@@ -1,0 +1,744 @@
+% vim: foldmethod=marker spelllang=en
+
+% Formelblad Stat based on Fredriks formelblad + Trans & Stat's formelblad:
+% Version 0.1 IvTj, 2012-09-06: Converted to UTF-8
+%         0.5 Lagt Exp,Bin, Wilcoxons 2012-09-13:
+%         0.7 Tables isolated in Tables subdir, 2012-09-22: 
+%         0.9 Combined En-Swe version via \Tr{}{}
+%         1.0 Spawned Tables in separate file
+
+% The @-t -> \Tr{}{lastword}-def (put it alone on newline before copying):   A}I\Tr{
+
+
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{a4,graphicx,amssymb}
+\usepackage{array}   % nicer tables
+
+% instead of \usepackage{fullpage} <<<
+\topmargin 0pt
+\advance \topmargin by -3.5\headheight
+\advance \topmargin by -\headsep
+\textheight 8.9in
+\oddsidemargin 0pt
+\evensidemargin \oddsidemargin
+\marginparwidth 0.5in
+\textwidth 6.6in
+% >>>
+
+\pagestyle{headings}
+\everymath{\textstyle}
+\textheight=720pt\parindent=0pt
+\def\myskip{\vspace{8pt minus 6pt}}
+\def\obs{{\mbox{\tiny obs}}}
+\def\CI{\mbox{CI}}
+
+% LANG SETTINGS -------------------
+\newcount\Lang   \newcommand\Tr[2]{\ifnum\Lang=0 #1\else #2\fi}
+\Lang=1\relax   %% 0 - En || 1 -- Se
+%------------ /LANG SETTINGS ------------------
+
+%% <<< Former \input\jobname.h ----------------
+
+%-------------
+%- LaTeX def's
+%-------------
+
+\everymath{\displaystyle}
+
+\makeatletter
+\renewcommand{\@oddhead}{}
+\renewcommand{\@evenhead}{}
+\renewcommand{\@oddfoot}
+{\ifnum\thepage=1
+  \today\hfill file:~\small\texttt{\jobname.pdf}
+\else
+\Tr{Cheat Sheet TMSB17 Mathematical Statistics}
+   {Formelblad TMSB17 Matematisk Statistik}
+  \hfill
+  \Tr{p}{s}.~\thepage{} \Tr{of}{av} \pageref{LastPageNo}
+\fi}
+
+  \renewcommand{\@evenfoot}{\small
+        \texttt{\jobname.pdf},\hfill}
+
+\makeatother
+
+%% restore good old TeX \eqalign:
+\makeatletter
+
+\def\eqalign#1{\null\,\vcenter{\openup\jot\m@th
+  \ialign{\strut\hfil$\displaystyle{##}$&$\displaystyle{{}##}$\hfil
+      \crcr#1\crcr}}\,}
+
+\def\iint{\mathop{\relax\protect
+    \noexpand\intop\mkern-9mu\noexpand\intop}\displaylimits}
+
+\def\iiint{\mathop{\relax\protect
+    \noexpand\intop\mkern-9mu\noexpand\intop\mkern-9mu\noexpand\intop}\displaylimits}
+
+
+\makeatother
+
+
+\newcommand\conj[1]{{\overline #1}}
+\let\ob\conj
+\newcommand\binom[2]{{#1\choose #2}}
+
+
+% - sets -
+\def\Rone{{\mathbb R}}
+\def\Cone{{\mathbb C}}
+\def\Zone{{\mathbb Z}}
+
+% - operators -
+
+\def\norm#1{{\Vert #1\Vert}}
+\def\SP#1{\langle #1\rangle}
+\def\Ordo{\mathcal O}
+\def\Fourier#1{\mathcal F\left\{#1\right\}}
+\def\Laplace#1{\mathcal L\left\{#1\right\}}
+\def\invFourier#1{\mathcal F^{-1}\left\{#1\right\}}
+\def\invLaplace#1{\mathcal L^{-1}\left\{#1\right\}}
+\let\invFF\invFourier
+\let\FF\Fourier
+\let\invLL\invLaplace
+\let\LL\Laplace
+
+% - förkortnngar
+
+\newcommand\mha{med hjälp av }
+\newcommand\bis{^{\prime\prime}}
+\newcommand\triss{^{'''}}
+\newcommand\PartInt[2]{\left\lceil\matrix{\mbox{\small #1}\cr
+                                       \mbox{\small #2}}\right\rceil}
+\def\tfrac{\textstyle\frac}
+
+%adjust row height in tables #1 - overall height #2 - depth:
+\newcommand\TblHeight[2]{\lower#2em\vbox to#1em{\hsize=0pt}}
+\def\tvavektor[#1,#2]{\protect\pmatrix{#1\cr #2}}
+\def\trevektor[#1,#2,#3]{\protect\pmatrix{#1\cr #2\cr #3}}
+\def\Var{\mbox{Var}}
+\def\Cov{\mbox{Cov}}
+\def\md{\mbox{md}}
+
+%% End \input\jobname.h fold >>> -
+
+\begin{document}
+
+
+\section*{TMSB17 \Tr{Cheat Sheet Mathematical Statistics}{Matematisk Statistik, formelblad}}
+
+\subsection*{\Tr{Probability laws}{Sannolikhetslära}}%<<<
+
+\textbf{\Tr{Notation}{Beteckningar}}: 
+   $A$, $B$, ... -- \Tr{events}{händelser}, 
+   $\Omega$ -- \Tr{the sample space}{utfallsrummet},
+   $P(A)$ -- \Tr{the probability of event}{sannolikheten för händelsen} $A$.
+
+   \textbf{\Tr{Properties}{Egenskaper}}:
+\parbox[m]{0.8\hsize}{
+\begin{itemize}\advance\itemsep by -5pt
+  \item $0\le P(A)\le 1$
+  \item $P(\Omega)=1$
+  \item $P(A\cup B)\le P(A)+P(B)$ \Tr{equality if}{med likhet då} $A\cap B=\varnothing$
+    (\Tr{i.e., mutually exclusive}{dvs är oförenliga})
+   \item $P(A^c) = 1-P(A)$ ($A^c$ \Tr{is the complement of}{är komplementet till} $A$)
+  \item $P(A\cup B) = P(A)+P(B)-P(A\cap B)$.
+\end{itemize}
+}
+
+\textbf{\Tr{Conditional probability}{Betingat sannolikhet}}: 
+  $P(A|B) = \frac{P(A\cap B)}{P(B)}$
+
+  \textbf{Total \Tr{probability}{sannolikhet}}:
+  \Tr{If}{Om}  
+  $\Omega=A_1\cup A_2\cdots\cup A_n$, 
+  \Tr{and the events}{där händelserna}
+  $\{A_k\}_1^n$
+  \Tr{are mutually exclusive, then}{är parvis oförenliga, är}
+\[
+P(B) = \sum_{k=1}^n P(B\cap A_k)
+     = \sum_{k=1}^n P(B|A_k) P(A_k)
+\]
+
+\textbf{\Tr{Bayes's theorem}{Bayes formula}}:
+  \Tr{If}{Om}  
+  $\Omega=A_1\cup A_2\cdots\cup A_n$, 
+  \Tr{and the events}{där händelserna}
+  $\{A_k\}_1^n$
+  \Tr{are mutually exclusive, then}{är parvis oförenliga, är}
+$$
+P(A_m|B) = \frac{P(A_m\cap B)}{P(B)}
+      = \frac{P(B|A_m) P(A_m)}
+             {\sum_{k=1}^n P(B|A_k) P(A_k)}
+$$%>>>
+
+\subsection*{\Tr{Expectation and Variance}{Väntevärde och varians}}%<<<
+
+\textbf{\Tr{Expectation}{Väntevärde}}:
+$
+\Tr{
+\mu=E(X)=\cases{
+\sum_k x_kP(X=x_k), & $X$ -- discrete random variable\cr
+\int_{-\infty}^\infty x f(x)\,dx , & $X$ -- continuous r.~v. with pdf $f$.
+}
+}{
+\mu=E(\xi)=\cases{
+\sum_k x_kP(\xi=x_k), & $\xi$ -- diskret stokastisk variabel\cr
+\int_{-\infty}^\infty x f(x)\,dx , & $\xi$ -- kontinuerlig s.~v. med frekvensfunktion $f$.
+}
+}
+$
+
+\medskip
+\textbf{\Tr{Variance}{Varians}}:
+$
+\Tr{
+\Var(X)=E[(x-\mu)^2]=\cases{
+\sum_k (x_k-\mu)^2 P(X=x_k), & $X$ -- discrete random variable\cr
+\int_{-\infty}^\infty (x-\mu)^2 f(x)\,dx , &  $X$ -- continuous r.~v. with pdf $f$.
+}
+}{
+V(\xi)=E[(x-\mu)^2]=\cases{
+\sum_k (x_k-\mu)^2 P(\xi=x_k), & $\xi$ -- diskret s.~v.\cr
+\int_{-\infty}^\infty (x-\mu)^2 f(x)\,dx , & $\xi$ -- kontinuerlig s.~v.
+}
+}
+$
+
+\medskip
+\textbf{\Tr{Standard deviation}{Standardavvikelse}}: 
+\Tr{
+$\sigma=\sqrt{\Var(X)}$
+}
+{
+$\sigma=\sqrt{V(\xi)}$
+}
+
+
+\textbf{\Tr{Steiner's theorem}{Steiner's sats}}: 
+$
+\Tr{
+\sigma^2=E(X^2)-\mu^2 %=E(\xi^2)-[E(\xi)]^2
+=\cases{
+\sum_k x_k^2 P(X=x_k)-\mu^2, & $X$ -- discrete random variable\cr
+\int_{-\infty}^\infty x^2 f(x)\,dx -\mu^2 , &  $X$ -- continuous r.~v. with pdf $f$.
+}
+}{
+\sigma^2=E(\xi^2)-\mu^2 %=E(\xi^2)-[E(\xi)]^2
+=\cases{
+\sum_k x_k^2 P(\xi=x_k)-\mu^2, & $\xi$ -- diskret s.~v.\cr
+\int_{-\infty}^\infty x^2 f(x)\,dx -\mu^2 , & $\xi$ -- kontinuerlig s.~v.
+}
+}
+$
+%>>>
+
+\subsection*{\Tr{Parameters of some distributions}%<<< 
+             {Några ofta förekommande fördelningar}}
+
+\def\EspaceAuDessus{&&&&\\*[-10pt]}\def\duPlancher{\\*[4pt] \hline}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\EspaceAuDessus     \Tr{$X$ from}{$\xi$ från}
+                  & $f(x)$ 
+                  & \Tr{$F(x)=P(X\le x)$}{$F(x)=P(\xi\le x)$}
+                  & \Tr{$\mu=E(X)$}{$\mu=E(\xi)$} 
+                  & \Tr{$\sigma=\sqrt{\Var(X)}$}{$\sigma=\sqrt{V(\xi)}$}
+                  \duPlancher
+\hline
+\EspaceAuDessus $\mbox{Hyp}(N,n,p)$ &
+                  $\frac{\binom{Np}x\binom{N(1-p)}{n-x}}{\binom{N}{n}}$ &
+                  $\sum_{k=0}^x\frac{\binom{Np}k\binom{N(1-p)}{n-k}}{\binom{N}{n}}$ &
+                  $np$ & $\sqrt{\tfrac{N-n}{N-1}\,np(1-p)}$\duPlancher
+                  \EspaceAuDessus $\mbox{Bin}\,(n,p)$    &
+                  $\binom nx p^x(1-p)^{n-x}$ &
+                  $\sum_{k=0}^x\binom nk p^k(1-p)^{n-k}$ &
+                  $np$ & $\sqrt{np(1-p)}$\duPlancher
+  \EspaceAuDessus $\mbox{Po}(\lambda) $ &
+                  $e^{-\lambda}\,\frac{\lambda^x}{x!}$ &
+                  $e^{-\lambda}\,\sum_{k=0}^x \frac{\lambda^k}{k!}$ &
+                  $\lambda$ & $\sqrt{\lambda}$\duPlancher\hline
+  \EspaceAuDessus $\mbox{Exp}(\lambda)$  &
+                  $\lambda e^{-\lambda x}$ &
+                  $1-e^{-\lambda x}$ &
+                  $1/\lambda$ & $1/\lambda$\duPlancher
+  \EspaceAuDessus $N(\mu,\sigma) $ &
+                  %% $\frac{1}{\sigma\sqrt{2\pi}}\,e^{-(x-\mu)^2/2\sigma^2}$ &
+                  $\frac{1}{\sigma\sqrt{2\pi}}\,e^{-(\frac{x-\mu}\sigma)^2/2}$ &
+                  $\Phi\Bigl(\frac{x-\mu}{\sigma}\Bigr)
+                  =\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\frac{x-\mu}{\sigma}} e^{-t^2/2}\,dt$ &
+                  $\mu$ & $\sigma$\\*[10pt]\hline
+\end{tabular}
+%>>>
+
+\section*{Joint distributions}%<<<
+
+\begin{itemize}
+
+  \item \textbf{Joint density, discrete case}: %<<<
+$
+f_{XY}(x,y) = P[(X = x)\cap(Y = y)],
+\quad
+\cases{
+  f_{XY}(x,y)\ge 0
+  \cr
+  \sum_x
+  \sum_y
+  f_{XY}(x,y) = 1.
+}
+$%>>>
+
+  \item \textbf{The joint density in the continuous case} is a function $f_{X,Y}(x,y)\ge 0$ which satisfies: %<<<
+\[
+P[(a\le X\le b)\cap(c\le Y\le d)] = 
+ \int\limits_a^b\mkern-10mu\int\limits_c^d f_{XY}(x,y) \,dxdy,
+\qquad
+\iint_{\mkern-12mu\Rone^2} f_{XY}\,dxdy = 1.
+\]
+
+  \item \textbf{Cumulative distribution function} (discrete and continuous):  
+  $F_{XY}(x,y)=P[(X\le x)\cap(Y\le y)]$.%>>>
+
+  \item \textbf{Marginal densities}: %<<<
+    \[
+      F_X(x) = \cases{
+      \sum_y f_{XY}(x,y) &, discrete case 
+         \cr
+         \int_{-\infty}^\infty f_{XY}(x,y)\,dy &, continuous case
+      }
+      \quad
+      F_Y(y) = \cases{
+      \sum_x f_{XY}(x,y) &, discrete case 
+         \cr
+      \int_{-\infty}^\infty f_{XY}(x,y)\,dx &, continuous case.
+      }
+    \]%>>>
+
+  \item Variables $X$ and $Y$ are \textbf{independent} if: %<<<
+  $f_{XY}(x,y)=f_X(x)f_Y(y)$.%>>>
+
+  \item \textbf{Expectations}:%<<<
+    \[
+\eqalign{
+\mu_x 
+ & = E(X) = \cases{
+    \sum_x\sum_y xf_{XY}(x,y) = \sum_x xf_X(x) &, discrete case \cr
+    \iint_{\mkern-12mu\Rone^2}xf_{XY}(x,y)\,dxdy = \int_{-\infty}^\infty xf_{X}(x)\,dx &, continuous case
+    }
+\cr
+\mu_y 
+  & = E(Y) = \cases{
+    \sum_x\sum_y yf_{XY}(x,y) =\sum_y yf_X(y) &, discrete case \cr
+    \iint_{\mkern-12mu\Rone^2}yf_{XY}(x,y)\,dxdy = \int_{-\infty}^\infty yf_{Y}(y)\,dy &, continuous case.
+    }
+   }
+\]%>>>
+
+  \item \textbf{Covariance}: %<<<
+  \[
+  \Cov(X,Y) = E[(X-\mu_x)(Y-\mu_y)]= E(XY)-\mu_x\mu_y .
+%%  \mbox{ In particular, }\Var(X)=\Cov(X,X).
+  \] %>>>
+
+  \item \textbf{Pearson coefficient of correlation}:%<<<
+  \[
+  \rho_{XY} = \frac{\Cov(X,Y)}{\sigma_X\sigma_Y}
+       = \frac{\Cov(X,Y)}{\sqrt{\Cov(X,X)\Cov(Y,Y)}}\, ,
+       \quad
+       -1\le\rho\le 1.
+  \]%>>>
+
+\item If the random variables $X$ and $Y$ are \textbf{independent} 
+    $\Rightarrow$ $\rho_{XY}=0$ ($X$ and $Y$ are 
+    \textbf{uncorrelated}). The converse is not true in general.
+
+\end{itemize} %>>>
+
+\subsection*{\Tr{Linear combinations, sums and averages of random variables}%<<<
+             {Linjära kombinationer, summor och snitt av stokastiska variabler}
+         }
+\Tr{%
+Suppose that $\{X_k\}_{k=1}^n$ are (discrete or continuous) random variables with expectations 
+$E(X_k)=\mu_k$ and variances $\Var(X_k)=\sigma_k^2$, $k=1,...,n$, and let
+ $\{a_k\}_{k=1}^n$ be constants. Then
+}{%
+Antag att $\{\xi_k\}_{k=1}^n$ är (diskreta eller kontinuerliga) stokastiska variabler med
+väntevärden $E(\xi_k)=\mu_k$ och varianser $V(\xi_k)=\sigma_k^2$, $k=1,...,n$, samt
+ $\{a_k\}_{k=1}^n$ är konstanter. Då gäller
+}
+\[
+\Tr{
+\eqalign{
+E(a_1X_1+\cdots+a_nX_n)& =a_1\mu_1+\cdots + a_n\mu_n\cr
+\Var(a_1X_1+\cdots+a_nX_n)& =a_1^2\sigma_1^2+\cdots + a_n^2\sigma_n^2
+   \quad(\mbox{if $X_1,\ldots,X_n$ are independent}).
+} % eqalign
+}{
+\eqalign{
+   E(a_1\xi_1+\cdots+a_n\xi_n)& =a_1\mu_1+\cdots + a_n\mu_n\cr
+V(a_1\xi_1+\cdots+a_n\xi_n)& =a_1^2\sigma_1^2+\cdots + a_n^2\sigma_n^2
+   \quad(\mbox{om $\xi_1,\ldots,\xi_n$ är oberoende}).
+} % eqalign
+}
+\]
+\Tr{%
+If $\{X_k\}_{k=1}^n$ are \textbf{normal and independent} r.\,v.,
+then their linear combinations also are normally distributed:
+}{%
+Om $\{\xi_k\}_{k=1}^n$ är \textbf{normalfördelade och oberoende},
+så är deras linjärkombinationer också normalfördelade:
+}
+\[
+\Tr{%
+X_k\in N(\mu_k,\sigma_k),\;
+k=1,...,n,
+\;\Rightarrow\;
+a_1X_1+\cdots+a_nX_n\in N\bigl(a_1\mu_1+\cdots a_n\mu_n,
+                   \sqrt{a_1^2\sigma_1^2+\cdots a_n^2\sigma_n^2}\,\bigr).
+}{%
+\Tr{X}{\xi}_k\in N(\mu_k,\sigma_k),\;
+k=1,...,n,
+\;\Rightarrow\;
+a_1\xi_1+\cdots+a_n\xi_n\in N(a_1\mu_1+\cdots a_n\mu_n,
+                   \sqrt{a_1^2\sigma_1^2+\cdots a_n^2\sigma_n^2}).
+}
+\]
+\Tr{%
+For \textbf{sums} and \textbf{averages of i.d.~normal} variables, in particular, holds:
+}{%
+I synnerhet, för \textbf{summor} och \textbf{snitt av lika normalfördelade oberoende} variabler gäller:
+}
+\Tr{%
+$$
+X_k\in N(\mu,\sigma),\;
+k=1,...,n,
+\;\Rightarrow\;
+\cases{
+X_1+\cdots+X_n \in N(n\mu,\sigma\sqrt{n})\cr\noalign{\vskip5pt}
+\frac{X_1+\cdots+X_n}{n} = \ob X \in N(\mu,\frac{\sigma}{\sqrt{n}})
+\Leftrightarrow
+z:=\frac{\ob X-\mu}{\sigma/\sqrt{n}}\in N(0,1).  }
+}{%
+$$
+\xi_k\in N(\mu,\sigma),\;
+k=1,...,n,
+\;\Rightarrow\;
+\cases{
+\xi_1+\cdots+\xi_n \in N(n\mu,\sigma\sqrt{n})\cr\noalign{\vskip5pt}
+\frac{\xi_1+\cdots+\xi_n}{n} = \ob\xi \in N(\mu,\frac{\sigma}{\sqrt{n}})
+\Leftrightarrow
+z:=\frac{\ob\xi-\mu}{\sigma/\sqrt{n}}\in N(0,1).  }
+}
+$$
+%>>>
+
+\subsection*{\Tr{The Central Limit Theorem}{Centrala gränsvärdessatsen}} %<<<
+
+\Tr{%
+Suppose that $X_1,\cdots, X_n$ are \textbf{independent identically distributed}  (i.i.d.)
+random variables with expectation $\mu$ and standard deviation $\sigma$. Then for large $n$
+holds:
+}{%
+Antag att $\xi_1,\cdots, \xi_n$ är \textbf{oberoende likafördelade} stokastiska
+variabler med väntevärde $\mu$ och standardavvikelse $\sigma$. För stora $n$
+gäller:
+}
+
+\Tr{%
+\begin{itemize}
+  \item $\sum_{k=1}^n X_k=X_1+\cdots+X_n\;
+    \widetilde\in\; N(n\mu,\sigma\sqrt{n})$, i.e. \
+        $P(\sum_{k=1}^n X_k\le x)\approx
+        \Phi\Bigl(\frac{x-n\mu}{\sigma\sqrt{n}}\Bigr)
+        = \Phi\Bigl(\frac{\ob x-\mu}{\sigma/\sqrt{n}}\Bigr)
+        $;
+
+  \item $\ob X=\frac1n
+    \sum_{k=1}^n X_k=\frac{X_1+\cdots+X_n}n\;
+    \widetilde\in\; N(\mu,\frac\sigma{\sqrt{n}})$, i.e.
+        $P(\ob X\le \ob x)\approx\Phi(z)$,
+        $z=\frac{\ob x-\mu}{\sigma/\sqrt{n}}\cdot$
+\end{itemize}
+}{%
+\begin{itemize}
+  \item $\sum_{k=1}^n \xi_k=\xi_1+\cdots+\xi_n\;
+    \widetilde\in\; N(n\mu,\sigma\sqrt{n})$, dvs \
+        $P(\sum_{k=1}^n \xi_k\le x)\approx
+        \Phi\Bigl(\frac{x-n\mu}{\sigma\sqrt{n}}\Bigr)
+        = \Phi\Bigl(\frac{\ob x-\mu}{\sigma/\sqrt{n}}\Bigr)
+        $;
+
+  \item $\ob\xi=\frac1n
+    \sum_{k=1}^n \xi_k=\frac{\xi_1+\cdots+\xi_n}n\;
+    \widetilde\in\; N(\mu,\frac\sigma{\sqrt{n}})$, dvs
+        $P(\ob\xi\le \ob x)\approx\Phi(z)$,
+        $z=\frac{\ob x-\mu}{\sigma/\sqrt{n}}\cdot$
+\end{itemize}
+}
+%>>>
+
+\subsection*{\Tr{Approximations of distributions}{Approximationer}}%<<<
+\medskip
+\begin{center}
+   \includegraphics[scale=0.65]{Figs/approx}
+\end{center}
+%>>>
+
+\subsection*{\Tr{Statistical inference}{Statistisk inferens}}%<<<
+
+\Tr{%
+\textbf{Point estimators}: 
+Let $x_1,\dots,x_n$ be the observed values of a sample $\left\{X_k\right\}_1^n$ from a population with 
+mean $\mu$ och standard deviation $\sigma$. Point estimators 
+for the mean and the variance of the population are
+}{%
+\textbf{Punktskattningar}: 
+Låt $x_1,\dots,x_n$ vara ett observerat stickprov från en fördelning med
+väntevärde $\mu$ och standardavvikelse $\sigma.$ Väntevärdesriktiga skattningar
+av $\mu$ och $\sigma^2$ är då
+}
+
+\Tr{%
+\begin{itemize}
+  \item % $\hat\mu = \ob X = \frac1n\sum_{k=1}^{n}X_k$, computed from the observed values as
+    $\overline{x}=\frac{1}{n}\sum_{k=1}^n x_k$
+
+ \item $\displaystyle
+     %\left(\sigma^2_\obs\right)^*=
+     s^2
+     =\frac{1}{n-1}\sum_{i=1}^n(x_i-\overline{x})^2
+     =\frac{1}{n-1}\left(\sum_{i=1}^nx_i^2-n\overline{x}^2\right)\;\;\;$
+     (if the mean is not known).
+\end{itemize}
+}{%
+\begin{itemize}
+  \item $\displaystyle \mu^*_\obs=\overline{x}=\frac{1}{n}\sum_{i=1}^n x_i$
+
+ \item $\displaystyle
+     \left(\sigma^2_\obs\right)^*
+     =s^2
+     =\frac{1}{n-1}\sum_{i=1}^n(x_i-\overline{x})^2
+     =\frac{1}{n-1}\left(\sum_{i=1}^nx_i^2-n\overline{x}^2\right)\;\;\;$
+     (då $\mu$ ej känd).
+\end{itemize}
+}%>>>
+
+\subsection*{\Tr{Confidence Interval -- One Sample}{Konfidensintervall - ett stickprov}}%<<<
+
+\begin{eqnarray*}\begin{array}{|ccc|}\hline
+     \mbox{\Tr{Estimated paramter $\theta$}{Parameter $\theta$ som skattas}}
+   & \mbox{\Tr{Point estimate}{Punktskattning}}
+   & \mbox{\Tr{Two-tailed}{Tvåsidigt konfidensintervall} }
+   \CI_{1-\alpha}(\theta) \\
+
+\hline && \\
+\mu \;\mbox{\Tr{from}{från} } N(\mu,\sigma),\; \sigma \mbox{ \Tr{known}{känd}}
+ & \overline{x}
+ &  [\ob x-\varepsilon,\ob x+\varepsilon],\;  
+    \varepsilon = \Tr{z}{\lambda}_{\alpha/2}\frac{\sigma}{\sqrt{n}}\\&&\\
+
+\hline &&\\
+\mu \;\mbox{\Tr{from}{från} } N(\mu,\sigma),\; \sigma \mbox{ \Tr{not known}{ej känd}}
+ & \overline{x}
+& [\ob x-\varepsilon,\ob x+\varepsilon],\;  \varepsilon = t_{\alpha/2,n-1}\frac{s}{\sqrt{n}}\\&&\\
+
+\hline &&\\
+\sigma^2 \;\mbox{\Tr{from}{från} } N(\mu,\sigma)
+ & s^2&\frac{(n-1)s^2}{\chi^2_{\alpha/2,n-1}}
+  \leq\sigma^2
+  \leq \frac{(n-1)s^2}{\chi^2_{1-\alpha/2,n-1}}
+
+\\&&\\
+
+\hline &&\\p \;\mbox{ \Tr{from}{från} Bin}(n,p) & \Tr{\hat p=\frac x n}{p^*_\obs}
+& [
+  \Tr{\hat p}{p^*_\obs}-\varepsilon ,
+  \Tr{\hat p}{p^*_\obs}+\varepsilon ],\;
+ \varepsilon = 
+ \Tr{z}{\lambda}_{\alpha/2}\sqrt{\frac{\Tr{\hat p}{p^*_\obs}(1-\Tr{\hat p}{p^*_\obs})}{n}}
+
+ \\&&\\
+\hline
+
+  \end{array}
+\end{eqnarray*}
+%>>>
+
+\subsection*{\Tr{Confidence Interval for the Mean -- Two Samples}%<<<
+                   {Konfidensintervall -- två normalfördelade stickprov}}
+
+\begin{itemize}
+
+\item \textbf{\Tr{Two samples (paired data)}{Två parade stickprov}}: %<<<
+  $\{(x_i,y_i)\}_{i=1}^n$ 
+  \Tr{with}{där} 
+   $x_i\in N(\mu_i,\sigma_x)$ \Tr{and}{och} 
+   $y_i\in N(\mu_i+\Delta,\sigma_y)$, $i=1,\dots,n$. 
+   \Tr{Then}{Då} $\{z_i\}_1^n=\{y_i-x_i\}_1^n$ 
+   \Tr{is a sample from}{är ett stickprov från}
+   $N(\Delta,\sigma_z)$ 
+   \Tr{with}{där} 
+   $\sigma_z=\sqrt{\sigma_x^2+\sigma_y^2}$\,.
+   \Tr{The two-sided $\CI_{1-\alpha}$ for}{Den tvåsidiga $CI_{1-\alpha}$ för} $\Delta$:
+
+%%   \Tr{The two-tailed $(1-\alpha)$--confidence interval for $\Delta$ is given by}
+%%      {Tvåsidiga konfidensintervall för $\Delta$ med konfidensgrad $1-\alpha$ är då}
+%% Fredriks gamla%<<<
+%% \begin{eqnarray*}
+%%   \overline{z}-\lambda_{\alpha/2}\frac{\sigma}{\sqrt{n}}
+%%   \leq\Delta\leq
+%%   \overline{z}+\lambda_{\alpha/2}\frac{\sigma}{\sqrt{n}}\;\;\;\mbox{ om }\sigma \mbox{ känd}\\
+%%   \overline{z}-t_{\alpha/2}(n-1)\frac{s}{\sqrt{n}}\leq\Delta\leq
+%%   \overline{z}+t_{\alpha/2}(n-1)\frac{s}{\sqrt{n}}\;\;\;\mbox{ om }\sigma\mbox{
+%%   ej känd}
+%% \end{eqnarray*}%>>>
+\[
+\CI_{1-\alpha}(\Delta) = [\ob z-\varepsilon,\ob z+\varepsilon],\quad 
+   \varepsilon =
+   \cases{
+      \Tr{z}{\lambda}_{\alpha/2}\,\frac{\sigma_z}{\sqrt{n}}\;,
+          & \Tr{if}{om} $\sigma_z$ \Tr{is known}{är känd} \cr
+      t_{\alpha/2,n-1}\,\frac{s_z}{\sqrt{n}}\;,
+      & \Tr{if}{om} $\sigma_z$ \Tr{is not known}{är ej känd} \cr
+   }
+\]%>>>
+
+\item \textbf{\Tr{Two independent samples (pooled test)}{Två oberoende stickprov}}: 
+$\{x_i\}_{i=1}^{n}$ \Tr{from}{från} $N(\mu_x,\sigma)$ 
+  \Tr{and}{och} 
+  $\{y_i\}_{i=1}^{m}$ \Tr{from}{från} $N(\mu_y,\sigma)$.
+  \Tr{The two-tailed $\CI_{1-\alpha}$ for $\mu_x-\mu_y$ is given by}
+      {Den tvåsidiga $\CI_{1-\alpha}$ för $\mu_x-\mu_y$ ges av}
+\[
+\CI_{1-\alpha}(\mu_x-\mu_y) = [(\ob x-\ob y)-\varepsilon,(\ob x-\ob y)+\varepsilon],\quad 
+   \varepsilon =
+   \cases{
+   \Tr{z}{\lambda}_{\alpha/2}\,\sigma\sqrt{\frac1n+\frac1m},
+          & \Tr{if}{om} $\sigma$ \Tr{is known}{är känd} \cr
+          t_{\alpha/2,n+m-2}\,\Tr{s_p}{\sigma^*_\obs}\sqrt{\frac1n+\frac1m}\,,
+      & \Tr{if}{om} $\sigma$ \Tr{is not known}{är ej känd}, \cr
+   }
+\]
+\Tr{where}{där} 
+$\Tr{s_p}{\sigma^*_\obs}$
+\Tr{is the pooled (weighted) standard deviation}{är den vägda standardavvikelsen}
+\/$ \Tr{s_p}{\sigma^*_\obs} =\sqrt{\frac{(n-1)s_x^2+(m-1)s_y^2}{n+m-2}}\,\cdot$
+
+\end{itemize}
+%>>>
+
+\subsection*{\Tr{Hypothesis tests}{Hypotestest}}%<<<
+
+\subsubsection*{ \Tr{Parametric methods}{Parametriska metoder}}%<<<
+
+\begin{eqnarray*}\begin{array}{|cccc|}
+  \hline 
+   \mbox{\Tr{Null hypothesis}{Nollhypotes}} &
+   \mbox{\Tr{Test variable}{Testvariabel}} &
+   \mbox{\Tr{Alt.~hypothesis}{Mothypotes}}  &
+   \mbox{\Tr{$H_0$ rejected if}{När $H_0$ förkastas}} 
+  \\ \hline &&&\\[-10pt]
+  &&H_1:\mu\neq\mu_0&\vert z_0\vert>\Tr{z}{\lambda}_{\alpha/2} \\
+    H_0:\mu=\mu_0
+   &z_0=\frac{\overline{x}-\mu_0}{\sigma/\sqrt{n}}
+   &H_1:\mu>\mu_0&z_0>\Tr{z}{\lambda}_\alpha\\
+   \sigma \mbox{ \Tr{known}{känd}}
+  &&H_1:\mu<\mu_0&z_0<-\Tr{z}{\lambda}_\alpha
+  \\ \hline &&&\\[-10pt]
+  &&H_1:\mu\neq\mu_0&\vert t_0\vert>t_{\alpha/2,n-1} \\
+    H_0:\mu=\mu_0 & t_0=\frac{\overline{x}-\mu_0}{s/\sqrt{n}}
+   &H_1:\mu>\mu_0 & t_0>t_{\alpha,n-1}  \\
+   \sigma \mbox{ \Tr{not known}{ej känd}}
+  &&H_1:\mu<\mu_0 & t_0<-t_{\alpha,n-1} 
+\\ \hline &&&\\[-10pt]
+  &&H_1:\sigma^2\neq\sigma^2_0
+    % & \chi^2_0<\chi^2_{1-\alpha/2,n-1} \mbox{\, \Tr{or}{eller} \,\,} \chi^2_0>\chi^2_{\alpha/2,n-1}
+    & \chi^2_0 \notin [\chi^2_{1-\alpha/2,n-1} \,,\, \chi^2_{\alpha/2,n-1}]
+     \\
+ H_0:\sigma^2=\sigma^2_0
+    &\chi^2_0=\frac{(n-1)s^2}{\sigma^2_0}
+    &H_1:\sigma^2>\sigma^2_0
+    &\chi^2_0>\chi^2_{\alpha,n-1}  \\
+&&H_1:\sigma^2<\sigma^2_0&\chi^2_0<\chi^2_{1-\alpha,n-1}
+\\ \hline &&&\\[-10pt]
+  &&H_1:p\neq p_0&\vert z_0\vert>\Tr{z}{\lambda}_{\alpha/2}\\
+   H_0:p=p_0
+   &z_0=\frac{x-np_0}{\sqrt{np_0(1-p_0)}}
+   &H_1:p>p_0&z_0>\Tr{z}{\lambda}_\alpha \\
+  &&H_1:p<p_0&z_0<-\Tr{z}{\lambda}_\alpha
+\\ \hline \end{array}
+\end{eqnarray*}
+%>>>
+
+\subsubsection*{\Tr{Non-parametric methods}{Icke-parametriska metoder}}%<<<
+
+\vspace{-5pt}
+\begin{center}
+\begin{tabular}[t]{|c|*{4}{>{$}c<{$}}|}
+  \cline{2-5}\multicolumn{1}{c|}{}
+   &
+   \mbox{\Tr{Null hypothesis}{Nollhypotes}} &
+   \mbox{\Tr{Alt.~hypothesis}{Mothypotes}}  &
+   \mbox{\Tr{Test variable}{Testvariabel}} &
+   \mbox{\Tr{$H_0$ rejected if}{När $H_0$ förkastas}} 
+   \\ \hline
+     &&H_1:{\md}\neq{\md}_0&r=\min(r^-,r^+)&r\leq r_{\alpha/2} \\
+     \mbox{\textbf{\Tr{Sign test}{Teckentest}}}
+      &H_0:{\md}={\md}_0&H_1:{\md}>{\md}_0&r^-&r^-\leq r_\alpha \\
+     \mbox{\Tr{for the median}{för medianen}}
+     &&H_1:{\md}<{\md}_0&r^+&r^+\leq r_\alpha
+ \\\hline
+\end{tabular}
+
+\vspace{5pt}
+\begin{tabular}[t]{|c|*{3}{>{$}c<{$}}|}
+  \cline{2-4}\multicolumn{1}{c|}{}
+   &
+   \mbox{\Tr{Null hypothesis}{Nollhypotes}} &
+   \mbox{\Tr{Alt.~hypothesis}{Mothypotes}}  &
+   \mbox{\Tr{$H_0$ rejected if}{När $H_0$ förkastas}} 
+   \\ \hline
+   \mbox{\textbf{Wilcoxon\Tr{'}{}s}}
+ %%% Fredrik's old %<<<
+ %%%           &&H_A:\mu_A\neq\mu_B&w=\min(w_A,w_B)&w\leq w^*_\alpha\\
+ %%% \mbox{\Tr{Rang Sum Test}{Rangsummatest}}
+ %%%            &H_0:\mu_A=\mu_B&H_A:\mu_A>\mu_B&w_B&w_B\leq w^*_\alpha \\
+ %%% \mbox{\Tr{Requires}{Krav}: }n_A\leq n_B
+ %%%           &&H_A:\mu_A<\mu_B&w_A&w_A\leq w^*_\alpha \\\hline
+ %%% %>>>
+            &&H_1:\mu_A\neq\mu_B
+            &(w_A \leq w^-_{\alpha/2}) \mbox{ or }
+             (w_A \geq w^+_{\alpha/2})
+             \cr
+\textbf{\Tr{Rank Sum Test}{Rangsummatest}}
+             &H_0:\mu_A=\mu_B&H_1:\mu_A>\mu_B&w_A\geq w^+_\alpha \\
+  \Tr{Requires}{Krav}: $n_A\leq n_B$
+            &&H_1:\mu_A<\mu_B&w_A\leq w^-_\alpha \\\hline
+\end{tabular}
+\end{center}
+%>>>
+
+\subsubsection*{Test statistic for the $\chi^2$-tests:}%<<<
+
+\vspace{-5pt}
+\hfil
+\begin{tabular}[t]{|c|c|}
+  \hline
+  \textbf{Goodness-of-fit}: 
+     $\chi^2 = \sum_{i=1}^{n}\frac{(O_i-E_i)^2}{E_i}$ & 
+     \parbox[m]{12em}{
+     \textbf{Test for independence}: \\
+    ($m\times n$-contingency table)
+     }
+  $\chi^2 = \sum_{i=1}^m\sum_{j=1}^{n}\frac{(O_{ij}-E_{ij})^2}{E_{ij}}$ \cr
+  \hline
+\end{tabular}
+%>>>
+
+%>>>
+
+\label{LastPageNo}
+\end{document}

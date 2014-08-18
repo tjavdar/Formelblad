@@ -1,0 +1,381 @@
+% Changes:
+% Ver. 0.91 (Fri Mar 16 14:38:00 CET 2007) isolatin --> utf-8
+% Ver. 0.9  (Tue Aug  8 16:01:48 CEST 2006) \voffset-0.9in --> -1.1in
+% Ver. 0.8  (Thu Apr 27 21:41:58 CEST 2006) \bdy --> \bdX i för att ha
+%                                  samma beteckningar som OH-bilderna
+%
+\documentclass{article}
+\voffset-1.1in
+\hoffset-.9in
+\usepackage[swedish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\pagestyle{empty}
+\usepackage{graphicx} % \includegraphics does both eps && pdf!
+\textwidth=38pc\textheight=734pt\parindent=0pt
+
+%% restore good old TeX \eqalign:
+\makeatletter
+\def\eqalign#1{\null\,\vcenter{\openup\jot\m@th
+  \ialign{\strut\hfil$\displaystyle{##}$&$\displaystyle{{}##}$\hfil
+      \crcr#1\crcr}}\,}
+\makeatother
+
+\def\ppmatrix{\protect\pmatrix}
+\def\pcases{\protect\cases}
+\newcommand\pdet[1]{\protect\left|\protect\matrix{#1}\protect\right|}
+\newcommand\Ordo{\mathcal O}
+\let\ergo\Longrightarrow
+\let\vaxer\nearrow
+\let\avtar\searrow
+\newcommand\conj[1]{{\overline #1}}
+\let\ob\conj
+\newcommand\binom[2]{{#1\choose #2}}
+
+%% the boldface guys %%
+
+\newcommand\bdF{\mathbf F}
+\newcommand\bdG{\mathbf G}
+\newcommand\bdN{\mathbf N}
+\newcommand\bdP{\mathbf P}
+\newcommand\bdQ{\mathbf Q}
+
+\newcommand\bda{\mathbf a}
+\newcommand\bdb{\mathbf b}
+\newcommand\bdc{\mathbf c}
+\newcommand\bde{\mathbf e}
+\newcommand\bdf{\mathbf f}
+\newcommand\bdg{\mathbf g}
+\newcommand\bdi{\mathbf i}
+\newcommand\bdj{\mathbf j}
+\newcommand\bdk{\mathbf k}
+\newcommand\bdm{\mathbf m}
+\newcommand\bdn{\mathbf n}
+\newcommand\bdp{\mathbf p}
+\newcommand\bdq{\mathbf q}
+\newcommand\bdr{\mathbf r}
+\newcommand\bdu{\mathbf u}
+\newcommand\bdv{\mathbf v}
+\newcommand\bdx{\mathbf x}
+\newcommand\bdy{\mathbf y}
+\newcommand\bdw{\mathbf w}
+\newcommand\bdz{\mathbf z}
+\newcommand\bdzero{\mathbf 0}
+
+
+\newcommand\bdX{\mathbf X}
+\newcommand\bdZ{\mathbf Z}
+
+% - sets -
+\def\Rone{{\mathbb R}}
+
+% - operators -
+
+\def\ddn{\partial_n}
+\def\dist{\mathop{\mathrm{dist}}}
+\def\divergence{\mathop{\mathrm{div}}}
+\def\rot{\mathop{\mathrm{rot}}}
+\def\norm#1{{\Vert #1\Vert}}
+
+% - förkortnngar
+
+\newcommand\mha{med hjälp av }
+\newcommand\bis{^{\prime\prime}}
+\newcommand\triss{^{'''}}
+\newcommand\PartInt[2]{\left\lceil\matrix{\mbox{\small #1}\cr
+                                       \mbox{\small #2}}\right\rceil}
+
+%adjust row height in tables #1 - overall height #2 - depth:
+\newcommand\TblHeight[2]{\lower#2em\vbox to#1em{\hsize=0pt}}
+
+%--------- End Preambule -------------
+
+\everymath{\displaystyle}
+
+\begin{document}
+
+\section*{Linjära system av ODE
+med konstanta koefficienter}
+
+Konventioner och beteckningar:
+\itemsep=1pt
+\begin{itemize}
+\item $\bdX(t)=(x_1(t),\cdots,x_n(t))^T$ --- kolumnvektorn av de
+  obekanta funktioner;
+\item  $A=[a_{ij}]_{i,j=1}^n$ -- $n\times n$
+  matris vars element är reella konstanter;
+
+\item Egenvärden $\lambda_k$ och egenvektorer $\bdv_k$ till $A$, dvs
+$A\bdv_k=\lambda_k\bdv_k$,\, $k=1,2,\ldots,p$,\, $p\le n$.
+
+\item Om $A$ är diagonaliserbar: $A=TDT^{-1}$ där
+$T=\pmatrix{
+| &       & | \cr
+\bdv_1 & \cdots & \bdv_n\cr
+| &       & | \cr
+}$ och
+$D=\pmatrix{
+\lambda_1 &  0 & \cdots    & 0 \cr
+0 & \lambda_1 &  \cdots    & 0 \cr
+\vdots&\vdots &  \ddots    & \vdots \cr
+0 &   0       &  \cdots    & \lambda_n\cr
+}$.
+%  $T=[\bdv_1,\ldots,\bdv_n]$ och
+%$D=\mbox{diag}[\lambda_1,\ldots,\lambda_n]$.
+
+\end{itemize}
+
+\subsection*{Första ordningens homogena system: $\bdX'=A\bdX$}
+
+Till varje homogent system går att hitta en sk fundamental upsättning (FU)
+av linjärt oberoende lösningar $\{\phi_1(t),\ldots,\phi_n(t)\}$ så att
+den allmänna lösningen $\bdX_h(t)$ (dvs varje lösning) till $\bdX'=A\bdX$
+är en linjär\-kom\-bi\-na\-tion av funktionerna i den FU
+$$
+\bdX_h(t) = \sum_{k=1}^nC_k\phi_k(t)=C_1\phi_1(t)+\cdots+C_n\phi_n(t),
+$$
+där $C_1,...,C_n$ är godtyckliga konstanter. Följande fall kan uppstå:
+
+\bigskip
+\textbf{Fall 1}: $A$ är diagonaliserbar och alla dess egenvärden är
+reella.  Då gäller:
+$$
+\bdX'=A\bdX\iff
+\bdX'=TDT^{-1}\bdX\iff
+T^{-1}\bdX'=DT^{-1}\bdX\iff
+\bdZ'=D\bdZ
+\mbox{ med } \bdZ=T^{-1}\bdX \iff \bdX=T\bdZ.
+$$
+Det sista systemet består av $n$-st oberoende ekvationer:
+$$
+\bdZ'=D\bdZ\iff
+\cases{
+     z_1'=\lambda_1 z_1\cr
+     \hfil\vdots\cr
+     z_n'=\lambda_n z_n\cr
+       }
+\ergo \,
+\cases{
+     z_1'=C_1e^{\lambda_1t}\cr
+     \hfil\vdots\cr
+     z_n'=C_ne^{\lambda_nt}\cr
+       }
+\quad\ergo\quad
+\bdX_h=T\bdZ
+= \sum_{k=1}^n C_k\underbrace{e^{\lambda_kt}\bdv_k}_{\phi_k(t)}.\eqno(\star)
+$$
+Med andra ord kan man välja fundamentalt system
+$\{\phi_1(t),\ldots,\phi_n(t)\}=
+ \{e^{\lambda_1t}\bdv_1,\ldots,e^{\lambda_nt}\bdv_n\}$.
+
+%%
+\bigskip
+\textbf{Fall 2}: $A$ är diagonaliserbar men har komplext
+konjugerade egenvärden. Antag, t.ex., att $\lambda_{k+1}=\ob\lambda_k$ för något
+$k$ mellan $1$ och $n-1$. Då gäller visserligen framställningen
+$(\star)$, men då är resp. egenvektorer också komplext konjugerade,
+dvs $\bdv_{k+1}=\ob\bdv_k$. Den delen av $\bdX_h$ som formeras
+av dessa två egenvärden kan skrivas som
+%%
+$$
+C_ke^{\lambda_k t}\bdv_k+C_{k+1}e^{\lambda_{k+1}t}\bdv_{k+1}
+=C_ke^{\lambda_k t}\bdv_k+C_{k+1}e^{\ob\lambda_{k}}\ob\bdv_{k}
+=A\,\mbox{Re\,}[e^{\lambda_k t}\bdv_k]+B\,\mbox{Im}\,[e^{\lambda_k t}\bdv_k]
+$$
+där $A$ och $B$ också är godtyckliga konstanter. Notera att
+om $\bdv_k=\bdp+i\bdq$ (och därmed $\ob\bdv_k=\bdp-i\bdq$),
+$\mbox{Re\,}\lambda_k=x$
+och $\mbox{Im\,}\lambda_k=y$
+så är $e^{\lambda_k t}=e^{xt+iyt}=e^{xt}(\cos yt + i \sin yt)$, och då är
+$$
+\mbox{Re\,}[e^{\lambda_k t}\bdv_k] = e^{xt}[\cos(yt)\,\bdp-\sin(yt)\,\bdq]
+\quad\mbox{ och }\quad
+\mbox{Im\,}[e^{\lambda_k t}\bdv_k] = e^{xt}[\sin(yt)\,\bdp+\cos(yt)\,\bdq].
+$$
+
+
+%%
+\bigskip
+\textbf{Fall 3}: $A$ är ej diagonaliserabar. Då finns det
+minst ett egenvärde vars multiplicitet (som rot till det
+karakteristiska ekvationen $|A-\lambda I|=0$) är högre än det största
+antalet linjärt oberoende egenvektorer det genererar.  Det går
+ändå att ta fram lika många lösningar som ska ingå i det fundamentala systemet
+som rotens multiplicitet.
+
+Vi betraktar endast det speciella fallet då
+$\lambda_k=\lambda_{k+1}=\lambda$ är \emph{dubbelrot} och genererar
+endast \emph{en} egenvektor $\bdv$, så att $A\bdv=\lambda\bdv$. Då ges
+de två lösningarna $\phi_k(t)$ och $\phi_{k+1}(t)$ i det fundamentala
+systemet som genereras av denna dubbelrot av $$
+\phi_k(t)=e^{\lambda
+  t}\bdv \quad\mbox{ och }\quad \phi_{k+1}(t)=e^{\lambda t}(\bda +
+\bdb t), $$
+där $\bda$ och $\bdb$ är obekanta vektorer.  Substitutionen
+$\bdX=\phi_{k+1}$ i det homogena systemet $\bdX'=A\bdX$ ger: $$
+[e^{\lambda t}(\bda + \bdb t)]' =e^{\lambda t}[\lambda(\bda + \bdb
+t)+\bdb] =Ae^{\lambda t}(\bda + \bdb t) \iff \lambda(\bda + \bdb
+t)+\bdb = A(\bda + \bdb t) \iff\cases{A\bdb=\lambda\bdb\cr(A-\lambda
+  I)\bda=\bdb.}
+$$
+De sista två likheterna ovan följer från kravet att om två vektorpolynom,
+ett i VL och ett i HL, ska vara lika för varje $t$, då måste
+koefficienterna framför de respektive potenserna av $t$ vara lika.
+Notera att eftersom $\bdb$ är egenvektor till $A$, då är $\bdb=\bdv$.
+Slutligen är $\bda$ en
+godtycklig lösning till systemet $(A-\lambda I)\bda=\bdv$.
+
+\subsection*{Icke-homogena första ordningens linjära system}
+Det icke-homogena första ordningens linjära system
+$
+\bdX'=A\bdX + \bdF
+$
+har allmän lösning
+$
+\bdX(t) = \bdX_h(t) + \bdX_p(t)
+$.
+%%
+Här är $\bdX_h$ det homogena systemets ($\bdX'=A\bdX$) allmänna
+lösning och $\bdX_p$ är en (vilken som helst) lösning till det
+icke-homogena systemet.
+
+Vi betraktar endast det speciella fallet då $\bdF$ är ett
+vektorpolynom $\bdP_m(t)$. Man får en partikulär lösning genom att
+ansätta $\bdX_p$ till ett polynom av samma grad $m$ som $\bdP_m$ med
+obestämda vektorer $\{\bdb_k\}_{k=1}^m$ som koefficienter:
+%%
+$$
+\bdF=\bdP_m(t)=\bda_0+\bda_1t+\cdots\bda_mt^m \ergo
+\bdX_p=\bdQ_m(t)=\bdb_0+\bdb_1t+\cdots\bdb_mt^m.  $$
+Substitution av
+$\bdX_p$ i det icke-homogena systemet $\bdX'=A\bdX + \bdP_m$
+resulterar i höger- och vänsterled som är båda polynom av samma grad
+$m$.  Att HL = VL för varje $t$ medför att koefficienterna framför de
+respektive potenserna av $t$ i HL och VL måste vara lika.
+
+\textit{Exempel}:
+Låt $m=1$ så att ekvationsytemet av $\bdX'=A\bdX + \bda_0+\bda_1t$.
+Ansättning av $\bdX_p=\bdb_0+\bdb_1t$\, in i systemet och jämförelse av
+koefficienterna i polynomen från HL och VL ger:
+$$
+(\bdb_0+\bdb_1t)'=\bdb_1=A(\bdb_0+\bdb_1t) + \bda_0+\bda_1t
+\ergo
+\cases{t^1: A\bdb_1=-\bda_1 & $\to\bdb_1$ löses ut\cr
+       t^0: A\bdb_0=\bdb_1-\bda_0 & $\to\bdb_0$ löses ut.\cr}
+         % & ($\bdb_1$ är redan bestämt från ovan)
+$$
+
+\subsection*{Begynnelsevärdesproblem (BVP): \
+  $\cases{\bdX'=A\bdX + \bdF\cr \bdX(0)=\bdX_0.}$}
+
+Man tar fram den allmänna lösningen av systemet som ovan:
+$\displaystyle\bdX(t)=\bdX_h(t)+\bdX_p(t)=\sum_{k=1}^nC_k\phi_k(t)+\bdX_p(t)$.
+De obekanta konstanterna $C_1,...,C_n$ beräknas genom att sätta in
+begynnelsevillkoren för $t=0$ och lösa det (algebraiska) linjära systemet:
+$$
+\sum_{k=1}^nC_k\phi_k(0)
+=\underbrace{\pmatrix{
+| & \cdots & | \cr
+\phi_1(0) & \cdots & \phi_n(0)\cr
+| & \cdots & | \cr
+}}_{\mbox{$T$, om $A$ är d-bar}}
+\pmatrix{C_1\cr\vdots\cr C_n}
+=\bdX_0-\bdX_p(0).
+$$
+
+%% \section*{Andra ordningens linjära system av ODE
+%%   av typen: $\bdX''=A\bdX$.}
+%%
+%% Vi betraktar endast fallet då $A$ är diagonaliserbar och alla
+%% egenvärden är reella. Då gäller:
+%% $$
+%% \bdX''=A\bdX\!\iff\!
+%% \bdX''=TDT^{-1}\bdX\!\iff\!
+%% T^{-1}\bdX''=DT^{-1}\bdX\!\iff\!
+%% \bdZ''=D\bdZ
+%% \mbox{ med } \bdZ=T^{-1}\bdX \!\iff\! \bdX=T\bdZ.
+%% $$
+%% Det sista systemet består av $n$-st oberoende ekvationer:
+%% $$
+%% \bdZ''=D\bdZ\iff
+%% \cases{
+%%      z_1''=\lambda_1 z_1\cr
+%%      \hfil\vdots\cr
+%%      z_n''=\lambda_n z_n\cr
+%%        }
+%% \ergo \,z_k(t)
+%% =\cases{
+%% C_{k1}e^{\sqrt\lambda_kt}+C_{k2}e^{-\sqrt\lambda_kt}, & $\lambda_k>0$;\cr
+%% C_{k1}\cos(\sqrt{-\lambda}_kt)+C_{k2}\sin(\sqrt{-\lambda}_kt), &
+%%                                            $\lambda_k<0$;\cr
+%% C_{k1} + C_{k2}t, & $\lambda_k=0$.
+%% }
+%% $$
+%% Därmed är
+%% $$
+%% \bdX=T\bdZ = \sum_{k=1}^n z_k(t)\bdv_k.
+%% $$
+%%
+%% \hrule
+%% \smallskip
+%% \hrule
+%%
+
+
+
+\section*{Linjära kombinationer, summor och snitt av stokastiska variabler}
+Antag att $\{\xi_k\}_{k=1}^n$ är (diskreta eller kontinuerliga) stokastiska variabler med
+väntevärden $E(\xi_k)=\mu_k$ och varianser $V(\xi_k)=\sigma_k^2$, $k=1,...,n$, samt
+ $\{a_k\}_{k=1}^n$ är konstanter. Då gäller
+$$
+\eqalign{
+E(a_1\xi_1+\cdots+a_n\xi_n)& =a_1\mu_1+\cdots a_n\mu_n\cr
+V(a_1\xi_1+\cdots+a_n\xi_n)& =a_1^2\sigma_1^2+\cdots a_n\sigma_n^2
+   \quad(\mbox{om de är oberoende}).
+}
+$$
+Om $\{\xi_k\}_{k=1}^n$ är \textbf{normalfördelade} och oberoende,
+så är deras linjärkombinationer också normalfördelade:
+$$
+\xi_k\in N(\mu_k,\sigma_k),\;
+k=1,...,n,
+\quad\ergo\quad
+a_1\xi_1+\cdots+a_n\xi_n\in N(a_1\mu_1+\cdots a_n\mu_n,\sqrt{a_1^2\sigma_1^2+\cdots a_n\sigma_n^2}).
+$$
+I synnerhet, för \textbf{summor} och \textbf{snitt av likafördelade} och oberoende
+variabler gäller:
+$$
+\xi_k\in N(\mu,\sigma),\;
+k=1,...,n,
+\quad\ergo\quad
+\cases{
+\xi_1+\cdots+\xi_n \in N(n\mu,\sigma\sqrt{n})\cr\noalign{\vskip5pt}
+\frac{\xi_1+\cdots+\xi_n}{n} = \ob\xi \in N(\mu,\frac{\sigma}{\sqrt{n}})\cr
+}
+$$
+
+
+
+\section*{Väntevärde och varians för vissa fördelningar.
+             Approximationer}
+
+\hbox to \hsize{
+\def\EspaceAuDessus{&&\\*[-10pt]}\def\FromBelow{\\*[2pt] \hline}
+\begin{tabular}{|c|c|c|}
+\hline
+  \EspaceAuDessus $\xi$        & $\mu=E(\xi)$ & $\sigma^2=V(\xi)$\FromBelow
+\hline
+  \EspaceAuDessus $Hyp\,(N,n,p)$ & $np$ & $\frac{N-n}{N-1}\,np(1-p) $\FromBelow
+  \EspaceAuDessus $Bin\,(n,p)$   & $np$ & $np(1-p)$\FromBelow
+  \EspaceAuDessus $Po\,(\lambda)$& $\lambda$ & $\lambda$\FromBelow\hline
+  \EspaceAuDessus $Exp\,(\lambda)$& $1/\lambda$ & $1/\lambda^2$\FromBelow
+  \EspaceAuDessus $N(\mu,\sigma)$ & $\mu$ & $\sigma^2$\FromBelow
+\end{tabular}
+ \hfill
+   \raise-1.6cm\hbox{\includegraphics[scale=0.35]{approx}}
+}
+
+\bigskip
+
+
+\end{document}

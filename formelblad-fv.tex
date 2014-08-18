@@ -1,0 +1,1134 @@
+% vim: spelllang=en:nospell:foldmethod=marker
+%% Macroset för \Tr{}{}
+
+
+
+% Preambules, etc %<<<
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{a4}
+\usepackage{graphicx}
+%%% instead of \usepackage{fullpage} 
+\topmargin 0pt
+\advance \topmargin by -\headheight
+\advance \topmargin by -\headsep
+\textheight 8.9in
+\oddsidemargin 0pt
+\evensidemargin \oddsidemargin
+\marginparwidth 0.5in
+\textwidth 6.5in
+%%%%%%%%%
+\usepackage{amssymb}
+\pagestyle{myheadings}
+
+\everymath{\displaystyle}
+\textheight=720pt\parindent=0pt
+%>>>
+
+% LANG SETTINGS -------------------
+
+\newcount\Lang   \newcommand\Tr[2]{\ifnum\Lang=0 #1\else #2\fi}
+\Lang=0\relax   %% 0 - En || 1 -- Se
+%------------ /LANG SETTINGS ------------------
+
+%% <<< Former jobname.h ----------------
+
+%-------------
+%- LaTeX def's
+%-------------
+
+\let\UP\nearrow
+\let\DN\searrow
+\everymath{\displaystyle}
+
+%--------------------------- Facit macros ------
+
+\def\contentsname{} % Erase it
+\def\Facit#1{\par
+
+\addtocontents{toc}{{\small\protect\item[\textbf{\theenumi.}]#1\par\smallskip\hrule\par}}}
+\def\BeginUppg{\par\addtocontents{toc}{\par\protect\begin{enumerate}}
+               \par\begin{enumerate}}
+\def\EndUppg{\addtocontents{toc}{\protect\end{enumerate}}\par\end{enumerate}}
+
+\newcommand{\mymatrix}[2]{\left(\begin{array}{#1} #2\end{array}\right)}
+\newcommand{\mydet}[2]{\left|\begin{array}{#1} #2\end{array}\right|}
+
+\newcommand\dd[2]{\frac{\partial #1}{\partial #2}}
+\newcommand\lvec[1]{\stackrel{\longrightarrow}{#1}}
+
+\newcommand\tightSvar[1]{\fbox{\textbf{A:} #1}}
+\let\Svar\tightSvar
+
+%--------------------------- end Facit macros ------
+
+%% restore good old TeX \eqalign:
+\makeatletter
+\renewcommand{\@oddhead}{}
+\renewcommand{\@evenhead}{}
+\renewcommand{\@oddfoot}
+{\ifnum\thepage=1
+  \small\today\hfill file:~\small\texttt{\jobname.pdf}
+\else
+ \small
+ \Tr{Cheatsheet Multivariate Calculus}{Formelblad Flervariabelanalys}
+ \hfill s.~\thepage{} av \pageref{LastPageNo}
+\fi}
+
+  \renewcommand{\@evenfoot}{\small
+        \texttt{\jobname.pdf},\hfill}
+
+\def\eqalign#1{\null\,\vcenter{\openup\jot\m@th
+  \ialign{\strut\hfil$\displaystyle{##}$&$\displaystyle{{}##}$\hfil
+      \crcr#1\crcr}}\,}
+
+\def\iint{\mathop{\relax\protect
+    \noexpand\intop\mkern-9mu\noexpand\intop}\displaylimits}
+
+\def\iiint{\mathop{\relax\protect
+    \noexpand\intop\mkern-9mu\noexpand\intop\mkern-9mu\noexpand\intop}\displaylimits}
+\def\oiint{\bigcirc\mkern-24mu\int\mkern-15mu\int\displaylimits}
+\def\oint{\bigcirc\mkern-21.3mu\int\displaylimits}
+
+\makeatother
+
+
+\def\ppmatrix{\protect\pmatrix}
+\def\pcases{\protect\cases}
+\newcommand\pdet[1]{\protect\left|\protect\matrix{#1}\protect\right|}
+\newcommand\Ordo{\mathcal O}
+\let\ergo\Longrightarrow
+\let\vaxer\nearrow
+\let\avtar\searrow
+\newcommand\conj[1]{{\overline #1}}
+\let\ob\conj
+\newcommand\binom[2]{{#1\choose #2}}
+
+%% Boldface things %%
+
+\newcommand\bdF{\mathbf F}
+\newcommand\bdG{\mathbf G}
+\newcommand\bdN{\mathbf N}
+
+\newcommand\bda{\mathbf a}
+\newcommand\bdb{\mathbf b}
+\newcommand\bdc{\mathbf c}
+\newcommand\bde{\mathbf e}
+\newcommand\bdf{\mathbf f}
+\newcommand\bdg{\mathbf g}
+\newcommand\bdh{\mathbf h}
+\newcommand\bdi{\mathbf i}
+\newcommand\bdj{\mathbf j}
+\newcommand\bdk{\mathbf k}
+\newcommand\bdm{\mathbf m}
+\newcommand\bdn{\mathbf n}
+\newcommand\bdp{\mathbf p}
+\newcommand\bdq{\mathbf q}
+\newcommand\bdr{\mathbf r}
+\newcommand\bdu{\mathbf u}
+\newcommand\bdv{\mathbf v}
+\newcommand\bdx{\mathbf x}
+\newcommand\bdy{\mathbf y}
+\newcommand\bdw{\mathbf w}
+\newcommand\bdzero{\mathbf 0}
+
+% - sets -
+\def\Rone{{\mathbb R}}
+
+% - operators -
+
+\def\ddn{\partial_n}
+\def\dist{\mathop{\mathrm{dist}}}
+\def\Grad{\mathop{\mathrm{grad}}}
+\def\rot{\mathop{\mathrm{rot}}}
+\def\Curl{\mathop{\mathrm{curl}}}
+\def\Rot{\mathop{\mathrm{rot}}}
+\def\norm#1{{\Vert #1\Vert}}
+\newcommand\DDet[1]{\left|\protect\matrix{#1}\right|}
+\newcommand\Div{\mathop{\mathrm{div}}}
+
+% - förkortnngar
+
+\newcommand\mha{med hjälp av }
+\newcommand\bis{^{\prime\prime}}
+\newcommand\triss{^{'''}}
+\newcommand\PartInt[2]{\left\lceil\matrix{\mbox{\small #1}\cr
+                                       \mbox{\small #2}}\right\rceil}
+
+%adjust row height in tables #1 - overall height #2 - depth:
+\newcommand\TblHeight[2]{\lower#2em\vbox to#1em{\hsize=0pt}}
+\def\tvavektor[#1,#2]{\protect\pmatrix{#1\cr #2}}
+\def\trevektor[#1,#2,#3]{\protect\pmatrix{#1\cr #2\cr #3}}
+
+
+%% End \input\jobname.h fold >>> -
+
+\begin{document}
+
+\section*{
+\Tr{Cheat Sheet Multivariate Calculus}
+   {Formelblad Flervariabelanalys}
+}
+
+\subsection*{
+\Tr{Limits and continuity for functions of several variables}
+   {Gränsvärden och kontinuitet för funktioner av flera variabler}
+}
+\begin{itemize}
+
+\item % Limits ($f:\Rone^n\to\Rone$): %<<<
+  \Tr{Limits}
+     {Gränsvärden}
+($f:\Rone^n\to\Rone$):
+%    of several variables ($f:\Rone^n\to\Rone$) are
+%    defined through one-dimensional limits:
+ %
+ \ $
+ \lim_{\bdx\to\bda}f(\bdx)
+ = A \quad\iff\quad \lim_{|\bdx-\bda|\to0}|f(\bdx)-A|
+ = 0.
+ $%>>>
+
+ \item % Continuity %<<<
+   $f$
+   \Tr{is continuous at}
+      {är kontinuerlig i}
+   $\bda$
+   \Tr{if}
+      {om}
+   $\lim_{\bdx\to\bda}f(\bdx) = f(\bda)$.
+   $f\in C(\Omega)$
+   \Tr{if}
+      {om}
+   $f$
+   \Tr{is continuous at every point of the set}
+      {är kontinuerlig i alla punkter av}
+   $\Omega$.
+
+%>>>
+
+\end{itemize}
+
+\subsection*{
+\Tr{Derivatives, differentiability, tangent planes and normal lines, the chain rule}
+   {Derivator, differentiabilitet, normal och tangentplan, kedjeregeln}
+}
+\begin{itemize}
+
+\item %% Partial derivatives for a function of two variables at a point $(a,b)$:%<<<
+  \Tr{Partial derivatives for a function of two variables at a point}
+     {Partiella derivator för funktion av två variabler i punkten}
+$(a,b)$:
+ %
+ $$
+%%  \eqalign{
+%%  \dd fx(a,b)&=D_xf(a,b)=D_1f(a,b)=f'_x(a,b)=\lim_{h\to0}\frac{f(a+h,b)-f(a,b)}{h}\cr
+%%  \dd fy(a,b)&=D_yf(a,b)=D_2f(a,b)=f'_y(a,b)=\lim_{k\to0}\frac{f(a,b+k)-f(a,b)}{k}\cr
+%% } % eqalign
+  \dd fx(a,b)=f'_x(a,b)=\lim_{h\to0}\frac{f(a+h,b)-f(a,b)}{h},\qquad\quad
+  \dd fy(a,b)=f'_y(a,b)=\lim_{k\to0}\frac{f(a,b+k)-f(a,b)}{k}.
+ $$
+% Partial derivatives for functions of more than 2 variables are defined in a similar way.%>>>
+
+\item % The gradient of %<<<
+  \Tr{The gradient of}
+     {Gradiententen av}
+  $f:\Rone^n\to\Rone$: $\mbox{grad}\, f(\bdx)
+  =\nabla f(\bdx)
+  =(\dd f{x_1}(\bdx), \ldots, \dd f{x_n}(\bdx))^T
+  =(f'_{x_1}(\bdx),\ldots, f'_{x_n}(\bdx))^T
+  $.%>>>
+
+\item %% Diff-bility %<<<
+  \Tr{A function}
+     {Funktionen}
+  $f:\Rone^n\to\Rone$
+  \Tr{is differentiable at a point}
+     {är differentierbar i punkten}
+  $\bda=(a_1,\cdots,a_n)$
+  \Tr{if}
+     {om}
+  $$
+    f(\bda+\bdh) = f(\bda)+\nabla f(\bda)\cdot\bdh + |\bdh|\rho(\bdh)
+  $$
+  \Tr{in a neighbourhood of}
+     {i någon omgivning av}
+  $\bda$,
+  \Tr{so that}
+     {så att}
+  $\rho(\bdh)\to0$,
+  \Tr{as}
+     {då}
+  $\bdh\to\bdzero$.
+  \Tr{For differentiable function of two variables:}
+     {För differentierbara funktioner av två variabler:}
+  $$
+  f(a+h,b+k)
+  = f(a,b)+f'_x(a,b)(x-a)+f'_y(a,b)(y-b)+\sqrt{h^2+k^2}\,\rho(h,k).
+  $$%>>>
+
+\item %% The directional derivative  %<<<
+  \Tr{The directional derivative of a differentiable}
+     {Riktningsderivatan av en differentierbar}
+$f:\Rone^n\to\Rone$
+\Tr{in the direction}
+   {i riktningen}
+$\bdv$, $|\bdv|=1$,
+\Tr{at the point}
+   {i punkten}
+$\bda$:
+%
+ $$
+ \dd f{\bdv}(a,b)=f'_{\bdv}(a,b)=\lim_{t\to0}\frac{f(\bda+t\bdv)-f(\bda)}{t}
+                 =\nabla f(\bda) \cdot \bdv.
+ $$
+ % >>>
+
+\item % Tangentplan till funktionsyta %<<<
+  \Tr{Tangent plane}
+     {Tangentplan}
+  $\Pi$
+  \Tr{and normal line}
+     {och normallinje}
+  $N$
+  \Tr{to the functional surface}
+     {till funktionsytan}
+  $z=f(x,y)$
+  \Tr{at the point}
+     {i punkten}
+  $(a,b)$:
+  $$
+  \Pi: z = f(a,b)+f'_x(a,b)(x-a)+f'_y(a,b)(y-b); \qquad
+  N: \trevektor[x,y,z]=\trevektor[a,b,f(a,b)] + t\pmatrix{f'_x(a,b)\cr f'_y(a,b)\cr -1},\; t\in\Rone.
+  $$%>>>
+
+\item % Tangentplan till F(x,y,z) = 0 %<<<
+  \Tr{Tangent plane}
+     {Tangentplan}
+  $\Pi$
+  \Tr{and normal line}
+     {och normallinje}
+  $N$
+  \Tr{to the implicitly given surface}
+     {till implicitangivna ytan}
+  $F(x,y,z)=0$
+  \Tr{at the point}
+     {i punkten}
+  $(a,b,c)$:
+  $$
+  \Pi: \nabla F(a,b,c)\cdot\trevektor[x-a,y-b,z-c]=0\qquad
+  N: \trevektor[x,y,z]=\trevektor[a,b,c] + t\nabla F(a,b,c),\; t\in\Rone.
+  $$%>>>
+
+\item % Differential %<<<
+  \Tr{The the differential (the total derivative) and the linearization of}
+     {Differentialen och lineariseringen av}
+$f:\Rone^n\to\Rone$
+\Tr{at a point}
+   {i punkten}
+$\bda$:
+  $$
+  df(\bda)=\nabla f(\bda)\cdot d\bdx=f'_{x_1}(\bda)dx_1+\cdots+f'_{x_n}(\bda)dx_n;
+  \quad
+   \Delta f(\bda) =f(\bda+\Delta\bdx)-f(\bda)
+                  \approx  \nabla f(\bda)\cdot \Delta \bdx.
+                  % =f'_{x_1}(\bda)\Delta x_1+\cdots+f'_{x_n}(\bda)\Delta x_n\cr
+  $$%>>>
+
+\item % The chain rule %<<<
+  \Tr{The chain rule. If}
+     {Kedjeregeln. Om}
+  $f:\Rone^n\to\Rone$,
+  $\bdr=\bdr(t)=(x_1(t),\dots, x_n(t))$, and $\varphi(t)=f(\bdr(t))$,
+  \Tr{then:}
+     {då är}
+  $$
+  \varphi'(t)=\frac{d}{dt} f(\bdr(t))
+          =f'_{x_1}(\bdr(t))\,x_1'(t)+\cdots +f'_{x_n}(\bdr(t))\,x_n'(t)
+          =\nabla f(\bdr(t))\cdot\bdr'(t).
+  $$
+  %>>>
+
+  \item % Derivator av högre ordning %<<<
+    \Tr{\textbf{The higher-order derivatives} are defined recursively, e.g.}
+       {\textbf{Högre ordningens derivator} definieras rekursivt, dvs}
+  \ $f''_{xx}\stackrel{\mbox{\tiny def}}=(f'_x)'_x$,
+  \ $f''_{xy}\stackrel{\mbox{\tiny def}}=(f'_x)'_y$, \ etc.
+A f-n
+$f\in C^n(\Omega)$ 
+\Tr{if $f$ and all derivatives up to order}
+   {om $f$ och alla dess derivator till ordning}
+$n$ 
+\Tr{are continuous functions at every point of}
+   {är kontinuerliga funktioner i alla punkter av}
+$\Omega$.%>>>
+
+\item % The mixed derivatives theorem %<<<
+  \Tr{The mixed derivatives theorem gives a sufficient condition for equality of the mixed derivatives, e.g.:}
+     {Ett tillräckligt villkor för likhet av de blandade derivatorna är:}
+  $$
+  f:\Rone^2\to\Rone,\, f\in C^2(\Omega) \quad\ergo\quad f''_{xy}=f''_{yx}.
+  $$%>>>
+
+\end{itemize}
+
+
+\subsection*{
+\Tr{Taylor formula of order $n$ for a smooth function of two variables}
+   {Taylors formel för funktioner av två variabler}
+}
+
+%<<<
+\[
+f(x_0+h,y_0+k)
+= \sum_{k=0}^n \frac1{k!}(hD_x+kD_y)^kf(x_0,y_0) + \Ordo(|(h,k)|^{n+1}).
+%\quad (x_0,y_0) \mbox{ internal pt of $D_f$ }, f\in C^{n+1}(D_f).
+\]
+%>>>
+
+\subsection*{
+\Tr{Extremes of functions}
+   {Lokala och globala extrema}
+}
+
+\begin{itemize}
+
+\item % Critical pts %<<<
+  \Tr{A point }
+     {Punkten}
+$\bdx_0$ 
+\Tr{is critical (stationary) if }
+   {är kritisk (stationär) om}
+$\nabla f(\bdx_0)=0$.
+  \Tr{A point }
+     {Punkten}
+$\bdx_0$
+\Tr{is singular if}
+   {är singulär om}
+$\nabla f(\bdx_0)$
+\Tr{does not exist.}
+   {ej existerar.}
+
+%% For differentiable
+%% functions of two variables these are the points
+%% where the tangent plane is parallel to
+%% the $xy$-plane.%>>>
+
+\item \Tr{Local extremes:}{Lokala extrema:} %<<<
+  $\bdx_0$
+  \Tr{is a loc max pt of}
+     {är lok max till}
+  $f$
+  \Tr{if}
+     {om}
+  $f(\bdx_0)>f(\bdx)$
+  \Tr{in some nb-hood of}
+     {i ngn omgivning av}
+  $\bdx_0$;
+  \Tr{loc min, if}
+     {lok min, om}
+  $f(\bdx_0)<f(\bdx)$.
+  \Tr{If}
+     {Om}
+  $f$
+  \Tr{has a local extreme and is differentiable at}
+     {har ett lok extremum och är diff-bar i}
+  $\bdx_0$,
+  \Tr{then}
+     {då är}
+  $\bdx_0$
+  \Tr{is a critical point of}
+     {en kritisk punkt av}
+  $f$,
+  \Tr{i.e.}
+     {dvs}
+  $\nabla f(\bdx_0)=\bdzero$.
+  %>>>
+
+  \item % Global extremes:  %<<<
+    \Tr{Global extremes}
+       {Globala extrema}:
+  $\bdx_0$
+  \Tr{is a global max pt of}
+     {är ett glob max till}
+  $f$
+  \Tr{if}
+     {om}
+  $f(\bdx_0)\ge f(\bdx)$
+  (glob min,
+  \Tr{if}
+     {om}
+  $f(\bdx_0)\le f(\bdx)$),
+%  \Tr{for all}
+%     {}
+  $\bdx\in D_f$.%>>>
+
+\item % Optimering på kompakta områden %<<<
+  \Tr{If}
+     {Om}
+ $f\in  C(D_f)$
+ \Tr{and}
+    {och}
+ $D$
+ \Tr{is compact,}
+    {är kompakt, når}
+ $f$
+ \Tr{reaches both it's global max and min in}
+    {både sina globala max och min i}
+ $D$.%>>>
+
+\end{itemize}
+
+\subsection*{
+\Tr{Sufficient conditions for local extremes of smooth functions}
+   {Tillräckliga villkor för lokala extrema}
+}
+
+\begin{itemize}
+
+  \item % Hessian: % <<<
+    \Tr{Hessian: the square matrix of the second partial derivatives}
+       {Hessianen: matrisen av de andra partiella derivatorna}
+    $\mathcal{H}(\bdx_0)=[f''_{x_ix_j}(\bdx_0)]$, $1\le i,j\le n$,
+    \Tr{computed at the pt}
+       {beräknade i}
+    $\bdx_0$.
+    \Tr{If the mixed derivatives are equal (e.g. if}
+       {Ifall de blandade derivatorna är lika (t\,ex om}
+    $f$
+    \Tr{is}
+       {är}
+    $C^2$
+    \Tr{at}
+       {i}
+    $\bdx_0$),
+    \Tr{then}
+       {då är}
+    $\mathcal{H}(\bdx_0)$
+    \Tr{is symmetric.}
+       {symmetrisk.}
+  % >>>
+
+  \item % Quadratic form % <<<
+    \Tr{Quadratic form}
+       {Kvadratisk form}
+    $Q(\bdh)=\sum_{i=1}^n\sum_{j=1}^n f''_{x_ix_j}(x_0)h_ih_j =\bdh^T\mathcal H(\bdx_0)\bdh$.
+    \Tr{For}
+       {För}
+    $n=2$,
+    \Tr{and}
+       {och}
+    $f''_{xy}(\bdx_0)=f''_{yx}(\bdx_0)$,
+    \Tr{then}
+       {är}
+    $$
+    Q(h,k) 
+    = (h,k) \mathcal H(x_0)\!\pmatrix{h\cr k}
+    = f''_{xx}(\bdx_0)h^2+2f''_{xy}(\bdx_0)hk+f''_{yy}(\bdx_0)k^2
+    = (h,k)\pmatrix{
+                  f''_{xx}(\bdx_0) & f''_{xy}(\bdx_0)\cr
+                  f''_{xy}(\bdx_0) & f''_{yy}(\bdx_0)
+               }\!
+      \pmatrix{h\cr k}.
+    $$
+    \Tr{In a neighburhood of a critical point}
+       {I en omgivning av den kritiska punkten}
+    $\bdx_0$
+    \Tr{one has:}
+       {är}
+    $f(\bdx_0+\bdh)-f(\bdx)=Q(h,k)+\Ordo(|(h,k)|^3)$.
+  % >>>
+
+  \item % Typer av kritiska punkter % <<<
+    \Tr{Type of the crtical  point}
+       {Typ av den kritiska punkten}
+$\bdx_0$ (%
+\Tr{i.e.}
+   {dvs}
+$\nabla f(\bdx_0)=\bdzero$) 
+\Tr{depending on the sign of}
+   {beroende på tecknet av}
+     $Q(\bdh)$
+     \Tr{at}
+        {i}
+     $\bdx_0$
+     \Tr{for}
+        {för}
+     $\bdh\neq\bdzero$:
+
+    \begin{tabular}[m]{|c|c|c|c|c|c|}
+      \hline
+      $Q(\bdh)$ &
+      \Tr{changes sign}
+         {växlar tecken} &
+          $Q(\bdh)>0$ &
+          $Q(\bdh)<0$ &
+          $Q(\bdh)\le0$ \ or \ %
+          $Q(\bdh)\ge0$ \\
+      \hline
+      $Q$\Tr{'s type}{:s typ} &
+      \Tr{indefinite}
+         {indefinit}
+          &
+          \Tr{positive definite}
+             {positiv definit}
+          &
+          \Tr{negative definite}
+             {negativ definit}
+          &
+          \Tr{postive/negative semi--definite}
+             {positiv/negativ semidefinit}
+          \\
+      \hline
+      \Tr{The pt $\bdx_0$ is}
+         {Punkten $\bdx_0$ är}
+      &
+      \Tr{a saddle pt}
+         {sadelpunkt}
+          &
+          \Tr{a local min}
+             {lok min}
+          &
+          \Tr{a local max}
+             {lok max}
+          &
+          \Tr{further investigation needed}
+             {vidare undersökningar krävs}
+          \\
+      \hline
+    \end{tabular}
+  % >>>
+
+\end{itemize}
+
+\subsection*{
+\Tr{Optimization under constraints. Lagrange multipliers}
+   {Optimering under bivillkor. Lagrange multiplikatorer}
+}
+
+\Tr{Necessary conditions for local extremes when looking for}
+   {Nödvändiga villkor för lokala extrema om man söker}
+
+\begin{itemize}
+
+  % in R^2 <<<
+  \item $\cases{\mbox{\small max/min}\, f(x,y)\cr g(x,y)=0\,.}$
+    \hspace{2em} 
+    \Tr{At the crtitical points}
+       {I de kritiska punkterna är}
+    $\nabla f=\lambda\nabla g$                                  
+    \Tr{or}
+       {eller}
+    $\nabla g=\bdzero$,
+    \Tr{i.e.}
+       {dvs}
+    $\left|\matrix{-\nabla f -\cr -\nabla g -}\right|=0$.
+  % >>>
+
+  % in R^3, one restriction <<<
+  \item $\cases{\mbox{\small max/min}\, f(x,y,z)\cr g(x,y,z)=0\,.}$
+    \hspace{2em} 
+    \Tr{At the crtitical points }
+       {I de kritiska punkterna är}
+    $\nabla f=\lambda\nabla g$
+    \Tr{or}
+       {eller}
+    $\nabla g=\bdzero$, 
+    \Tr{i.e.}
+       {dvs}
+    $\nabla f\times\nabla g=\bdzero$.
+  % >>>
+
+  % in R^3, two restrictions <<<
+  \item $\cases{\mbox{\small max/min}\, f(x,y,z)\cr g_1(x,y,z)=0\cr g_2(x,y,z)=0\,.}$
+    \hspace{2em} 
+    \Tr{At the crtitical points }
+       {I de kritiska punkterna är}
+    $\nabla f=\lambda\nabla g_1+\mu\nabla g_2$, 
+    \Tr{i.e.}
+       {dvs}
+    $\left|\matrix{-\nabla f -\cr -\nabla g_1 -\cr -\nabla g_2 -}\right|=0$.
+  % >>>
+
+\end{itemize}
+
+\subsection*{
+\Tr{Two variants of the implicit function theorem}
+   {Två varianter av implicita funktionssatsen}
+}
+
+\begin{itemize}
+
+\item % i R^2 %<<<
+  \Tr{Let}
+     {Låt}
+$\gamma$ 
+\Tr{be the curve}
+   {vara kurvan}
+ $\gamma:F(x,y)=0$
+ \Tr{and}
+    {och}
+$(a,b)\in\gamma$.
+\Tr{Then, if}
+   {Om}
+$F\in C^1$
+\Tr{in a neighbourhood of}
+   {i någon omgivning av}
+$(a,b)$
+\Tr{and}
+   {och}
+$F'_y(a,b)\neq0$,
+\Tr{then there exists a}
+   {då finns en}
+$C^1$-\Tr{function}{funktion}
+$y=y(x)$,
+\Tr{such that}
+   {sådan att}
+$F(x,y(x))\equiv0$
+\Tr{in some neighbourhood of}
+   {någon omgivning av}
+$x=a$.
+\Tr{Moreover,}
+   {Dessutom är}
+$y'(a)=-F'_x(a,b)/F'_y(a,b)$.
+
+%>>>
+
+\item % i R^3 %<<<
+  \Tr{Let $S$ be the surface $S\!:\!F(x,y,z)=0$ and $(a,b,c)\in S$.}
+     {Låt $S$ vara ytan $S\!:\!F(x,y,z)=0$ och $(a,b,c)\in S$.}
+  \Tr{If}
+     {Om}
+$F\in C^1$
+\Tr{in a nb-hood of}
+   {i omgivningen av}
+$(a,b,c)$
+\Tr{and}
+   {och}
+$F'_z(a,b,c)\neq0$,
+\Tr{then there exists a $C^1$-function $z(x,y)$, such that}
+   {då existerar en $C^1$-funktion $z(x,y)$, sådan att}
+$F(x,y,z(x,y))\equiv0$ 
+\Tr{in some nb-hood of $(x,y)=(a,b)$. Moreover,}
+   {i någon omgivning av $(x,y)=(a,b)$. Dessutom är}
+$z'_x(a,b)=-F'_x(a,b,c)/F'_z(a,b,c)$ 
+\Tr{and}
+   {och}
+$z'_y(a,b)=-F'_y(a,b,c)/F'_z(a,b,c)$.%>>>
+
+\end{itemize}
+
+\subsection*{
+\Tr{Gradient, Curl and Divergence}
+   {Gradient, Rotation och Divergens}
+}
+
+\Tr{Notation:}
+   {Beteckningar:}
+  $\Phi:\Rone^n\to\Rone$
+  \Tr{is a scalar field}
+     {är ett skalärfält},
+  $\bdF:\Rone^n\to\Rone^n$
+  \Tr{is a vector field}
+     {är ett vektorfält}
+%  $\bdF=(P,Q,R)$ in $\Rone^3$,
+\Tr{and}
+   {och}
+  $\nabla=\textstyle(\dd{}{x_1},\ldots,\dd{}{x_n})$
+
+
+\begin{itemize}
+
+   \item Gradient: % <<<
+     $\Grad \Phi \stackrel{\mbox{\tiny def}}
+     {=} \nabla\Phi = (\Phi'_{x_1},\ldots,\Phi'_{x_n})$.
+   % >>>
+   \item % Divergence: % <<<
+     \Tr{Divergence:}
+        {Divergens:}
+     $\Div \bdF \stackrel{\mbox{\tiny def}}
+     {=} \nabla\cdot\bdF = \textstyle\dd{F_1}{x_1}+\cdots+\dd{F_n}{x_n}$.
+        $\bdF$ 
+        \Tr{is solenoidal if}
+           {är solenoidal om}
+    $\Div \bdF=0$.
+   % >>>
+   \item % Curl/Rot % <<<
+     \Tr{Curl (in $\Rone^3$, $\bdF=(P,Q,R)$):}
+        {Rotation ($\bdF=(P,Q,R)$):}
+     $\Rot\,\bdF \stackrel{\mbox{\tiny def}}
+        {=} \nabla\times\bdF = (R'_y-Q'_z,P'_z-R'_x,Q'_x-P'_y)$.
+        $\bdF$
+        \Tr{is curl-free if}
+           {är rot-fri om}
+        $\nabla\times\bdF=\bdzero$.
+   % >>>
+   \item % Konsrvativa fält % <<<
+   $\bdF$
+   \Tr{is conservative if}
+      {är konservativt om}
+   $\bdF=\Grad\Phi$, $\Phi$
+   \Tr{is called a potential for}
+      {kallas för potential för}
+   $\bdF$.
+   \Tr{Every conservative $C^2$-field is curl-free}
+      {Varje konservativt $C^2$-fält är rotationsfri}.
+   % >>>
+   \item % Laplacian: %<<<
+     \Tr{The Laplacian:}
+        {Laplacianen:}
+ $\Delta\stackrel{\mbox{\tiny def}}
+ =\nabla\cdot\nabla=\dd {{}^2}{x_1^2}+\cdots+\dd {{}^2}{x_n^2}$.
+ \Tr{If}
+    {Om}
+ $f$
+ \Tr{satisfies the equation}
+    {uppfyller ekvationen}
+ $\Delta f=0$, 
+ \Tr{then}
+    {är}
+ $f$
+ \Tr{is harmonic.}
+    {harmonisk.}
+ %>>>
+
+\end{itemize}
+
+\subsection*{
+\Tr{Double integrals}
+   {Dubbelintegraler}
+}
+
+\begin{itemize}
+
+ \item % Iterated integration (Fubini theorem): % <<<
+   \Tr{Iterated integration (Fubini theorem):}
+      {Itererad integration (Fubinis sats):}
+     $$
+        \iint_{\mkern-12mu D} f(x,y)\,dxdy
+        =\int_a^b\Bigl(\int_{\varphi(x)}^{\psi(x)}f(x,y)\,dy\Bigr)dx,
+        \qquad D=\{\varphi(x)\le y \le \psi(x),\, a\le x\le b\}.
+     $$
+   % >>>
+
+ \item % Change of variables %<<<
+   \Tr{Change of variables $D\leftrightarrow D'$ by}
+      {Variabelbyte $D\leftrightarrow D'$ genom}
+      \ $\cases{x=x(u,v)\cr y=y(u,v)}$ 
+      \Tr{or}{eller}
+      $\cases{u=u(x,y)\cr v=v(x,y)}$
+$$
+  \iint_{\mkern-12mu D} f(x,y)\,dxdy =
+  \iint_{\mkern-12mu D'} f(x(u,v),y(u,v))\,J\,dudv,
+  \qquad
+  J=\Bigl|\frac{d(x,y)}{d(u,v)}\Bigr| =
+  \frac1{\Bigl|\frac{d(u,v)}{d(x,y)}\Bigr|}\cdot
+$$%>>>
+
+  \item % Polära koordinater %<<<
+    \Tr{Polar coordinates}
+       {Polära koordinater}
+       ($a>0$, $b>0$):
+       \ $\cases{x=ar\cos\varphi\cr y = br\sin\varphi}$, \hspace{0.5em}
+      $dxdy = J\,drd\varphi$, \ $J=\Bigl|\frac{d(x,y)}{d(r,\varphi)}\Bigr|=abr$.
+      %>>>
+
+\end{itemize}
+
+
+\subsection*{
+\Tr{Triple integrals}
+   {Trippelintegraler}
+   }
+
+\begin{itemize}
+
+ \item % Iterated integration (Fubini theorem): % <<<
+   \Tr{Iterated integration (Fubini theorem):}
+      {Itererad integration (Fubinis sats):}
+     $$
+        \iiint_{\mkern-12mu \Omega} f(x,y,z)\,dxdydz
+       = \iint_{\mkern-12mu D}
+         \Bigl(\int_{\varphi(x,y)}^{\psi(x,y)}f(x,y,z)\,dz\Bigr)f(x,y,z)\,dxdy,
+        \qquad \Omega=\cases{
+               \varphi(x,y)\le z \le \psi(x,y)\cr
+              (x,y)\in D.}
+     $$
+   % >>>
+
+ \item % Change of variables,  %<<<
+   \Tr{Change of variables $\Omega\leftrightarrow\Omega'$ by }
+      {Variabelbyte $\Omega\leftrightarrow\Omega'$ genom }
+  \ $\cases{x=x(u,v,w)\cr y=y(u,v,w)\cr z=z(u,v,w)}$
+  \Tr{or}{eller}
+   $\cases{u=u(x,y,z)\cr v=v(x,y,z)\cr w=w(x,y,z)}$
+$$
+  \iiint_{\mkern-12mu \Omega}  f(x,y,z)\,dV = % dxdydz
+  \iiint_{\mkern-12mu \Omega'} f(x(u,v,w),y(u,v,w),z(u,v,w))\,J\,dV', %dudvdw,
+  \quad
+  J=\Bigl|\frac{d(x,y,z)}{d(u,v,w)}\Bigr| =
+  \frac1{\Bigl|\frac{d(u,v,w)}{d(x,y,z)}\Bigr|}\cdot
+$$%>>>
+
+  \item % Cylindriska koordinater%<<<
+    \Tr{Cylindrical coordinates}
+       {Cylindrindriska koordinater} ($a,b>0$):
+    \ $\cases{x=ar\cos\varphi\cr y = br\sin\varphi\cr z=z}$,  \
+    $dxdydz=\Bigl|\frac{d(x,y,z)}{d(r,\varphi,z)}\Bigr|=abr\,drd\varphi dz$.
+    %>>>
+
+  \item % Sfäriska koordinater%<<<
+    \Tr{Spherical coordinates}
+       {Sfäriska koordinater} ($a,b,c>0$):
+    \ $\cases{x = ar\sin\vartheta\cos\varphi\cr
+              y = br\sin\vartheta\sin\varphi\cr
+              z=  cr\cos\vartheta}$,  \
+    $dxdydz=\Bigl|\frac{d(x,y,z)}{d(r,\vartheta,\varphi)}\Bigr|
+           =abcr^2\sin\vartheta\,drd\vartheta d\varphi$.
+           %>>>
+
+\end{itemize}
+
+\subsection*{
+\Tr{Line integrals over scalar fields}
+   {Kurvintegraler över skalära fält}
+}
+
+\begin{itemize}
+
+% Computetion %<<<
+   \item 
+     \Tr{If}
+        {Om}
+     $f:\Rone^n\to\Rone$
+     \Tr{and}
+        {och}
+     $\gamma$
+     \Tr{is a $C^1$-curve with parametrization}
+        {är en $C^1$-kurva med parametrisering}
+     $\gamma: \bdr=\bdr(t)$, $a < t < b$,
+     \Tr{then}
+        {då är}
+     $$
+     \int_\gamma f\,|d\bdr| = \int_a^b f(\bdr(t))\, |\bdr'(t)|\,dt,
+     \qquad  |\bdr'(t)| = \sqrt{(x_1'(t))^2+\cdots (x_n'(t))^2}\,.
+     $$%>>>
+
+% The length of $\gamma$ %<<<
+   \item 
+     \Tr{In particular, the length of}
+        {I synnerhet, ges längden av}
+     $\gamma$  
+     \Tr{is given by}
+        {av}
+     \,$\int_\gamma |d\bdr|$.
+     %>>>
+
+\end{itemize}
+
+\subsection*{
+\Tr{Line integrals over vector fields}
+   {Kurvintegraler över vektorfält}
+}
+
+
+\begin{itemize}
+
+% Computation%<<<
+ \item 
+   \Tr{If}
+      {Om}
+      $\bdF:\Rone^n\to\Rone^n$
+   \Tr{and}
+      {och}
+   $\hat T$
+   \Tr{is the unit tangent of the oriented $C^1$-curve}
+      {är enhetstangenten till den orienterade $C^1$-kurvan}
+   $\gamma: \bdr=\bdr(t)$, $t:a \to b$,
+   \Tr{then}
+      {är}
+   $$
+    \int_\gamma \bdF\cdot \hat T\, |d\bdr|
+  = \int_\gamma \bdF\cdot d\bdr
+  = \int_a^b \bdF(\bdr(t))\cdot\bdr'(t)\,dt.
+   $$%>>>
+
+\item % Common notation for line integrals in $\Rone^2$ and $\Rone^3$ when%<<<
+  \Tr{Common notation for line integrals in $\Rone^2$ and $\Rone^3$ when}
+     {Vanliga beteckningar för kurvintegraler i $\Rone^2$ och $\Rone^3$ då}
+     $\bdF(x,y) = (P,Q)$
+     \Tr{and}
+        {och}
+     $\bdF(x,y,z) = (P,Q,R)$:
+$$
+        \int_\gamma P\,dx + Q\,dy + R\,dz
+     \qquad
+     \mbox{\Tr{and}{och}}
+     \qquad
+        \int_\gamma P\,dx + Q\,dy.
+$$%>>>
+
+\item % Common notation for line integrals along closed paths (circulations):%<<<
+  \Tr{Common notation for line integrals along closed paths (circulations):}
+     {Vanlig beteckning för kurvintegraler längs slutna konturer (cirkulationer):}
+   \ $
+    \oint_\gamma \bdF\cdot d\bdr.
+   $
+   \Tr{Positive direction of transversal is counterclockwise.}
+      {Positiv om\-lopps\-rikt\-ning är moturs}.
+%>>>
+
+\item % Independence of path) If $F$ is conservative %<<<
+  \Tr{Independence of path: If }
+     {Oberoende av vägen: Om}
+$\bdF$ 
+\Tr{is conservative with a potential $\Phi$ in an open simply connected domain}
+   {är konservativt med potential $\Phi$ i det enkelt sammanhängande området}
+$\Omega$
+\Tr{and}
+   {och}
+$\gamma\subset\Omega$
+\Tr{is an arbitrary piecewise $C^1$-curve from the point $A$ to $B$, then}
+   {är en godtycklig styckvis $C^1$-kurva från punkten $A$ till $B$, då är}
+$$
+    \int_\gamma \bdF\cdot d\bdr = \int_\gamma\nabla\Phi\cdot d\bdr
+    = \Phi(B)-\Phi(A).
+$$
+%>>>
+
+% The Green formula: If $\Omega\subset\Rone^2$ is an %<<<
+\item 
+  \Tr{The Green formula: If}
+     {Greens formel: Om}
+  $\Omega\subset\Rone^2$
+  \Tr{is an open connected domain with positively oriented piecewise $C^1$-boundary}
+     {är ett öppet sammanhängande område med positivt orienterad styckvis $C^1$ rand}
+ $\partial\Omega$
+ \Tr{and}
+    {samt}
+ $\bdF(x,y)=(P,Q)\in C^1(\Omega\cup\partial\Omega)$,
+ \Tr{then}
+    {då är}
+$$
+  \oint_{\partial\Omega} \bdF\cdot d\bdr
+= \oint_{\partial\Omega} P\,dx + Q\, dy
+= \iint_{\mkern-12mu \Omega} (Q'_x-P'_y)\,dxdy.
+$$
+%>>>
+
+\end{itemize}
+
+\subsection*{
+\Tr{Surface integrals over scalar fields}
+   {Ytintegraler över skalära fält}
+}% 
+
+\begin{itemize}
+
+% Computation %<<<
+\item 
+  \Tr{If}
+     {Om}
+  $f:\Rone^3\to\Rone$
+  \Tr{and $S$ is a $C^1$-surface with parametrization}
+     {och $S$ är en $C^1$-yta med parametrisering}
+  $S: \bdr=\bdr(u,v)$, $(u,v)\in\Omega\subset\Rone^2$,
+  \Tr{then}
+     {då är}
+ $$
+ \iint_{\mskip -12mu S} f\,dS
+= \iint_{\mskip -12mu\Omega}
+     f(\bdr(u,v))\,|\bdr'_u\times\bdr'_v|\,dudv.
+ $$%>>>
+
+%   If $S$ is the functional surface %<<<
+   \item 
+     \Tr{If, in particular, $S$ is the functional surface}
+        {I synnerhet, om $S$ är en funktionsyta,}
+     $S: z=z(x,y)$, $(x,y)\in\Omega\subset\Rone^2$,
+     \Tr{then}{då är}
+     $$
+     \iint_{\mskip -12mu S} f\,dS
+   = \iint_{\mskip -12mu\Omega}
+     f(x,y,z(x,y))\sqrt{1+(z'_x)^2+(z'_y)^2}\,dxdy.
+     $$%>>>
+
+   \item % Area av buktig yta %<<<
+     \Tr{If, in particular, $f\equiv1$, then  \,$\iint_{\mskip -12mu S}dS$ \ gives the area of $S$.}
+        {I synnerhet, om $f\equiv1$, då ger \,$\iint_{\mskip -12mu S}dS$ \ arean av $S$.}
+     %>>>
+
+\end{itemize}
+
+\subsection*{
+\Tr{Flux integrals}
+   {Flödesintegraler}
+}% over scalar fields}
+
+\Tr{Notation:}
+   {Beteckning:}
+$\bdF=(P,Q,R):\Rone^3\to\Rone^3$, $S$
+\Tr{is a orientable, piecewise $C^1$-surface, $\widehat\bdN$ is the unit normal to $S$.}
+   {är orienterbar, styckvis $C^1$-yta, $\widehat\bdN$ är enhetsnormalen till $S$.}
+\begin{itemize}
+
+% Computation %<<<
+   \item 
+     \Tr{If}
+        {Om}
+     $S: \bdr=\bdr(u,v)$, $(u,v)\in\Omega\subset\Rone^2$,
+     \Tr{then}
+        {då är}
+     $$
+     \iint_{\mskip -12mu S} \bdF\cdot\widehat\bdN\,dS
+   = \pm\iint_{\mskip -12mu\Omega}
+         \bdF(\bdr(u,v))\cdot (\bdr'_u\times\bdr'_v)\,dudv.
+     $$%>>>
+
+%   If $S$ is the functional surface %<<<
+   \item 
+     \Tr{If, in particular, $S$ is the functional surface}
+        {Om, i synnerhet, $S$ är en funktionsyta,}
+     $S: z=z(x,y)$, $(x,y)\in\Omega\subset\Rone^2$,
+     \Tr{then}
+        {då är}
+     $$
+     \iint_{\mskip -12mu S} \bdF\cdot\widehat\bdN\,dS
+   = \pm\iint_{\mskip -12mu\Omega}
+     \bdF(x,y,z(x,y))\cdot\trevektor[-z'_x,-z'_y,1]\,dxdy.
+     $$%>>>
+
+%  Gauss %<<<
+   \item 
+     \Tr{The Gauss (divergence) theorem: If}
+        {Gauss'  sats (divergenssatsen): Om}
+     $V\subset\Rone^3$
+     \Tr{has a piecewise $C^1$--boundary}
+        {har styckvis $C^1$--rand}
+     $S$
+     \Tr{with an outer unit normal $\widehat\bdN$ and $\bdF\in C^1(V\cup\partial V)$, then}
+        {med enhetsnormal utåt $\widehat\bdN$ och $\bdF\in C^1(V\cup\partial V)$, då är}
+     $$
+     \oiint_{\mskip -12mu\partial V} \bdF\cdot\widehat\bdN\,dS
+   = \iiint_{\mskip -12mu V} \Div\bdF \,dV
+   = \iiint_{\mskip -12mu V} \nabla\cdot \bdF \,dV
+   = \iiint_{\mskip -12mu V} (P'_x+Q'_y+R'_z) \,dV.
+     $$%>>>
+
+%  Stokes %<<<
+   \item 
+     \Tr{The Stokes theorem:}
+        {Stokes' sats:}
+      \Tr{If the $C^1$-surface $S$ has a piecewise $C^1$-boundary $\partial S$, then the counterclockwise circulation (seen from}
+         {Om $C^1$-ytan $S$ har styckvis $C^1$-rand $\partial S$, då är moturscirkulationen (sett från}
+     $\widehat\bdN$)
+     $$
+     \oint_{\partial S} \bdF\cdot d\bdr
+     = \iint_{\mskip -12mu S} \Tr{\Curl}{\Rot}\bdF\cdot\widehat\bdN\,dS
+   = \iint_{\mskip -12mu S} (\nabla\times \bdF)\cdot\widehat\bdN\,dS.
+     $$
+     %>>>
+\end{itemize}
+\label{LastPageNo}
+\end{document}

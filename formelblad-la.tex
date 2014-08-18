@@ -1,0 +1,594 @@
+%% CHANGES:
+%% IvTj, 2012-03-19:     * Rättelse för isometriska avb: F(u*v) = F(u)*F(v)
+%%                                                   --> u*v = F(u)*F(v)
+%% IvTj, 2010-10-29: 
+%%                       * Byte: kolumn(er) --> kolonn(er)
+%%                       * Byte: |A| -->  det(A)
+%%                       * Ny def på utveckling av det(A) längs en rad
+%%                       * |A-\lambda I| --> det(A-\lambda I)
+%%                       * .. nollställena till den karakteristiska ekv
+%%                       -->  lösningarna till den karakteristiska ekv
+%%                        
+%% Ändring: Ivtj, 2009-02: lagt till direktformeln för ax^2+bx+c=0
+%%                         Lagt till indelningslinjer i tabellerna 
+%%                         "Luftigare" tabeller 
+%%                         Flyttat om del av "Vektorer" --> sida 1
+%%                         Lagt till en till form för kryssprodukten
+%%                         Splittrat lin ber/ober.
+%%                         Lagt text om A ~ I (radekvivalens med enhetsmatrisen)
+%%                         Lagt till Ortogonala matriser
+%%                         Ommöblering av huvudsatsen
+%%                           Preciserat att A_{n x n}
+%%                    Lagt till att A:s både rader och kolonner utgör bas för R^n
+%%                           Bytt (in-, sur-, bijektiv) --> omvändbar
+%% Ändring: Ivtj, 2008-08: Konverterart t. UTF-8, Tagit bort jth-logot
+%%                         No external dependencies: alla LaTeX-def's inbäddade
+%%                         Utbyta externdefinierade environments
+%%                         Omdef \vec --> vektorer i bold-typpsnitt utan pil
+%%                         det A --> det(A), etc
+%%                         Krav att egenvektorn u != 0
+%%                         Bytt ut definitionen av diagonaliserbar matris,
+%%                         ej nödvändigt att kräva skilda egenvärden
+
+\documentclass[a4paper]{article}
+%% \usepackage[T1]{fontenc}
+%% \usepackage[latin1]{inputenc}
+\usepackage[utf8]{inputenc}  % <-- IvTj
+\usepackage[swedish]{babel}
+\usepackage{amsmath,fancyhdr,amssymb,graphicx} 
+%% \usepackage{mycommands}
+
+\addtolength{\topmargin}{-45mm}
+\addtolength{\headheight}{20ex}
+\addtolength{\headsep}{-3ex}
+\addtolength{\hoffset}{-18mm}
+\addtolength{\textheight}{30mm}
+\addtolength{\marginparwidth}{-20mm}
+\addtolength{\textwidth}{55mm}
+\footskip 3ex
+\parindent 0 cm
+
+\pagestyle{fancy}
+
+%% -- Latex def's:
+\let\ent\Leftrightarrow
+\def\trevektor[#1,#2,#3]{\begin{pmatrix}#1\cr #2\cr #3\end{pmatrix}}
+\def\abs#1{|#1|}
+\def\Rone{{\mathbb R}}
+\let\R\Rone
+\def\vec#1{\mathbf #1} %% <-- omdef \vec -- vektorer i boldface
+%%  -- /Latex def's 
+
+%% -- Head && foot
+\chead{\ifnum\thepage=1 {} \else Formelblad Linjär Algebra\fi}
+\rhead{\ifnum\thepage=1 \textbf{FORMELBLAD Linjär Algebra}
+               \else sid. \thepage{} av \pageref{fin@lpage}  \fi}
+\lfoot{\ifnum\thepage=1\small\today\fi}
+\cfoot{}
+\rfoot{\ifnum\thepage=1\small File: \texttt{\jobname.pdf}\fi}
+
+
+%% -- /Head && foot
+\begin{document}
+
+\subsection*{Andragradsekvationer}
+
+Ekvationen $x^2+px+q=0$ har lösningarna
+%% \begin{equation*}
+  $x_{1,2}=-\frac p2\pm\sqrt{\left(\frac p2\right)^2-q}$\,.
+%% \end{equation*}
+Då är $x^2+px+q=(x-x_1)(x-x_2)$.
+
+\medskip %% Added by IvTj, 2009-02-13:  
+Ekvationen $ax^2+bx+c=0$ har lösningarna
+$x_{1,2}=\dfrac{-b\pm\sqrt{b^2-4ac}}{2a}$\,.
+Då är $ax^2+bx+c=a(x-x_1)(x-x_2)$.
+
+
+\subsection*{Trigonometri}
+\begin{equation*}
+  \begin{array}{|ll|ccccccccc|}
+    \hline
+    &&&&&&&&&&\\*[-7pt]
+    \text{Vinkel }x&(\text{grader})&
+    0^\circ&30^\circ&45^\circ&60^\circ&90^\circ&
+    120^\circ&135^\circ&150^\circ&180^\circ\\
+    &(\text{radianer})&
+    0&\dfrac\pi6&\dfrac\pi4&\dfrac\pi3&\dfrac\pi2&
+    \dfrac{2\pi}3&\dfrac{3\pi}4&\dfrac{5\pi}6&\pi\\*[3pt]
+    &&&&&&&&&&\\*[-7pt]
+    \hline
+    &&&&&&&&&&\\*[-7pt]
+    &\sin x&0&\dfrac12&\dfrac1{\sqrt2}&\dfrac{\sqrt3}2&1&
+    \dfrac{\sqrt3}2&\dfrac1{\sqrt2}&\dfrac12&0\\*[3pt]
+    &&&&&&&&&&\\*[-7pt]
+    &\cos x&1&\dfrac{\sqrt3}2&\dfrac1{\sqrt2}&\dfrac12&0&
+    -\dfrac12&-\dfrac1{\sqrt2}&-\dfrac{\sqrt3}2&-1\\*[3pt]
+    &&&&&&&&&&\\*[-7pt]
+    &\tan x&0&\dfrac1{\sqrt3}&1&\sqrt3&\mbox{odef}&
+    -\sqrt3&-1&-\dfrac1{\sqrt3}&0\\*[10pt]
+    \hline
+  \end{array}
+\end{equation*}
+
+\begin{equation*}
+  \begin{array}{|l|l|}
+    \hline 
+    &\\*[-7pt]
+    \sin^2x+\cos^2x=1  &\tan x=\dfrac{\sin x}{\cos x}\\ 
+    & \\ 
+    \sin(-x)=-\sin x &\cos(-x)=\cos x \\ 
+    & \\ 
+    \sin(\pi-x)=\sin x=\cos(\frac{\pi}{2}-x) &
+    \cos(\pi-x)=-\cos x=-\sin(\frac{\pi}{2}-x) \\ 
+    & \\ 
+    \sin(x\pm y)=\sin x\cos y\pm\sin y\cos x &
+    \cos(x\pm y)=\cos x\cos y\mp\sin x\sin y \\ 
+    & \\ 
+    \sin 2x=2\sin x\cos x&\cos 2x=2\cos^2x-1=1-2\sin^2x \\ 
+    & \\
+    \sin x\sin y=\frac{1}{2}(\cos(x-y)-\cos(x+y))
+    &\sin x\cos y=\frac{1}{2}(\sin(x-y)+\sin(x+y)) \\
+    & \\
+    \cos x\cos y=\frac{1}{2}(\cos(x-y)+\cos(x+y))\hspace{7 mm}
+    &\tan(x\pm y)=\dfrac{\tan x\pm\tan y}{1\mp\tan x\tan y}\\*[10pt]
+    \hline
+  \end{array} 
+\end{equation*}
+
+%% \newpage
+\subsection*{Vektorer}
+
+Formlerna i detta avsnitt utgår från 3-dimensionella vektorer. Men
+undantag för formlerna för vektorprodukt samt de formler som rör
+planet, är de med självklara modifieringar giltiga även för andra
+dimensionstal. 
+
+\bigskip
+Antag att vektorerna $\vec u=\trevektor[u_1,u_2,u_3]$ och $\vec
+v=\trevektor[v_1,v_2,v_3]$ i en ON-bas, $\theta$ är vinkeln mellan
+$\vec u$ och $\vec v$ samt $\lambda\in\mathbb R$. Då är:
+%% är ett godtyckligt reellt tal. Då gäller:
+
+\bigskip
+\begin{tabular}{|p{0.25\linewidth}|p{0.7\linewidth}|}
+  \hline &\\*[-8pt]
+  Addition &
+  $\vec u+\vec v=\trevektor[u_1+v_1,u_2+v_2,u_3+v_3]=\vec v + \vec u$
+  \\*[15pt] \hline &\\*[-8pt]
+  Multiplikation med tal&
+  $\lambda\vec u=\trevektor[\lambda u_1,\lambda u_2,\lambda u_3] = \vec u\lambda$
+  \\*[15pt] \hline &\\*[-8pt]
+  Längd, norm
+  &
+  $\abs{\vec u}=\sqrt{u_1^2+u_2^2+u_3^2}$\\*[2pt]
+  &$\abs{\lambda\vec u}=\abs \lambda\abs{\vec u}$\\*[0pt]
+  \hline
+\end{tabular}
+
+\newpage
+
+\subsection*{Vektorer (forts.)}
+
+\begin{tabular}{|p{0.2\linewidth}|p{0.75\linewidth}|}
+  \hline &\\*[-8pt]
+  Skalärprodukt&$\vec u\cdot\vec v=\abs{\vec u}\abs{\vec v}\cos\theta
+  =u_1v_1+u_2v_2+u_3v_3$\\*[2pt]
+  Räkneregler:
+  &$\vec u\cdot\vec v=\vec v\cdot \vec u$, 
+  $(\lambda\vec u)\cdot\vec v=\vec u\cdot(\lambda\vec v)=\lambda(\vec u\cdot\vec v)$\\*[2pt]
+  &$\vec u\cdot(\vec v+\vec w)=\vec u\cdot\vec v+\vec u\cdot\vec w$\\*[2pt]
+  &$\vec u\cdot\vec u=\abs{\vec u}^2$;
+  $|\vec u|=\sqrt{\abs{\vec u}^2}=\sqrt{u_1^2+u_2^2+u_3^2}\ge0$ 
+  (med $|\vec u|=0\iff\vec u=\mathbf 0$)\\*[2pt]
+  &$\vec u$ och $\vec v$ ortogonala $\ent\vec u\cdot\vec v=0$
+\\*[2pt]\hline&\\*[-8pt]
+  Projektions\-formeln&Den vinkelräta projektionen $\vec u'$ av
+  $\vec u$ på $\vec v$ ges av:
+  $\vec u'=\dfrac{\vec u\cdot\vec v}{\abs{\vec v}^2}\vec v$.
+  \\*[8pt] \hline &\\*[-10pt]
+  Vektor-/kryssprodukt&  %% Tilläg IvTj, 2009-02-13
+  $\vec u\times\vec v=\trevektor[u_1,u_2,u_3]\times\trevektor[v_1,v_2,v_3]
+  =
+  \left(\begin{array}{c}
+      \begin{vmatrix}
+        u_2 & v_2\\
+        u_3 & v_3\\
+      \end{vmatrix} 
+   \\*[8pt] 
+  -   \begin{vmatrix}
+        u_1 & v_1\\
+        u_3 & v_3\\
+      \end{vmatrix} 
+    \\*[8pt]
+      \begin{vmatrix}
+        u_1 & v_1\\
+        u_2 & v_2\\
+      \end{vmatrix} 
+    \end{array}\right) 
+  =\trevektor[u_2v_3-u_3v_2,u_3v_1-u_1v_3,u_1v_2-u_2v_1]$\\*[2pt]
+  Räkneregler:
+  &$\vec u\times\vec v$ är ortogonal mot både $\vec u$ och $\vec v$.\\*[2pt]
+  &$\abs{\vec u\times\vec v}=\abs{\vec u}\abs{\vec v}\sin\theta$ anger
+  arean av den parallellogram som spänns upp av $\vec u$ \& $\vec v$\\*[2pt]
+  &$\vec u\times\vec v=-\vec v\times \vec u$, 
+  $(\lambda \vec u)\times\vec v=\vec u\times(\lambda \vec v)=\lambda (\vec u\times\vec v)$\\*[2pt]
+  &$\vec u\times(\vec v+\vec w)=\vec u\times\vec v+\vec u\times\vec w$
+  \\*[2pt] \hline &\\*[-8pt]
+  Skalär trippelprodukt
+  &
+  $
+  \vec u\cdot(\vec v\times\vec w)=
+  \begin{vmatrix}
+    u_1&v_1&w_1\\
+    u_2&v_2&w_2\\
+    u_3&v_3&w_3
+  \end{vmatrix}
+  = \vec w\cdot(\vec u\times\vec v)
+  = \vec v\cdot(\vec w\times\vec u)
+  = \pm $ volymen av den parallellepiped som spänns upp av vektorerna
+  $\vec u$, $\vec v$ och $\vec w$.\\*[0pt]
+  \hline
+  &\\*[-8pt]
+  Linjärt oberoende & Vektorerna $\vec u_1,\dots\vec u_n$ är linjärt 
+  oberonde då och endast då det homogena ekvationssysemet
+  $\lambda_1\vec u_1+\dots\lambda_n\vec u_n=\vec 0$
+  har endast den triviala lösningen
+  $\lambda_1=\lambda_2=\cdots\lambda_n=0$.
+  \\*[2pt]
+  \hline
+  &\\*[-8pt]
+  Linjärt beroende&Motsatsen till lin. oberoende: 
+  Vektorerna $\vec u_1,\dots\vec u_n$ är
+  linjärt beronde $\ent$ Det finns skalärer $\lambda_1,\dots\lambda_n$,
+  ej alla 0 sådana att $\lambda_1\vec u_1+\dots\lambda_n\vec u_n=\vec
+  0$.
+  \\*[2pt] \hline &\\*[-8pt]
+  Räta linjens ekvation&En rät linje genom punkten $P_0=(x_0,y_0,z_0)$ med
+  riktningsvektorn\\
+  &$\vec v=\trevektor[v_x,v_y,v_z]$ har på parameterform ekvationen 
+  $\trevektor[x,y,z]=\trevektor[x_0,y_0,z_0]+t\trevektor[v_x,v_y,v_z],\,
+  t\in\mathbb R$.
+  \\*[14pt] \hline &\\*[-8pt]
+  Planets ekvation&Ett plan genom punkten $P=(x_0,y_0,z_0)$ med normalrikning
+  $\mathbf n=(a,b,c)$ ges av
+  \[
+  (\mathbf{r} - \mathbf{r}_P)\cdot\mathbf{n} = 0
+  \iff
+  \left[
+     \trevektor[x,y,z]
+    -\trevektor[x_0,y_0,z_0]
+  \right]
+  \cdot
+  \trevektor[a,b,c]=0
+  \iff
+  ax+by+cz=d,
+  \]
+  där 
+  $\mathbf{r}$ är ortsvektorn av godt. punkt i planet,
+  $\mathbf{r}_P$ är ortsvektorn av $P$ och
+  $d=\mathbf{r}_p\cdot\mathbf{n}$.
+  \\*[14pt] %% &\\*[-8pt]
+  På parameterform:
+  &Ett plan genom punkten $P=(x_0,y_0,z_0)$ utmed (de
+  linjärt oberoende) vektorerna $\vec v=(v_x,v_y,v_z)^t$ 
+  och $\vec w=(w_x,w_y,w_z)^t$ har parametriska framställningen\\
+  &
+  $$
+  \vec r = \vec r_P + s\vec v + t\vec w
+  \iff
+  \trevektor[x,y,z]
+    = \trevektor[x_0,y_0,z_0]
+    +s\trevektor[v_x,v_y,v_z]
+    +t\trevektor[w_x,w_y,w_z],
+     \,s,t\in\Rone.
+  $$
+  %%&På parameterfri form är planets ekvation $Ax+By+Cz+D=0$ där $\vec
+  %% n=\trevektor[A,B,C]$ är en normalvektor till planet.
+  \\*[8pt]
+  %En avståndsformel&Avståndet mellan punkten $(x_1,y_1,z_1)$ och planet
+  %$Ax+By+Cz+D=0$ är
+  %$\dfrac{\abs{Ax_1+By_1+Cz_1+D}}{\sqrt{A^2+B^2+C^2}}$.\\*[8pt]
+  \hline
+\end{tabular}
+\newpage
+
+\subsection*{Linjära ekvationssystem}
+\begin{tabular}{|p{0.2\linewidth}|p{0.75\linewidth}|}
+  \hline
+  Gausseliminering
+  &
+  Syfte: Att med hjälp av radoperationer ställa systemet på
+  trappstegsform.\\
+  &
+  Tillåtna radoperationer, som inte ändrar på systemets lösningsmängd, är:
+  \vspace{-5pt}
+  \begin{enumerate}
+      \addtolength{\itemsep}{-5pt}
+  \item 
+    Platsbyte på ekvationer.
+  \item 
+    Multiplikation av en ekvation med ett tal.
+  \item 
+    Addition av en multipel av en ekvation till en annan.
+  \end{enumerate}
+  \vspace{-15pt}
+  \\*[2pt]\hline\\*[-9pt]
+  Radekvivalens med $I$ & Om en kvadratisk martis kan med tillåtna radoperationer formas om
+  till enhetsmatris, kallas $A$ radekvivalent med enhetsmatrisen $I$ (betecknas
+  med $A\sim I$).
+  \\*[2pt]
+  Om $A\sim I$
+  & Gausselimination och bakåtelimination vid lösningen av matrisekvationen $AX=B$ resulterar i
+  $$
+  (A|B)\sim\cdots\sim (I|X).
+  $$
+  \vspace{-15pt}
+  \\
+  \hline
+\end{tabular}
+
+\subsection*{Matriser}
+
+\begin{tabular}{|p{0.2\linewidth}|p{0.75\linewidth}|}
+  \hline & \\*[-9pt]
+  Addition & $A+B=B+A$, $(A+B)+C=A+(B+C)$
+  \\*[2pt]\hline & \\*[-9pt]
+  Mult. med tal & $\lambda(A+B)=\lambda A+\lambda B$
+  \\*[2pt]\hline & \\*[-9pt]
+  Multiplikation&$AB\ne BA$ (i allmänhet) 
+  \\*[2pt]
+  &$(AB)C=A(BC)$, \ $A(B+C)=AB+AC$, \  $(A+B)C=AC+BC$
+  \\*[2pt]\hline & \\*[-9pt]
+  Enhetsmatrisen&$I=
+  \begin{pmatrix}
+    1&0&\cdots&0\\
+    0&1&\cdots&0\\
+    \vdots&\vdots&\ddots&\vdots\\
+    0&0&\cdots&1
+  \end{pmatrix}
+  $, $AI=IA=A$
+  \\*[24pt]\hline & \\*[-9pt]
+  Invers &$AA^{-1}=A^{-1}A=I$, $(AB)^{-1}=B^{-1}A^{-1}$\\*[3pt]
+  Jacobis metod:& Med radoperationer överförs systemet $(A|I)\sim \cdots\sim (I|A^{-1})$.
+  \\*[3pt]
+  Ortogonala matriser & $A^{-1}=A^T$.
+  \\*[3pt]
+  $2\times 2$--matriser:&
+  $A_{2\times2}^{-1}
+  =\begin{pmatrix}a&b\\c&d\end{pmatrix}^{-1}
+  =\dfrac1{\det(A)}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}
+  =\dfrac1{ad-bc}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}$
+  \\*[9pt]\hline  & \\*[-7pt]
+  Transponering &
+  Rader och kolonner byter plats, t\,ex, 
+  $ \begin{pmatrix}a_{11}&a_{12}&a_{13}\\a_{21}&a_{22}&a_{23}\end{pmatrix}^T=
+    \begin{pmatrix}a_{11}&a_{21}\\a_{12}&a_{22}\\a_{13}&a_{23}\\\end{pmatrix}$\\*[3pt]
+  &$(A+B)^T=A^T+B^T$, \ 
+  $(AB)^T=B^TA^T$, \ 
+  $(A^{-1})^T=(A^T)^{-1}$\\*[2pt]
+  \hline
+\end{tabular}
+\subsection*{Determinanter}
+\begin{tabular}{|p{0.2\linewidth}|p{0.75\linewidth}|}
+  \hline
+   & \\*[-8pt]
+  $2\times2$--matriser &Om $A=\begin{pmatrix}a&b\\c&d\end{pmatrix}$ är 
+  $\det(A)=\begin{vmatrix}a&b\\c&d\end{vmatrix}=ad-bc$.
+  \\*[9pt] \hline & \\*[-15pt]
+  \vfill
+  Utveckling efter rad $i$ &
+  $$
+  \det(A_{n\times n})
+  = a_{i1}(-1)^{i+1}D_{i1}
+  + \cdots + a_{ij}(-1)^{i+j}D_{ij}
+  + \cdots + a_{in}(-1)^{i+n}D_{in},
+ $$ 
+ där
+ $D_{ij}$ är determinanten som fås 
+ genom att i $\det(A)$ stryka rad $i$ och kolonn $j$.
+  \\*[5pt] \hline & \\*[-8pt]
+%   \\*[9pt] \hline & \\*[-8pt]
+%   Utveckling efter rad &
+%   Exempel (utv. längs rad 1): \  
+%   $
+%   \begin{vmatrix}
+%     a&b&c\\d&e&f\\g&h&i
+%   \end{vmatrix}=a
+%   \begin{vmatrix}
+%     e&f\\
+%     h&i
+%   \end{vmatrix}
+%   -b
+%   \begin{vmatrix}
+%     d&f\\
+%     g&i
+%   \end{vmatrix}
+%   +c
+%   \begin{vmatrix}
+%     d&e\\
+%     g&h
+%   \end{vmatrix}
+%   $
+%  \\*[15pt] \hline & \\*[-8pt]
+  Räkneregler &
+  $\det(A^T)=\det(A)$ (dvs, allt som är tillåtet att göra 
+                         radvis fungerar även kolonnvis);
+  \\*[2pt]
+  &
+  $\det(AB)=\det(A)\det(B)$, 
+  $\det(A^{-1})=1/\det(A)$
+  \\*[2pt]
+  &
+  \parbox{10em}{Multipel av en rad eller kolonn kan bruytas ut:}
+  \ $
+  \begin{vmatrix}
+    a&\lambda b&c\\d&\lambda e&f\\g&\lambda h&i
+  \end{vmatrix}
+  =\lambda 
+  \begin{vmatrix}
+    a&b&c\\d&e&f\\g&h&i
+  \end{vmatrix},\quad
+  \begin{vmatrix}
+    a&b&c\\d&e&f\\\lambda g&\lambda h&\lambda i
+  \end{vmatrix}
+  =\lambda 
+  \begin{vmatrix}
+    a&b&c\\d&e&f\\g&h&i
+  \end{vmatrix}.
+  $\\*[15pt]
+  &Om två rader eller två kolonner byter plats skiftar determinanten
+  tecken.
+  \\*[2pt]
+  &En multipel av en rad kan läggas till en annan rad utan att determinanten ändras.
+  \\*[2pt]
+  &En multipel av en kolonn kan läggas till en annan utan att determinanten ändras.
+\\
+  \hline
+\end{tabular}
+
+\subsection*{Linjära avbildningar}
+
+\begin{tabular}{|p{0.2\linewidth}|p{0.75\linewidth}|}
+  \hline\\*[-9pt]
+  Definition&$F$ är en linjär avbildning $\ent F(\vec u+\vec
+  v)=F(\vec u)+F(\vec v)$ och $F(\lambda\vec u)=\lambda F(\vec u)$.\\
+  &$F$ är en linjär avbildning $\ent F(\vec u)=A\vec u$ där $A$ är en
+  konstant matris.
+  \\*[2pt] \hline\\*[-9pt]
+  Sammansättning&Om $F(\vec u)=A\vec u$ och
+  $G(\vec u)=B\vec u$ är
+  $G\bigl(F(\vec u)\bigr)
+  =G\bigl(A\vec u\bigr)
+  =BA\vec u
+  $.
+  \\*[2pt] \hline\\*[-9pt]
+  Isometriska&$F:\R^n\to\R^n,F(\vec u)=A\vec u$ är isometrisk $\ent
+  \abs{F(\vec u)}=\abs{\vec u}$ för alla $\vec u\in\R^n\ent$\\
+  avbildningar&$\vec u\cdot\vec v=F(\vec u)\cdot
+  F(\vec v)$ för alla $\vec u$ och $\vec v\in\R^n\ent A$ är en ON-matris 
+  $\ent$\\ 
+  &$A^{-1}=A^T\ent A$:s kolonner (rader) utgör en ON-bas för $\R^n$.\\
+  \hline
+\end{tabular}
+
+\subsection*{Baser och basbyten}
+\begin{tabular}{|p{0.2\linewidth}|p{0.75\linewidth}|}
+  \hline\\*[-9pt]
+  Baser&En uppsättning av $n$ linjärt oberoende vektorer $\vec e_1,\dots,\vec
+  e_n$ bildar en \emph{bas} för $\R^n$. Till varje $\vec u\in\R^n$ finns
+  då reella tal $x_1,\dots,x_n$ så att $\vec u=x_1\vec e_1\dots x_n\vec
+  e_n$. Talen $x_1,\dots,x_n$ är $\vec u$:s koordinater i basen 
+  $\vec e_1,\dots,\vec e_n$.
+  \\*[2pt] \hline\\*[-9pt]
+  Basbyten&Om $u$ har koordinaterna $x_1,\dots,x_n$ i basen $\vec e_1,\dots,\vec
+  e_n$ och koordinaterna $y_1,\dots,y_n$ i basen $\vec f_1,\dots,\vec
+  f_n$, är $\trevektor[x_1,\vdots,x_n]
+           =P\trevektor[y_1,\vdots,y_n]$ där
+  basbytesmatrisen $P=
+  \begin{pmatrix}
+    |&&|\\
+    \vec f_1&\dots&\vec f_n\\
+    |&&|
+  \end{pmatrix}$ med $\vec f_1,\dots,\vec f_n$ uttryckta i basen
+  $\vec e_1,\dots,\vec e_n$.
+  \\*[2pt] \hline\\*[-9pt]
+  Avbildningsmatris vid basbyte&Om den linjära avbildningen $F$ har
+  avbildningsmatris $A$ i basen $\vec e_1,\dots,\vec e_n$ och
+  avbildningsmatris $A'$ i basen $\vec f_1,\dots,\vec f_n$, gäller
+  $A'=P^{-1}AP$, där $P$ är basbytesmatrisen definierad ovan.\\
+  \hline
+\end{tabular}
+
+\subsection*{Egenvärden och egenvektorer}
+\label{subsection*}
+\begin{tabular}{|p{0.2\linewidth}|p{0.75\linewidth}|}
+  \hline\\*[-9pt]
+  Definition&Matrisen $A$ har \emph{egenvektorn} $\vec u\neq\vec0$ med
+  \emph{egenvärdet} $\lambda$ om
+  $A\vec u=\lambda\vec u$.
+  \\*[2pt] \hline\\*[-9pt]
+  Egenvärdena $\lambda_k$ 
+   & bestäms som lösningarna till den karakteristiska ekvationen 
+   $\det(A-\lambda I)=0$.\\
+  Egenvektorerna $\vec u_k$& bestäms ur det homogena systemet $(A-\lambda I)\vec u=\mathbf{0}$.
+  \\*[2pt] \hline\\*[-9pt]
+%%   Diagonalisering&Om $n\times n$-matrisen $A$ har $n$ olika egenvärden
+%%   $\lambda_1,\dots,\lambda_n$ med motsvarande egenvektorer
+%%   $\vec u_1,\dots,\vec u_n$, är $A=PDP^{-1}$ där
+Diagonalisering&Om $n\times n$-matrisen $A$ har $n$ st linjärt oberoende
+egenvektorer $\vec u_1,\dots,\vec u_n$ med motsvarande egenvärden
+$\lambda_1,\dots,\lambda_n$, är $A=PDP^{-1}$ där
+\vspace{-10pt}
+  $$ P=
+  \begin{pmatrix}
+    |&&|\\
+    \vec u_1&\dots&\vec u_n\\
+    |&&|
+  \end{pmatrix}
+  \mbox{ \ och \ \ }
+  D = \begin{pmatrix}
+    \lambda_1&\dots&0\\
+    \vdots&\ddots&\vdots\\
+    0&\dots&\lambda_n
+  \end{pmatrix}.
+  $$
+  \vspace{-12pt}
+  \\
+  \hline
+\end{tabular}
+
+\subsection*{Huvudsatsen}
+
+%% Låt $A$ vara en $n\times n$--matris.\\*[10pt]
+\begin{tabular}{|p{0.475\linewidth}|p{0.475\linewidth}|}
+  \hline
+  &\\*[-10pt]
+%  Låt $A$ vara en $n\times n$--matris.\hfill\break
+  Ekvivalenta påståenden för en $n\times n$--matris $A$:
+& % Låt $A$ vara en $n\times n$--matris.\hfill\break
+  %% Följande påståenden är ekvivalenta:
+  Ekvivalenta påståenden för en $n\times n$--matris $A$:
+  \\
+  \hline
+  \\*[-24pt]
+  \begin{itemize}\addtolength{\itemsep}{-5pt}
+  \item $\det(A)\ne0$
+  \item $A$ är inverterbar
+  \item $A\sim I$ (dvs $A$ är radekvivalent med $I$)
+  \item Ekvationssystemet $A\vec x=\vec 0$ har endast den triviala
+    lösningen $\vec x=\vec 0$
+  \item Ekvationssystemet $A\vec x=\vec b$ har en entydig lösning för
+    varje val av högerledet $\vec b$
+  \item $A$:s rader är linjärt oberoende
+  \item $A$:s rader utgör en bas för $\mathbb{R}^n$
+  \item $A$:s kolonner är linjärt oberoende
+  \item $A$:s kolonner utgör en bas för $\mathbb{R}^n$
+  \item Avbildningen $F(\vec x)=A\vec x$ är omvändbar % injektiv, surjektiv och inverterbar.
+  \item $A$:s egenvärden är alla skilda från $0$
+  \end{itemize}
+  \vspace{-16pt}
+  &
+  \begin{itemize}\addtolength{\itemsep}{-5pt}
+  \item $\det(A)=0$
+  \item $A$ är inte inverterbar
+  \item $A$ är inte radekvivalent med $I$
+  \item Ekvationssystemet $A\vec x=\vec 0$ har oändligt många lösningar
+  \item Ekvationssystemet $A\vec x=\vec b$ saknar lösning eller också
+    har det oändligt många lösningar
+  \item $A$:s rader är linjärt beroende
+  \item $A$:s rader utgör inte bas för $\mathbb{R}^n$
+  \item $A$:s kolonner är linjärt beroende
+  \item $A$:s kolonner utgör inte bas för $\mathbb{R}^n$
+  \item Avbildningen $F(\vec x)=A\vec x$ är inte omvändbar % varken injektiv, surjektiv eller inverterbar.
+  \item $0$ är ett egenvärde till $A$
+  \end{itemize}
+  \vspace{-16pt}
+  \\
+  \hline
+\end{tabular}
+
+\label{fin@lpage}
+
+
+\end{document}

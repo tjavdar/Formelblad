@@ -1,0 +1,291 @@
+% vim: spelllang=sv:spell
+
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{a4}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\pagestyle{empty}
+
+% instead of \usepackage{fullpage} <<<
+\topmargin 0pt
+\advance \topmargin by -3.5\headheight
+\advance \topmargin by -\headsep
+\textheight 8.9in
+\oddsidemargin 0pt
+\evensidemargin \oddsidemargin
+\marginparwidth 0.5in
+\textwidth 6.6in
+% >>>
+
+%%\everymath{\displaystyle}
+\everymath{\textstyle}
+\textheight=725pt\parindent=0pt
+
+
+%% <<< Former \input\jobname.h ----------------
+
+%-------------
+%- LaTeX def's
+%-------------
+
+\let\UP\nearrow
+\let\DN\searrow
+\everymath{\displaystyle}
+
+%--------------------------- Facit macros ------
+
+\def\contentsname{} % Erase it
+\def\Facit#1{\par
+
+\addtocontents{toc}{{\small\protect\item[\textbf{\theenumi.}]#1\par\smallskip\hrule\par}}}
+\def\BeginUppg{\par\addtocontents{toc}{\par\protect\begin{enumerate}}
+               \par\begin{enumerate}}
+\def\EndUppg{\addtocontents{toc}{\protect\end{enumerate}}\par\end{enumerate}}
+
+\newcommand{\mymatrix}[2]{\left(\begin{array}{#1} #2\end{array}\right)}
+\newcommand{\mydet}[2]{\left|\begin{array}{#1} #2\end{array}\right|}
+
+\newcommand\dd[2]{\frac{\partial #1}{\partial #2}}
+\newcommand\lvec[1]{\stackrel{\longrightarrow}{#1}}
+
+\newcommand\tightSvar[1]{\fbox{\textbf{A:} #1}}
+\let\Svar\tightSvar
+
+%--------------------------- end Facit macros ------
+
+%% restore good old TeX \eqalign:
+\makeatletter
+
+\def\eqalign#1{\null\,\vcenter{\openup\jot\m@th
+  \ialign{\strut\hfil$\displaystyle{##}$&$\displaystyle{{}##}$\hfil
+      \crcr#1\crcr}}\,}
+
+\def\iint{\mathop{\relax\protect
+    \noexpand\intop\mkern-9mu\noexpand\intop}\displaylimits}
+
+\def\iiint{\mathop{\relax\protect
+    \noexpand\intop\mkern-9mu\noexpand\intop\mkern-9mu\noexpand\intop}\displaylimits}
+
+
+\makeatother
+
+
+\def\ppmatrix{\protect\pmatrix}
+\def\pcases{\protect\cases}
+\newcommand\pdet[1]{\protect\left|\protect\matrix{#1}\protect\right|}
+\newcommand\Ordo{\mathcal O}
+\let\ergo\Longrightarrow
+\let\vaxer\nearrow
+\let\avtar\searrow
+\newcommand\conj[1]{{\overline #1}}
+\let\ob\conj
+\newcommand\binom[2]{{#1\choose #2}}
+
+%% Boldface things %%
+
+\newcommand\bdF{\mathbf F}
+\newcommand\bdG{\mathbf G}
+\newcommand\bdN{\mathbf N}
+
+\newcommand\bda{\mathbf a}
+\newcommand\bdb{\mathbf b}
+\newcommand\bdc{\mathbf c}
+\newcommand\bde{\mathbf e}
+\newcommand\bdf{\mathbf f}
+\newcommand\bdg{\mathbf g}
+\newcommand\bdh{\mathbf h}
+\newcommand\bdi{\mathbf i}
+\newcommand\bdj{\mathbf j}
+\newcommand\bdk{\mathbf k}
+\newcommand\bdm{\mathbf m}
+\newcommand\bdn{\mathbf n}
+\newcommand\bdp{\mathbf p}
+\newcommand\bdq{\mathbf q}
+\newcommand\bdr{\mathbf r}
+\newcommand\bdu{\mathbf u}
+\newcommand\bdv{\mathbf v}
+\newcommand\bdx{\mathbf x}
+\newcommand\bdy{\mathbf y}
+\newcommand\bdw{\mathbf w}
+\newcommand\bdzero{\mathbf 0}
+
+% - sets -
+\def\Rone{{\mathbb R}}
+
+% - operators -
+
+\def\ddn{\partial_n}
+\def\dist{\mathop{\mathrm{dist}}}
+\def\divergence{\mathop{\mathrm{div}}}
+\def\rot{\mathop{\mathrm{rot}}}
+\def\norm#1{{\Vert #1\Vert}}
+\newcommand\DDet[1]{\left|\protect\matrix{#1}\right|}
+
+% - förkortnngar
+
+\newcommand\mha{med hjälp av }
+\newcommand\bis{^{\prime\prime}}
+\newcommand\triss{^{'''}}
+\newcommand\PartInt[2]{\left\lceil\matrix{\mbox{\small #1}\cr
+                                       \mbox{\small #2}}\right\rceil}
+
+%adjust row height in tables #1 - overall height #2 - depth:
+\newcommand\TblHeight[2]{\lower#2em\vbox to#1em{\hsize=0pt}}
+\def\tvavektor[#1,#2]{\protect\pmatrix{#1\cr #2}}
+\def\trevektor[#1,#2,#3]{\protect\pmatrix{#1\cr #2\cr #3}}
+
+
+%% End \input\jobname.h fold >>> -
+
+\begin{document}
+
+%\input formelbody 
+
+{\Large \textbf{TMKA17 MATEMATIK, formelblad}}  
+
+\begin{enumerate}
+  \item Kvadrerings-  och konjugatreglerna: \hfil
+%%     \hfil
+%%     $(a\pm b)^2 = a^2\pm2ab+b^2$
+%%     \hfil 
+%%     $(a+b)(a-b) = a^2-b^2$
+    \begin{tabular}[m]{|c|c|}
+      \hline
+      &\\*[-11pt]
+    $(a\pm b)^2 = a^2\pm2ab+b^2$
+    &
+    $(a+b)(a-b) = a^2-b^2$\\
+      \hline
+    \end{tabular}
+
+  \item Polynomet $P(x)=x^2+px+q$:\hfil  
+    \begin{tabular}[m]{|l|l|}
+      \hline & \\*[-11pt] 
+      Kvadratkomplettering: &
+      $\textstyle P(x)=(x+\frac p2)^2-\frac{p^2}4+q$\\*[2pt]
+      \hline & \\*[-11pt] 
+      Nollställen: &
+      $\textstyle x_{1,2}=\frac p2\pm\sqrt{D}$, 
+        om $\textstyle D=\frac{p^2}4-q\ge 0$\\*[2pt]
+      \hline & \\*[-11pt] 
+       Faktoruppdelning: &
+         $P(x)=(x-x_1)(x-x_2)$ om $D\ge0$\\*[2pt]
+%%   \multicolumn{2}{l}{$ax^2+bx+c 
+%%    =a(x^2+px+q)$, $\textstyle p=\frac ba,\quad q=\frac ca$
+%%   }\\*[2pt]
+%%      $ax^2+bx+c$ &
+%%      ${}=a(x^2+px+q)$, $\textstyle p=\frac ba,\quad q=\frac ca$\\*[2pt]
+      \hline
+    \end{tabular}
+  \item Polynomet $Q(x) = ax^2+bx+c$: \,
+    \fbox{$Q(x)=a(x^2+px+q)=aP(x)$ \ med 
+    \ $\textstyle p=\frac ba,\quad q=\frac ca$}
+
+  \item Rät linje: 
+    \ \ 
+    \begin{tabular}[m]{|l|l|}
+      \hline
+      på allmän form: & $ax+by=c$\cr
+      \hline
+      på $k$-form: & $y=kx+m$\cr
+      \hline
+    \end{tabular}
+  
+  \item Rät linje genom $(x_0,y_0)$ 
+    \hfil
+    \begin{tabular}[m]{|l|l|}
+      \hline
+       med lutning $k$: & $y=y_0+k(x-x_0)$\cr
+      \hline
+                    &\\*[-10pt]
+      och $(x_1,y_1)$ med lutning $k$: & $y=y_0+k(x-x_0)$, 
+                    $k=\frac{y_1-y_0}{x_1-x_0}$\\*[7pt] \hline
+                    &\\*[-10pt]
+      vinkelrätt mot linje med 
+      lutning $k$: & 
+      $\cases{y=y_0-\textstyle\frac1k(x-x_0) &, 
+      $k\neq0$\cr x=x_0 &, $k=0$}$\\*[7pt]
+      \hline
+    \end{tabular}
+
+
+  \item Derivata: 
+    $f'(x)\stackrel{\mbox{\tiny def}}=\lim_{h\to0}\frac{f(x+h)-f(x)}{h}$;
+    \hfil
+    \begin{tabular}[m]{|c|c|c|c|c|c|c|c|c|}
+       \hline &&&&&&&&\\*[-11pt] 
+       $f(x)$  & $k$     & $x$ & $x^2$ & $\frac1x$ & $\sqrt x$ 
+               & $x^\alpha$ & $e^x$ & $e^{kx}$\\
+       &&&&&&&&\\*[-10pt] \hline &&&&&&&&\\*[-10pt] 
+       $f'(x)$ &   0   & $1$ & $ 2x$ & $-\frac1{x^2}$ & $\frac1{2\sqrt x}$ 
+               & $\alpha x^{\alpha-1}$ & $e^x$ & $ke^{kx}$\\*[7pt]
+      \hline
+    \end{tabular}
+
+  \item % Tangent och Normal 
+    \hfil
+     \begin{tabular}[m]{|l|l|}
+        \hline & \\*[-11pt] 
+       Tangent till kurvan $y=f(x)$ i punkten $(a,f(a))$: 
+       & $y=f(a)+f'(a)(x-a)$\\
+       \hline & \\*[-10pt]
+       Normal till kurvan $y=f(x)$ i punkten $(a,f(a))$:& 
+       $\cases{y=f(a)-\textstyle\frac1{f'(a)}(x-a)&, 
+        om $f'(a)\neq0$\cr  x=a&, om $f'(a)=0$}$ \\*[8pt]
+       \hline
+     \end{tabular} 
+  
+  \item Potenslagar:\hfil 
+     \begin{tabular}[m]{|c|c|c|c|}
+       \hline &&&\\*[-10pt]
+        $a^xa^y=a^{x+y}$ &
+        $\frac{a^x}{a^y}=a^{x-y}$ &
+        $(a^x)^y=a^{xy} = (a^y)^x$ &
+        $(ab)^x=a^xb^x$\\*[5pt]
+        \hline&&&\\*[-10pt]
+        $a^{1/x} = \sqrt[x]{a}$ &
+        $\left(\frac ab\right)^x=\frac{a^x}{b^x}$ &
+        $a^0 = 1$ &
+        $a^{-1} = \frac1a$ 
+        \\*[5pt]
+       \hline
+     \end{tabular}
+
+
+
+  \item Logaritmlagar:
+
+     \begin{tabular}[m]{|c|c|c|c|c|}
+       \hline &&&&\\*[-10pt]
+        $y \!=\! e^x \!\iff\! x \!=\! \ln y$ &
+        $\ln(xy) = \ln x + \ln y$ &
+        $\ln\frac{x}{y}=\ln x - \ln y$ &
+        $\ln(x^n)=n\ln x$ &
+        $\ln\frac1x=-\ln x$\\*[7pt]
+        \hline&&&&\\*[-10pt]
+        $y \!=\! 10^x \!\iff\! x \!=\! \lg y$ &
+        $\lg(xy) = \lg x + \lg y$ &
+        $\lg\frac{x}{y}=\lg x - \lg y$ &
+        $\lg(x^n)=n\lg x$ &
+        $\lg\frac1x=-\lg x$\\*[7pt]
+       \hline
+     \end{tabular}
+
+  \item Basbyte: \hfill
+     \begin{tabular}[m]{|c|c|c|c|c|}
+       \hline &&&&\\*[-10pt]
+       $a^x = e^{x\ln a}=10^{x\lg a}$ &
+        $\lg x =\frac{\ln x}{\ln10}$ &
+        $\ln x=\frac{\lg x}{\lg e}$ &
+        $\ln 10 = \frac{1}{\lg e}$ &
+        $\log_a x =\frac{\ln x}{\ln a} =\frac{\lg x}{\lg a}$\\*[7pt]
+       \hline
+     \end{tabular}
+
+
+\end{enumerate}
+
+
+\end{document}
