@@ -28,6 +28,7 @@ LANG1      := Lang=1\\relax
 
 %.pdf : %.tex
 	pdflatex $<
+	pdflatex $<
 
 %-x2.pdf : %.pdf
 	$(PDFNUP) --suffix x2 $< 
@@ -38,12 +39,18 @@ LANG1      := Lang=1\\relax
 %.tex : %.m
 	octave -q $< > $@
 
+%.pdfsq : %.pdf
+	@echo Squeezing $< ...
+	@ps2pdfwr -dCompatibilityLevel=1.4 $<  $@
+	@echo "Compare sizes non-squeezed/squeezed:"
+	@ls -l  $<  $@
+	@mv -fv $@  $<
+
 # End of implicit rules# >>>
 
 # Rules # <<<
-default : c
 
-c:    $(FILE).pdf
+default : xsq
 
 ec:
 	vim $(FILE).tex 
@@ -52,9 +59,14 @@ et:
 e:
 	$(EDIT) $(FILE).tex &
 
-x2 : $(FILE)-x2.pdf
+x:   $(FILE).pdf
+xsq: $(FILE).pdf $(FILE).pdfsq 
 
-x4 : $(FILE)-x4.pdf
+x2  : $(FILE)-x2.pdf
+x2sq: $(FILE)-x2.pdf $(FILE)-x2.pdfsq
+
+x4  : $(FILE)-x4.pdf
+x4sq: $(FILE)-x4.pdf $(FILE)-x4.pdfsq
 
 v:
 	evince $(FILE).pdf &
@@ -71,12 +83,11 @@ p4:
 	lp $(FILE)-x4.pdf
 
 
-
 # Special rules
 
 tables: $(TEXTABLES)
 
-www: $(FILE).pdf $(FILE)-x2.pdf $(FILE)-x4.pdf
+www: xsq x2sq x4sq
 	rsync -auv *.tex *.pdf $(ALLMATTEDIR)/formelblad/
 	@echo; echo Consider to:
 	@echo; echo "        pushd $(ALLMATTEDIR); make  www; popd"; echo
@@ -98,6 +109,11 @@ help :
 	@echo "Just make  || make www "
 
 cl: clean
+
 clean:
 	rm -f .log *.aux *.log *.dvi *.bak *.ps foo* *.gpg *~ 
+
+distclean: clean
+	rm -f $(FILE)*.pdf
+
 # >>>
