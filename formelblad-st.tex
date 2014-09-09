@@ -17,20 +17,18 @@
 \usepackage{array}   % nicer tables
 
 % instead of \usepackage{fullpage} <<<
-\topmargin 0pt
-\advance \topmargin by -3.5\headheight
-\advance \topmargin by -\headsep
-\textheight 8.9in
+\advance \topmargin by -4.5\headheight
+\advance \textheight by 25pt
 \oddsidemargin 0pt
 \evensidemargin \oddsidemargin
 \marginparwidth 0.5in
 \textwidth 6.6in
+\parindent=0pt
+\advance\parskip by 1pt
 % >>>
 
 \pagestyle{headings}
 \everymath{\textstyle}
-\textheight=720pt\parindent=0pt
-\def\myskip{\vspace{8pt minus 6pt}}
 \def\obs{{\mbox{\tiny obs}}}
 \def\CI{\mbox{CI}}
 
@@ -54,8 +52,8 @@
 {\ifnum\thepage=1
   \today\hfill file:~\small\texttt{\jobname.pdf}
 \else
-\Tr{Cheat Sheet TMSB17 Mathematical Statistics}
-   {Formelblad TMSB17 Matematisk Statistik}
+\Tr{Cheat Sheet Mathematical Statistics}
+   {Formelblad Matematisk Statistik}
   \hfill
   \Tr{p}{s}.~\thepage{} \Tr{of}{av} \pageref{LastPageNo}
 \fi}
