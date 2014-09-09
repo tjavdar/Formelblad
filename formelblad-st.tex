@@ -3,7 +3,7 @@
 % Formelblad Stat based on Fredriks formelblad + Trans & Stat's formelblad:
 % Version 0.1 IvTj, 2012-09-06: Converted to UTF-8
 %         0.5 Lagt Exp,Bin, Wilcoxons 2012-09-13:
-%         0.7 Tables isolated in Tables subdir, 2012-09-22: 
+%         0.7 Tables isolated in Tables subdir, 2012-09-22:
 %         0.9 Combined En-Swe version via \Tr{}{}
 %         1.0 Spawned Tables in separate file
 
@@ -132,8 +132,8 @@
 
 \subsection*{\Tr{Probability laws}{Sannolikhetslära}}%<<<
 
-\textbf{\Tr{Notation}{Beteckningar}}: 
-   $A$, $B$, ... -- \Tr{events}{händelser}, 
+\textbf{\Tr{Notation}{Beteckningar}}:
+   $A$, $B$, ... -- \Tr{events}{händelser},
    $\Omega$ -- \Tr{the sample space}{utfallsrummet},
    $P(A)$ -- \Tr{the probability of event}{sannolikheten för händelsen} $A$.
 
@@ -149,12 +149,12 @@
 \end{itemize}
 }
 
-\textbf{\Tr{Conditional probability}{Betingat sannolikhet}}: 
+\textbf{\Tr{Conditional probability}{Betingat sannolikhet}}:
   $P(A|B) = \frac{P(A\cap B)}{P(B)}$
 
   \textbf{Total \Tr{probability}{sannolikhet}}:
-  \Tr{If}{Om}  
-  $\Omega=A_1\cup A_2\cdots\cup A_n$, 
+  \Tr{If}{Om}
+  $\Omega=A_1\cup A_2\cdots\cup A_n$,
   \Tr{and the events}{där händelserna}
   $\{A_k\}_1^n$
   \Tr{are mutually exclusive, then}{är parvis disjunkta, är}
@@ -164,8 +164,8 @@ P(B) = \sum_{k=1}^n P(B\cap A_k)
 \]
 
 \textbf{\Tr{Bayes's theorem}{Bayes formula}}:
-  \Tr{If}{Om}  
-  $\Omega=A_1\cup A_2\cdots\cup A_n$, 
+  \Tr{If}{Om}
+  $\Omega=A_1\cup A_2\cdots\cup A_n$,
   \Tr{and the events}{där händelserna}
   $\{A_k\}_1^n$
   \Tr{are mutually exclusive, then}{är parvis disjunkta, är}
@@ -209,7 +209,7 @@ V(\xi)=E[(x-\mu)^2]=\cases{
 $
 
 \medskip
-\textbf{\Tr{Standard deviation}{Standardavvikelse}}: 
+\textbf{\Tr{Standard deviation}{Standardavvikelse}}:
 \Tr{
 $\sigma=\sqrt{\Var(X)}$
 }
@@ -218,7 +218,7 @@ $\sigma=\sqrt{V(\xi)}$
 }
 
 
-\textbf{\Tr{Steiner's theorem}{Steiner's sats}}: 
+\textbf{\Tr{Steiner's theorem}{Steiner's sats}}:
 $
 \Tr{
 \sigma^2=E(X^2)-\mu^2 %=E(\xi^2)-[E(\xi)]^2
@@ -248,9 +248,9 @@ $
 \multicolumn{1}{ |c| }{\textbf{\Tr{Discrete}{Diskreta}}:} \cr
 \hline
 \EspaceAuDessus     \Tr{$X$ from}{$\xi$ från}
-                  & $f(x)$ 
+                  & $f(x)$
                   & \Tr{$F(x)=P(X\le x)$}{$F(x)=P(\xi\le x)$}
-                  & \Tr{$\mu=E(X)$}{$\mu=E(\xi)$} 
+                  & \Tr{$\mu=E(X)$}{$\mu=E(\xi)$}
                   & \Tr{$\sigma=\sqrt{\Var(X)}$}{$\sigma=\sqrt{V(\xi)}$}
                   \duPlancher
 \hline
@@ -299,11 +299,11 @@ $
                   $\mu$ & $\sigma$\\*[10pt]\hline
 \end{tabular}
 %>>>
-% 
+%
 % \section*{Joint distributions}%<<<
-% 
+%
 % \begin{itemize}
-% 
+%
 %   \item \textbf{Joint density, discrete case}: %<<<
 % $
 % f_{XY}(x,y) = P[(X = x)\cap(Y = y)],
@@ -316,59 +316,59 @@ $
 %   f_{XY}(x,y) = 1.
 % }
 % $%>>>
-% 
+%
 %   \item \textbf{The joint density in the continuous case} is a function $f_{X,Y}(x,y)\ge 0$ which satisfies: %<<<
 % \[
-% P[(a\le X\le b)\cap(c\le Y\le d)] = 
+% P[(a\le X\le b)\cap(c\le Y\le d)] =
 %  \int\limits_a^b\mkern-10mu\int\limits_c^d f_{XY}(x,y) \,dxdy,
 % \qquad
 % \iint_{\mkern-12mu\Rone^2} f_{XY}\,dxdy = 1.
 % \]
-% 
-%   \item \textbf{Cumulative distribution function} (discrete and continuous):  
+%
+%   \item \textbf{Cumulative distribution function} (discrete and continuous):
 %   $F_{XY}(x,y)=P[(X\le x)\cap(Y\le y)]$.%>>>
-% 
+%
 %   \item \textbf{Marginal densities}: %<<<
 %     \[
 %       F_X(x) = \cases{
-%       \sum_y f_{XY}(x,y) &, discrete case 
+%       \sum_y f_{XY}(x,y) &, discrete case
 %          \cr
 %          \int_{-\infty}^\infty f_{XY}(x,y)\,dy &, continuous case
 %       }
 %       \quad
 %       F_Y(y) = \cases{
-%       \sum_x f_{XY}(x,y) &, discrete case 
+%       \sum_x f_{XY}(x,y) &, discrete case
 %          \cr
 %       \int_{-\infty}^\infty f_{XY}(x,y)\,dx &, continuous case.
 %       }
 %     \]%>>>
-% 
+%
 %   \item Variables $X$ and $Y$ are \textbf{independent} if: %<<<
 %   $f_{XY}(x,y)=f_X(x)f_Y(y)$.%>>>
-% 
+%
 %   \item \textbf{Expectations}:%<<<
 %     \[
 % \eqalign{
-% \mu_x 
+% \mu_x
 %  & = E(X) = \cases{
 %     \sum_x\sum_y xf_{XY}(x,y) = \sum_x xf_X(x) &, discrete case \cr
 %     \iint_{\mkern-12mu\Rone^2}xf_{XY}(x,y)\,dxdy = \int_{-\infty}^\infty xf_{X}(x)\,dx &, continuous case
 %     }
 % \cr
-% \mu_y 
+% \mu_y
 %   & = E(Y) = \cases{
 %     \sum_x\sum_y yf_{XY}(x,y) =\sum_y yf_X(y) &, discrete case \cr
 %     \iint_{\mkern-12mu\Rone^2}yf_{XY}(x,y)\,dxdy = \int_{-\infty}^\infty yf_{Y}(y)\,dy &, continuous case.
 %     }
 %    }
 % \]%>>>
-% 
+%
 %   \item \textbf{Covariance}: %<<<
 %   \[
 %   \Cov(X,Y) = E[(X-\mu_x)(Y-\mu_y)]= E(XY)-\mu_x\mu_y .
 % %%  \mbox{ In particular, }\Var(X)=\Cov(X,X).
 %   \] %>>>
-% 
+%
 %   \item \textbf{Pearson coefficient of correlation}:%<<<
 %   \[
 %   \rho_{XY} = \frac{\Cov(X,Y)}{\sigma_X\sigma_Y}
@@ -376,18 +376,18 @@ $
 %        \quad
 %        -1\le\rho\le 1.
 %   \]%>>>
-% 
-% \item If the random variables $X$ and $Y$ are \textbf{independent} 
-%     $\Rightarrow$ $\rho_{XY}=0$ ($X$ and $Y$ are 
+%
+% \item If the random variables $X$ and $Y$ are \textbf{independent}
+%     $\Rightarrow$ $\rho_{XY}=0$ ($X$ and $Y$ are
 %     \textbf{uncorrelated}). The converse is not true in general.
-% 
+%
 % \end{itemize} %>>>
 
 \subsection*{\Tr{Linear combinations, sums and averages of random variables}%<<<
              {Linjära kombinationer, summor och snitt av stokastiska variabler}
          }
 \Tr{%
-Suppose that $\{X_k\}_{k=1}^n$ are (discrete or continuous) random variables with expectations 
+Suppose that $\{X_k\}_{k=1}^n$ are (discrete or continuous) random variables with expectations
 $E(X_k)=\mu_k$ and variances $\Var(X_k)=\sigma_k^2$, $k=1,...,n$, and let
  $\{a_k\}_{k=1}^n$ be constants. Then
 }{%
@@ -516,12 +516,12 @@ gäller:
 \subsection*{\Tr{Statistical inference}{Statistisk inferens}}%<<<
 
 \Tr{%
-\textbf{Point estimators}: 
-Let $x_1,\dots,x_n$ be the observed values of a sample $\left\{X_k\right\}_1^n$ from a population with 
-mean $\mu$ och standard deviation $\sigma$. Point estimators 
+\textbf{Point estimators}:
+Let $x_1,\dots,x_n$ be the observed values of a sample $\left\{X_k\right\}_1^n$ from a population with
+mean $\mu$ och standard deviation $\sigma$. Point estimators
 for the mean and the variance of the population are
 }{%
-\textbf{Punktskattningar}: 
+\textbf{Punktskattningar}:
 Låt $x_1,\dots,x_n$ vara ett observerat stickprov från en fördelning med
 väntevärde $\mu$ och standardavvikelse $\sigma.$ Väntevärdesriktiga skattningar
 av $\mu$ och $\sigma^2$ är då
@@ -563,7 +563,7 @@ av $\mu$ och $\sigma^2$ är då
 \hline && \\
 \mu \;\mbox{\Tr{from}{från} } N(\mu,\sigma),\; \sigma \mbox{ \Tr{known}{känd}}
  & \overline{x}
- &  [\ob x-\varepsilon,\ob x+\varepsilon],\;  
+ &  [\ob x-\varepsilon,\ob x+\varepsilon],\;
     \varepsilon = \Tr{z}{\lambda}_{\alpha/2}\frac{\sigma}{\sqrt{n}}\\&&\\
 
 \hline &&\\
@@ -583,7 +583,7 @@ av $\mu$ och $\sigma^2$ är då
 & [
   \Tr{\hat p}{p^*_\obs}-\varepsilon ,
   \Tr{\hat p}{p^*_\obs}+\varepsilon ],\;
- \varepsilon = 
+ \varepsilon =
  \Tr{z}{\lambda}_{\alpha/2}\sqrt{\frac{\Tr{\hat p}{p^*_\obs}(1-\Tr{\hat p}{p^*_\obs})}{n}}
 
  \\&&\\
@@ -599,14 +599,14 @@ av $\mu$ och $\sigma^2$ är då
 \begin{itemize}
 
 \item \textbf{\Tr{Two samples (paired data)}{Två parade stickprov}}: %<<<
-  $\{(x_i,y_i)\}_{i=1}^n$ 
-  \Tr{with}{där} 
-   $x_i\in N(\mu_i,\sigma_x)$ \Tr{and}{och} 
-   $y_i\in N(\mu_i+\Delta,\sigma_y)$, $i=1,\dots,n$. 
-   \Tr{Then}{Då} $\{z_i\}_1^n=\{y_i-x_i\}_1^n$ 
+  $\{(x_i,y_i)\}_{i=1}^n$
+  \Tr{with}{där}
+   $x_i\in N(\mu_i,\sigma_x)$ \Tr{and}{och}
+   $y_i\in N(\mu_i+\Delta,\sigma_y)$, $i=1,\dots,n$.
+   \Tr{Then}{Då} $\{z_i\}_1^n=\{y_i-x_i\}_1^n$
    \Tr{is a sample from}{är ett stickprov från}
-   $N(\Delta,\sigma_z)$ 
-   \Tr{with}{där} 
+   $N(\Delta,\sigma_z)$
+   \Tr{with}{där}
    $\sigma_z=\sqrt{\sigma_x^2+\sigma_y^2}$\,.
    \Tr{The two-sided $\CI_{1-\alpha}$ for}{Den tvåsidiga $CI_{1-\alpha}$ för} $\Delta$:
 
@@ -622,7 +622,7 @@ av $\mu$ och $\sigma^2$ är då
 %%   ej känd}
 %% \end{eqnarray*}%>>>
 \[
-\CI_{1-\alpha}(\Delta) = [\ob z-\varepsilon,\ob z+\varepsilon],\quad 
+\CI_{1-\alpha}(\Delta) = [\ob z-\varepsilon,\ob z+\varepsilon],\quad
    \varepsilon =
    \cases{
       \Tr{z}{\lambda}_{\alpha/2}\,\frac{\sigma_z}{\sqrt{n}}\;,
@@ -632,14 +632,14 @@ av $\mu$ och $\sigma^2$ är då
    }
 \]%>>>
 
-\item \textbf{\Tr{Two independent samples (pooled test)}{Två oberoende stickprov}}: 
-$\{x_i\}_{i=1}^{n}$ \Tr{from}{från} $N(\mu_x,\sigma)$ 
-  \Tr{and}{och} 
+\item \textbf{\Tr{Two independent samples (pooled test)}{Två oberoende stickprov}}:
+$\{x_i\}_{i=1}^{n}$ \Tr{from}{från} $N(\mu_x,\sigma)$
+  \Tr{and}{och}
   $\{y_i\}_{i=1}^{m}$ \Tr{from}{från} $N(\mu_y,\sigma)$.
   \Tr{The two-tailed $\CI_{1-\alpha}$ for $\mu_x-\mu_y$ is given by}
       {Den tvåsidiga $\CI_{1-\alpha}$ för $\mu_x-\mu_y$ ges av}
 \[
-\CI_{1-\alpha}(\mu_x-\mu_y) = [(\ob x-\ob y)-\varepsilon,(\ob x-\ob y)+\varepsilon],\quad 
+\CI_{1-\alpha}(\mu_x-\mu_y) = [(\ob x-\ob y)-\varepsilon,(\ob x-\ob y)+\varepsilon],\quad
    \varepsilon =
    \cases{
    \Tr{z}{\lambda}_{\alpha/2}\,\sigma\sqrt{\frac1n+\frac1m},
@@ -648,7 +648,7 @@ $\{x_i\}_{i=1}^{n}$ \Tr{from}{från} $N(\mu_x,\sigma)$
       & \Tr{if}{om} $\sigma$ \Tr{is not known}{är ej känd}, \cr
    }
 \]
-\Tr{where}{där} 
+\Tr{where}{där}
 $\Tr{s_p}{\sigma^*_\obs}$
 \Tr{is the pooled (weighted) standard deviation}{är den vägda standardavvikelsen}
 \/$ \Tr{s_p}{\sigma^*_\obs} =\sqrt{\frac{(n-1)s_x^2+(m-1)s_y^2}{n+m-2}}\,\cdot$
@@ -661,11 +661,11 @@ $\Tr{s_p}{\sigma^*_\obs}$
 \subsubsection*{ \Tr{Parametric methods}{Parametriska metoder}}%<<<
 
 \begin{eqnarray*}\begin{array}{|cccc|}
-  \hline 
+  \hline
    \mbox{\Tr{Null hypothesis}{Nollhypotes}} &
    \mbox{\Tr{Test variable}{Testvariabel}} &
    \mbox{\Tr{Alt.~hypothesis}{Mothypotes}}  &
-   \mbox{\Tr{$H_0$ rejected if}{När $H_0$ förkastas}} 
+   \mbox{\Tr{$H_0$ rejected if}{När $H_0$ förkastas}}
   \\ \hline &&&\\[-10pt]
   &&H_1:\mu\neq\mu_0&\vert z_0\vert>\Tr{z}{\lambda}_{\alpha/2} \\
     H_0:\mu=\mu_0
@@ -678,7 +678,7 @@ $\Tr{s_p}{\sigma^*_\obs}$
     H_0:\mu=\mu_0 & t_0=\frac{\overline{x}-\mu_0}{s/\sqrt{n}}
    &H_1:\mu>\mu_0 & t_0>t_{\alpha,n-1}  \\
    \sigma \mbox{ \Tr{not known}{ej känd}}
-  &&H_1:\mu<\mu_0 & t_0<-t_{\alpha,n-1} 
+  &&H_1:\mu<\mu_0 & t_0<-t_{\alpha,n-1}
 \\ \hline &&&\\[-10pt]
   &&H_1:\sigma^2\neq\sigma^2_0
     % & \chi^2_0<\chi^2_{1-\alpha/2,n-1} \mbox{\, \Tr{or}{eller} \,\,} \chi^2_0>\chi^2_{\alpha/2,n-1}
@@ -709,7 +709,7 @@ $\Tr{s_p}{\sigma^*_\obs}$
    \mbox{\Tr{Null hypothesis}{Nollhypotes}} &
    \mbox{\Tr{Alt.~hypothesis}{Mothypotes}}  &
    \mbox{\Tr{Test variable}{Testvariabel}} &
-   \mbox{\Tr{$H_0$ rejected if}{När $H_0$ förkastas}} 
+   \mbox{\Tr{$H_0$ rejected if}{När $H_0$ förkastas}}
    \\ \hline
      &&H_1:{\md}\neq{\md}_0&r=\min(r^-,r^+)&r\leq r_{\alpha/2} \\
      \mbox{\textbf{\Tr{Sign test}{Teckentest}}}
@@ -725,7 +725,7 @@ $\Tr{s_p}{\sigma^*_\obs}$
    &
    \mbox{\Tr{Null hypothesis}{Nollhypotes}} &
    \mbox{\Tr{Alt.~hypothesis}{Mothypotes}}  &
-   \mbox{\Tr{$H_0$ rejected if}{När $H_0$ förkastas}} 
+   \mbox{\Tr{$H_0$ rejected if}{När $H_0$ förkastas}}
    \\ \hline
    \mbox{\textbf{Wilcoxon\Tr{'}{}s}}
  %%% Fredrik's old %<<<
@@ -753,8 +753,8 @@ $\Tr{s_p}{\sigma^*_\obs}$
 \hfil
 \begin{tabular}[t]{|c|c|}
   \hline
-  \textbf{Goodness-of-fit}: 
-     $\chi^2 = \sum_{i=1}^{n}\frac{(O_i-E_i)^2}{E_i}$ & 
+  \textbf{Goodness-of-fit}:
+     $\chi^2 = \sum_{i=1}^{n}\frac{(O_i-E_i)^2}{E_i}$ &
      \parbox[m]{12em}{
      \textbf{Test for independence}: \\
     ($m\times n$-contingency table)
