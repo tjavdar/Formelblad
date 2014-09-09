@@ -234,70 +234,6 @@ $
 $
 %>>>
 
-\subsection*{\Tr{Parameters of some distributions}%<<<
-             {Några ofta förekommande fördelningar}}
-
-
-
-\def\EspaceAuDessus{&&&&\\*[-10pt]}\def\duPlancher{\\*[2pt] \hline}
-
-\begin{tabular}{|c|c|c|c|c|}
-\cline{1-1}
-\multicolumn{1}{ |c| }{\textbf{\Tr{Discrete}{Diskreta}}:} \cr
-\hline
-\EspaceAuDessus     \Tr{$X$ from}{$\xi$ från}
-                  & $f(x)$
-                  & \Tr{$F(x)=P(X\le x)$}{$F(x)=P(\xi\le x)$}
-                  & \Tr{$\mu=E(X)$}{$\mu=E(\xi)$}
-                  & \Tr{$\sigma=\sqrt{\Var(X)}$}{$\sigma=\sqrt{V(\xi)}$}
-                  \duPlancher
-\hline
-  \EspaceAuDessus $\mbox{Unifd}(1,n)$  &
-                  $ \frac{1}{n},\; 1\le\! x\le\! n $ &
-                  $ \frac{x}{n},\; 1\le\! x\le\! n $ &
-                  $\frac{n+1}{2}$ &
-                  $\frac{\sqrt{n^2-1}}{2\sqrt{3}}$
-                  \duPlancher
-  \EspaceAuDessus $\mbox{Geo}(p)$,\, $x\ge1$ &
-                  $p(1-p)^{x-1}$ &
-                  $1 - (1-p)^x$ &
-                  $1/p$ & $\sqrt{1-p}\big/p$\duPlancher
-  \EspaceAuDessus $\mbox{Hyp}(N,n,p)$ &
-                  $\frac{\binom{Np}x\binom{N(1-p)}{n-x}}{\binom{N}{n}}$ &
-                  $\sum_{k=0}^x\frac{\binom{Np}k\binom{N(1-p)}{n-k}}{\binom{N}{n}}$ &
-                  $np$ & $\sqrt{\tfrac{N-n}{N-1}\,np(1-p)}$\duPlancher
-  \EspaceAuDessus $\mbox{Bin}\,(n,p)$    &
-                  $\binom nx p^x(1-p)^{n-x}$ &
-                  $\sum_{k=0}^x\binom nk p^k(1-p)^{n-k}$ &
-                  $np$ & $\sqrt{np(1-p)}$\duPlancher
-  \EspaceAuDessus $\mbox{Po}(\lambda) $ &
-                  $e^{-\lambda}\,\frac{\lambda^x}{x!}$ &
-                  $e^{-\lambda}\,\sum_{k=0}^x \frac{\lambda^k}{k!}$ &
-                  $\lambda$ & $\sqrt{\lambda}$\duPlancher
-\end{tabular}
-
-\begin{tabular}{|c|c|c|c|c|}
-\cline{1-1} \multicolumn{1}{ |c| }{\textbf{\Tr{Continuous}{Kontinuerliga}}:} \cr
-\hline
-  \EspaceAuDessus $\mbox{Unifc}(a,b)$  &
-                  $ \frac{1}{b-a},\; a\le\! x\le\! b $ &
-                  $\frac{x-a}{b-a},\; a\le\! x\le\! b $ &
-                  $\frac{a+b}{2}$ &
-                  $\frac{b-a}{2\sqrt{3}}$
-                  \duPlancher
-  \EspaceAuDessus $\mbox{Exp}(\lambda)$  &
-                  $\lambda e^{-\lambda x}$ &
-                  $1-e^{-\lambda x}$ &
-                  $1/\lambda$ & $1/\lambda$\duPlancher
-  \EspaceAuDessus $N(\mu,\sigma) $ &
-                  %% $\frac{1}{\sigma\sqrt{2\pi}}\,e^{-(x-\mu)^2/2\sigma^2}$ &
-                  $\frac{1}{\sigma\sqrt{2\pi}}\,e^{-(\frac{x-\mu}\sigma)^2/2}$ &
-                  $\Phi\Bigl(\frac{x-\mu}{\sigma}\Bigr)
-                  =\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\frac{x-\mu}{\sigma}} e^{-t^2/2}\,dt$ &
-                  $\mu$ & $\sigma$\\*[10pt]\hline
-\end{tabular}
-%>>>
-
 \subsection*{\Tr{Linear combinations, sums and averages of random variables}%<<<
              {Linjära kombinationer, summor och snitt av stokastiska variabler}
          }
@@ -390,6 +326,71 @@ gäller:
 \begin{center}
    \includegraphics[scale=0.65]{Figs/approx}
 \end{center}
+%>>>
+
+\subsection*{\Tr{Parameters of some distributions}%<<<
+             {Några ofta förekommande fördelningar}}
+
+\def\EspaceAuDessus{&&&&\\*[-10pt]}\def\duPlancher{\\*[2pt] \hline}
+
+\begin{tabular}{|c|c|c|c|c|}
+\cline{1-1}
+\multicolumn{1}{ |c| }{\textbf{\Tr{Discrete}{Diskreta}}:} \cr
+\hline
+\EspaceAuDessus     \Tr{$X$ from}{$\xi$ från}
+                  & $f(x)$
+                  & \Tr{$F(x)=P(X\le x)$}{$F(x)=P(\xi\le x)$}
+                  & \Tr{$\mu=E(X)$}{$\mu=E(\xi)$}
+                  & \Tr{$\sigma=\sqrt{\Var(X)}$}{$\sigma=\sqrt{V(\xi)}$}
+                  \duPlancher
+\hline
+  \EspaceAuDessus $\mbox{Unifd}(1,n)$  &
+                  $ \frac{1}{n},\; 1\le\! x\le\! n $ &
+                  $ \frac{x}{n},\; 1\le\! x\le\! n $ &
+                  $\frac{n+1}{2}$ &
+                  $\frac{\sqrt{n^2-1}}{2\sqrt{3}}$
+                  \cr &&&&\\[-23pt]
+                  \duPlancher
+  \EspaceAuDessus $\mbox{Geo}(p)$,\, $x\ge1$ &
+                  $p(1-p)^{x-1}$ &
+                  $1 - (1-p)^x$ &
+                  $1/p$ & $\sqrt{1-p}\big/p$\duPlancher
+  \EspaceAuDessus $\mbox{Hyp}(N,n,p)$ &
+                  $\frac{\binom{Np}x\binom{N(1-p)}{n-x}}{\binom{N}{n}}$ &
+                  $\sum_{k=0}^x\frac{\binom{Np}k\binom{N(1-p)}{n-k}}{\binom{N}{n}}$ &
+                  $np$ & $\sqrt{\tfrac{N-n}{N-1}\,np(1-p)}$\duPlancher
+  \EspaceAuDessus $\mbox{Bin}\,(n,p)$    &
+                  $\binom nx p^x(1-p)^{n-x}$ &
+                  $\sum_{k=0}^x\binom nk p^k(1-p)^{n-k}$ &
+                  $np$ & $\sqrt{np(1-p)}$\duPlancher
+  \EspaceAuDessus $\mbox{Po}(\lambda) $ &
+                  $e^{-\lambda}\,\frac{\lambda^x}{x!}$ &
+                  $e^{-\lambda}\,\sum_{k=0}^x \frac{\lambda^k}{k!}$ &
+                  $\lambda$ & $\sqrt{\lambda}$\duPlancher
+\end{tabular}
+
+\medskip
+\begin{tabular}{|c|c|c|c|c|}
+\cline{1-1} \multicolumn{1}{ |c| }{\textbf{\Tr{Continuous}{Kontinuerliga}}:} \cr
+\hline
+  \EspaceAuDessus $\mbox{Unifc}(a,b)$  &
+                  $ \frac{1}{b-a},\; a\le\! x\le\! b $ &
+                  $\frac{x-a}{b-a},\; a\le\! x\le\! b $ &
+                  $\frac{a+b}{2}$ &
+                  $\frac{b-a}{2\sqrt{3}}$
+                  \cr &&&&\\[-23pt]
+                  \duPlancher
+  \EspaceAuDessus $\mbox{Exp}(\lambda)$  &
+                  $\lambda e^{-\lambda x}$ &
+                  $1-e^{-\lambda x}$ &
+                  $1/\lambda$ & $1/\lambda$\duPlancher
+  \EspaceAuDessus $N(\mu,\sigma) $ &
+                  %% $\frac{1}{\sigma\sqrt{2\pi}}\,e^{-(x-\mu)^2/2\sigma^2}$ &
+                  $\frac{1}{\sigma\sqrt{2\pi}}\,e^{-(\frac{x-\mu}\sigma)^2/2}$ &
+                  $\Phi\Bigl(\frac{x-\mu}{\sigma}\Bigr)
+                  =\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\frac{x-\mu}{\sigma}} e^{-t^2/2}\,dt$ &
+                  $\mu$ & $\sigma$\\*[10pt]\hline
+\end{tabular}
 %>>>
 
 \subsection*{\Tr{Statistical inference}{Statistisk inferens}}%<<<
