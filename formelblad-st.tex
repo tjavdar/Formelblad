@@ -297,89 +297,6 @@ $
                   $\mu$ & $\sigma$\\*[10pt]\hline
 \end{tabular}
 %>>>
-%
-% \section*{Joint distributions}%<<<
-%
-% \begin{itemize}
-%
-%   \item \textbf{Joint density, discrete case}: %<<<
-% $
-% f_{XY}(x,y) = P[(X = x)\cap(Y = y)],
-% \quad
-% \cases{
-%   f_{XY}(x,y)\ge 0
-%   \cr
-%   \sum_x
-%   \sum_y
-%   f_{XY}(x,y) = 1.
-% }
-% $%>>>
-%
-%   \item \textbf{The joint density in the continuous case} is a function $f_{X,Y}(x,y)\ge 0$ which satisfies: %<<<
-% \[
-% P[(a\le X\le b)\cap(c\le Y\le d)] =
-%  \int\limits_a^b\mkern-10mu\int\limits_c^d f_{XY}(x,y) \,dxdy,
-% \qquad
-% \iint_{\mkern-12mu\Rone^2} f_{XY}\,dxdy = 1.
-% \]
-%
-%   \item \textbf{Cumulative distribution function} (discrete and continuous):
-%   $F_{XY}(x,y)=P[(X\le x)\cap(Y\le y)]$.%>>>
-%
-%   \item \textbf{Marginal densities}: %<<<
-%     \[
-%       F_X(x) = \cases{
-%       \sum_y f_{XY}(x,y) &, discrete case
-%          \cr
-%          \int_{-\infty}^\infty f_{XY}(x,y)\,dy &, continuous case
-%       }
-%       \quad
-%       F_Y(y) = \cases{
-%       \sum_x f_{XY}(x,y) &, discrete case
-%          \cr
-%       \int_{-\infty}^\infty f_{XY}(x,y)\,dx &, continuous case.
-%       }
-%     \]%>>>
-%
-%   \item Variables $X$ and $Y$ are \textbf{independent} if: %<<<
-%   $f_{XY}(x,y)=f_X(x)f_Y(y)$.%>>>
-%
-%   \item \textbf{Expectations}:%<<<
-%     \[
-% \eqalign{
-% \mu_x
-%  & = E(X) = \cases{
-%     \sum_x\sum_y xf_{XY}(x,y) = \sum_x xf_X(x) &, discrete case \cr
-%     \iint_{\mkern-12mu\Rone^2}xf_{XY}(x,y)\,dxdy = \int_{-\infty}^\infty xf_{X}(x)\,dx &, continuous case
-%     }
-% \cr
-% \mu_y
-%   & = E(Y) = \cases{
-%     \sum_x\sum_y yf_{XY}(x,y) =\sum_y yf_X(y) &, discrete case \cr
-%     \iint_{\mkern-12mu\Rone^2}yf_{XY}(x,y)\,dxdy = \int_{-\infty}^\infty yf_{Y}(y)\,dy &, continuous case.
-%     }
-%    }
-% \]%>>>
-%
-%   \item \textbf{Covariance}: %<<<
-%   \[
-%   \Cov(X,Y) = E[(X-\mu_x)(Y-\mu_y)]= E(XY)-\mu_x\mu_y .
-% %%  \mbox{ In particular, }\Var(X)=\Cov(X,X).
-%   \] %>>>
-%
-%   \item \textbf{Pearson coefficient of correlation}:%<<<
-%   \[
-%   \rho_{XY} = \frac{\Cov(X,Y)}{\sigma_X\sigma_Y}
-%        = \frac{\Cov(X,Y)}{\sqrt{\Cov(X,X)\Cov(Y,Y)}}\, ,
-%        \quad
-%        -1\le\rho\le 1.
-%   \]%>>>
-%
-% \item If the random variables $X$ and $Y$ are \textbf{independent}
-%     $\Rightarrow$ $\rho_{XY}=0$ ($X$ and $Y$ are
-%     \textbf{uncorrelated}). The converse is not true in general.
-%
-% \end{itemize} %>>>
 
 \subsection*{\Tr{Linear combinations, sums and averages of random variables}%<<<
              {Linjära kombinationer, summor och snitt av stokastiska variabler}
@@ -416,45 +333,26 @@ Om $\{\xi_k\}_{k=1}^n$ är \textbf{normalfördelade och oberoende},
 så är deras linjärkombinationer också normalfördelade:
 }
 \[
-\Tr{%
-X_k\in N(\mu_k,\sigma_k),\;
-k=1,...,n,
+\Tr{X}{\xi}_k\Tr{\sim}{\in} N(\mu_k,\sigma_k),\;
+k=1,...,n
 \;\Rightarrow\;
-a_1X_1+\cdots+a_nX_n\in N\bigl(a_1\mu_1+\cdots a_n\mu_n,
+a_1\Tr{X}{\xi}_1+\cdots+a_n\Tr{X}{\xi}_n\Tr{\sim}{\in} N\bigl(a_1\mu_1+\cdots a_n\mu_n,
                    \sqrt{a_1^2\sigma_1^2+\cdots a_n^2\sigma_n^2}\,\bigr).
-}{%
-\Tr{X}{\xi}_k\in N(\mu_k,\sigma_k),\;
-k=1,...,n,
-\;\Rightarrow\;
-a_1\xi_1+\cdots+a_n\xi_n\in N(a_1\mu_1+\cdots a_n\mu_n,
-                   \sqrt{a_1^2\sigma_1^2+\cdots a_n^2\sigma_n^2}).
-}
 \]
 \Tr{%
 For \textbf{sums} and \textbf{averages of i.d.~normal} variables, in particular, holds:
 }{%
 I synnerhet, för \textbf{summor} och \textbf{snitt av lika normalfördelade oberoende} variabler gäller:
 }
-\Tr{%
 $$
-X_k\in N(\mu,\sigma),\;
-k=1,...,n,
+\Tr{X}{\xi}_k\Tr{\sim}{\in} N(\mu,\sigma),\;
+k=1,...,n
 \;\Rightarrow\;
 \cases{
-X_1+\cdots+X_n \in N(n\mu,\sigma\sqrt{n})\cr\noalign{\vskip5pt}
-\frac{X_1+\cdots+X_n}{n} = \ob X \in N(\mu,\frac{\sigma}{\sqrt{n}})
+\Tr{X}{\xi}_1+\cdots+\Tr{X}{\xi}_n \Tr{\sim}{\in} N(n\mu,\sigma\sqrt{n})\cr\noalign{\vskip5pt}
+\frac{\Tr{X}{\xi}_1+\cdots+\Tr{X}{\xi}_n}{n} = \Tr{\ob X}{\ob\xi} \Tr{\sim}{\in} N(\mu,\frac{\sigma}{\sqrt{n}})
 \Leftrightarrow
-z:=\frac{\ob X-\mu}{\sigma/\sqrt{n}}\in N(0,1).  }
-}{%
-$$
-\xi_k\in N(\mu,\sigma),\;
-k=1,...,n,
-\;\Rightarrow\;
-\cases{
-\xi_1+\cdots+\xi_n \in N(n\mu,\sigma\sqrt{n})\cr\noalign{\vskip5pt}
-\frac{\xi_1+\cdots+\xi_n}{n} = \ob\xi \in N(\mu,\frac{\sigma}{\sqrt{n}})
-\Leftrightarrow
-z:=\frac{\ob\xi-\mu}{\sigma/\sqrt{n}}\in N(0,1).  }
+z:=\frac{\Tr{\ob X}{\ob\xi} -\mu}{\sigma/\sqrt{n}}\Tr{\sim}{\in} N(0,1).
 }
 $$
 %>>>
@@ -471,37 +369,20 @@ variabler med väntevärde $\mu$ och standardavvikelse $\sigma$. För stora $n$
 gäller:
 }
 
-\Tr{%
 \begin{itemize}
-  \item $\sum_{k=1}^n X_k=X_1+\cdots+X_n\;
-    \widetilde\in\; N(n\mu,\sigma\sqrt{n})$, i.e. \
-        $P(\sum_{k=1}^n X_k\le x)\approx
+  \item $\sum_{k=1}^n \Tr{X}{\xi}_k=\Tr{X}{\xi}_1+\cdots+\Tr{X}{\xi}_n\;
+    \Tr{\stackrel{\mbox{\tiny appr}}{\sim}}{\widetilde\in}\; N(n\mu,\sigma\sqrt{n})$, i.e. \
+        $P(\sum_{k=1}^n \Tr{X}{\xi}_k\le x)\approx
         \Phi\Bigl(\frac{x-n\mu}{\sigma\sqrt{n}}\Bigr)
         = \Phi\Bigl(\frac{\ob x-\mu}{\sigma/\sqrt{n}}\Bigr)
         $;
 
-  \item $\ob X=\frac1n
-    \sum_{k=1}^n X_k=\frac{X_1+\cdots+X_n}n\;
-    \widetilde\in\; N(\mu,\frac\sigma{\sqrt{n}})$, i.e.
-        $P(\ob X\le \ob x)\approx\Phi(z)$,
+  \item $\Tr{\ob X}{\ob\xi}=\frac1n
+    \sum_{k=1}^n \Tr{X}{\xi}_k=\frac{\Tr{X}{\xi}_1+\cdots+\Tr{X}{\xi}_n}n\;
+    \Tr{\stackrel{\mbox{\tiny appr}}{\sim}}{\widetilde\in}\; N(\mu,\frac\sigma{\sqrt{n}})$, i.e.
+        $P(\Tr{\ob X}{\ob\xi}\le \ob x)\approx\Phi(z)$,
         $z=\frac{\ob x-\mu}{\sigma/\sqrt{n}}\cdot$
 \end{itemize}
-}{%
-\begin{itemize}
-  \item $\sum_{k=1}^n \xi_k=\xi_1+\cdots+\xi_n\;
-    \widetilde\in\; N(n\mu,\sigma\sqrt{n})$, dvs \
-        $P(\sum_{k=1}^n \xi_k\le x)\approx
-        \Phi\Bigl(\frac{x-n\mu}{\sigma\sqrt{n}}\Bigr)
-        = \Phi\Bigl(\frac{\ob x-\mu}{\sigma/\sqrt{n}}\Bigr)
-        $;
-
-  \item $\ob\xi=\frac1n
-    \sum_{k=1}^n \xi_k=\frac{\xi_1+\cdots+\xi_n}n\;
-    \widetilde\in\; N(\mu,\frac\sigma{\sqrt{n}})$, dvs
-        $P(\ob\xi\le \ob x)\approx\Phi(z)$,
-        $z=\frac{\ob x-\mu}{\sigma/\sqrt{n}}\cdot$
-\end{itemize}
-}
 %>>>
 
 \subsection*{\Tr{Approximations of distributions}{Approximationer}}%<<<
@@ -599,8 +480,8 @@ av $\mu$ och $\sigma^2$ är då
 \item \textbf{\Tr{Two samples (paired data)}{Två parade stickprov}}: %<<<
   $\{(x_i,y_i)\}_{i=1}^n$
   \Tr{with}{där}
-   $x_i\in N(\mu_i,\sigma_x)$ \Tr{and}{och}
-   $y_i\in N(\mu_i+\Delta,\sigma_y)$, $i=1,\dots,n$.
+   $x_i\Tr{\sim}{\in} N(\mu_i,\sigma_x)$ \Tr{and}{och}
+   $y_i\Tr{\sim}{\in} N(\mu_i+\Delta,\sigma_y)$, $i=1,\dots,n$.
    \Tr{Then}{Då} $\{z_i\}_1^n=\{y_i-x_i\}_1^n$
    \Tr{is a sample from}{är ett stickprov från}
    $N(\Delta,\sigma_z)$
@@ -766,3 +647,88 @@ $\Tr{s_p}{\sigma^*_\obs}$
 
 \label{LastPageNo}
 \end{document}
+
+>> THROWNAWAY SECTION:
+
+\section*{Joint distributions}%<<<
+
+\begin{itemize}
+
+  \item \textbf{Joint density, discrete case}: %<<<
+$
+f_{XY}(x,y) = P[(X = x)\cap(Y = y)],
+\quad
+\cases{
+  f_{XY}(x,y)\ge 0
+  \cr
+  \sum_x
+  \sum_y
+  f_{XY}(x,y) = 1.
+}
+$%>>>
+
+  \item \textbf{The joint density in the continuous case} is a function $f_{X,Y}(x,y)\ge 0$ which satisfies: %<<<
+\[
+P[(a\le X\le b)\cap(c\le Y\le d)] =
+ \int\limits_a^b\mkern-10mu\int\limits_c^d f_{XY}(x,y) \,dxdy,
+\qquad
+\iint_{\mkern-12mu\Rone^2} f_{XY}\,dxdy = 1.
+\]
+
+  \item \textbf{Cumulative distribution function} (discrete and continuous):
+  $F_{XY}(x,y)=P[(X\le x)\cap(Y\le y)]$.%>>>
+
+  \item \textbf{Marginal densities}: %<<<
+    \[
+      F_X(x) = \cases{
+      \sum_y f_{XY}(x,y) &, discrete case
+         \cr
+         \int_{-\infty}^\infty f_{XY}(x,y)\,dy &, continuous case
+      }
+      \quad
+      F_Y(y) = \cases{
+      \sum_x f_{XY}(x,y) &, discrete case
+         \cr
+      \int_{-\infty}^\infty f_{XY}(x,y)\,dx &, continuous case.
+      }
+    \]%>>>
+
+  \item Variables $X$ and $Y$ are \textbf{independent} if: %<<<
+  $f_{XY}(x,y)=f_X(x)f_Y(y)$.%>>>
+
+  \item \textbf{Expectations}:%<<<
+    \[
+\eqalign{
+\mu_x
+ & = E(X) = \cases{
+    \sum_x\sum_y xf_{XY}(x,y) = \sum_x xf_X(x) &, discrete case \cr
+    \iint_{\mkern-12mu\Rone^2}xf_{XY}(x,y)\,dxdy = \int_{-\infty}^\infty xf_{X}(x)\,dx &, continuous case
+    }
+\cr
+\mu_y
+  & = E(Y) = \cases{
+    \sum_x\sum_y yf_{XY}(x,y) =\sum_y yf_X(y) &, discrete case \cr
+    \iint_{\mkern-12mu\Rone^2}yf_{XY}(x,y)\,dxdy = \int_{-\infty}^\infty yf_{Y}(y)\,dy &, continuous case.
+    }
+   }
+\]%>>>
+
+  \item \textbf{Covariance}: %<<<
+  \[
+  \Cov(X,Y) = E[(X-\mu_x)(Y-\mu_y)]= E(XY)-\mu_x\mu_y .
+%%  \mbox{ In particular, }\Var(X)=\Cov(X,X).
+  \] %>>>
+
+  \item \textbf{Pearson coefficient of correlation}:%<<<
+  \[
+  \rho_{XY} = \frac{\Cov(X,Y)}{\sigma_X\sigma_Y}
+       = \frac{\Cov(X,Y)}{\sqrt{\Cov(X,X)\Cov(Y,Y)}}\, ,
+       \quad
+       -1\le\rho\le 1.
+  \]%>>>
+
+\item If the random variables $X$ and $Y$ are \textbf{independent}
+    $\Rightarrow$ $\rho_{XY}=0$ ($X$ and $Y$ are
+    \textbf{uncorrelated}). The converse is not true in general.
+
+\end{itemize} %>>>
