@@ -236,11 +236,16 @@ $
 $
 %>>>
 
-\subsection*{\Tr{Parameters of some distributions}%<<< 
+\subsection*{\Tr{Parameters of some distributions}%<<<
              {Några ofta förekommande fördelningar}}
 
-\def\EspaceAuDessus{&&&&\\*[-10pt]}\def\duPlancher{\\*[4pt] \hline}
+
+
+\def\EspaceAuDessus{&&&&\\*[-10pt]}\def\duPlancher{\\*[2pt] \hline}
+
 \begin{tabular}{|c|c|c|c|c|}
+\cline{1-1}
+\multicolumn{1}{ |c| }{\textbf{\Tr{Discrete}{Diskreta}}:} \cr
 \hline
 \EspaceAuDessus     \Tr{$X$ from}{$\xi$ från}
                   & $f(x)$ 
@@ -249,18 +254,39 @@ $
                   & \Tr{$\sigma=\sqrt{\Var(X)}$}{$\sigma=\sqrt{V(\xi)}$}
                   \duPlancher
 \hline
-\EspaceAuDessus $\mbox{Hyp}(N,n,p)$ &
+  \EspaceAuDessus $\mbox{Unifd}(1,n)$  &
+                  $ \frac{1}{n},\; 1\le\! x\le\! n $ &
+                  $ \frac{x}{n},\; 1\le\! x\le\! n $ &
+                  $\frac{n+1}{2}$ &
+                  $\frac{\sqrt{n^2-1}}{2\sqrt{3}}$
+                  \duPlancher
+  \EspaceAuDessus $\mbox{Geo}(p)$,\, $x\ge1$ &
+                  $p(1-p)^{x-1}$ &
+                  $1 - (1-p)^x$ &
+                  $1/p$ & $\sqrt{1-p}\big/p$\duPlancher
+  \EspaceAuDessus $\mbox{Hyp}(N,n,p)$ &
                   $\frac{\binom{Np}x\binom{N(1-p)}{n-x}}{\binom{N}{n}}$ &
                   $\sum_{k=0}^x\frac{\binom{Np}k\binom{N(1-p)}{n-k}}{\binom{N}{n}}$ &
                   $np$ & $\sqrt{\tfrac{N-n}{N-1}\,np(1-p)}$\duPlancher
-                  \EspaceAuDessus $\mbox{Bin}\,(n,p)$    &
+  \EspaceAuDessus $\mbox{Bin}\,(n,p)$    &
                   $\binom nx p^x(1-p)^{n-x}$ &
                   $\sum_{k=0}^x\binom nk p^k(1-p)^{n-k}$ &
                   $np$ & $\sqrt{np(1-p)}$\duPlancher
   \EspaceAuDessus $\mbox{Po}(\lambda) $ &
                   $e^{-\lambda}\,\frac{\lambda^x}{x!}$ &
                   $e^{-\lambda}\,\sum_{k=0}^x \frac{\lambda^k}{k!}$ &
-                  $\lambda$ & $\sqrt{\lambda}$\duPlancher\hline
+                  $\lambda$ & $\sqrt{\lambda}$\duPlancher
+\end{tabular}
+
+\begin{tabular}{|c|c|c|c|c|}
+\cline{1-1} \multicolumn{1}{ |c| }{\textbf{\Tr{Continuous}{Kontinuerliga}}:} \cr
+\hline
+  \EspaceAuDessus $\mbox{Unifc}(a,b)$  &
+                  $ \frac{1}{b-a},\; a\le\! x\le\! b $ &
+                  $\frac{x-a}{b-a},\; a\le\! x\le\! b $ &
+                  $\frac{a+b}{2}$ &
+                  $\frac{b-a}{2\sqrt{3}}$
+                  \duPlancher
   \EspaceAuDessus $\mbox{Exp}(\lambda)$  &
                   $\lambda e^{-\lambda x}$ &
                   $1-e^{-\lambda x}$ &
@@ -273,89 +299,89 @@ $
                   $\mu$ & $\sigma$\\*[10pt]\hline
 \end{tabular}
 %>>>
-
-\section*{Joint distributions}%<<<
-
-\begin{itemize}
-
-  \item \textbf{Joint density, discrete case}: %<<<
-$
-f_{XY}(x,y) = P[(X = x)\cap(Y = y)],
-\quad
-\cases{
-  f_{XY}(x,y)\ge 0
-  \cr
-  \sum_x
-  \sum_y
-  f_{XY}(x,y) = 1.
-}
-$%>>>
-
-  \item \textbf{The joint density in the continuous case} is a function $f_{X,Y}(x,y)\ge 0$ which satisfies: %<<<
-\[
-P[(a\le X\le b)\cap(c\le Y\le d)] = 
- \int\limits_a^b\mkern-10mu\int\limits_c^d f_{XY}(x,y) \,dxdy,
-\qquad
-\iint_{\mkern-12mu\Rone^2} f_{XY}\,dxdy = 1.
-\]
-
-  \item \textbf{Cumulative distribution function} (discrete and continuous):  
-  $F_{XY}(x,y)=P[(X\le x)\cap(Y\le y)]$.%>>>
-
-  \item \textbf{Marginal densities}: %<<<
-    \[
-      F_X(x) = \cases{
-      \sum_y f_{XY}(x,y) &, discrete case 
-         \cr
-         \int_{-\infty}^\infty f_{XY}(x,y)\,dy &, continuous case
-      }
-      \quad
-      F_Y(y) = \cases{
-      \sum_x f_{XY}(x,y) &, discrete case 
-         \cr
-      \int_{-\infty}^\infty f_{XY}(x,y)\,dx &, continuous case.
-      }
-    \]%>>>
-
-  \item Variables $X$ and $Y$ are \textbf{independent} if: %<<<
-  $f_{XY}(x,y)=f_X(x)f_Y(y)$.%>>>
-
-  \item \textbf{Expectations}:%<<<
-    \[
-\eqalign{
-\mu_x 
- & = E(X) = \cases{
-    \sum_x\sum_y xf_{XY}(x,y) = \sum_x xf_X(x) &, discrete case \cr
-    \iint_{\mkern-12mu\Rone^2}xf_{XY}(x,y)\,dxdy = \int_{-\infty}^\infty xf_{X}(x)\,dx &, continuous case
-    }
-\cr
-\mu_y 
-  & = E(Y) = \cases{
-    \sum_x\sum_y yf_{XY}(x,y) =\sum_y yf_X(y) &, discrete case \cr
-    \iint_{\mkern-12mu\Rone^2}yf_{XY}(x,y)\,dxdy = \int_{-\infty}^\infty yf_{Y}(y)\,dy &, continuous case.
-    }
-   }
-\]%>>>
-
-  \item \textbf{Covariance}: %<<<
-  \[
-  \Cov(X,Y) = E[(X-\mu_x)(Y-\mu_y)]= E(XY)-\mu_x\mu_y .
-%%  \mbox{ In particular, }\Var(X)=\Cov(X,X).
-  \] %>>>
-
-  \item \textbf{Pearson coefficient of correlation}:%<<<
-  \[
-  \rho_{XY} = \frac{\Cov(X,Y)}{\sigma_X\sigma_Y}
-       = \frac{\Cov(X,Y)}{\sqrt{\Cov(X,X)\Cov(Y,Y)}}\, ,
-       \quad
-       -1\le\rho\le 1.
-  \]%>>>
-
-\item If the random variables $X$ and $Y$ are \textbf{independent} 
-    $\Rightarrow$ $\rho_{XY}=0$ ($X$ and $Y$ are 
-    \textbf{uncorrelated}). The converse is not true in general.
-
-\end{itemize} %>>>
+% 
+% \section*{Joint distributions}%<<<
+% 
+% \begin{itemize}
+% 
+%   \item \textbf{Joint density, discrete case}: %<<<
+% $
+% f_{XY}(x,y) = P[(X = x)\cap(Y = y)],
+% \quad
+% \cases{
+%   f_{XY}(x,y)\ge 0
+%   \cr
+%   \sum_x
+%   \sum_y
+%   f_{XY}(x,y) = 1.
+% }
+% $%>>>
+% 
+%   \item \textbf{The joint density in the continuous case} is a function $f_{X,Y}(x,y)\ge 0$ which satisfies: %<<<
+% \[
+% P[(a\le X\le b)\cap(c\le Y\le d)] = 
+%  \int\limits_a^b\mkern-10mu\int\limits_c^d f_{XY}(x,y) \,dxdy,
+% \qquad
+% \iint_{\mkern-12mu\Rone^2} f_{XY}\,dxdy = 1.
+% \]
+% 
+%   \item \textbf{Cumulative distribution function} (discrete and continuous):  
+%   $F_{XY}(x,y)=P[(X\le x)\cap(Y\le y)]$.%>>>
+% 
+%   \item \textbf{Marginal densities}: %<<<
+%     \[
+%       F_X(x) = \cases{
+%       \sum_y f_{XY}(x,y) &, discrete case 
+%          \cr
+%          \int_{-\infty}^\infty f_{XY}(x,y)\,dy &, continuous case
+%       }
+%       \quad
+%       F_Y(y) = \cases{
+%       \sum_x f_{XY}(x,y) &, discrete case 
+%          \cr
+%       \int_{-\infty}^\infty f_{XY}(x,y)\,dx &, continuous case.
+%       }
+%     \]%>>>
+% 
+%   \item Variables $X$ and $Y$ are \textbf{independent} if: %<<<
+%   $f_{XY}(x,y)=f_X(x)f_Y(y)$.%>>>
+% 
+%   \item \textbf{Expectations}:%<<<
+%     \[
+% \eqalign{
+% \mu_x 
+%  & = E(X) = \cases{
+%     \sum_x\sum_y xf_{XY}(x,y) = \sum_x xf_X(x) &, discrete case \cr
+%     \iint_{\mkern-12mu\Rone^2}xf_{XY}(x,y)\,dxdy = \int_{-\infty}^\infty xf_{X}(x)\,dx &, continuous case
+%     }
+% \cr
+% \mu_y 
+%   & = E(Y) = \cases{
+%     \sum_x\sum_y yf_{XY}(x,y) =\sum_y yf_X(y) &, discrete case \cr
+%     \iint_{\mkern-12mu\Rone^2}yf_{XY}(x,y)\,dxdy = \int_{-\infty}^\infty yf_{Y}(y)\,dy &, continuous case.
+%     }
+%    }
+% \]%>>>
+% 
+%   \item \textbf{Covariance}: %<<<
+%   \[
+%   \Cov(X,Y) = E[(X-\mu_x)(Y-\mu_y)]= E(XY)-\mu_x\mu_y .
+% %%  \mbox{ In particular, }\Var(X)=\Cov(X,X).
+%   \] %>>>
+% 
+%   \item \textbf{Pearson coefficient of correlation}:%<<<
+%   \[
+%   \rho_{XY} = \frac{\Cov(X,Y)}{\sigma_X\sigma_Y}
+%        = \frac{\Cov(X,Y)}{\sqrt{\Cov(X,X)\Cov(Y,Y)}}\, ,
+%        \quad
+%        -1\le\rho\le 1.
+%   \]%>>>
+% 
+% \item If the random variables $X$ and $Y$ are \textbf{independent} 
+%     $\Rightarrow$ $\rho_{XY}=0$ ($X$ and $Y$ are 
+%     \textbf{uncorrelated}). The converse is not true in general.
+% 
+% \end{itemize} %>>>
 
 \subsection*{\Tr{Linear combinations, sums and averages of random variables}%<<<
              {Linjära kombinationer, summor och snitt av stokastiska variabler}
