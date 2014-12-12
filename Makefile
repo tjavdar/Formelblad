@@ -21,11 +21,6 @@ LANG1      := Lang=1\\relax
 #
 # Implicit rules# <<<
 
-%.dvi : %.tex
-	if [ -f $*.sh ]; then sh $*.sh; fi # fig-script if present
-	latex $< ; latex $<
-
-
 %.pdf : %.tex
 	pdflatex $<
 	pdflatex $<
