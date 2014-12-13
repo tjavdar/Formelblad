@@ -3,17 +3,16 @@
 # 2011-03-11: No more intermediate dvi
 
 AMNE         := Tables
-AMNE         := st
+AMNE         := fv
 
 # Övriga Makefile-vars # <<<
-ALLMATTEDIR  := ../allmatte
-BNAME        := formelblad
-FILE         := $(BNAME)-$(AMNE)
+ALLMATTEDIR   := ../allmatte
+WWWDIR        := ../allmatte/formelblad
+BNAME         := formelblad
+FILE          := $(BNAME)-$(AMNE)
 EDIT          := gvim
 PS2PDF        := ps2pdfwr -dCompatibilityLevel=1.4 -sPAPERSIZE=a4
 PDFNUP        := pdfnup --frame true --a4paper
-MTABLES       := $(wildcard *.m)
-TEXTABLES     := $(patsubst %.m,%.tex,$(MTABLES))
 x2_LPOPTIONS:= -o media=A4 -o fit-to-page -o sides=two-sided-short-edge -o landscape
 LANG0      := Lang=0\\relax
 LANG1      := Lang=1\\relax
@@ -21,31 +20,34 @@ LANG1      := Lang=1\\relax
 #
 # Implicit rules# <<<
 
-%.pdf : %.tex
+%.pdf-bloat : %.tex
 	pdflatex $<
 	pdflatex $<
+	mv -fv $*.pdf $@    # GNU Make Automatic var $$*!
 
-%-x2.pdf : %.pdf
-	$(PDFNUP) --suffix x2 $< 
+%-x2.pdf-bloat : %.pdf
+	$(PDFNUP) --suffix x2 $< --outfile $@
 
-%-x4.pdf : %.pdf
-	$(PDFNUP) --nup 2x2 --no-landscape --suffix x4 $< 
+%-x4.pdf-bloat : %.pdf
+	$(PDFNUP) --nup 2x2 --no-landscape --suffix x4 $< --outfile $@
 
-%.tex : %.m
-	octave -q $< > $@
-
-%.pdfsq : %.pdf
+%.pdf : %.pdf-bloat
 	@echo Squeezing $< ...
 	@ps2pdfwr -dCompatibilityLevel=1.4 $<  $@
 	@echo "Compare sizes non-squeezed/squeezed:"
 	@ls -l  $<  $@
-	@mv -fv $@  $<
+
+%.tex : %.m
+	octave -q $< > $@
+
+$(WWWDIR)/%.pdf : %.pdf
+	rsync -auv  $< $@
 
 # End of implicit rules# >>>
 
 # Rules # <<<
 
-default : xsq
+default : x
 
 ec:
 	vim $(FILE).tex 
@@ -54,22 +56,13 @@ et:
 e:
 	$(EDIT) $(FILE).tex &
 
-x:   $(FILE).pdf
-xsq: $(FILE).pdf $(FILE).pdfsq 
-
-x2  : $(FILE)-x2.pdf
-x2sq: $(FILE)-x2.pdf $(FILE)-x2.pdfsq
-
-x4  : $(FILE)-x4.pdf
-x4sq: $(FILE)-x4.pdf $(FILE)-x4.pdfsq
+x  : $(FILE).pdf
+xr : $(WWWDIR)/$(FILE).pdf
+x2r: $(WWWDIR)/$(FILE)-x2.pdf
+x4r: $(WWWDIR)/$(FILE)-x4.pdf
 
 v:
 	evince $(FILE).pdf &
-v2:
-	evince $(FILE)-x2.pdf &
-v4:
-	evince $(FILE)-x4.pdf &
-
 p:
 	lp $(FILE).pdf
 p2:
@@ -77,13 +70,11 @@ p2:
 p4:
 	lp $(FILE)-x4.pdf
 
-
 # Special rules
 
 tables: $(TEXTABLES)
 
-www: xsq x2sq x4sq
-	rsync -auv *.tex *.pdf $(ALLMATTEDIR)/formelblad/
+www: xr x2r x4r
 	@echo; echo Consider to:
 	@echo; echo "        pushd $(ALLMATTEDIR); make  www; popd"; echo
 
@@ -101,7 +92,7 @@ sl:  $(FILE).tex
 help : 
 	@echo "Usage:"
 	@echo "Put AMNE = an|la|tr|fv|mv for corresponding formelblad "
-	@echo "Just make  || make www "
+	@echo "make || make www "
 
 cl: clean
 
