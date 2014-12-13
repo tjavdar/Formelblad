@@ -75,6 +75,8 @@ p4:
 tables: $(TEXTABLES)
 
 www: xr x2r x4r
+	@echo; echo Created and moved:
+	@ls -oh $(WWWDIR)/$(FILE)*pdf
 	@echo; echo Consider to:
 	@echo; echo "        pushd $(ALLMATTEDIR); make  www; popd"; echo
 
@@ -100,6 +102,6 @@ clean:
 	rm -f .log *.aux *.log *.dvi *.bak *.ps foo* *.gpg *~ 
 
 distclean: clean
-	rm -f $(FILE)*.pdf
+	rm -f *.pdf
 
 # >>>
