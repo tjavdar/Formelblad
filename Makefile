@@ -99,9 +99,4 @@ help :
 cl: clean
 
 clean:
-	rm -f .log *.aux *.log *.dvi *.bak *.ps foo* *.gpg *~ 
-
-distclean: clean
-	rm -f *.pdf
-
-# >>>
+	rm -f *.pdf .log *.aux *.log *.dvi *.bak *.ps foo* *.gpg *~ 
