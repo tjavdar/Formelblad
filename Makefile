@@ -3,7 +3,7 @@
 # 2011-03-11: No more intermediate dvi
 
 AMNE         := Tables
-AMNE         := fv
+AMNE         := st
 
 # Övriga Makefile-vars # <<<
 ALLMATTEDIR   := ../allmatte
