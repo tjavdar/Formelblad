@@ -1,5 +1,5 @@
 % Funklära formelblad, startat 2013-08-19 as cherrypick från formelbald-an
-% 2015-01-19:  C-tal borkommenterats
+% 2015-01-19:  C-tal borkommenterats, trig tabellerna kortade med symmetrirelationer till höger
 
 \voffset-1.5cm
 \documentclass{article}
@@ -66,7 +66,7 @@
  %\psfig{figure=k-ing.eps,width=29mm}} <-- ändring IvTj
 %>>>
 
-\vspace{-1.5cm} 
+\vspace{-1.5cm}
 
 %%% \subsection*{Funktionslära:}
 
@@ -212,71 +212,53 @@ $\begin{array}{|l|l|l|l|l|}\hline
 
 \subsubsection*{De trigonometriska funktionerna}%<<<
 
-% Trigrormlerna%<<<
-$\begin{array}{|l|l|}\hline &\\*[-11pt] % <-- ändring IvTj
- \sin(-x)=-\sin(x) &\cos(-x)=\cos(x) \EndRow
- \cos^2(x)+\sin^2(x)=1  &
- \cos(2x)=\cos^2(x)-\sin^2(x) \EndRow %% <-- ändring IvTj 
- \sin(2x)=2\sin(x)\cos(x)&\cos(2x)=2\cos^2(x)-1=1-2\sin^2(x) \EndRow
- \sin^2(x) = (1-\cos(2x))/2 &
- \cos^2(x) = (1+\cos(2x))/2 \EndRow % <-- ändring IvTj
- \sin(x)=\sin(\pi-x)=\cos(\frac{\pi}{2}-x) &
- \cos(x)=\sin(\frac{\pi}{2}-x)=-\cos(\pi-x)\EndRow 
- \sin(x\pm\pi) = -\sin(x) &
- \cos(x\pm\pi) = -\cos(x) \EndRow % <-- ändring IvTj
- \sin(x\pm y)=\sin(x)\cos(y)\pm\sin(y)\cos(x) &
- \cos(x\pm y)=\cos(x)\cos(y)\mp\sin(x)\sin(y)\EndRow 
-% \sin(2x)=2\sin(x)\cos(x)&\cos(2x)=2\cos^2(x)-1=1-2\sin^2 x \EndRow
- \sin(x)\sin(y)=\frac{1}{2}(\cos(x-y)-\cos(x+y)) &
- \sin(x)\cos(y)=\frac{1}{2}(\sin(x-y)+\sin(x+y)) \EndRow
- \cos(x)\cos(y)=\frac{1}{2}(\cos(x-y)+\cos(x+y)) &
- \tan(x\pm y)=\dfrac{\tan(x)\pm\tan(y)}{1\mp\tan(x)\tan(y)}\\*[8pt]
- \cline{1-2}\multicolumn{2}{|c|}{     % <-- ändring IvTj
-   a\cos x+b\sin x=A\sin(x+\varphi) = A\cos(x-\psi),\;
-              A=\sqrt{a^2+b^2}  
-     \mbox{ \ och \ }
-              \left\{ \begin{array}{l}
-              \sin\varphi=\cos\psi=a/A \\
-              \cos\varphi=\sin\psi=b/A
-\end{array}\right.}
- \EndRow\hline\end{array}$ %>>>
-
-\vspace{1 mm}
-
-% Standarda värden för sin/cos/tan%<<<
-{% Local scope def's <-- Ändring IvTj
+% Standarda värden för sin/cos/tan + symmetrirelationer t höger %<<<
+{% Local scope def's
 \let\F\frac
 \newcommand\CC[1]{#1^\circ}
-\def\myEnd{\\*[2pt]\hline &&&&&&&&& \\*[-9pt]}
-\def\myEnd{\\*[2pt]\hline &&&&&&&&& \\*[-9pt]}
+\def\vPad{&&&&&\\*[-10pt]}
+\def\myEnd{\\\hline\vPad}
 \newcommand\tW{{\sqrt2}}
 \newcommand\tH{{\sqrt3}}
 $
-\begin{array}{|c|c|c|c|c|c|c|c|c|c|}
-\hline & & & & & & & & &\\*[-10pt]
+\begin{array}{|c|c|c|c|c|c|}
+\hline\vPad
 \mbox{(Std.~vinklar)}^\circ
-  & \CC{0} &\CC{30} &\CC{45} &\CC{60} &\CC{90} &\CC{120} &\CC{135} &\CC{150} &\CC{180}
+  & \CC{0} &\CC{30} &\CC{45} &\CC{60} &\CC{90}   % &\CC{120} &\CC{135} &\CC{150} &\CC{180}
  \myEnd
- x \mbox{ (\textbf{rad})} 
-        & 0     & \pi/6 & \pi/4 &  \pi/3 & \pi/2 & 2\pi/3 & 3\pi/4 & 5\pi/6 &\pi 
- \\\hline\hline
- \cos(x)&   1   & \tH/2 & 1/\tW &  1/2  &   0   & -1/2   & -1/\tW & -\tH/2 & -1 
- \myEnd 
- \sin(x)&   0   &   1/2 & 1/\tW & \tH/2 &   1   & \tH/2  &  1/\tW &   1/2  &  0 
- \myEnd 
+ x \mbox{ (\textbf{rad})}
+        & 0     & \pi/6 & \pi/4 &  \pi/3 & \pi/2 % & 2\pi/3 & 3\pi/4 & 5\pi/6 &\pi
+ \\\hline\hline\vPad
+ \cos(x)&   1   & \tH/2 & 1/\tW &  1/2  &   0    % & -1/2   & -1/\tW & -\tH/2 & -1
+ \myEnd
+ \sin(x)&   0   &   1/2 & 1/\tW & \tH/2 &   1    % & \tH/2  &  1/\tW &   1/2  &  0
+ \myEnd
  \tan(x)&   0   & 1/\tH &   1   & \tH   &
                                     \mbox{ej def}
-                                                &-\tH  &    -1  & -1/\tH &  0 
- \\*[2pt]\hline
+                                                 % &-\tH  &    -1  & -1/\tH &  0
+ \\\hline
+\end{array}
+\quad
+\begin{array}[m]{|l|l|}
+\hline
+  \cos(-x) = \cos(x)    & \cos(x\pm\pi) = -\cos(x) \\
+  \sin(-x) = -\sin(x)   & \sin(x\pm\pi) = -\sin(x) \\
+\hline
+\hline
+  \sin(\pi-x) = \sin(x) &  \cos(x+2\pi) = \cos(x) \\
+  \cos(\pi-x) = -\cos(x)&  \sin(x+2\pi) = \sin(x) \\
+\hline
+\hline
+ \tan(-x) = \tan(x)     & \tan(x\pm\pi) = \tan(x) \\
+\hline
 \end{array}
 $
 }%>>>
-%>>>
 
 % Trig.~ekv: %<<<
 \medskip
 \textbf{Trig.~ekv}:
-\raise8pt\hbox{ 
+\raise8pt\hbox{
 $
 \begin{array}[t]{|c|c|c|}
   \hline
@@ -298,6 +280,37 @@ x=\pm x_0+n2\pi\,,\;n\in\mathbb{Z}
 \hline
 \end{array}
 $} % raised hbox
+%>>>
+
+% Trigrormlerna%<<<
+\medskip
+$\begin{array}{|l|l|}\hline &\\*[-11pt] % <-- ändring IvTj
+ %\sin(-x)=-\sin(x) &\cos(-x)=\cos(x) \EndRow
+ \cos^2(x)+\sin^2(x)=1  &
+ \cos(2x)=\cos^2(x)-\sin^2(x) \EndRow %% <-- ändring IvTj
+ \sin(2x)=2\sin(x)\cos(x)&\cos(2x)=2\cos^2(x)-1=1-2\sin^2(x) \EndRow
+ \sin^2(x) = (1-\cos(2x))/2 &
+ \cos^2(x) = (1+\cos(2x))/2 \EndRow % <-- ändring IvTj
+ \sin(x)=\sin(\pi-x)=\cos(\frac{\pi}{2}-x) &
+ \cos(x)=\sin(\frac{\pi}{2}-x)=-\cos(\pi-x)\EndRow
+ % \sin(x\pm\pi) = -\sin(x) & \cos(x\pm\pi) = -\cos(x) \EndRow % <-- ändring IvTj
+ \sin(x\pm y)=\sin(x)\cos(y)\pm\sin(y)\cos(x) &
+ \cos(x\pm y)=\cos(x)\cos(y)\mp\sin(x)\sin(y)\EndRow
+% \sin(2x)=2\sin(x)\cos(x)&\cos(2x)=2\cos^2(x)-1=1-2\sin^2 x \EndRow
+ \sin(x)\sin(y)=\frac{1}{2}(\cos(x-y)-\cos(x+y)) &
+ \sin(x)\cos(y)=\frac{1}{2}(\sin(x-y)+\sin(x+y)) \EndRow
+ \cos(x)\cos(y)=\frac{1}{2}(\cos(x-y)+\cos(x+y)) &
+ \tan(x\pm y)=\dfrac{\tan(x)\pm\tan(y)}{1\mp\tan(x)\tan(y)}\\*[8pt]
+ \cline{1-2}\multicolumn{2}{|c|}{     % <-- ändring IvTj
+   a\cos x+b\sin x=A\sin(x+\varphi) = A\cos(x-\psi),\;
+              A=\sqrt{a^2+b^2}
+     \mbox{ \ och \ }
+              \left\{ \begin{array}{l}
+              \sin\varphi=\cos\psi=a/A \\
+              \cos\varphi=\sin\psi=b/A
+\end{array}\right.}
+ \EndRow\hline\end{array}$ %>>>
+
 %>>>
 
 \subsubsection*{De inversa trigonometriska funktionerna}%<<<
