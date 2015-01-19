@@ -2,8 +2,8 @@
 # Sätt AMNE = an|la|tr|fv|mv för respektive formelblad 
 # 2011-03-11: No more intermediate dvi
 
-AMNE         := st
 AMNE         := Tables
+AMNE         := lf
 
 # Övriga Makefile-vars # <<<
 ALLMATTEDIR   := ../allmatte

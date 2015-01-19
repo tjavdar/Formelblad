@@ -1,4 +1,5 @@
 % Funklära formelblad, startat 2013-08-19 as cherrypick från formelbald-an
+% 2015-01-19:  C-tal borkommenterats
 
 \voffset-1.5cm
 \documentclass{article}
@@ -107,44 +108,44 @@
 %% % \end{verbatim}
 %% %>>>
 
-\subsubsection*{Komplexa tal}%<<<
-
-$  % <-- Ändring IvTj
-\begin{array}{|l|l|}
-  \hline & \\*[-8pt]
-  z=x+iy    =|z|\,e^{ i\varphi}=|z|(\cos\varphi+i\sin\varphi) & 
- x=\text{Re}(z)\in\Rone,\;
- y=\text{Im}(z)\in\Rone,\;
- |z| = |\ob z| = \sqrt{x^2+y^2}
-  \EndRow
-  \ob z=x-iy=|z|\,e^{-i\varphi}=|z|(\cos\varphi-i\sin\varphi) & 
-  \varphi = \arg (z), 
-  \;
-  %\text{ där }
-  \cos\varphi = x/|z|,
-  %\text{ och }
-  \;
-  \sin\varphi = y/|z|  ;
-  \;
-  \arg(\ob z) = -\varphi
-  \EndRow
-  \ob{\ob z} = z ;
-  \;\,
-  \ob{zw} = \ob z\,\,\ob w ;
-  \;\,
-  \ob{z / w} = \ob z/\ob w ;
-  \;\,
-  z\ob z = |z|^2
-  &
-  |zw| = |z|\,|w| ;
-  \quad
-  |z/w| = |z|/|w| ;
-  \quad
-  |z+w| \le |z| + |w|
-  \EndRow   \hline
-\end{array}
-$
-%>>>
+%% \subsubsection*{Komplexa tal} % Kommenterats bort 2015-01-19: %<<<
+%%
+%% $
+%% \begin{array}{|l|l|}
+%%   \hline & \\*[-8pt]
+%%   z=x+iy    =|z|\,e^{ i\varphi}=|z|(\cos\varphi+i\sin\varphi) &
+%%  x=\text{Re}(z)\in\Rone,\;
+%%  y=\text{Im}(z)\in\Rone,\;
+%%  |z| = |\ob z| = \sqrt{x^2+y^2}
+%%   \EndRow
+%%   \ob z=x-iy=|z|\,e^{-i\varphi}=|z|(\cos\varphi-i\sin\varphi) &
+%%   \varphi = \arg (z),
+%%   \;
+%%   %\text{ där }
+%%   \cos\varphi = x/|z|,
+%%   %\text{ och }
+%%   \;
+%%   \sin\varphi = y/|z|  ;
+%%   \;
+%%   \arg(\ob z) = -\varphi
+%%   \EndRow
+%%   \ob{\ob z} = z ;
+%%   \;\,
+%%   \ob{zw} = \ob z\,\,\ob w ;
+%%   \;\,
+%%   \ob{z / w} = \ob z/\ob w ;
+%%   \;\,
+%%   z\ob z = |z|^2
+%%   &
+%%   |zw| = |z|\,|w| ;
+%%   \quad
+%%   |z/w| = |z|/|w| ;
+%%   \quad
+%%   |z+w| \le |z| + |w|
+%%   \EndRow   \hline
+%% \end{array}
+%% $
+%% %>>>
 
 \subsubsection*{Kvadratkomplettering, faktorisering och nollställen till ett andragradspolynom:}%<<<
    \[
@@ -178,15 +179,15 @@ Polynom av grad $n$:\, $P_n(z)
 Faktorsatsen: $P_n(z_0)=0 \iff P_n(z) = (z-z_0)Q_{n-1}(z)$, där $Q_{n-1}$ är
 polynom av grad $n-1$.
 
-\bigskip
-
-   Polynom med reella koefficienter: 
-   Om $P_n(z_0)=0\iff P_n(\ob z_0)=0$, $\text{Im}(z)\neq0$, och därmed
-   $$
-   P_n(z)
-    =(z-z_0)(z-\ob z_0)Q_{n-2}(z)
-    =(z^2-2\text{Re}(z_0)z +|z_0|^2)Q_{n-2}(z).
-   $$%>>>
+%% \bigskip %  bortkommenterats 2015-01-19:
+%%   Polynom med reella koefficienter: 
+%%   Om $P_n(z_0)=0\iff P_n(\ob z_0)=0$, $\text{Im}(z)\neq0$, och därmed
+%%   $$
+%%   P_n(z)
+%%    =(z-z_0)(z-\ob z_0)Q_{n-2}(z)
+%%    =(z^2-2\text{Re}(z_0)z +|z_0|^2)Q_{n-2}(z).
+%%   $$
+%>>>
 
 \subsubsection*{Potenser, exponentialfunktioner, logaritmer}%<<<
 
