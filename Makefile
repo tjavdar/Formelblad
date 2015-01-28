@@ -1,15 +1,19 @@
 # Makefle för formelblad
-# Sätt AMNE = an|la|tr|fv|mv för respektive formelblad 
+# 2015-01-28: file to be done is the LAST-touched, unless explicitly defined
+
 # 2011-03-11: No more intermediate dvi
 
-AMNE         := Tables
-AMNE         := lf
+# Uncomment to supercede default LAST-target
+# FILE         := formelblad-lf
 
 # Övriga Makefile-vars # <<<
+LAST = $(shell ls -1t formelblad*.tex |head -n1)
 ALLMATTEDIR   := ../allmatte
 WWWDIR        := ../allmatte/formelblad
 BNAME         := formelblad
-FILE          := $(BNAME)-$(AMNE)
+ifndef FILE
+  FILE        := $(basename $(LAST))
+endif
 EDIT          := gvim
 PS2PDF        := ps2pdfwr -dCompatibilityLevel=1.4 -sPAPERSIZE=a4
 PDFNUP        := pdfnup --frame true --a4paper
@@ -48,6 +52,8 @@ $(WWWDIR)/%.pdf : %.pdf
 # Rules # <<<
 
 default : x
+
+include ../bz/Mtargets.last-edited   # defines the LAST-targets
 
 ec:
 	vim $(FILE).tex 
