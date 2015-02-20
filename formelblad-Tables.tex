@@ -208,7 +208,15 @@ $f /\alpha$
 \subsection*{\Tr{Critical Values for the Wilcoxon Rank-Sum Test}%%<<<
                    {Kritiska värden för Wilcoxons rangsummetest}\footnotemark}
 
-\footnotetext{From: \texttt{http://www.stat.auckland.ac.nz/~wild/ChanceEnc/Ch10.wilcoxon.pdf}}
+% \footnotetext{From: \texttt{http://www.stat.auckland.ac.nz/~wild/ChanceEnc/Ch10.wilcoxon.pdf}}
+% Footnote removed, as the table can be reproduced by the followin R one-liner
+%# R-code: qWilcoxon-table
+%p=c(.005,.01,.025,.05,.1,.2);
+%for (m in 4:12) {
+%  print(m);
+%  for (n in m:12) { L<-qwilcox(p,m,n)-1; R<-m*n-L;LR<-c(L,R)+m*(m+1)/2; print(c(n,LR)) }
+%}
+%# EndR-code:
 
 Probabilities for the rank sum of $W_A$ for the smaller
 sample $A$ of the two samples $A$ and $B$ when consdering to reject 

@@ -53,7 +53,8 @@ $(WWWDIR)/%.pdf : %.pdf
 
 default : x
 
-include ../bz/Mtargets.last-edited   # defines the LAST-targets
+include ../bz/Mtargets.last-edited     # defines the LAST-targets
+include ../bz/Mtargets.rip-off-compute # R, Octave, Ampl, Lingo rip-off
 
 ec:
 	vim $(FILE).tex 
