@@ -53,8 +53,10 @@ $(WWWDIR)/%.pdf : %.pdf
 
 default : x
 
-include ../bz/Mtargets.last-edited     # defines the LAST-targets
+U = QDirty
+RIP_FROM=*.tex
 include ../bz/Mtargets.rip-off-compute # R, Octave, Ampl, Lingo rip-off
+include ../bz/Mtargets.last-edited     # defines the LAST-targets
 
 ec:
 	vim $(FILE).tex 
