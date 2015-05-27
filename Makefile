@@ -53,6 +53,10 @@ $(WWWDIR)/%.pdf : %.pdf
 
 default : x
 
+all:
+	@echo "# To make all formelblad, issue:"
+	@echo '  for i in formelblad-*.tex; do touch $i; make  www; done'
+
 U = QDirty
 RIP_FROM=*.tex
 include ../bz/Mtargets.rip-off-compute # R, Octave, Ampl, Lingo rip-off
