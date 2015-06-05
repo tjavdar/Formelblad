@@ -43,9 +43,8 @@
 
 %% <-- 2009-01-21: ändring IvTj, nya headers/footers
 %\lhead{\ifnum\thepage=1  \includegraphics[scale=1.3]{jth-logo.eps}\fi} % <-- Ändring IvTj
-\chead{\ifnum\thepage=1 {} \else Formelblad Matematisk analys\fi}
-\rhead{\ifnum\thepage=1 \textbf{FORMELBLAD MATEMATISK ANALYS}
-          %\parbox[b]{8.2em}{\textbf{FORMELBLAD}\\Matematisk analys}
+\chead{\ifnum\thepage=1 {} \else Formelblad Envariabelanalys\fi}
+\rhead{\ifnum\thepage=1 \textbf{FORMELBLAD ENVARIABELANALYS}
                \else sid. \thepage{} av \pageref{LastPageNo}  \fi}
 
 \lfoot{\ifnum\thepage=1\small\today\fi}
@@ -70,19 +69,19 @@
 
 \vspace{-1.5cm} 
 
-\subsection*{Några beteckningar, konjugat- och binomialformlerna}%<<<
+\subsection*{Kvadrerings-, konjugat- och binomialformlerna}%<<<
 
 
 \begin{tabular}[m]{|c|c|}
   \hline
-Fakultet: $n! = \begin{cases}
+Binomiala koefficienter:
+    $\binom nk = \frac{n!}{k!(n-k)!}$
+&
+$n! = \begin{cases}
                 \hfil1,& n=0\\
                 1\cdot2\cdot3\cdots\cdot n,& n=1,2,\dots
                 \end{cases}$
-&
-Binomiala koefficienter:
-    $\binom nk = \frac{n!}{k!(n-k)!}$\\
-  \hline
+  \\\hline
 \end{tabular}
 
 \medskip
@@ -129,20 +128,92 @@ $\begin{array}{|l|l|l|l|l|}\hline
 \EndRow
 \hline\end{array}$%>>>
 
-\subsection*{Trigonometri}%<<<
+\subsubsection*{De trigonometriska funktionerna}%<<<
+
+% Standarda värden för sin/cos/tan + symmetrirelationer t höger %<<<
+{% Local scope def's
+\let\F\frac
+\newcommand\CC[1]{#1^\circ}
+\def\vPad{&&&&&\\*[-10pt]}
+\def\myEnd{\\\hline\vPad}
+\newcommand\tW{{\sqrt2}}
+\newcommand\tH{{\sqrt3}}
+$
+\begin{array}{|c|c|c|c|c|c|}
+\hline\vPad
+\mbox{(Std.~vinklar)}^\circ
+  & \CC{0} &\CC{30} &\CC{45} &\CC{60} &\CC{90}   % &\CC{120} &\CC{135} &\CC{150} &\CC{180}
+ \myEnd
+ x \mbox{ (\textbf{rad})}
+        & 0     & \pi/6 & \pi/4 &  \pi/3 & \pi/2 % & 2\pi/3 & 3\pi/4 & 5\pi/6 &\pi
+ \\\hline\hline\vPad
+ \cos(x)&   1   & \tH/2 & 1/\tW &  1/2  &   0    % & -1/2   & -1/\tW & -\tH/2 & -1
+ \myEnd
+ \sin(x)&   0   &   1/2 & 1/\tW & \tH/2 &   1    % & \tH/2  &  1/\tW &   1/2  &  0
+ \myEnd
+ \tan(x)&   0   & 1/\tH &   1   & \tH   &
+                                    \mbox{ej def}
+                                                 % &-\tH  &    -1  & -1/\tH &  0
+ \\\hline
+\end{array}
+\quad
+\begin{array}[m]{|l|l|}
+\hline
+  \cos(-x) = \cos(x)    & \cos(x\pm\pi) = -\cos(x) \\
+  \sin(-x) = -\sin(x)   & \sin(x\pm\pi) = -\sin(x) \\
+\hline
+\hline
+  \sin(\pi-x) = \sin(x) &  \cos(x+2\pi) = \cos(x) \\
+  \cos(\pi-x) = -\cos(x)&  \sin(x+2\pi) = \sin(x) \\
+\hline
+\hline
+ \tan(-x) = \tan(x)     & \tan(x\pm\pi) = \tan(x) \\
+\hline
+\end{array}
+$
+}%>>>
+
+% Trig.~ekv: %<<<
+\medskip
+\textbf{Trig.~ekv}:
+\raise8pt\hbox{
+$
+\begin{array}[t]{|c|c|c|}
+  \hline
+%  \multicolumn{3}{|c|}{\mbox{Trigonometriska ekvationer}}\\ % <-- Ändring IvTj
+%  \cline{1-3}
+  \sin(x)=c\,, \;|c|\leq 1,      \mbox{ löses av:} &
+  \cos(x)=c\,, \;|c|\leq 1,      \mbox{ löses av:} &
+  \tan(x)=c\,, \;c\in\mathbb{R}, \mbox{ löses av:}
+\\[2pt]
+x=
+\begin{cases}
+     x_0+2n\pi,   & n\in\mathbb{Z}\cr
+    \pi-x_0+2k\pi,& k\in\mathbb{Z}
+\end{cases}
+&
+x=\pm x_0+n2\pi\,,\;n\in\mathbb{Z}
+&x=x_0+n\pi\,,\;n\in\mathbb{Z}
+\\[11pt]
+\hline
+\end{array}
+$} % raised hbox
+%>>>
+
+% Trigrormlerna%<<<
+\medskip
 $\begin{array}{|l|l|}\hline &\\*[-11pt] % <-- ändring IvTj
- \sin(-x)=-\sin(x) &\cos(-x)=\cos(x) \EndRow
+ %\sin(-x)=-\sin(x) &\cos(-x)=\cos(x) \EndRow
  \cos^2(x)+\sin^2(x)=1  &
- \cos(2x)=\cos^2(x)-\sin^2(x) \EndRow %% <-- ändring IvTj 
+ \cos(2x)=\cos^2(x)-\sin^2(x) \EndRow %% <-- ändring IvTj
  \sin(2x)=2\sin(x)\cos(x)&\cos(2x)=2\cos^2(x)-1=1-2\sin^2(x) \EndRow
  \sin^2(x) = (1-\cos(2x))/2 &
  \cos^2(x) = (1+\cos(2x))/2 \EndRow % <-- ändring IvTj
  \sin(x)=\sin(\pi-x)=\cos(\frac{\pi}{2}-x) &
- \cos(x)=\sin(\frac{\pi}{2}-x)=-\cos(\pi-x)\EndRow 
- \sin(x\pm\pi) = -\sin(x) &
- \cos(x\pm\pi) = -\cos(x) \EndRow % <-- ändring IvTj
+ \cos(x)=\sin(\frac{\pi}{2}-x)=-\cos(\pi-x)\EndRow
+ % \sin(x\pm\pi) = -\sin(x) & \cos(x\pm\pi) = -\cos(x) \EndRow % <-- ändring IvTj
  \sin(x\pm y)=\sin(x)\cos(y)\pm\sin(y)\cos(x) &
- \cos(x\pm y)=\cos(x)\cos(y)\mp\sin(x)\sin(y)\EndRow 
+ \cos(x\pm y)=\cos(x)\cos(y)\mp\sin(x)\sin(y)\EndRow
 % \sin(2x)=2\sin(x)\cos(x)&\cos(2x)=2\cos^2(x)-1=1-2\sin^2 x \EndRow
  \sin(x)\sin(y)=\frac{1}{2}(\cos(x-y)-\cos(x+y)) &
  \sin(x)\cos(y)=\frac{1}{2}(\sin(x-y)+\sin(x+y)) \EndRow
@@ -150,14 +221,17 @@ $\begin{array}{|l|l|}\hline &\\*[-11pt] % <-- ändring IvTj
  \tan(x\pm y)=\dfrac{\tan(x)\pm\tan(y)}{1\mp\tan(x)\tan(y)}\\*[8pt]
  \cline{1-2}\multicolumn{2}{|c|}{     % <-- ändring IvTj
    a\cos x+b\sin x=A\sin(x+\varphi) = A\cos(x-\psi),\;
-              A=\sqrt{a^2+b^2}  
+              A=\sqrt{a^2+b^2}
      \mbox{ \ och \ }
               \left\{ \begin{array}{l}
               \sin\varphi=\cos\psi=a/A \\
               \cos\varphi=\sin\psi=b/A
 \end{array}\right.}
- \EndRow\hline\end{array}$ 
-\vspace{5 mm}
+ \EndRow\hline\end{array}$ %>>>
+
+%>>>
+
+\subsubsection*{De inversa trigonometriska funktionerna}%<<<
 
 $\begin{array}{|lll|}\hline && \\*[-9pt] 
   y=\sin(x),\hspace{2 mm} x\in[-\frac{\pi}{2},\frac{\pi}{2}]&
@@ -171,7 +245,7 @@ $\begin{array}{|lll|}\hline && \\*[-9pt]
   x=\arctan(y), \hspace{2 mm} y\in\mathbb{R}\\*[6pt]\hline
 \end{array}$  
 
-\vspace{5 mm}
+\vspace{1 mm}
 
 $\begin{array}{|l|l|l|}\hline & & \\*[-11pt]
 \arcsin(-x)=-\arcsin(x) & \arccos(-x)=\pi-\arccos(x) & 
@@ -179,87 +253,7 @@ $\begin{array}{|l|l|l|}\hline & & \\*[-11pt]
 \arctan(-x)=-\arctan(x) &\arccos(x)=\frac{\pi}{2}-\arcsin(x) & 
   \arctan(x)+\arctan(\tfrac1x)=-\frac\pi2, \; x < 0 \\*[6pt] % <-- ändring IvTj
 \hline
-\end{array}$
-
-\vspace{5mm}
-
-% <-- ändring IvTj
-%% $\begin{array}{|llllll|}
-%% \hline x&0&\frac{\pi}{6}&\frac{\pi}{4}&\frac{\pi}{3}&\frac{\pi}{2} 
-%% \\ \hline \sin(x)&0&\frac{1}{2}&\frac{1}{\sqrt{2}}&\frac{\sqrt{3}}{2}&1 
-%% 
-%% \\ \hline \cos(x) &1&\frac{\sqrt{3}}{2}&\frac{1}{\sqrt{2}}&\frac{1}{2}&0 
-%% 
-%% \\ \hline \end{array}$ \hspace{5 mm}$\begin{array}{|ll|}\hline a\sin x+b\cos x=A\sin(x+\varphi)\iff &\left\{ \begin{array}{l}
-%%               A=\sqrt{a^2+b^2}  \\ 
-%%               \cos\varphi=\frac{a}{\sqrt{a^2+b^2}} \\
-%%               \sin\varphi=\frac{b}{\sqrt{a^2+b^2}}
-%% \end{array}\right. \\\hline\end{array}$
-%% 
-%% \vspace{5 mm}
-
-{% Local scope def's <-- Ändring IvTj
-\let\F\frac
-\newcommand\CC[1]{#1^\circ}
-\def\myEnd{\\*[2pt]\hline &&&&&&&&& \\*[-9pt]}
-\def\myEnd{\\*[2pt]\hline &&&&&&&&& \\*[-9pt]}
-\newcommand\tW{{\sqrt2}}
-\newcommand\tH{{\sqrt3}}
-$
-\begin{array}{|c|c|c|c|c|c|c|c|c|c|}
-\hline & & & & & & & & &\\*[-10pt]
-\mbox{(motsv. vinkel)}^\circ
-  & \CC{0} &\CC{30} &\CC{45} &\CC{60} &\CC{90} &\CC{120} &\CC{135} &\CC{150} &\CC{180}
-%  }
- \\\hline\hline
- x 
-       & 0     & \pi/6 & \pi/4 &  \pi/3 & \pi/2 & 2\pi/3 & 3\pi/4 & 5\pi/6 &\pi 
- \myEnd 
- \cos x&   1   & \tH/2 & 1/\tW &  1/2  &   0   & -1/2   & -1/\tW & -\tH/2 & -1 
- \myEnd
- \sin x&   0   &   1/2 & 1/\tW & \tH/2 &   1   & \tH/2  &  1/\tW &   1/2  &  0 
- \myEnd
- \tan x&   0   & 1/\tH &   1   & \tH   &
-                                    \mbox{ej def}
-                                                &-\tH  &    -1  & -1/\tH &  0 
- \\*[2pt]\hline
-\end{array}
-$
-}
-
-%% $\begin{array}{|l|l|l|l|}
-%%   \hline \text{Vinkel } x&\sin(x)&\cos(x)&\tan(x)\\
-%%   \hline0^\circ=0&0&1&0\\30^\circ=\pi/6&1/2&\sqrt{3}/2&1/\sqrt{3}\\
-%%   45^\circ=\pi/4&1/\sqrt{2}&1/\sqrt{2}&1\\
-%%   60^\circ=\pi/3&\sqrt{3}/2&1/2&\sqrt{3}\\
-%%   90^\circ=\pi/2&1&0&\text{odef}\\
-%%   \hline\end{array}$
-%%   \hfil
-%% $\begin{array}{|l|l|l|l|}
-%% \hline
-%% \text{Vinkel } x&\sin(x)&\cos(x)&\tan(x)        \\*[2pt]
-%% \hline     &&&                                  \\*[-9pt]
-%% 120^\circ=2\pi/3&\sqrt{3}/2&-1/2&-\sqrt{3}      \\*[2pt]
-%% 135^\circ=3\pi/4&1/\sqrt{2}&-1/\sqrt{2}&-1      \\*[2pt]
-%% 150^\circ=5\pi/6&1/2&-\sqrt{3}/2&-1/\sqrt{3}    \\*[2pt]
-%% 180^\circ=\pi&0&-1&0\\
-%% \hline\end{array}$
-
-\vspace{5 mm}
-
-
-
-$\begin{array}{|c|c|c|}
-  \hline
-  \multicolumn{3}{|c|}{\mbox{Trigonometriska ekvationer}}\\ % <-- Ändring IvTj
-  \cline{1-3}
-  \sin x=c\,, \;|c|\leq 1 &
-  \cos x=c\,, \;|c|\leq 1&
-  \tan x=c\,, \;c\in\mathbb{R}\\\;\;\;\;\iff&
-\;\;\;\;\iff&\;\;\;\;\iff\\x=\left\{\begin{array}{l}x_0+n2\pi\\\pi-x_0+n2\pi\end{array}\right.\,,\;n\in\mathbb{Z}&x=\pm x_0+n2\pi\,,\;n\in\mathbb{Z}&x=x_0+n\pi\,,\;n\in\mathbb{Z}
-
-\\\hline\end{array}$
-%>>>
+\end{array}$%>>>
 
 \subsection*{Komplexa tal}%<<<
 
