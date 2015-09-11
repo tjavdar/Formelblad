@@ -217,7 +217,8 @@ $f /\alpha$
 %  for (n in m:12) { L<-qwilcox(p,m,n)-1; R<-m*n-L;LR<-c(L,R)+m*(m+1)/2; print(c(n,LR)) }
 %}
 %# EndR-code:
-
+%
+\Tr{%
 Probabilities for the rank sum of $W_A$ for the smaller
 sample $A$ of the two samples $A$ and $B$ when consdering to reject 
 the $H_0$ hypothesis "sample $A$ does not differ from sample $B$". The tabulated value 
@@ -225,6 +226,13 @@ for the \textbf{lower tail} is the largest value $w_A$ for which
 $P(W_A\le w_A)\le\alpha$. The tabulated value 
 for the \textbf{upper tail} is the smallest value $w_A$ for which 
 $P(W_A\ge w_A)\le\alpha$.
+}{%
+Låt  $A$ och $B$ vara stickprov med storlek $n_A$ respektive $n_B$, där
+$n_A\le n_B$ och låt $W_A$ vara $A$:s rangsumma. De nedre gränserna i tabellen
+är de största värden $w_A$ för vilka
+$P(W_a\le w_a)\le\alpha$ och de övre gränserna är de minsta värden $w_A$ för
+vilka
+$P(W_a\ge w_a)\le\alpha$.}
 
 
 
@@ -233,13 +241,19 @@ $P(W_A\ge w_A)\le\alpha$.
 \input Tables/Wilcoxon
 \medskip
 
-When both $n_A,n_B\ge10$, the distribution of $W_A$ can be considered as 
-\[
+\Tr{%
+When both $n_A,n_B\ge10$, can assume that
+}{%
+  När både $n_A,n_B\ge10$ gäller}
+\(
    W_A \stackrel\sim\in N(\mu_A,\sigma_A), 
-   \;\mbox{ where }\;
-   \mu_A = \frac{n_A(n_A+n_B+1)}{2},\;\;
-   \sigma_A = \sqrt{\frac{n_An_B(n_A+n_B+1)}{12}}
-\] 
+\) 
+\Tr{where}{där}
+\[
+   \mu_A = \frac{n_A(n_A+n_B+1)}{2}
+   \quad\mbox{ \Tr{and}{och} }\quad
+   \sigma_A = \sqrt{\frac{n_An_B(n_A+n_B+1)}{12}}.
+\]
 %>>>
 
 } % small tables
