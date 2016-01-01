@@ -1,0 +1,132 @@
+% vim: foldmethod=marker spelllang=en
+
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools,graphicx,amssymb}
+\usepackage{array}   % nicer tables
+
+% instead of \usepackage{fullpage} <<<
+\advance \topmargin by -4.5\headheight
+\advance \textheight by 25pt
+\oddsidemargin 0pt
+\evensidemargin \oddsidemargin
+\marginparwidth 0.5in
+\textwidth 6.6in
+\parindent=0pt
+\advance\parskip by 1pt
+% >>>
+
+\pagestyle{headings}
+\everymath{\textstyle}
+
+% LANG SETTINGS -------------------
+\newcount\Lang   \newcommand\Tr[2]{\ifnum\Lang=0 #1\else #2\fi}
+\Lang=0\relax   %% 0 - En || 1 -- Se
+%------------ /LANG SETTINGS ------------------
+
+
+%-------------
+%- LaTeX def's
+%-------------
+
+\everymath{\displaystyle}
+
+% Header matter %<<<
+\makeatletter
+\renewcommand{\@oddhead}{}
+\renewcommand{\@evenhead}{}
+\renewcommand{\@oddfoot}
+{\ifnum\thepage=1
+  \today\hfill file:~\small\texttt{\jobname.pdf}
+\else
+  Math for Soft Eng Cheat Sheet
+  \hfill
+  \Tr{p}{s}.~\thepage{} \Tr{of}{av} \pageref{LastPageNo}
+\fi}
+
+  \renewcommand{\@evenfoot}{\small
+        \texttt{\jobname.pdf},\hfill}
+\makeatother%>>>
+
+\input ../bz/StdLaTeXdef.h
+
+\begin{document}
+
+
+\section*{MSE Cheat Sheet}
+
+All parameters, if nothing else specified, assumed in $\Zone$; $[a]_n \iff a\; (\mbox{mod } n)$.
+
+\textbf{Generating functions:}
+\[
+  \begin{array}[t]{|ll|ll|}
+    \hline
+    &&& \\[-9pt]
+    \mbox{Geometirc sum:} & 1+t+\cdots+t^n = \frac{1-t^{n+1}}{1-t} &
+    \mbox{Geometirc series:} & 1+t+t^2+\cdots = \frac{1}{1-t}
+    \\[7pt]\hline
+    &&& \\[-9pt]
+    \multicolumn{2}{|l|}{(1+t)^n = \sum_{r=0}^{n} \binom nr t^r, \; \binom nr = \frac{n!}{r!(n-r)!}} &
+    \multicolumn{2}{l|}{(1-t)^{-n} = \sum_{r=0}^{\infty} \binom {-n}r (-t)^r = \sum_{r=0}^{\infty}\binom {n-1+r}r t^r}
+    \\[11pt]\hline
+
+  \end{array}
+\]
+
+
+\textbf{Greatest common divisor, least common multiple}
+\[
+  \begin{array}[t]{|*{3}{l|}}
+    \hline
+    && \\[-8pt]
+    m\perp n \iff \gcd(m,n)=1 & \gcd(m,n) = d \iff \frac md\perp\frac nd & \gcd(m,n)\,\mbox{lcm}(m,n) = mn
+ \\[6pt] \hline
+  \end{array}
+\]
+
+\textbf{Sets:}
+\[
+  \begin{array}[t]{|*{3}{l|}}
+ \hline
+    && \\[-8pt]
+   n\Zone = \{0,\pm n,\pm 2n,\ldots \}
+ & Z_n,\Zone/n\Zone = \{[0]_n,[1]_n,\ldots,[n-1]_n\}
+ & Z_n^* = \{[1]_n,\ldots,[n-1]_n\} \\[6pt]
+   \Rone - \mbox{the reals}
+ & \Rone^* = \Rone\setminus\{0\}
+ & U_n = \{k\in\Zone_n: k\perp n\}
+ \\[3pt] \hline
+  \end{array}
+\]
+
+\textbf{}
+
+\textbf{Arithmetic mod $n$}
+\[
+  \begin{array}[t]{|*{4}{l|}}
+    \hline
+    &&& \\[-8pt]
+    [a+b]_n = [[a]_n + [b]_n]_n &
+    [ab]_n = [[a]_n[b]_n]_n &
+    [ka]_{kn} = k [a]_n &
+    \mbox{Euler: }a\perp n \ergo [a^{\varphi(n)}]_n = 1
+    \\[3pt] \hline
+  \end{array}
+\]
+
+\textbf{CRT}
+\[
+  \left\{
+  \begin{array}{ll}
+    [x]_{n_j} = [r_j],& j=1,\cdots,k \\[2pt]
+  \hfil n_i\perp n_j ,& 1\le i\neq j\le k
+  \end{array}\right.
+\;\iff\;
+x = \Bigl[ \sum_{j=1}^{k} r_jN_j[N_j^{-1}]_{n_j} \Bigr]_n, \; N_j= \frac{n}{n_j}, \,
+    n=n_1\cdots n_k.
+\]
+
+
+\label{LastPageNo}
+\end{document}
