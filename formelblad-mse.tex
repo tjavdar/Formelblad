@@ -1,5 +1,3 @@
-% vim: foldmethod=marker spelllang=en
-
 \documentclass[a4paper]{article}
 
 \usepackage[utf8]{inputenc}
@@ -8,7 +6,7 @@
 
 % instead of \usepackage{fullpage} <<<
 \advance \topmargin by -4.5\headheight
-\advance \textheight by 25pt
+\advance \textheight by 125pt
 \oddsidemargin 0pt
 \evensidemargin \oddsidemargin
 \marginparwidth 0.5in
@@ -56,9 +54,9 @@
 
 \section*{MSE Cheat Sheet}
 
-All parameters, if nothing else specified, assumed in $\Zone$; $[a]_n \iff a\; (\mbox{mod } n)$.
+All parameters below, if nothing else specified, assumed in $\Zone$; $[a]_n \iff a\; (\mbox{mod } n)$.
 
-\textbf{Generating functions:}
+\subsubsection*{Generating functions:} \vspace{-1.2em}%<<<
 \[
   \begin{array}[t]{|ll|ll|}
     \hline
@@ -70,12 +68,15 @@ All parameters, if nothing else specified, assumed in $\Zone$; $[a]_n \iff a\; (
     \multicolumn{2}{|l|}{(1+t)^n = \sum_{r=0}^{n} \binom nr t^r, \; \binom nr = \frac{n!}{r!(n-r)!}} &
     \multicolumn{2}{l|}{(1-t)^{-n} = \sum_{r=0}^{\infty} \binom {-n}r (-t)^r = \sum_{r=0}^{\infty}\binom {n-1+r}r t^r}
     \\[11pt]\hline
+    &&& \\[-9pt]
+    \multicolumn{2}{|l|}{e^t = \sum_{k=0}^{\infty} \frac{t^k}{k!} =  1 + \frac{t}{1!} + \frac{t^2}{2!} + \cdots}&
+    \multicolumn{2}{l|}{\ln(1+t) = \sum_{k=1}^{\infty}(-1)^{k+1}\frac{t^k}{k} =  t - \frac{t^2}{2} + \frac{t^3}{3} - \cdots}
+    \\[11pt]\hline
 
   \end{array}
-\]
+\]%>>>
 
-
-\textbf{Greatest common divisor, least common multiple}
+\subsubsection*{Greatest common divisor, least common multiple:} \vspace{-1.2em}%<<<
 \[
   \begin{array}[t]{|*{3}{l|}}
     \hline
@@ -83,9 +84,9 @@ All parameters, if nothing else specified, assumed in $\Zone$; $[a]_n \iff a\; (
     m\perp n \iff \gcd(m,n)=1 & \gcd(m,n) = d \iff \frac md\perp\frac nd & \gcd(m,n)\,\mbox{lcm}(m,n) = mn
  \\[6pt] \hline
   \end{array}
-\]
+\]%>>>
 
-\textbf{Sets:}
+\subsubsection*{Sets:} \vspace{-2.5em} %<<<
 \[
   \begin{array}[t]{|*{3}{l|}}
  \hline
@@ -98,11 +99,9 @@ All parameters, if nothing else specified, assumed in $\Zone$; $[a]_n \iff a\; (
  & U_n = \{k\in\Zone_n: k\perp n\}
  \\[3pt] \hline
   \end{array}
-\]
+\]%>>>
 
-\textbf{}
-
-\textbf{Arithmetic mod $n$}
+\subsubsection*{Arithmetic mod $n$:} \vspace{-1.2em} %<<<
 \[
   \begin{array}[t]{|*{4}{l|}}
     \hline
@@ -113,10 +112,38 @@ All parameters, if nothing else specified, assumed in $\Zone$; $[a]_n \iff a\; (
     \mbox{Euler: }a\perp n \ergo [a^{\varphi(n)}]_n = 1
     \\[3pt] \hline
   \end{array}
-\]
+\]%>>>
 
-\textbf{CRT}
+\subsubsection*{The Bézout identity: \fbox{$mx\pm ny=1$, $m\perp n$}}
+
+\subsubsection*{Solve Bézout/Find inverses in $U_n$ by row operations in Euklides extended:} %<<<
 \[
+  \boxed{
+  m\perp n \ergo
+  \begin{pmatrix}
+    m \BAR 1 & 0 \cr
+    n \BAR 0 & 1 \cr
+  \end{pmatrix}
+  \sim \{\mbox{row op.}\} \sim
+  \begin{pmatrix}
+    1 \BAR m & -n \cr
+    0 \BAR -y & x \cr
+  \end{pmatrix}
+  \iff
+  mx-ny=1
+  \iff
+  \begin{cases}
+  \hfill  x = m^{-1}   & \text{in }\, U_n \cr
+   -y = n^{-1} & \text{in }\, U_m \cr
+%    [mx]_n    &=1 \cr
+%    [(-n)y]_m &= 1.
+  \end{cases}
+}
+\]%>>>
+
+\subsubsection*{Concurrent congruences/The Chinese Remainder Theorem}%<<<
+\[
+  \boxed{
   \left\{
   \begin{array}{ll}
     [x]_{n_j} = [r_j],& j=1,\cdots,k \\[2pt]
@@ -125,8 +152,61 @@ All parameters, if nothing else specified, assumed in $\Zone$; $[a]_n \iff a\; (
 \;\iff\;
 x = \Bigl[ \sum_{j=1}^{k} r_jN_j[N_j^{-1}]_{n_j} \Bigr]_n, \; N_j= \frac{n}{n_j}, \,
     n=n_1\cdots n_k.
-\]
+  }
+\]%>>>
+
+\subsubsection*{Automorphisms $\cong$ $S_n$, the groups of permutations. Disjoint cyclic form (DCF)}
+
+Any set of $n$ distinct elements gives rise to the maximal group of its permutations $\cong(S_n,\circ)$
+under compositions.
+
+\begin{center}
+  \textbf{Notation ex.}:
+  \begin{tabular}[m]{|l|l|}
+    \hline
+     & \\[-10pt]
+    Two-line notation: & Disjoint cycle form (DCF): \cr \hline
+     & \\[-9pt]
+    $
+    \alpha =
+    \begin{pmatrix}
+      0 & 1 & 2 & 3 & 4 & 5 \cr
+      5 & 4 & 0 & 3 & 1 & 2 \cr
+    \end{pmatrix} \in S_6
+    $
+    &
+    $
+    \alpha
+    = (0,5,2)(1,4)
+    = (0,5,2)(1,4)(3)
+    $
+    \\[9pt]\hline
+  \end{tabular}
+\end{center}
+In DCF, fixed elements are ommitted, thus the unit element $e=()\in S_n$, $\forall n$.
+\begin{center}
+  \begin{tabular}[m]{|l|l|}
+    \hline
+     & \\[-10pt]
+    Action on sets (from left): & Multiplication (right-to-left) : \cr \hline
+     & \\[-9pt]
+    $
+     (0,5,2)(1,4)[a,b,c,d,e,f]
+             =   [f,e,a,d,b,c]
+    $
+    &
+    $
+    \begin{array}[m]{l}
+     \alpha\circ\beta = (0,5,2)(1,4)\circ(0,4) = (0,1,4,5,2) \cr
+     \beta\circ\alpha = (0,4)\circ(0,5,2)(1,4) = (0,5,2,4,1)
+    \end{array}
+    $
+    \\[1pt]\hline
+  \end{tabular}
+\end{center}
 
 
 \label{LastPageNo}
 \end{document}
+
+% vim: foldmethod=marker spelllang=en
