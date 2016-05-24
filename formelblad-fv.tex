@@ -1,8 +1,3 @@
-% vim: spelllang=en:nospell:foldmethod=marker
-%% Macroset för \Tr{}{}
-
-
-
 % Preambules, etc %<<<
 \documentclass{article}
 
@@ -10,7 +5,7 @@
 \usepackage{a4}
 \usepackage{graphicx}
 %%% instead of \usepackage{fullpage} 
-\topmargin 0pt
+\topmargin -35pt
 \advance \topmargin by -\headheight
 \advance \topmargin by -\headsep
 \textheight 8.9in
@@ -29,7 +24,7 @@
 % LANG SETTINGS -------------------
 
 \newcount\Lang   \newcommand\Tr[2]{\ifnum\Lang=0 #1\else #2\fi}
-\Lang=1\relax   %% 0 - En || 1 -- Se
+\Lang=0\relax   %% 0 - En || 1 -- Se
 %------------ /LANG SETTINGS ------------------
 
 %% <<< Former jobname.h ----------------
@@ -1132,3 +1127,5 @@ $\bdF=(P,Q,R):\Rone^3\to\Rone^3$, $S$
 \end{itemize}
 \label{LastPageNo}
 \end{document}
+
+% vim: spelllang=en:nospell:foldmethod=marker
