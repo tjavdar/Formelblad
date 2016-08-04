@@ -1,20 +1,12 @@
 # Makefle för formelblad
+# 2016-08-08: More include files/common targets and rules
 # 2015-01-28: file to be done is the LAST-touched, unless explicitly defined
-
 # 2011-03-11: No more intermediate dvi
 
-# Uncomment to supercede default LAST-target
-# FILE         := formelblad-lf
-
 # Övriga Makefile-vars # <<<
-LAST = $(shell ls -1t formelblad*.tex |head -n1)
 ALLMATTEDIR   := ../allmatte
 WWWDIR        := ../allmatte/formelblad
 BNAME         := formelblad
-ifndef FILE
-  FILE        := $(basename $(LAST))
-endif
-EDIT          := gvim
 PS2PDF        := ps2pdfwr -dCompatibilityLevel=1.4 -sPAPERSIZE=a4
 PDFNUP        := pdfnup --frame true --a4paper
 x2_LPOPTIONS:= -o media=A4 -o fit-to-page -o sides=two-sided-short-edge -o landscape
@@ -22,24 +14,9 @@ LANG0      := Lang=0\\relax
 LANG1      := Lang=1\\relax
 # >>>
 #
-# Implicit rules# <<<
+# Implicit rules (including ../bz/Mtargets.implicit)# <<<
 
-%.pdf-bloat : %.tex
-	pdflatex $<
-	pdflatex $<
-	mv -fv $*.pdf $@    # GNU Make Automatic var $$*!
-
-%-x2.pdf-bloat : %.pdf
-	$(PDFNUP) --suffix x2 $< --outfile $@
-
-%-x4.pdf-bloat : %.pdf
-	$(PDFNUP) --nup 2x2 --no-landscape --suffix x4 $< --outfile $@
-
-%.pdf : %.pdf-bloat
-	@echo Squeezing $< ...
-	@ps2pdfwr -dCompatibilityLevel=1.4 $<  $@
-	@echo "Compare sizes non-squeezed/squeezed:"
-	@ls -l  $<  $@
+include ../bz/Mtargets.implicit
 
 %.tex : %.m
 	octave -q $< > $@
@@ -49,45 +26,39 @@ $(WWWDIR)/%.pdf : %.pdf
 
 # End of implicit rules# >>>
 
-# Rules # <<<
-
 default : x
+
+# include Mtargets.rip-off-compute, Mtargets.last-edit# <<<
+U = QDirty
+RIP_FROM=*.tex
+include ../bz/Mtargets.rip-off-compute # R, Octave, Ampl, Lingo rip-off
+LAST_EXT      = formelblad*.tex
+include ../bz/Mtargets.last-edit       # defines the LAST-targets
+FILE        := $(basename $(LAST))
+# >>>
+
+# Rules # <<<
 
 all:
 	@echo "# To make all formelblad, issue:"
 	@echo '  for i in formelblad-*.tex; do touch $i; make  www; done'
 
-U = QDirty
-RIP_FROM=*.tex
-include ../bz/Mtargets.rip-off-compute # R, Octave, Ampl, Lingo rip-off
-include ../bz/Mtargets.last-edited     # defines the LAST-targets
+e:  e-last
+ec:ec-last
+et:et-last
+v:  v-last
+p:   $(FILE).lpr
 
-ec:
-	vim $(FILE).tex 
-et:
-	lxterminal -e vim $(FILE).tex &
-e:
-	$(EDIT) $(FILE).tex &
-
-x  : $(FILE).pdf
-xr : $(WWWDIR)/$(FILE).pdf
-x2r: $(WWWDIR)/$(FILE)-x2.pdf
-x4r: $(WWWDIR)/$(FILE)-x4.pdf
-
-v:
-	evince $(FILE).pdf &
-p:
-	lp $(FILE).pdf
-p2:
-	lp $(x2_LPOPTIONS) $(FILE)-x2.pdf
-p4:
-	lp $(FILE)-x4.pdf
+x  : $(FILE).pdf   # and squeze (def'd in Mtargets.implicit)
+xr :  x             $(FILE).pdfsq    $(WWWDIR)/$(FILE).pdf
+xr2: $(FILE)-x2.pdf $(FILE)-x2.pdfsq $(WWWDIR)/$(FILE)-x2.pdf
+xr4: $(FILE)-x4.pdf $(FILE)-x4.pdfsq $(WWWDIR)/$(FILE)-x4.pdf
 
 # Special rules
 
 tables: $(TEXTABLES)
 
-www: xr x2r x4r
+www: xr xr2 xr4
 	@echo; echo Created and moved:
 	@ls -oh $(WWWDIR)/$(FILE)*pdf
 	@echo; echo Consider to:
@@ -111,5 +82,5 @@ help :
 
 cl: clean
 
-clean:
-	rm -f *.pdf .log *.aux *.log *.dvi *.bak *.ps foo* *.gpg *~ 
+clean: TeXclean
+	rm -f *.pdf *.bak *.ps foo* *.gpg *~
