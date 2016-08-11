@@ -54,7 +54,8 @@
 
 \section*{MSE Cheat Sheet}
 
-All parameters below, if nothing else specified, assumed in $\Zone$; $[a]_n \iff a\; (\mbox{mod } n)$.
+All parameters, if nothing else specified, assumed in $\Zone$;
+notation used: $[a]_n \iff a\; (\mbox{mod } n)$.
 
 \subsubsection*{Generating functions:} \vspace{-1.2em}%<<<
 \[
@@ -108,7 +109,7 @@ All parameters below, if nothing else specified, assumed in $\Zone$; $[a]_n \iff
     &&& \\[-8pt]
     [a+b]_n = [[a]_n + [b]_n]_n &
     [ab]_n = [[a]_n[b]_n]_n &
-    [ka]_{kn} = k [a]_n &
+    [ka]_{kn} = [k [a]_n]_{nk} &
     \mbox{Euler: }a\perp n \ergo [a^{\varphi(n)}]_n = 1
     \\[3pt] \hline
   \end{array}
@@ -155,13 +156,36 @@ x = \Bigl[ \sum_{j=1}^{k} r_jN_j[N_j^{-1}]_{n_j} \Bigr]_n, \; N_j= \frac{n}{n_j}
   }
 \]%>>>
 
-\subsubsection*{Automorphisms $\cong$ $S_n$, the groups of permutations. Disjoint cyclic form (DCF)}
+\textbf{Some common groups:}%<<<
+\vspace{-8pt}
+\[
+  \begin{array}[t]{|l|l|}
+    \hline
+     \Zone_n := (\Zone_n,+_n) \text{  -- $\Zone_n$ under summation mod $n$}
+    &  U_n := (U_n,\cdot_n) \text{  -- $U_n$ under multiplication mod $n$}
+    \\\hline
+    %& \\[-10pt]
+    C_n = \langle a\rangle = \{e,a,a^2,\ldots,a^{n-1}\} \text{ -- the cyclic group}
+    & GL_n = \{A_{n\times n} \,|\, \det(A)\neq 0 \text{ -- the general linear group}
+    \\ \hline
+    \multicolumn{2}{|l|}{%
+    \text{Product groups: } G\times H = \{(g,h)\,|\, g\in G, h\in H\}, \;
+    \text{ multiplication: }
+    (g,h)\circ(g',h')\defeq (g\circ_Gg', h\circ_H h')
+  } % multicolumn
+    \cr\hline
+  \end{array}
+\]%>>>
 
-Any set of $n$ distinct elements gives rise to the maximal group of its permutations $\cong(S_n,\circ)$
-under compositions.
+\subsubsection*{Automorphisms $S_X$ of a set $X$; $S_n$ %<<<
+  -- the groups of permutations of $\{0,1,\ldots,n-1\}$}
 
-\begin{center}
-  \textbf{Notation ex.}:
+
+Any set $X=\{x_1,\ldots,x_n\}$ gives rise to the group of its
+permutations \, $\text{Sym}(X)=S_X\cong S_n$ under composition.
+
+\medskip
+  \textbf{Notation} for permutations in $S_n$:
   \begin{tabular}[m]{|l|l|}
     \hline
      & \\[-10pt]
@@ -176,19 +200,22 @@ under compositions.
     $
     &
     $
+    \begin{array}[t]{ll}
     \alpha
-    = (0,5,2)(1,4)
-    = (0,5,2)(1,4)(3)
+    &= (0,5,2)(1,4)(3)\cr
+    &= (0,5,2)(1,4)
+    \end{array}
     $
     \\[9pt]\hline
   \end{tabular}
-\end{center}
-In DCF, fixed elements are ommitted, thus the unit element $e=()\in S_n$, $\forall n$.
+\medskip
+
+Observe that in DCF, the fixed elements are often ommitted, thus the unit element $e=()\in S_n$, $\forall n$.
 \begin{center}
   \begin{tabular}[m]{|l|l|}
     \hline
      & \\[-10pt]
-    Action on sets (from left): & Multiplication (right-to-left) : \cr \hline
+    Left group  action on a set: & Multiplication (right-to-left) : \cr \hline
      & \\[-9pt]
     $
      (0,5,2)(1,4)[a,b,c,d,e,f]
@@ -203,7 +230,10 @@ In DCF, fixed elements are ommitted, thus the unit element $e=()\in S_n$, $\fora
     $
     \\[1pt]\hline
   \end{tabular}
-\end{center}
+\end{center}%>>>
+
+
+
 
 
 \label{LastPageNo}
