@@ -32,7 +32,6 @@ default : x
 U = QDirty
 RIP_FROM=*.tex
 include ../bz/Mtargets.rip-off-compute # R, Octave, Ampl, Lingo rip-off
-LAST_EXT      = formelblad*.tex
 include ../bz/Mtargets.last-edit       # defines the LAST-targets
 FILE        := $(basename $(LAST))
 # >>>
