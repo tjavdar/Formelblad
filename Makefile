@@ -7,15 +7,14 @@
 ALLMATTEDIR   := ../allmatte
 WWWDIR        := ../allmatte/formelblad
 BNAME         := formelblad
-PS2PDF        := ps2pdfwr -dCompatibilityLevel=1.4 -sPAPERSIZE=a4
+PS2PDF        := ps2pdfwr -dCompatibilityLevel=1.5 -sPAPERSIZE=a4
 PDFNUP        := pdfnup --frame true --a4paper
 x2_LPOPTIONS:= -o media=A4 -o fit-to-page -o sides=two-sided-short-edge -o landscape
-LANG0      := Lang=0\\relax
-LANG1      := Lang=1\\relax
 # >>>
 #
 # Implicit rules (including ../bz/Mtargets.implicit)# <<<
 
+include ../bz/Mtargets.lang
 include ../bz/Mtargets.implicit
 
 %.tex : %.m
@@ -31,6 +30,7 @@ default : x
 # include Mtargets.rip-off-compute, Mtargets.last-edit# <<<
 U = QDirty
 RIP_FROM=*.tex
+LAST_POOL=*.tex
 include ../bz/Mtargets.rip-off-compute # R, Octave, Ampl, Lingo rip-off
 include ../bz/Mtargets.last-edit       # defines the LAST-targets
 FILE        := $(basename $(LAST))
@@ -57,22 +57,26 @@ xr4: $(FILE)-x4.pdf $(FILE)-x4.pdfsq $(WWWDIR)/$(FILE)-x4.pdf
 
 tables: $(TEXTABLES)
 
+www-en:
+	make en
+	make WWWDIR=$(WWWDIR)/en www
+www-sv:
+	make sv
+	make WWWDIR=$(WWWDIR)/sv sv www
+www-en+sv www-sv+en: www-en www-sv
+
 www: xr xr2 xr4
 	@echo; echo Created and moved:
 	@ls -oh $(WWWDIR)/$(FILE)*pdf
 	@echo; echo Consider to:
 	@echo; echo "        pushd $(ALLMATTEDIR); make  www; popd"; echo
 
-en: 
-	sed -i'~' 's,^\\Lang=[0-9],\\Lang=0,' $(FILE).tex # Reload file!
-sv: 
-	sed -i'~' 's,^\\Lang=[0-9],\\Lang=1,' $(FILE).tex # Reload file!
-
-sl:  $(FILE).tex
-	# Swap Lang 0<->1 (sv<->en):
-	# TentaSwap: TentaVariant 0<->1
-	@sed -i'~' 's/$(LANG1)/$(LANG0)/; t End; s/$(LANG0)/$(LANG1)/; :End' $<
-	@grep -E '$(LANG0)|$(LANG1)' $<
+en: $(FILE).tex
+	@$(LANG_EN)
+sv: $(FILE).tex
+	@$(LANG_SV)
+sl: $(FILE).tex
+	@$(LANG_SWAP)
 
 help : 
 	@echo "Usage:"
