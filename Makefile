@@ -78,10 +78,14 @@ sv: $(FILE).tex
 sl: $(FILE).tex
 	@$(LANG_SWAP)
 
-help : 
-	@echo "Usage:"
-	@echo "Put AMNE = an|la|tr|fv|mv for corresponding formelblad "
-	@echo "make || make www "
+help lhelp:
+	# Usage:
+	#
+	# Last touched formelblad is made by default
+	# Put AMNE = an|la|tr|fv|mv for corresponding formelblad
+	#
+	# make ls|en|sv # for lang swap, en or sv
+	# make || make www[-en|sv|sv+en|en+sv]
 
 cl: clean
 
