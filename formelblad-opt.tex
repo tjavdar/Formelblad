@@ -1,0 +1,185 @@
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools,graphicx,amssymb}
+\usepackage{array}   % nicer tables
+
+% instead of \usepackage{fullpage} <<<
+\advance \topmargin by -4.5\headheight
+\advance \textheight by 125pt
+\oddsidemargin 0pt
+\evensidemargin \oddsidemargin
+\marginparwidth 0.5in
+\textwidth 6.6in
+\parindent=0pt
+\advance\parskip by 1pt
+% >>>
+
+\pagestyle{headings}
+\everymath{\textstyle}
+
+% LANG SETTINGS -------------------
+\newcount\Lang   \newcommand\Tr[2]{\ifnum\Lang=0 #1\else #2\fi}
+\Lang=0\relax   %% 0 - En || 1 -- Se
+%------------ /LANG SETTINGS ------------------
+
+
+%-------------
+%- LaTeX def's
+%-------------
+
+\everymath{\displaystyle}
+
+% Header matter %<<<
+\makeatletter
+\renewcommand{\@oddhead}{}
+\renewcommand{\@evenhead}{}
+\renewcommand{\@oddfoot}
+{\ifnum\thepage=1
+  \today\hfill file:~\small\texttt{\jobname.pdf}
+\else
+  LP Cheat Sheet
+  \hfill
+  \Tr{p}{s}.~\thepage{} \Tr{of}{av} \pageref{LastPageNo}
+\fi}
+
+  \renewcommand{\@evenfoot}{\small
+        \texttt{\jobname.pdf},\hfill}
+\makeatother%>>>
+
+\input ../bz/StdLaTeXdef.h
+
+\begin{document}
+
+\section*{LP Cheat Sheet}
+
+\subsubsection*{Notation:}%<<<
+  \begin{tabular}{ll}
+Constant matrices: &
+  $\bdb_{m\times1}$,
+  $A_{m\times n}$,
+  $\bdc_{n\times1}$,
+  $\bdzero=(0,\ldots,0)^T$,
+  $I_p$ (identity matrix, order $p$)
+\cr
+Variables: &
+  $z$, $w$ (primal/dual objective function),
+  $z^*$, $w^*$ (values at optimum)
+\cr
+  &
+  $\bdx_{n\times1}$ (primal decision),
+  $\bdy_{m\times1}$ (dual),
+  $\bds_{m\times1}$ (slack/surplus),
+  $\bda$ (artificial)
+\cr
+B-N regroupings:
+  & $(A,I_m)=(B_{m\times m},N_{m\times n})$ (basic columns, non-basic columns) \cr
+  & $
+     \tvavektor[\bdx,\bds]
+     = \tvavektor[{\bdx_B}_{m\times 1},{\bdx_N}_{n\times 1}]
+     $, $
+     \tvavektor[\bdc,\bdzero]
+     = \tvavektor[{\bdc_B}_{m\times 1},{\bdc_N}_{n\times 1}]$
+     $ \;\rightsquigarrow\;\tvavektor[
+       \text{basic},
+       \text{non-basic}
+     ]$
+     variables/coefficients.\cr
+\end{tabular}
+%>>>
+
+\subsubsection*{Standard matrix representation for a max LP:}%<<<
+\[
+  \boxed{
+    \begin{array}[m]{ll}
+      \max & z = c_1x_1+c_2x_2+\cdots+c_nx_n \cr
+      \mbox{s.t.} &
+      \mkern-15mu
+      \begin{cases}
+        a_{11}x_1+\cdots+a_{1n}x_n &\le b_1 \cr
+        \hfil\vdots &  \hfil\vdots          \cr
+        a_{m1}x_1+\cdots+a_{mn}x_n &\le b_m \cr
+        \hfill x_1,x_2,\ldots,x_n  &\ge 0.
+      \end{cases}
+    \end{array}
+  } % boxed
+  \;\leftrightsquigarrow\;
+  \boxed{
+    \begin{array}[m]{ll}
+      \max & z=\bdc^T\bdx\cr
+      \mbox{s.t.} &
+      \mkern-15mu
+      \begin{cases}
+      A\bdx\le\bdb\cr
+      \hfill\bdx\ge\bdzero
+      \end{cases}
+    \end{array}
+  } % boxed
+  \;\leftrightsquigarrow\;
+  \boxed{\{\max\; z=\bdc^T\bdx; A\bdx\le\bdb,\, \bdx\ge\bdzero\}}
+\]
+\textbf{The standard min LP problem}: \hspace{4.3em}
+$
+  \boxed{
+    \begin{array}[m]{ll}
+      \min & z=\bdc^T\bdx\cr
+      \mbox{s.t.} &
+      \mkern-15mu
+      \begin{cases}
+      A\bdx\ge\bdb\cr
+      \hfill\bdx\ge\bdzero
+      \end{cases}
+    \end{array}
+  } % boxed
+  \;\leftrightsquigarrow\;
+\boxed{\{\min\; z=\bdc^T\bdx; A\bdx\ge\bdb,\, \bdx\ge\bdzero\}}
+$
+%>>>
+
+\subsubsection*{The max LP in canonical form, initial and final (physical layout) Simplex Tableau at optimum:}%<<<
+\[
+  \begin{cases}
+    \begin{array}[m]{*{5}{lc}}
+    z &-& \bdc^T\bdx &+& \bdzero^T\bds &=&  0   \cr
+      & &   A\bdx    &+&   I_m\bds     &=& \bdb \cr
+    \end{array}
+  \end{cases}
+  \;\rightsquigarrow\;
+    \begin{array}[m]{c|ccc|c}
+ \perp &     z   & \bdx^T & \bds^T     & \hat\bdb \cr\hline\rule{0pt}{10pt}
+    z  &     1   &-\bdc^T & \bdzero^T  &   0    \cr %\hline
+ \bds  & \bdzero & A      & I_m        & \bdb   \cr
+    \end{array}
+  \;\sim\;\cdots\;\sim\;
+    \begin{array}[m]{c|ccc|c}
+ \perp &     z   &     \bdx^T &     \bds^T   & \hat\bdb \cr\hline\rule{0pt}{10pt}
+ z  &     1   &-\hat\bdc^T &     \bdy^{*T} & z^*\cr %\hline
+ \bdx_B& \bdzero &     B^{-1}A&     B^{-1}   & \bdx_B^*   \cr
+    \end{array}
+\]
+%>>>
+
+\subsubsection*{The final max LP Simplex Tableau regrouped after basic/non-basic columns:}%<<<
+\[
+  \begin{cases}
+    \begin{array}[m]{*{5}{lc}}
+      z^* &+& \bdzero^T\bdx_B^* &-& \hat\bdc_N^T\bdx_N &=&  \bdc_B^TB^{-1}\bdb \cr
+    %%%          &&&&                       &=& \bdc_B^T\bdx_B^* = \bdb^T\bdy^*\cr
+      & &    I_m\bdx_B^*  &+& B^{-1}N\bdx_N     &=& B^{-1}\bdb \cr
+    \end{array}
+  \end{cases}
+  \;\rightsquigarrow\quad\;
+    \begin{array}[m]{c|ccc|c}
+   \perp &     z   & \bdx_B^T  & \bdx_N^T & \hat\bdb \cr\hline\rule{0pt}{10pt}
+      z^*&     1   & \bdzero^T &-\hat\bdc_N^T & \bdc_B^TB^{-1}\bdb \cr %\hline
+  \bdx_B & \bdzero &  I_m  & B^{-1}N      &  B^{-1}\bdb   \cr
+    \end{array}
+\]
+Here \fbox{$\bdy^*=B^{-1}\bdc_B$} are the dual vars and
+\fbox{$\hat\bdc_N=\bdc_N-\bdc_B^TB^{-1}N=\bdc-y^{*T}N<0$} the reduced costs at opt.
+%>>>
+
+\label{LastPageNo}
+\end{document}
+
+% vim: foldmethod=marker spelllang=en
