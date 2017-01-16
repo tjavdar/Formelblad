@@ -72,8 +72,8 @@ Variables: &
   $\bds_{m\times1}$ (slack/surplus),
   $\bda$ (artificial)
 \cr
-B-N regroupings:
-  & $(A,I_m)=(B_{m\times m},N_{m\times n})$ (basic columns, non-basic columns) \cr
+B-N refactoring:
+  & $(A,I_m)=(B_{m\times m},N_{m\times n})$ (Basic columns, Non-basic columns) \cr
   & $
      \tvavektor[\bdx,\bds]
      = \tvavektor[{\bdx_B}_{m\times 1},{\bdx_N}_{n\times 1}]
@@ -81,8 +81,8 @@ B-N regroupings:
      \tvavektor[\bdc,\bdzero]
      = \tvavektor[{\bdc_B}_{m\times 1},{\bdc_N}_{n\times 1}]$
      $ \;\rightsquigarrow\;\tvavektor[
-       \text{basic},
-       \text{non-basic}
+       \text{Basic},
+       \text{Non-basic}
      ]$
      variables/coefficients.\cr
 \end{tabular}
@@ -136,7 +136,7 @@ $
 $
 %>>>
 
-\subsubsection*{The max LP in canonical form, initial and final (physical layout) Simplex Tableau at optimum:}%<<<
+\subsubsection*{The max LP in canonical form, initial and final Simplex Tableau at optimum:}%<<<
 \[
   \begin{cases}
     \begin{array}[m]{*{5}{lc}}
@@ -159,7 +159,7 @@ $
 \]
 %>>>
 
-\subsubsection*{The final max LP Simplex Tableau regrouped after basic/non-basic columns:}%<<<
+\subsubsection*{The final max LP Simplex Tableau refactored in Basic/Non-basic columns:}%<<<
 \[
   \begin{cases}
     \begin{array}[m]{*{5}{lc}}
