@@ -245,7 +245,7 @@ $(a,b)$:
   \Tr{if}
      {om}
   $$
-    f(\bda+\bdh) = f(\bda)+\nabla f(\bda)\cdot\bdh + |\bdh|\rho(\bdh)
+    f(\bda+\bdh) = f(\bda)+\nabla f(\bda)\circ\bdh + |\bdh|\rho(\bdh)
   $$
   \Tr{in a neighbourhood of}
      {i någon omgivning av}
@@ -256,12 +256,27 @@ $(a,b)$:
   \Tr{as}
      {då}
   $\bdh\to\bdzero$.
-  \Tr{For differentiable function of two variables:}
-     {För differentierbara funktioner av två variabler:}
-  $$
-  f(a+h,b+k)
-  = f(a,b)+f'_x(a,b)(x-a)+f'_y(a,b)(y-b)+\sqrt{h^2+k^2}\,\rho(h,k).
-  $$%>>>
+  %>>>
+
+\item % Tangentplan%<<<
+  \Tr{Tangent plane at}
+     {Tangentplan i} $(a,b,c)$:\,
+  \begin{tabular}[m]{|c|c|}
+  \hline
+  \Tr{to a function surface}
+     {till funktionsytan}
+     $z=f(x,y)$
+  &
+  \Tr{to an implicit surface}
+     {till implicita ytan}
+  $F(x,y,z)=0$
+  \cr\hline
+  \rule[-17pt]{0pt}{40pt}
+  $z = f(a,b)+\nabla f(a,b)\circ\tvavektor[x-a,y-b]$
+  &
+  $\nabla F(a,b,c)\circ\trevektor[x-a,y-b,z-c]=0$
+  \cr\hline
+  \end{tabular}%>>>
 
 \item %% The directional derivative  %<<<
   \Tr{The directional derivative of a differentiable}
@@ -276,60 +291,46 @@ $\bda$:
 %
  $$
  \dd f{\bdv}(a,b)=f'_{\bdv}(a,b)=\lim_{t\to0}\frac{f(\bda+t\bdv)-f(\bda)}{t}
-                 =\nabla f(\bda) \cdot \bdv.
+                 =\nabla f(\bda) \circ \bdv.
  $$
  % >>>
 
-\item % Tangentplan till funktionsyta %<<<
-  \Tr{Tangent plane}
-     {Tangentplan}
-  $\Pi$
-  \Tr{and normal line}
-     {och normallinje}
-  $N$
-  \Tr{to the functional surface}
-     {till funktionsytan}
-  $z=f(x,y)$
-  \Tr{at the point}
-     {i punkten}
-  $(a,b)$:
-  $$
-  \Pi: z = f(a,b)+f'_x(a,b)(x-a)+f'_y(a,b)(y-b); \qquad
-  N: \trevektor[x,y,z]=\trevektor[a,b,f(a,b)] + t\pmatrix{f'_x(a,b)\cr f'_y(a,b)\cr -1},\; t\in\Rone.
-  $$%>>>
-
-\item % Tangentplan till F(x,y,z) = 0 %<<<
-  \Tr{Tangent plane}
-     {Tangentplan}
-  $\Pi$
-  \Tr{and normal line}
-     {och normallinje}
-  $N$
-  \Tr{to the implicitly given surface}
-     {till implicitangivna ytan}
-  $F(x,y,z)=0$
-  \Tr{at the point}
-     {i punkten}
-  $(a,b,c)$:
-  $$
-  \Pi: \nabla F(a,b,c)\cdot\trevektor[x-a,y-b,z-c]=0\qquad
-  N: \trevektor[x,y,z]=\trevektor[a,b,c] + t\nabla F(a,b,c),\; t\in\Rone.
-  $$%>>>
-
 \item % Differential %<<<
   \Tr{The the differential (the total derivative) and the linearization of}
-     {Differentialen och lineariseringen av}
+     {Differentialen (totalderivatan) och lineariseringen av}
 $f:\Rone^n\to\Rone$
 \Tr{at a point}
    {i punkten}
 $\bda$:
   $$
-  df(\bda)=\nabla f(\bda)\cdot d\bdx=f'_{x_1}(\bda)dx_1+\cdots+f'_{x_n}(\bda)dx_n;
-  \quad
-   \Delta f(\bda) =f(\bda+\Delta\bdx)-f(\bda)
-                  \approx  \nabla f(\bda)\cdot \Delta \bdx.
-                  % =f'_{x_1}(\bda)\Delta x_1+\cdots+f'_{x_n}(\bda)\Delta x_n\cr
-  $$%>>>
+  \begin{array}[t]{rcll}
+    df(\bda)&=&\nabla f(\bda)\circ d\bdx
+            &= f'_{x_1}(\bda)dx_1+\cdots+f'_{x_n}(\bda)dx_n;
+            \\[5pt]
+   f(\bda+\bdh)-f(\bda)
+   = \Delta f(\bda)
+   &\approx&  \nabla f(\bda)\circ\bdh
+   &= f'_{x_1}(\bda)\,h_1+\cdots+f'_{x_n}(\bda)\,h_n;
+   \\[2pt]
+   %\mbox{} f(\bda+\bdh)-f(\bda)
+   &=& f'_{\bdv}(\bda)\,|\bdh|, &\bdv=\frac{\bdh}{|\bdh|}\cdot
+  \end{array}
+  $$
+  \Tr{For differentiable function of two variables linearization corresponds to the change on the tangent plane}
+     {För differentierbara funktioner av två variabler lineariserigen motsvarar ändringen på tangentplanet:}
+  $$
+  \Delta f(a,b)=f(a+h,b+k) - f(a,b)
+  \approx
+  \left(\mkern-7mu
+  \begin{array}{c}
+    f'_x(a,b)\cr
+    f'_y(a,b)
+  \end{array}
+  \mkern-7mu\right)
+   \circ\tvavektor[h,k] = f'_{\bdv}(a,b)\sqrt{h^2+k^2},
+  \quad \bdv=\frac{1}{\sqrt{h^2+k^2}}\tvavektor[h,k].
+  $$
+  %>>>
 
 \item % The chain rule %<<<
   \Tr{The chain rule. If}
@@ -341,11 +342,11 @@ $\bda$:
   $$
   \varphi'(t)=\frac{d}{dt} f(\bdr(t))
           =f'_{x_1}(\bdr(t))\,x_1'(t)+\cdots +f'_{x_n}(\bdr(t))\,x_n'(t)
-          =\nabla f(\bdr(t))\cdot\bdr'(t).
+          =\nabla f(\bdr(t))\circ\bdr'(t).
   $$
   %>>>
 
-  \item % Derivator av högre ordning %<<<
+\item % Derivator av högre ordning %<<<
     \Tr{\textbf{The higher-order derivatives} are defined recursively, e.g.}
        {\textbf{Högre ordningens derivator} definieras rekursivt, dvs}
   \ $f''_{xx}\stackrel{\mbox{\tiny def}}=(f'_x)'_x$,
@@ -743,7 +744,7 @@ $z'_y(a,b)=-F'_y(a,b,c)/F'_z(a,b,c)$.%>>>
      \Tr{Divergence:}
         {Divergens:}
      $\Div \bdF \stackrel{\mbox{\tiny def}}
-     {=} \nabla\cdot\bdF = \textstyle\dd{F_1}{x_1}+\cdots+\dd{F_n}{x_n}$.
+     {=} \nabla\circ\bdF = \textstyle\dd{F_1}{x_1}+\cdots+\dd{F_n}{x_n}$.
         $\bdF$ 
         \Tr{is solenoidal if}
            {är solenoidal om}
@@ -774,7 +775,7 @@ $z'_y(a,b)=-F'_y(a,b,c)/F'_z(a,b,c)$.%>>>
      \Tr{The Laplacian:}
         {Laplacianen:}
  $\Delta\stackrel{\mbox{\tiny def}}
- =\nabla\cdot\nabla=\dd {{}^2}{x_1^2}+\cdots+\dd {{}^2}{x_n^2}$.
+ =\nabla\circ\nabla=\dd {{}^2}{x_1^2}+\cdots+\dd {{}^2}{x_n^2}$.
  \Tr{If}
     {Om}
  $f$
@@ -818,7 +819,7 @@ $$
   \iint_{\mkern-12mu D'} f(x(u,v),y(u,v))\,J\,dudv,
   \qquad
   J=\Bigl|\frac{d(x,y)}{d(u,v)}\Bigr| =
-  \frac1{\Bigl|\frac{d(u,v)}{d(x,y)}\Bigr|}\cdot
+  \frac1{\Bigl|\frac{d(u,v)}{d(x,y)}\Bigr|}\circ
 $$%>>>
 
   \item % Polära koordinater %<<<
@@ -863,7 +864,7 @@ $$
   \iiint_{\mkern-12mu \Omega'} f(x(u,v,w),y(u,v,w),z(u,v,w))\,J\,dV', %dudvdw,
   \quad
   J=\Bigl|\frac{d(x,y,z)}{d(u,v,w)}\Bigr| =
-  \frac1{\Bigl|\frac{d(u,v,w)}{d(x,y,z)}\Bigr|}\cdot
+  \frac1{\Bigl|\frac{d(u,v,w)}{d(x,y,z)}\Bigr|}\circ
 $$%>>>
 
   \item % Cylindriska koordinater%<<<
@@ -944,9 +945,9 @@ $$%>>>
    \Tr{then}
       {är}
    $$
-    \int_\gamma \bdF\cdot \hat T\, |d\bdr|
-  = \int_\gamma \bdF\cdot d\bdr
-  = \int_a^b \bdF(\bdr(t))\cdot\bdr'(t)\,dt.
+    \int_\gamma \bdF\circ \hat T\, |d\bdr|
+  = \int_\gamma \bdF\circ d\bdr
+  = \int_a^b \bdF(\bdr(t))\circ\bdr'(t)\,dt.
    $$%>>>
 
 \item % Common notation for line integrals in $\Rone^2$ and $\Rone^3$ when%<<<
@@ -968,7 +969,7 @@ $$%>>>
   \Tr{Common notation for line integrals along closed paths (circulations):}
      {Vanlig beteckning för kurvintegraler längs slutna konturer (cirkulationer):}
    \ $
-    \oint_\gamma \bdF\cdot d\bdr.
+    \oint_\gamma \bdF\circ d\bdr.
    $
    \Tr{Positive direction of transversal is counterclockwise.}
       {Positiv om\-lopps\-rikt\-ning är moturs}.
@@ -987,7 +988,7 @@ $\gamma\subset\Omega$
 \Tr{is an arbitrary piecewise $C^1$-curve from the point $A$ to $B$, then}
    {är en godtycklig styckvis $C^1$-kurva från punkten $A$ till $B$, då är}
 $$
-    \int_\gamma \bdF\cdot d\bdr = \int_\gamma\nabla\Phi\cdot d\bdr
+    \int_\gamma \bdF\circ d\bdr = \int_\gamma\nabla\Phi\circ d\bdr
     = \Phi(B)-\Phi(A).
 $$
 %>>>
@@ -1006,7 +1007,7 @@ $$
  \Tr{then}
     {då är}
 $$
-  \oint_{\partial\Omega} \bdF\cdot d\bdr
+  \oint_{\partial\Omega} \bdF\circ d\bdr
 = \oint_{\partial\Omega} P\,dx + Q\, dy
 = \iint_{\mkern-12mu \Omega} (Q'_x-P'_y)\,dxdy.
 $$
@@ -1076,9 +1077,9 @@ $\bdF=(P,Q,R):\Rone^3\to\Rone^3$, $S$
      \Tr{then}
         {då är}
      $$
-     \iint_{\mskip -12mu S} \bdF\cdot\widehat\bdN\,dS
+     \iint_{\mskip -12mu S} \bdF\circ\widehat\bdN\,dS
    = \pm\iint_{\mskip -12mu\Omega}
-         \bdF(\bdr(u,v))\cdot (\bdr'_u\times\bdr'_v)\,dudv.
+         \bdF(\bdr(u,v))\circ (\bdr'_u\times\bdr'_v)\,dudv.
      $$%>>>
 
 %   If $S$ is the functional surface %<<<
@@ -1089,9 +1090,9 @@ $\bdF=(P,Q,R):\Rone^3\to\Rone^3$, $S$
      \Tr{then}
         {då är}
      $$
-     \iint_{\mskip -12mu S} \bdF\cdot\widehat\bdN\,dS
+     \iint_{\mskip -12mu S} \bdF\circ\widehat\bdN\,dS
    = \pm\iint_{\mskip -12mu\Omega}
-     \bdF(x,y,z(x,y))\cdot\trevektor[-z'_x,-z'_y,1]\,dxdy.
+     \bdF(x,y,z(x,y))\circ\trevektor[-z'_x,-z'_y,1]\,dxdy.
      $$%>>>
 
 %  Gauss %<<<
@@ -1105,9 +1106,9 @@ $\bdF=(P,Q,R):\Rone^3\to\Rone^3$, $S$
      \Tr{with an outer unit normal $\widehat\bdN$ and $\bdF\in C^1(V\cup\partial V)$, then}
         {med enhetsnormal utåt $\widehat\bdN$ och $\bdF\in C^1(V\cup\partial V)$, då är}
      $$
-     \oiint_{\mskip -12mu\partial V} \bdF\cdot\widehat\bdN\,dS
+     \oiint_{\mskip -12mu\partial V} \bdF\circ\widehat\bdN\,dS
    = \iiint_{\mskip -12mu V} \Div\bdF \,dV
-   = \iiint_{\mskip -12mu V} \nabla\cdot \bdF \,dV
+   = \iiint_{\mskip -12mu V} \nabla\circ \bdF \,dV
    = \iiint_{\mskip -12mu V} (P'_x+Q'_y+R'_z) \,dV.
      $$%>>>
 
@@ -1119,9 +1120,9 @@ $\bdF=(P,Q,R):\Rone^3\to\Rone^3$, $S$
          {Om $C^1$-ytan $S$ har styckvis $C^1$-rand $\partial S$, då är moturscirkulationen (sett från}
      $\widehat\bdN$)
      $$
-     \oint_{\partial S} \bdF\cdot d\bdr
-     = \iint_{\mskip -12mu S} \Tr{\Curl}{\Rot}\bdF\cdot\widehat\bdN\,dS
-   = \iint_{\mskip -12mu S} (\nabla\times \bdF)\cdot\widehat\bdN\,dS.
+     \oint_{\partial S} \bdF\circ d\bdr
+     = \iint_{\mskip -12mu S} \Tr{\Curl}{\Rot}\bdF\circ\widehat\bdN\,dS
+   = \iint_{\mskip -12mu S} (\nabla\times \bdF)\circ\widehat\bdN\,dS.
      $$
      %>>>
 \end{itemize}
