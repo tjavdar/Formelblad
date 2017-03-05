@@ -57,6 +57,8 @@
 All parameters, if nothing else specified, assumed in $\Zone$;
 notation used: $[a]_n \iff a\; (\mbox{mod } n)$.
 
+\vspace{-10pt}
+
 \subsubsection*{Generating functions:} \vspace{-1.2em}%<<<
 \[
   \begin{array}[t]{|ll|ll|}
@@ -96,9 +98,33 @@ notation used: $[a]_n \iff a\; (\mbox{mod } n)$.
  & Z_n,\Zone/n\Zone = \{[0]_n,[1]_n,\ldots,[n-1]_n\}
  & Z_n^* = \{[1]_n,\ldots,[n-1]_n\} \\[6pt]
    \Rone - \mbox{the reals}
- & \Rone^* = \Rone\setminus\{0\}
+ & \Zone^* = \Zone\setminus\{0\},\;
+   \Rone^* = \Rone\setminus\{0\},\;
+   \Cone^* = \Cone\setminus\{0\}
  & U_n = \{k\in\Zone_n: k\perp n\}
  \\[3pt] \hline
+  \end{array}
+\]%>>>
+
+\textbf{Groups:}%<<<
+\vspace{-15pt}
+\[
+  \begin{array}[t]{|l|l|}
+    \hline
+    \rule{0pt}{10pt}
+     \Zone_n := (\Zone_n,+_n) \text{  -- $\Zone_n$ under summation mod $n$}
+    &  U_n := (U_n,\cdot_n) \text{  -- $U_n$ under multiplication mod $n$}
+    \\\hline
+    \rule{0pt}{10pt}
+    C_n = \langle a\rangle = \{e,a,a^2,\ldots,a^{n-1}\} \text{ -- the cyclic group}
+    & GL_n = \{A_{n\times n} \,|\, \det(A)\neq 0 \text{ -- the general linear group}
+    \\ \hline
+    \multicolumn{2}{|l|}{%
+    \text{Product groups: } G\times H = \{(g,h)\,|\, g\in G, h\in H\}, \;
+    \text{ multiplication: }
+    (g,h)\circ(g',h')\defeq (g\circ_Gg', h\circ_H h')
+  } % multicolumn
+    \cr\hline
   \end{array}
 \]%>>>
 
@@ -109,15 +135,24 @@ notation used: $[a]_n \iff a\; (\mbox{mod } n)$.
     &&& \\[-8pt]
     [a+b]_n = [[a]_n + [b]_n]_n &
     [ab]_n = [[a]_n[b]_n]_n &
-    [ka]_{kn} = [k [a]_n]_{nk} &
+    [ka]_{kn} = k [a]_n &
     \mbox{Euler: }a\perp n \ergo [a^{\varphi(n)}]_n = 1
     \\[3pt] \hline
   \end{array}
 \]%>>>
 
-\subsubsection*{The Bézout identity: \fbox{$mx\pm ny=1$, $m\perp n$}}
+\textbf{Euler totient}: %<<<
+\begin{tabular}[m]{|l|l|l|}
+  \hline
+  \rule{0pt}{16pt}
+  $\varphi(n)=|U_n|=n\prod_{p\,|\,n}\Bigl(1-\frac1p\Bigr)$ &
+  $\phi(p^k)=(p-1)p^{k-1}$, $p$--prime &
+  $\varphi(st)=\varphi(s)\varphi(t)$, $s\perp t$ \cr
+  \hline
+\end{tabular}%>>>
 
-\subsubsection*{Solve Bézout/Find inverses in $U_n$ by row operations in Euklides extended:} %<<<
+\subsubsection*{Solve Bézout \fbox{$mx\pm ny=1$, $m\perp n$} (find inverse in $U_n$) %<<<
+by row red.~in Euklides extended:}
 \[
   \boxed{
   m\perp n \ergo
@@ -156,33 +191,13 @@ x = \Bigl[ \sum_{j=1}^{k} r_jN_j[N_j^{-1}]_{n_j} \Bigr]_n, \; N_j= \frac{n}{n_j}
   }
 \]%>>>
 
-\textbf{Some common groups:}%<<<
-\vspace{-8pt}
-\[
-  \begin{array}[t]{|l|l|}
-    \hline
-     \Zone_n := (\Zone_n,+_n) \text{  -- $\Zone_n$ under summation mod $n$}
-    &  U_n := (U_n,\cdot_n) \text{  -- $U_n$ under multiplication mod $n$}
-    \\\hline
-    %& \\[-10pt]
-    C_n = \langle a\rangle = \{e,a,a^2,\ldots,a^{n-1}\} \text{ -- the cyclic group}
-    & GL_n = \{A_{n\times n} \,|\, \det(A)\neq 0 \text{ -- the general linear group}
-    \\ \hline
-    \multicolumn{2}{|l|}{%
-    \text{Product groups: } G\times H = \{(g,h)\,|\, g\in G, h\in H\}, \;
-    \text{ multiplication: }
-    (g,h)\circ(g',h')\defeq (g\circ_Gg', h\circ_H h')
-  } % multicolumn
-    \cr\hline
-  \end{array}
-\]%>>>
-
 \subsubsection*{Automorphisms $S_X$ of a set $X$; $S_n$ %<<<
   -- the groups of permutations of $\{0,1,\ldots,n-1\}$}
 
 
-Any set $X=\{x_1,\ldots,x_n\}$ gives rise to the group of its
+Any finite set $X=\{x_1,\ldots,x_n\}$ gives rise to the group of its
 permutations \, $\text{Sym}(X)=S_X\cong S_n$ under composition.
+Fixed elements in DCF are most often ommitted, e.g., the unit element in $S_n$, $e=()$, $\forall n$.
 
 \medskip
   \textbf{Notation} for permutations in $S_n$:
@@ -200,7 +215,7 @@ permutations \, $\text{Sym}(X)=S_X\cong S_n$ under composition.
     $
     &
     $
-    \begin{array}[t]{ll}
+    \begin{array}[m]{ll}
     \alpha
     &= (0,5,2)(1,4)(3)\cr
     &= (0,5,2)(1,4)
@@ -208,14 +223,11 @@ permutations \, $\text{Sym}(X)=S_X\cong S_n$ under composition.
     $
     \\[9pt]\hline
   \end{tabular}
-\medskip
-
-Observe that in DCF, the fixed elements are often ommitted, thus the unit element $e=()\in S_n$, $\forall n$.
 \begin{center}
   \begin{tabular}[m]{|l|l|}
     \hline
      & \\[-10pt]
-    Left group  action on a set: & Multiplication (right-to-left) : \cr \hline
+    Left group  action on a set (list): & Multiplication (right-to-left) : \cr \hline
      & \\[-9pt]
     $
      (0,5,2)(1,4)[a,b,c,d,e,f]
@@ -231,10 +243,6 @@ Observe that in DCF, the fixed elements are often ommitted, thus the unit elemen
     \\[1pt]\hline
   \end{tabular}
 \end{center}%>>>
-
-
-
-
 
 \label{LastPageNo}
 \end{document}
