@@ -58,9 +58,9 @@ xr4: $(FILE)-x4.pdf $(FILE)-x4.pdfsq $(WWWDIR)/$(FILE)-x4.pdf
 tables: $(TEXTABLES)
 
 www-en:
-	make WWWDIR=$(WWWDIR)/en en www
+	make WWWDIR=$(WWWDIR)/en en clean www
 www-sv:
-	make WWWDIR=$(WWWDIR)/sv sv www
+	make WWWDIR=$(WWWDIR)/sv sv clean www
 www-en+sv: www-en www-sv
 www-sv+en: www-sv www-en
 

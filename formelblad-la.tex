@@ -1,17 +1,18 @@
-%% CHANGES:
+%% CHANGES: %<<<
+%% IvTj, 2017-03         * Tr2En; --lin.ber, --2:agradare; refold
 %% IvTj, 2012-03-19:     * Rättelse för isometriska avb: F(u*v) = F(u)*F(v)
 %%                                                   --> u*v = F(u)*F(v)
-%% IvTj, 2010-10-29: 
+%% IvTj, 2010-10-29:
 %%                       * Byte: kolumn(er) --> kolonn(er)
 %%                       * Byte: |A| -->  det(A)
 %%                       * Ny def på utveckling av det(A) längs en rad
 %%                       * |A-\lambda I| --> det(A-\lambda I)
 %%                       * .. nollställena till den karakteristiska ekv
 %%                       -->  lösningarna till den karakteristiska ekv
-%%                        
+%%
 %% Ändring: Ivtj, 2009-02: lagt till direktformeln för ax^2+bx+c=0
-%%                         Lagt till indelningslinjer i tabellerna 
-%%                         "Luftigare" tabeller 
+%%                         Lagt till indelningslinjer i tabellerna
+%%                         "Luftigare" tabeller
 %%                         Flyttat om del av "Vektorer" --> sida 1
 %%                         Lagt till en till form för kryssprodukten
 %%                         Splittrat lin ber/ober.
@@ -29,13 +30,13 @@
 %%                         Krav att egenvektorn u != 0
 %%                         Bytt ut definitionen av diagonaliserbar matris,
 %%                         ej nödvändigt att kräva skilda egenvärden
+%>>>
 
-\documentclass[a4paper]{article}
-%% \usepackage[T1]{fontenc}
-%% \usepackage[latin1]{inputenc}
+\documentclass[a4paper]{article}%<<<
+
 \usepackage[utf8]{inputenc}  % <-- IvTj
 \usepackage[swedish]{babel}
-\usepackage{amsmath,fancyhdr,amssymb,graphicx} 
+\usepackage{amsmath,fancyhdr,amssymb,graphicx}
 %% \usepackage{mycommands}
 
 \addtolength{\topmargin}{-45mm}
@@ -50,239 +51,308 @@
 
 \pagestyle{fancy}
 
+% LANG SETTINGS -------------------
+\newcount\Lang   \newcommand\Tr[2]{\ifnum\Lang=0 #1\else #2\fi}
+\Lang=0\relax   %% 0 - En || 1 -- Se
+%------------ /LANG SETTINGS ------------------
 %% -- Latex def's:
 \let\ent\Leftrightarrow
 \def\trevektor[#1,#2,#3]{\begin{pmatrix}#1\cr #2\cr #3\end{pmatrix}}
 \def\abs#1{|#1|}
 \def\Rone{{\mathbb R}}
 \let\R\Rone
+\let\iff\Leftrightarrow
 \def\vec#1{\mathbf #1} %% <-- omdef \vec -- vektorer i boldface
-%%  -- /Latex def's 
+%%  -- /Latex def's
 
 %% -- Head && foot
-\chead{\ifnum\thepage=1 {} \else Formelblad Linjär Algebra\fi}
-\rhead{\ifnum\thepage=1 \textbf{FORMELBLAD Linjär Algebra}
+\chead{\ifnum\thepage=1 {} \else \Tr{Cheatsheet Linear Algebra}{Formelblad Linjär Algebra}\fi}
+\rhead{\ifnum\thepage=1 \textbf{\Tr{Cheatsheet LINEAR ALGEBRA}{Formelblad LINJÄR ALGEBRA}}
                \else sid. \thepage{} av \pageref{fin@lpage}  \fi}
 \lfoot{\ifnum\thepage=1\small\today\fi}
 \cfoot{}
 \rfoot{\ifnum\thepage=1\small File: \texttt{\jobname.pdf}\fi}
-
-
 %% -- /Head && foot
+
+\def\norm#1{\Tr{\lVert{#1}\rVert}{|#1|}}
+
+\def\bdb{\vec b}
+\def\bde{\vec e}
+\def\bdu{\vec u}
+\def\bdv{\vec v}
+\def\bdx{\vec x}
+\def\bdzero{\vec 0}
+% /preambule %>>>
+
 \begin{document}
 
-\subsection*{Andragradsekvationer}
+\subsection*{\Tr{Trigonometry}{Trigonometri}} %<<<
 
-Ekvationen $x^2+px+q=0$ har lösningarna
-%% \begin{equation*}
-  $x_{1,2}=-\frac p2\pm\sqrt{\left(\frac p2\right)^2-q}$\,.
-%% \end{equation*}
-Då är $x^2+px+q=(x-x_1)(x-x_2)$.
+% Standarda värden för sin/cos/tan + symmetrirelationer t höger
+{% Local scope def's
+\let\F\frac
+\newcommand\CC[1]{#1^\circ}
+\def\vPad{&&&&&\\*[-10pt]}
+\def\myEnd{\\\hline\vPad}
+\newcommand\tW{{\sqrt2}}
+\newcommand\tH{{\sqrt3}}
+$
+\begin{array}{|c|c|c|c|c|c|}
+\hline\vPad
+\mbox{(Std.~\Tr{angles}{vinklar})}^\circ
+  & \CC{0} &\CC{30} &\CC{45} &\CC{60} &\CC{90}   % &\CC{120} &\CC{135} &\CC{150} &\CC{180}
+ \myEnd
+ x \mbox{ (\textbf{rad})}
+        & 0     & \pi/6 & \pi/4 &  \pi/3 & \pi/2 % & 2\pi/3 & 3\pi/4 & 5\pi/6 &\pi
+ \\\hline\hline\vPad
+ \cos(x)&   1   & \tH/2 & 1/\tW &  1/2  &   0    % & -1/2   & -1/\tW & -\tH/2 & -1
+ \myEnd
+ \sin(x)&   0   &   1/2 & 1/\tW & \tH/2 &   1    % & \tH/2  &  1/\tW &   1/2  &  0
+ \myEnd
+ \tan(x)&   0   & 1/\tH &   1   & \tH   &
+                                    \dag % \mbox{ej def}
+                                                 % &-\tH  &    -1  & -1/\tH &  0
+ \\\hline
+\end{array}
+\quad
+\begin{array}[m]{|l|l|}
+\hline
+  \cos(-x) = \cos(x)    & \cos(x\pm\pi) = -\cos(x) \\
+  \sin(-x) = -\sin(x)   & \sin(x\pm\pi) = -\sin(x) \\
+\hline
+\hline
+  \sin(\pi-x) = \sin(x) &  \cos(x+2\pi) = \cos(x) \\
+  \cos(\pi-x) = -\cos(x)&  \sin(x+2\pi) = \sin(x) \\
+\hline
+\hline
+ \tan(-x) = \tan(x)     & \tan(x\pm\pi) = \tan(x) \\
+\hline
+\end{array}
+$
+}%>>>
 
-\medskip %% Added by IvTj, 2009-02-13:  
-Ekvationen $ax^2+bx+c=0$ har lösningarna
-$x_{1,2}=\dfrac{-b\pm\sqrt{b^2-4ac}}{2a}$\,.
-Då är $ax^2+bx+c=a(x-x_1)(x-x_2)$.
+\subsection*{\Tr{Vectors}{Vektorer}}
 
-
-\subsection*{Trigonometri}
-\begin{equation*}
-  \begin{array}{|ll|ccccccccc|}
-    \hline
-    &&&&&&&&&&\\*[-7pt]
-    \text{Vinkel }x&(\text{grader})&
-    0^\circ&30^\circ&45^\circ&60^\circ&90^\circ&
-    120^\circ&135^\circ&150^\circ&180^\circ\\
-    &(\text{radianer})&
-    0&\dfrac\pi6&\dfrac\pi4&\dfrac\pi3&\dfrac\pi2&
-    \dfrac{2\pi}3&\dfrac{3\pi}4&\dfrac{5\pi}6&\pi\\*[3pt]
-    &&&&&&&&&&\\*[-7pt]
-    \hline
-    &&&&&&&&&&\\*[-7pt]
-    &\sin x&0&\dfrac12&\dfrac1{\sqrt2}&\dfrac{\sqrt3}2&1&
-    \dfrac{\sqrt3}2&\dfrac1{\sqrt2}&\dfrac12&0\\*[3pt]
-    &&&&&&&&&&\\*[-7pt]
-    &\cos x&1&\dfrac{\sqrt3}2&\dfrac1{\sqrt2}&\dfrac12&0&
-    -\dfrac12&-\dfrac1{\sqrt2}&-\dfrac{\sqrt3}2&-1\\*[3pt]
-    &&&&&&&&&&\\*[-7pt]
-    &\tan x&0&\dfrac1{\sqrt3}&1&\sqrt3&\mbox{odef}&
-    -\sqrt3&-1&-\dfrac1{\sqrt3}&0\\*[10pt]
-    \hline
-  \end{array}
-\end{equation*}
-
-\begin{equation*}
-  \begin{array}{|l|l|}
-    \hline 
-    &\\*[-7pt]
-    \sin^2x+\cos^2x=1  &\tan x=\dfrac{\sin x}{\cos x}\\ 
-    & \\ 
-    \sin(-x)=-\sin x &\cos(-x)=\cos x \\ 
-    & \\ 
-    \sin(\pi-x)=\sin x=\cos(\frac{\pi}{2}-x) &
-    \cos(\pi-x)=-\cos x=-\sin(\frac{\pi}{2}-x) \\ 
-    & \\ 
-    \sin(x\pm y)=\sin x\cos y\pm\sin y\cos x &
-    \cos(x\pm y)=\cos x\cos y\mp\sin x\sin y \\ 
-    & \\ 
-    \sin 2x=2\sin x\cos x&\cos 2x=2\cos^2x-1=1-2\sin^2x \\ 
-    & \\
-    \sin x\sin y=\frac{1}{2}(\cos(x-y)-\cos(x+y))
-    &\sin x\cos y=\frac{1}{2}(\sin(x-y)+\sin(x+y)) \\
-    & \\
-    \cos x\cos y=\frac{1}{2}(\cos(x-y)+\cos(x+y))\hspace{7 mm}
-    &\tan(x\pm y)=\dfrac{\tan x\pm\tan y}{1\mp\tan x\tan y}\\*[10pt]
-    \hline
-  \end{array} 
-\end{equation*}
-
-%% \newpage
-\subsection*{Vektorer}
-
+% Allmännt %<<<
+\Tr{The formulas below are spelled in $\mathbb{R}^3$ for the sake of
+  concretion.
+With the exception for the cross product, these are readily generalized
+for vectors both in the plane as well as in higher dimensions.%
+}{%
 Formlerna i detta avsnitt utgår från 3-dimensionella vektorer. Men
 undantag för formlerna för vektorprodukt samt de formler som rör
 planet, är de med självklara modifieringar giltiga även för andra
-dimensionstal. 
+dimensionstal.}
 
 \bigskip
-Antag att vektorerna $\vec u=\trevektor[u_1,u_2,u_3]$ och $\vec
-v=\trevektor[v_1,v_2,v_3]$ i en ON-bas, $\theta$ är vinkeln mellan
-$\vec u$ och $\vec v$ samt $\lambda\in\mathbb R$. Då är:
-%% är ett godtyckligt reellt tal. Då gäller:
+\Tr{The vectors}{Vektorerna}
+$\bdu=\trevektor[u_1,u_2,u_3]$
+\Tr{and}{och}
+$\bdv=\trevektor[v_1,v_2,v_3]$
+\Tr{are given in an ON-basis}{är givna i en ON-bas},
+$\theta$
+\Tr{is the angle between}{är vinkeln mellan}
+$\bdu$
+\Tr{and}{och}
+$\bdv$
+\Tr{and}{och}
+$\lambda\in\mathbb R$.
+\Tr{Then}{Då är}:
+%>>>
 
-\bigskip
-\begin{tabular}{|p{0.25\linewidth}|p{0.7\linewidth}|}
-  \hline &\\*[-8pt]
-  Addition &
-  $\vec u+\vec v=\trevektor[u_1+v_1,u_2+v_2,u_3+v_3]=\vec v + \vec u$
-  \\*[15pt] \hline &\\*[-8pt]
-  Multiplikation med tal&
-  $\lambda\vec u=\trevektor[\lambda u_1,\lambda u_2,\lambda u_3] = \vec u\lambda$
-  \\*[15pt] \hline &\\*[-8pt]
-  Längd, norm
+% Tabell sum, sträckning, längd %<<<
+\medskip
+\begin{tabular}{|l|l|}
+  \hline  &  \\[-8pt]
+  \textbf{Addition: }
+  $\bdu+\bdv=\trevektor[u_1+v_1,u_2+v_2,u_3+v_3]=\bdv + \bdu$
   &
-  $\abs{\vec u}=\sqrt{u_1^2+u_2^2+u_3^2}$\\*[2pt]
-  &$\abs{\lambda\vec u}=\abs \lambda\abs{\vec u}$\\*[0pt]
-  \hline
-\end{tabular}
+  \textbf{Mult.~\Tr{with scalar}{med tal}: }
+  $\lambda\bdu=\trevektor[\lambda u_1,\lambda u_2,\lambda u_3] = \bdu\lambda$;
+  \; $0\bdu = \bdzero$
+  \\[15pt] \hline \multicolumn{2}{|c|}{} \\[-9pt]
+  \multicolumn{2}{|c|}{
+  \Tr{Linear Combination (LC)}{Linjärkombination (LK)}:
+  $
+  \displaystyle \sum_{k=1}^n \lambda_k\bdu_k
+  =\lambda_1\bdu_1 + \cdots +\lambda_n\bdu_n
+  $;
+  \hspace{.2em}
+  Trivial \Tr{LC}{LK}:
+  $\lambda_1 = \cdots = \lambda_n = 0
+  \displaystyle
+  \;\rightsquigarrow\; \sum_{k=0}^{n} 0\mkern2mu\bdu_k = \mathbf{0}
+  $
+  }
+  \\[15pt] \hline \multicolumn{2}{|c|}{} \\[-9pt]
+  \multicolumn{2}{|l|}{\textbf{\Tr{Length}{Längd}/norm}: \;
+  $\norm{\bdu}
+    =\sqrt{u_1^2+u_2^2+u_3^2}
+  = \sqrt{\bdu\circ\bdu}$\,;
+    \; $\norm{\lambda\bdu}=\abs \lambda\norm{\bdu}$
+  } %multicolumn
+  \\[8pt] \hline \multicolumn{2}{|c|}{} \\[-9pt]
+  \multicolumn{2}{|l|}{\Tr{Unit vector}{Enhetsvektorn} \/$\bde$\/
+  \Tr{pointing in direction}{utmed vektorn} $\bdu$:
+  $
+  \; \displaystyle\bde = \frac{\bdu}{\norm{\bdu}}
+  $
+  } %multicolumn
+  \\[8pt] \hline
+\end{tabular}%>>>
 
-\newpage
-
-\subsection*{Vektorer (forts.)}
-
+\medskip % Dot product %<<<
 \begin{tabular}{|p{0.2\linewidth}|p{0.75\linewidth}|}
   \hline &\\*[-8pt]
-  Skalärprodukt&$\vec u\cdot\vec v=\abs{\vec u}\abs{\vec v}\cos\theta
+  \Tr{Dot product}{Skalärprodukt}:
+  &$\bdu\circ\bdv=\norm{\bdu}\norm{\bdv}\cos\theta
   =u_1v_1+u_2v_2+u_3v_3$\\*[2pt]
-  Räkneregler:
-  &$\vec u\cdot\vec v=\vec v\cdot \vec u$, 
-  $(\lambda\vec u)\cdot\vec v=\vec u\cdot(\lambda\vec v)=\lambda(\vec u\cdot\vec v)$\\*[2pt]
-  &$\vec u\cdot(\vec v+\vec w)=\vec u\cdot\vec v+\vec u\cdot\vec w$\\*[2pt]
-  &$\vec u\cdot\vec u=\abs{\vec u}^2$;
-  $|\vec u|=\sqrt{\abs{\vec u}^2}=\sqrt{u_1^2+u_2^2+u_3^2}\ge0$ 
-  (med $|\vec u|=0\iff\vec u=\mathbf 0$)\\*[2pt]
-  &$\vec u$ och $\vec v$ ortogonala $\ent\vec u\cdot\vec v=0$
+  &$\bdu\perp\bdv\ent\bdu\circ\bdv=0$ \\[2pt]
+  \Tr{Properties}{Räkneregler}:
+  &$\bdu\circ\bdv=\bdv\circ \bdu$,
+  $(\lambda\bdu)\circ\bdv=\bdu\circ(\lambda\bdv)=\lambda(\bdu\circ\bdv)$\\*[2pt]
+  &$\bdu\circ(\bdv+\vec w)=\bdu\circ\bdv+\bdu\circ\vec w$\\*[2pt]
+  &$\bdu\circ\bdu=\norm{\bdu}^2$\\[2pt]
+  & $\norm{\bdu}=\sqrt{\bdu\circ\bdu}=\sqrt{u_1^2+u_2^2+u_3^2}\ge0$.
+  Obs! $\norm{\bdu}=0\iff\bdu=\mathbf 0$
 \\*[2pt]\hline&\\*[-8pt]
-  Projektions\-formeln&Den vinkelräta projektionen $\vec u'$ av
-  $\vec u$ på $\vec v$ ges av:
-  $\vec u'=\dfrac{\vec u\cdot\vec v}{\abs{\vec v}^2}\vec v$.
-  \\*[8pt] \hline &\\*[-10pt]
-  Vektor-/kryssprodukt&  %% Tilläg IvTj, 2009-02-13
-  $\vec u\times\vec v=\trevektor[u_1,u_2,u_3]\times\trevektor[v_1,v_2,v_3]
+\Tr{Ortogonal projection}{Projektionsformeln}:
+  &
+  \Tr{The orthogonal projection}{Den vinkelräta projektionen}
+  % $\bdu'$
+  \Tr{of}{av}
+  $\bdu$
+  \Tr{upon}{längs}
+  $\bdv$:\,\;
+  $\text{proj}_{\bdv}\bdu
+  = \bdu'
+  = \dfrac{\bdu\circ\bdv}{\norm{\bdv}^2}\bdv$
+  \\*[8pt] \hline
+\end{tabular}%%>>>
+
+\medskip % Cross product & triple product %<<<
+\begin{tabular}{|p{0.2\linewidth}|p{0.75\linewidth}|}
+  \hline &\\*[-8pt]
+  \Tr{Cross product}{Kryssprodukt}:
+  &  %% Tilläg IvTj, 2009-02-13
+  $\bdu\times\bdv=\trevektor[u_1,u_2,u_3]\times\trevektor[v_1,v_2,v_3]
   =
-  \left(\begin{array}{c}
+  \left(\mkern-12mu
+  \begin{array}{r}
       \begin{vmatrix}
         u_2 & v_2\\
         u_3 & v_3\\
-      \end{vmatrix} 
-   \\*[8pt] 
+      \end{vmatrix}
+   \\*[8pt]
   -   \begin{vmatrix}
         u_1 & v_1\\
         u_3 & v_3\\
-      \end{vmatrix} 
+      \end{vmatrix}
     \\*[8pt]
       \begin{vmatrix}
         u_1 & v_1\\
         u_2 & v_2\\
-      \end{vmatrix} 
-    \end{array}\right) 
+      \end{vmatrix}
+    \end{array}\mkern-3mu\right)
   =\trevektor[u_2v_3-u_3v_2,u_3v_1-u_1v_3,u_1v_2-u_2v_1]$\\*[2pt]
-  Räkneregler:
-  &$\vec u\times\vec v$ är ortogonal mot både $\vec u$ och $\vec v$.\\*[2pt]
-  &$\abs{\vec u\times\vec v}=\abs{\vec u}\abs{\vec v}\sin\theta$ anger
-  arean av den parallellogram som spänns upp av $\vec u$ \& $\vec v$\\*[2pt]
-  &$\vec u\times\vec v=-\vec v\times \vec u$, 
-  $(\lambda \vec u)\times\vec v=\vec u\times(\lambda \vec v)=\lambda (\vec u\times\vec v)$\\*[2pt]
-  &$\vec u\times(\vec v+\vec w)=\vec u\times\vec v+\vec u\times\vec w$
+  \Tr{Properties}{Räkneregler}:
+  &$\bdu\times\bdv$
+  \Tr{is orthogonal to both}{är ortogonal mot både}
+  $\bdu$
+  \Tr{and}{och}
+  $\bdv$\\*[2pt]
+  &$\norm{\bdu\times\bdv}=\norm{\bdu}\norm{\bdv}\sin\theta=$
+  (\Tr{the area of the parallelogram spanned by}{arean av den parallellogram som spänns upp av}
+  $\bdu$ \& $\bdv$)\\*[2pt]
+  &$\bdu\times\bdv=-\bdv\times \bdu$\\[2pt]
+  & $(\lambda \bdu)\times\bdv=\bdu\times(\lambda \bdv)=\lambda (\bdu\times\bdv)$\\*[2pt]
+  &$\bdu\times(\bdv+\vec w)=\bdu\times\bdv+\bdu\times\vec w$
   \\*[2pt] \hline &\\*[-8pt]
-  Skalär trippelprodukt
+  \Tr{Triple product}{Skalär trippelprodukt}:
   &
   $
-  \vec u\cdot(\vec v\times\vec w)=
-  \begin{vmatrix}
+  \bdu\circ(\bdv\times\vec w)
+  = \vec w\circ(\bdu\times\bdv)
+  = \bdv\circ(\vec w\times\bdu)
+  =\begin{vmatrix}
     u_1&v_1&w_1\\
     u_2&v_2&w_2\\
     u_3&v_3&w_3
   \end{vmatrix}
-  = \vec w\cdot(\vec u\times\vec v)
-  = \vec v\cdot(\vec w\times\vec u)
-  = \pm $ volymen av den parallellepiped som spänns upp av vektorerna
-  $\vec u$, $\vec v$ och $\vec w$.\\*[0pt]
+  $ \\[2pt]
+  &
+  $
+  \hspace{54pt}=\pm$% <-- needed for spacing
+  (\Tr{the volume of the parallelepiped spanned by}{volymen av den parallellepiped som spänns upp av}
+  $\bdu$, $\bdv$ och $\vec w$)\\
+  \hline
+  \end{tabular}%>>>
+
+\subsection*{\Tr{Lines and planes}{Linjer och plan}}%<<<
+
+  \begin{tabular}{|p{0.2\linewidth}|p{0.75\linewidth}|}
   \hline
   &\\*[-8pt]
-  Linjärt oberoende & Vektorerna $\vec u_1,\dots\vec u_n$ är linjärt 
-  oberonde då och endast då det homogena ekvationssysemet
-  $\lambda_1\vec u_1+\dots\lambda_n\vec u_n=\vec 0$
-  har endast den triviala lösningen
-  $\lambda_1=\lambda_2=\cdots\lambda_n=0$.
-  \\*[2pt]
-  \hline
-  &\\*[-8pt]
-  Linjärt beroende&Motsatsen till lin. oberoende: 
-  Vektorerna $\vec u_1,\dots\vec u_n$ är
-  linjärt beronde $\ent$ Det finns skalärer $\lambda_1,\dots\lambda_n$,
-  ej alla 0 sådana att $\lambda_1\vec u_1+\dots\lambda_n\vec u_n=\vec
-  0$.
-  \\*[2pt] \hline &\\*[-8pt]
-  Räta linjens ekvation&En rät linje genom punkten $P_0=(x_0,y_0,z_0)$ med
-  riktningsvektorn\\
-  &$\vec v=\trevektor[v_x,v_y,v_z]$ har på parameterform ekvationen 
-  $\trevektor[x,y,z]=\trevektor[x_0,y_0,z_0]+t\trevektor[v_x,v_y,v_z],\,
+  \Tr{Straight line equation}{Räta linjens ekvation}:
+  &
+  \Tr{A straight line $L$ through the point}{En rät $L$ linje genom punkten}
+  $P_0=(x_0,y_0,z_0)$
+  \Tr{along the direction vector}{med riktningsvektorn}
+  \\[2pt]
+  &$\bdv=\trevektor[v_x,v_y,v_z]$
+  \Tr{has the parametric representation}{har på parameterform ekvationen}:
+  $L\!:\trevektor[x,y,z]=\trevektor[x_0,y_0,z_0]+t\trevektor[v_x,v_y,v_z],\,
   t\in\mathbb R$.
-  \\*[14pt] \hline &\\*[-8pt]
-  Planets ekvation&Ett plan genom punkten $P=(x_0,y_0,z_0)$ med normalrikning
-  $\mathbf n=(a,b,c)$ ges av
+  \\*[14pt] \hline
+  \Tr{Equation of a plane}{Planets ekvation}:
+  &
+  \Tr{The plane through the point}{Ett plan genom punkten}
+  $P=(x_0,y_0,z_0)$
+  \Tr{orthogonal to}{med normalrikning}:
+  $\mathbf n=(a,b,c)^t$:
   \[
-  (\mathbf{r} - \mathbf{r}_P)\cdot\mathbf{n} = 0
+  (\mathbf{r} - \mathbf{r}_P)\circ\mathbf{n} = 0
   \iff
   \left[
      \trevektor[x,y,z]
     -\trevektor[x_0,y_0,z_0]
   \right]
-  \cdot
+  \circ
   \trevektor[a,b,c]=0
   \iff
-  ax+by+cz=d,
+  ax+by+cz=d
   \]
-  där 
-  $\mathbf{r}$ är ortsvektorn av godt. punkt i planet,
-  $\mathbf{r}_P$ är ortsvektorn av $P$ och
-  $d=\mathbf{r}_p\cdot\mathbf{n}$.
-  \\*[14pt] %% &\\*[-8pt]
-  På parameterform:
-  &Ett plan genom punkten $P=(x_0,y_0,z_0)$ utmed (de
-  linjärt oberoende) vektorerna $\vec v=(v_x,v_y,v_z)^t$ 
-  och $\vec w=(w_x,w_y,w_z)^t$ har parametriska framställningen\\
+  \Tr{Here}{Här}
+  $\mathbf{r}$
+  \Tr{is the pos.~vector of an arbitrary pt in the plane}{är ortsvektorn av godt. punkt i planet},
+  $\mathbf{r}_P$
+  \Tr{-- the one of}{är ortsvektorn av}
+  $P$
+  \Tr{and}{och}
+  $d=\mathbf{r}_p\circ\mathbf{n}$.
+  \\*[7pt] % &\\*[-8pt]
+  \Tr{In parameter form}{På parameterform}:
   &
+  \Tr{The plane through the pt}{Ett plan genom punkten}
+  $P=(x_0,y_0,z_0)$
+  \Tr{parallel to the (linear independent) vectors}{utmed (de linjärt oberoende) vektorerna}
+  $\bdv=(v_x,v_y,v_z)^t$
+  \Tr{and}{och}
+  $\vec w=(w_x,w_y,w_z)^t$
+  \Tr{has a parametric reresentation}{har parametriska framställningen}
+  \\
+  &
+  \vspace{-1em}
   $$
-  \vec r = \vec r_P + s\vec v + t\vec w
-  \iff
-  \trevektor[x,y,z]
-    = \trevektor[x_0,y_0,z_0]
-    +s\trevektor[v_x,v_y,v_z]
-    +t\trevektor[w_x,w_y,w_z],
+  \vec r = \vec r_P + s\bdv + t\vec w,
+ %% \iff
+ %% \trevektor[x,y,z]
+ %%   = \trevektor[x_0,y_0,z_0]
+ %%   +s\trevektor[v_x,v_y,v_z]
+ %%   +t\trevektor[w_x,w_y,w_z],
      \,s,t\in\Rone.
   $$
+  \vspace{-2.2em}
   %%&På parameterfri form är planets ekvation $Ax+By+Cz+D=0$ där $\vec
   %% n=\trevektor[A,B,C]$ är en normalvektor till planet.
   \\*[8pt]
@@ -290,57 +360,86 @@ $\vec u$ och $\vec v$ samt $\lambda\in\mathbb R$. Då är:
   %$Ax+By+Cz+D=0$ är
   %$\dfrac{\abs{Ax_1+By_1+Cz_1+D}}{\sqrt{A^2+B^2+C^2}}$.\\*[8pt]
   \hline
-\end{tabular}
-\newpage
+\end{tabular}%>>>
 
-\subsection*{Linjära ekvationssystem}
+\subsection*{\Tr{Linear independence. Linear equation systems}%<<<
+            {Linjärt oberoende. Linjära ekvationssystem}}
+
 \begin{tabular}{|p{0.2\linewidth}|p{0.75\linewidth}|}
   \hline
-  Gausseliminering
+  &\\*[-8pt]
+  \Tr{Linear independence}{Linjärt oberoende}:
   &
-  Syfte: Att med hjälp av radoperationer ställa systemet på
-  trappstegsform.\\
-  &
-  Tillåtna radoperationer, som inte ändrar på systemets lösningsmängd, är:
-  \vspace{-5pt}
+  \Tr{The vectors}{Vektorerna}
+  $\bdu_1,\dots\bdu_n$
+  \Tr{are linear independent if an only if the homogeneous system}
+     {är linjärt oberonde då och endast då det homogena ekvationssysemet}
+  $\lambda_1\bdu_1+\dots\lambda_n\bdu_n=\bdzero$
+  \Tr{has only the trivial solution}{har endast den triviala lösningen}
+  $\lambda_1=\lambda_2=\cdots\lambda_n=0$
+  \\*[2pt]
+  \hline
+%%%  &\\*[-8pt]
+%%%  \Tr{Linear dependence}{Linjärt beroende}:
+%%%  &
+%%%  %\Tr{The negation of lin.~independence}{Motsatsen till lin.~oberoende}:
+%%%  \Tr{The vectors}{Vektorerna}
+%%%  $\bdu_1,\dots\bdu_n$
+%%%  \Tr{are linear dependent if an only if there exists a non-trivial LC}
+%%%     {är linjärt beronde då och endast då det existerar en icke-trivial LK}
+%%%  $\lambda_1\bdu_1+\dots\lambda_n\bdu_n=\bdzero$
+%%%  (\Tr{i.e. at least one}{dvs minst en} $\lambda_k\neq0$, $1\le k\le n$)
+%%%  \\*[2pt] \hline
+  &\\*[-8pt]
+    \Tr{Elementary Row}{Elementära rad-}
+    \\
+    \Tr{Operations (ERO)}{operationer (ERO)}:
+ &
+ \vspace{-2.8em}
   \begin{enumerate}
       \addtolength{\itemsep}{-5pt}
-  \item 
-    Platsbyte på ekvationer.
-  \item 
-    Multiplikation av en ekvation med ett tal.
-  \item 
-    Addition av en multipel av en ekvation till en annan.
+  \item
+    \Tr{Swap two equations}{Platsbyte på ekvationer}
+  \item
+    \Tr{Multiplication of both sides with constant}{Multiplikation av en ekvation med ett tal} $\lambda\neq0$
+  \item
+    \Tr{Addition of a multiple of an equation to another one}{Addition av en multipel av en ekvation till en annan}
   \end{enumerate}
-  \vspace{-15pt}
-  \\*[2pt]\hline\\*[-9pt]
-  Radekvivalens med $I$ & Om en kvadratisk martis kan med tillåtna radoperationer formas om
-  till enhetsmatris, kallas $A$ radekvivalent med enhetsmatrisen $I$ (betecknas
-  med $A\sim I$).
-  \\*[2pt]
-  Om $A\sim I$
-  & Gausselimination och bakåtelimination vid lösningen av matrisekvationen $AX=B$ resulterar i
-  $$
-  (A|B)\sim\cdots\sim (I|X).
-  $$
-  \vspace{-15pt}
-  \\
-  \hline
-\end{tabular}
+  \vspace{-2em}
+\\ \hline
+  &\\*[-8pt]
+  \Tr{Gauss elimination}{Gausseliminering}:
+  &
+  \Tr{Reduce a linear system through ERO's to echelon form}
+  {Att  med hjälp av ERO reducera ett linjärt ekvationsssyem till echelonform}
+  \\[2pt] \hline
+\end{tabular}%>>>
 
-\subsection*{Matriser}
+\subsection*{\Tr{Matrises}{Matriser}}%<<<
 
 \begin{tabular}{|p{0.2\linewidth}|p{0.75\linewidth}|}
   \hline & \\*[-9pt]
-  Addition & $A+B=B+A$, $(A+B)+C=A+(B+C)$
+  Addition: & $A+B=B+A$, $(A+B)+C=A+(B+C)$
   \\*[2pt]\hline & \\*[-9pt]
-  Mult. med tal & $\lambda(A+B)=\lambda A+\lambda B$
+  Mult.~\Tr{with scalar}{med tal}: & $\lambda(A+B)=\lambda A+\lambda B$
   \\*[2pt]\hline & \\*[-9pt]
-  Multiplikation&$AB\ne BA$ (i allmänhet) 
+  \Tr{Multiplication}{Multiplikation}:
+  &$AB\ne BA$ (\Tr{in general}{i allmänheti})
   \\*[2pt]
   &$(AB)C=A(BC)$, \ $A(B+C)=AB+AC$, \  $(A+B)C=AC+BC$
-  \\*[2pt]\hline & \\*[-9pt]
-  Enhetsmatrisen&$I=
+  \\*[2pt]\hline & \\*[-11pt]
+  \Tr{Transposition}{Transponering}:
+  &
+  \Tr{Rows and columns swap places, e.g.}{Rader och kolonner byter plats, t\,ex},\;
+  $ \begin{pmatrix}a_{11}&a_{12}&a_{13}\\a_{21}&a_{22}&a_{23}\end{pmatrix}^T=
+    \begin{pmatrix}a_{11}&a_{21}\\a_{12}&a_{22}\\a_{13}&a_{23}\\\end{pmatrix}$\\*[3pt]
+  &$(A+B)^T=A^T+B^T$,\; \
+  $(AB)^T=B^TA^T$,\; \
+  $(A^{-1})^T=(A^T)^{-1}$\\*[2pt]
+  & \\*[-9pt]
+  \hline
+  \Tr{The unit matrix}{Enhetsmatrisen}
+  &$I=
   \begin{pmatrix}
     1&0&\cdots&0\\
     0&1&\cdots&0\\
@@ -349,246 +448,360 @@ $\vec u$ och $\vec v$ samt $\lambda\in\mathbb R$. Då är:
   \end{pmatrix}
   $, $AI=IA=A$
   \\*[24pt]\hline & \\*[-9pt]
-  Invers &$AA^{-1}=A^{-1}A=I$, $(AB)^{-1}=B^{-1}A^{-1}$\\*[3pt]
-  Jacobis metod:& Med radoperationer överförs systemet $(A|I)\sim \cdots\sim (I|A^{-1})$.
-  \\*[3pt]
-  Ortogonala matriser & $A^{-1}=A^T$.
-  \\*[3pt]
-  $2\times 2$--matriser:&
+  \Tr{Row equivalence}{Radekvivalens}:
+  &
+  $A\sim A'$\;
+  \Tr{if $A$ can be driven to $A'$ with a finite number of ERO:s}
+      {om $A$ kan omformas till $A'$ med ändligt antal ERO:s}
+  \\*[2pt] \hline
+  \rule{0pt}{10pt}
+  $$
+  A\sim I
+  $$
+  &
+  \Tr{Gauss elimination (forward and backward) when solving
+  a square linear system of full rank matrix $A$
+  reveals the similarity to the unit matrix}{%
+  Gausselimination (nedåt och uppåt) i kvadratiska ekvationssystem
+  med entydig lösning uppenbarar radekvivalens med enhetsmatrisen} $I$:
+  \vspace{-9pt}
+  $$
+  AX=B \;\rightsquigarrow\; (A|B)\sim\cdots\sim (I|X)
+  $$
+  \vspace{-3em}
+  \\ \hline
+  \rule{0pt}{12pt}%
+  \Tr{Matrix inverse}{Matrisinvers}:
+  &
+  $AA^{-1}=A^{-1}A=I$; \quad
+  \Tr{Find the inverse via}{Bestämma inversen genom} ERO:
+  $(A|I)\sim \cdots\sim (I|A^{-1})$
+  \\[3pt]
+  $2\times 2$--inverse\Tr{s}{r}:&
   $A_{2\times2}^{-1}
   =\begin{pmatrix}a&b\\c&d\end{pmatrix}^{-1}
   =\dfrac1{\det(A)}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}
   =\dfrac1{ad-bc}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}$
-  \\*[9pt]\hline  & \\*[-7pt]
-  Transponering &
-  Rader och kolonner byter plats, t\,ex, 
-  $ \begin{pmatrix}a_{11}&a_{12}&a_{13}\\a_{21}&a_{22}&a_{23}\end{pmatrix}^T=
-    \begin{pmatrix}a_{11}&a_{21}\\a_{12}&a_{22}\\a_{13}&a_{23}\\\end{pmatrix}$\\*[3pt]
-  &$(A+B)^T=A^T+B^T$, \ 
-  $(AB)^T=B^TA^T$, \ 
-  $(A^{-1})^T=(A^T)^{-1}$\\*[2pt]
+  \\[12pt]
+  \Tr{Properties}{Räkneregler}:
+  &
+  $(AB)^{-1}=B^{-1}A^{-1}$; \quad
+  $(A^t)^{-1}=(A^{-1})^t$
+  \\*[3pt]
+  \Tr{Orthogonal matrices}{Ortogonala matriser}:
+  &
+  $A^{-1}=A^T$
+  \\
   \hline
-\end{tabular}
-\subsection*{Determinanter}
-\begin{tabular}{|p{0.2\linewidth}|p{0.75\linewidth}|}
+\end{tabular}%>>>
+
+\subsection*{Determinant\Tr{s}{er}}%<<<
+\begin{tabular}{|p{0.18\linewidth}|p{0.77\linewidth}|}
   \hline
    & \\*[-8pt]
-  $2\times2$--matriser &Om $A=\begin{pmatrix}a&b\\c&d\end{pmatrix}$ är 
-  $\det(A)=\begin{vmatrix}a&b\\c&d\end{vmatrix}=ad-bc$.
+   $2\times2$--determinant\Tr{s}{er}:
+  &
+  $\det\begin{pmatrix}a&b\\c&d\end{pmatrix}
+  =\begin{vmatrix}a&b\\c&d\end{vmatrix}=ad-bc$.
   \\*[9pt] \hline & \\*[-15pt]
   \vfill
-  Utveckling efter rad $i$ &
+  \Tr{Develop after row}{Utveckla efter rad} $i$
+  &
   $$
   \det(A_{n\times n})
-  = a_{i1}(-1)^{i+1}D_{i1}
-  + \cdots + a_{ij}(-1)^{i+j}D_{ij}
-  + \cdots + a_{in}(-1)^{i+n}D_{in},
- $$ 
- där
- $D_{ij}$ är determinanten som fås 
- genom att i $\det(A)$ stryka rad $i$ och kolonn $j$.
+  = a_{i1}(-1)^{i+1}M_{i1}
+  + \cdots + a_{ij}(-1)^{i+j}M_{ij}
+  + \cdots + a_{in}(-1)^{i+n}M_{in},
+ $$
+ $M_{ij}$
+ \Tr{is the determinent obtained by excluding row}{är determinanten som fås genom att stryka rad}
+ $i$
+ \Tr{and column}{och kolonn}
+ $j$
+ \Tr{in}{i}
+ $\det(A)$.
   \\*[5pt] \hline & \\*[-8pt]
-%   \\*[9pt] \hline & \\*[-8pt]
-%   Utveckling efter rad &
-%   Exempel (utv. längs rad 1): \  
-%   $
-%   \begin{vmatrix}
-%     a&b&c\\d&e&f\\g&h&i
-%   \end{vmatrix}=a
-%   \begin{vmatrix}
-%     e&f\\
-%     h&i
-%   \end{vmatrix}
-%   -b
-%   \begin{vmatrix}
-%     d&f\\
-%     g&i
-%   \end{vmatrix}
-%   +c
-%   \begin{vmatrix}
-%     d&e\\
-%     g&h
-%   \end{vmatrix}
-%   $
-%  \\*[15pt] \hline & \\*[-8pt]
-  Räkneregler &
-  $\det(A^T)=\det(A)$ (dvs, allt som är tillåtet att göra 
-                         radvis fungerar även kolonnvis);
+  \Tr{Properties}{Räkneregler}:
+  &
+  $\det(A^T)=\det(A)$
+  (%
+  \Tr{i.e., everything allowed row-wise is also allowed column-wise}
+  {dvs, allt som är tillåtet att göra radvis fungerar även kolonnvis});
   \\*[2pt]
   &
-  $\det(AB)=\det(A)\det(B)$, 
+  $\det(AB)=\det(A)\det(B)$,
   $\det(A^{-1})=1/\det(A)$
   \\*[2pt]
   &
-  \parbox{10em}{Multipel av en rad eller kolonn kan bruytas ut:}
+  \parbox{10em}{%
+    \Tr{Factor out a multiple of a row or column}
+    {Multipel av en rad eller kolonn kan brytas ut}:
+}
   \ $
   \begin{vmatrix}
     a&\lambda b&c\\d&\lambda e&f\\g&\lambda h&i
   \end{vmatrix}
-  =\lambda 
+  =\lambda
   \begin{vmatrix}
     a&b&c\\d&e&f\\g&h&i
   \end{vmatrix},\quad
   \begin{vmatrix}
     a&b&c\\d&e&f\\\lambda g&\lambda h&\lambda i
   \end{vmatrix}
-  =\lambda 
+  =\lambda
   \begin{vmatrix}
     a&b&c\\d&e&f\\g&h&i
   \end{vmatrix}.
   $\\*[15pt]
-  &Om två rader eller två kolonner byter plats skiftar determinanten
-  tecken.
+  &
+  \Tr{Swapping of  two rows or columns reverses the sign of the determinant}
+  {Om två rader eller två kolonner byter plats skiftar determinanten tecken.}
   \\*[2pt]
-  &En multipel av en rad kan läggas till en annan rad utan att determinanten ändras.
+  &
+  \Tr{Adding a multiple of a row to another row does not change the determinant}
+  {En multipel av en rad kan läggas till en annan rad utan att determinanten ändras}
   \\*[2pt]
-  &En multipel av en kolonn kan läggas till en annan utan att determinanten ändras.
+  &
+  \Tr{Adding a multiple of a column to another column does not change the determinant}
+  {En multipel av en kolonn kan läggas till en annan utan att determinanten ändras}
 \\
   \hline
-\end{tabular}
+\end{tabular}%>>>
 
-\subsection*{Linjära avbildningar}
+\subsection*{\Tr{Linear maps}{Linjära avbildningar}}%<<<
 
-\begin{tabular}{|p{0.2\linewidth}|p{0.75\linewidth}|}
-  \hline\\*[-9pt]
-  Definition&$F$ är en linjär avbildning $\ent F(\vec u+\vec
-  v)=F(\vec u)+F(\vec v)$ och $F(\lambda\vec u)=\lambda F(\vec u)$.\\
-  &$F$ är en linjär avbildning $\ent F(\vec u)=A\vec u$ där $A$ är en
-  konstant matris.
-  \\*[2pt] \hline\\*[-9pt]
-  Sammansättning&Om $F(\vec u)=A\vec u$ och
-  $G(\vec u)=B\vec u$ är
-  $G\bigl(F(\vec u)\bigr)
-  =G\bigl(A\vec u\bigr)
-  =BA\vec u
+\begin{tabular}{|p{0.17\linewidth}|p{0.78\linewidth}|}
+  \hline & \\*[-9pt]
+  Definition:
+  &
+  \begin{tabular}[t]{ll}
+  $F\!:\mathbb{R}^n\to\mathbb{R}^n$--lin\Tr{ear}{jär}
+  &
+  $\ent F(\bdu+\bdv)=F(\bdu)+F(\bdv)$s
+  \Tr{and}{och}
+  $F(\lambda\bdu)=\lambda F(\bdu)$.
+  \\
+ &
+ $\ent F(\bdu)=A\bdu$,  $A_{n\times n} = (F(\vec e_1),\ldots, F(\vec e_n))$
+  \end{tabular}
+  \\*[2pt] \hline & \\*[-9pt]
+  \Tr{Map composition}{Sammansättning}:
+  &
+  \Tr{If}{Om}
+  $F(\bdu)=A\bdu$
+  \Tr{and}{och}
+  $G(\bdu)=B\bdu$,
+  $\;\rightsquigarrow\;$
+  $
+  (F\circ G)(\bdu)
+  =
+  F\bigl(G(\bdu)\bigr)
+  =F\bigl(B\bdu\bigr)
+  =AB\bdu
   $.
-  \\*[2pt] \hline\\*[-9pt]
-  Isometriska&$F:\R^n\to\R^n,F(\vec u)=A\vec u$ är isometrisk $\ent
-  \abs{F(\vec u)}=\abs{\vec u}$ för alla $\vec u\in\R^n\ent$\\
-  avbildningar&$\vec u\cdot\vec v=F(\vec u)\cdot
-  F(\vec v)$ för alla $\vec u$ och $\vec v\in\R^n\ent A$ är en ON-matris 
-  $\ent$\\ 
-  &$A^{-1}=A^T\ent A$:s kolonner (rader) utgör en ON-bas för $\R^n$.\\
+  \\*[2pt] \hline & \\*[-9pt]
+  \Tr{Isometric maps}{Isometriska}:
+  &
+  $F:\R^n\to\R^n,F(\bdu)=A\bdu$
+  \Tr{is isometric}{är isometrisk}
+  $\ent \norm{F(\bdu)}=\norm{\bdu}$
+  \Tr{for all}{för alla}
+  $\bdu\in\R^n\ent$\\
+  \Tr{}{avbildningar}
+  &
+  $\bdu\circ\bdv=F(\bdu)\circ
+  F(\bdv)$
+  \Tr{for all}{för alla}
+  $\bdu$
+  \Tr{and}{och}
+  $\bdv\in\R^n\ent A$
+  \Tr{is an ON-matrix}{är en ON-matris}
+  $\ent A^{-1}=A^T$ \\
   \hline
-\end{tabular}
+\end{tabular}%>>>
 
-\subsection*{Baser och basbyten}
+\subsection*{\Tr{Bases and changes of bases}{Baser och basbyten}}%<<<
 \begin{tabular}{|p{0.2\linewidth}|p{0.75\linewidth}|}
-  \hline\\*[-9pt]
-  Baser&En uppsättning av $n$ linjärt oberoende vektorer $\vec e_1,\dots,\vec
-  e_n$ bildar en \emph{bas} för $\R^n$. Till varje $\vec u\in\R^n$ finns
-  då reella tal $x_1,\dots,x_n$ så att $\vec u=x_1\vec e_1\dots x_n\vec
-  e_n$. Talen $x_1,\dots,x_n$ är $\vec u$:s koordinater i basen 
-  $\vec e_1,\dots,\vec e_n$.
+  \hline & \\*[-9pt]
+  \Tr{Bases}{Baser}:
+  &
+  \Tr{Any set of $n$ linear independent vectors}{En uppsättning av $n$ linjärt oberoende vektorer}
+  $\underline{\vec e}=\{\vec e_1,\dots,\vec e_n\}$
+  \Tr{is a basis for}{bildar en bas för}
+  $\R^n$.
+  \Tr{Any vector}{Varje vektor}
+  $\bdb\in\R^n$
+  \Tr{can be written as a unique LC in this basis}{kan skrivas entydigt som LK i denna bas}:
+  $\bdb
+  = \underline{\vec e}X
+  =x_1\vec e_1\dots x_n\vec e_n$.
+ %% \Tr{The coefficients}{Koefficienterna}
+ %% $x_1,\dots,x_n$
+ %% \Tr{are}{är}
+ %% $\bdb$%
+ %% \Tr{'s coordinates in base}{:s koordinater i basen}
+ %%  $\underline{\vec e}$.
   \\*[2pt] \hline\\*[-9pt]
-  Basbyten&Om $u$ har koordinaterna $x_1,\dots,x_n$ i basen $\vec e_1,\dots,\vec
-  e_n$ och koordinaterna $y_1,\dots,y_n$ i basen $\vec f_1,\dots,\vec
-  f_n$, är $\trevektor[x_1,\vdots,x_n]
-           =P\trevektor[y_1,\vdots,y_n]$ där
-  basbytesmatrisen $P=
+  \Tr{Change of basis}{Basbyten}:
+  &
+  \Tr{Let}{Låt}
+  $\bdb
+  = \underline{\vec e}X
+  = \underline{\vec f}Y
+  $
+  \Tr{has coordinates}{har koordinaterna}
+  $x_1,\dots,x_n$
+  \Tr{in base}{i basen}
+  $\underline{\vec e}=\{\vec e_1,\dots,\vec e_n\}$
+  \Tr{and}{och}
+  \Tr{coordinates}{koordinaterna}
+  $y_1,\dots,y_n$
+  \Tr{in base}{i basen}
+  $\underline{\vec f}=\{\vec f_1,\dots,\vec f_n\}$,
+  \Tr{where}{där}
+  $
+  \underline{\vec f}
+  = \underline{\vec e}P
+  $.
+  \Tr{Then}{Då är}
+  $$
+  \trevektor[x_1,\vdots,x_n]
+  = \sum_{k=1}^{n} y_k\vec f_k
+  = P\trevektor[y_1,\vdots,y_n]
+  \;\ent\;
+  X = PY
+  ,\quad
+  P=
   \begin{pmatrix}
     |&&|\\
     \vec f_1&\dots&\vec f_n\\
     |&&|
-  \end{pmatrix}$ med $\vec f_1,\dots,\vec f_n$ uttryckta i basen
-  $\vec e_1,\dots,\vec e_n$.
+  \end{pmatrix},\!
+  $$
+  \Tr{where the columns of}{där koonnerna i}
+  $P$
+  \Tr{are populated by the components of}{består av komponenterna till}
+  $\vec f_1,\dots,\vec f_n$
+  \Tr{in base}{i bas}
+  $
+  \underline{\vec e}.
+  $
   \\*[2pt] \hline\\*[-9pt]
-  Avbildningsmatris vid basbyte&Om den linjära avbildningen $F$ har
-  avbildningsmatris $A$ i basen $\vec e_1,\dots,\vec e_n$ och
-  avbildningsmatris $A'$ i basen $\vec f_1,\dots,\vec f_n$, gäller
-  $A'=P^{-1}AP$, där $P$ är basbytesmatrisen definierad ovan.\\
+  \Tr{In linear maps}{I linjära avbildningar}:
+  &
+  %% Om $F$ har
+  %% avbildningsmatris $A$ i basen $\vec e_1,\dots,\vec e_n$ och
+  %% avbildningsmatris $A'$ i basen $\vec f_1,\dots,\vec f_n$, gäller
+  %% $A'=P^{-1}AP$, där $P$ är basbytesmatrisen definierad ovan.\\
+  $
+    F(\bdx) = \underline{\vec e}AX = \underline{\vec f}(PAP^{-1})Y
+  $,
+  \Tr{with}{med}
+  $\underline{\vec e},\; \underline{\vec f},\; P$ \Tr{as above}{som ovan}
+  \\
   \hline
-\end{tabular}
+\end{tabular}%>>>
 
-\subsection*{Egenvärden och egenvektorer}
+\subsection*{\Tr{Egenvalues och egenvectors}{Egenvärden och egenvektorer}}%<<<
 \label{subsection*}
 \begin{tabular}{|p{0.2\linewidth}|p{0.75\linewidth}|}
   \hline\\*[-9pt]
-  Definition&Matrisen $A$ har \emph{egenvektorn} $\vec u\neq\vec0$ med
-  \emph{egenvärdet} $\lambda$ om
-  $A\vec u=\lambda\vec u$.
+  Definition:
+  &
+  \Tr{The matrix}{Matrisen}
+  $A$
+  \Tr{has eigenvector}{har egenvektorn}
+  $\bdu\neq\vec0$
+  \Tr{to the eigenvalue}{med egenvärdet}
+  $\lambda$
+  \Tr{if}{om}
+  $A\bdu=\lambda\bdu$
   \\*[2pt] \hline\\*[-9pt]
-  Egenvärdena $\lambda_k$ 
-   & bestäms som lösningarna till den karakteristiska ekvationen 
-   $\det(A-\lambda I)=0$.\\
-  Egenvektorerna $\vec u_k$& bestäms ur det homogena systemet $(A-\lambda I)\vec u=\mathbf{0}$.
+  \Tr{The eigenvalues}{Egenvärdena}
+  $\lambda_k$
+   &
+   \Tr{are roots to the chacteristic equation}
+   {bestäms som lösningarna till den karakteristiska ekvationen}
+   $\det(A-\lambda I)=0$\\
+   \Tr{The eigenvectors}{Egenvektorerna}
+  $\bdu_k$
+  &
+  \Tr{are solutions to the homogeneous system}{bestäms ur det homogena systemet}
+  $(A-\lambda I)\bdu=\mathbf{0}$
   \\*[2pt] \hline\\*[-9pt]
 %%   Diagonalisering&Om $n\times n$-matrisen $A$ har $n$ olika egenvärden
 %%   $\lambda_1,\dots,\lambda_n$ med motsvarande egenvektorer
-%%   $\vec u_1,\dots,\vec u_n$, är $A=PDP^{-1}$ där
-Diagonalisering&Om $n\times n$-matrisen $A$ har $n$ st linjärt oberoende
-egenvektorer $\vec u_1,\dots,\vec u_n$ med motsvarande egenvärden
-$\lambda_1,\dots,\lambda_n$, är $A=PDP^{-1}$ där
+%%   $\bdu_1,\dots,\bdu_n$, är $A=PDP^{-1}$ där
+  \Tr{Diagonalization}{Diagonalisering}
+&
+\Tr{If the}{Om}
+$n\times n$-\Tr{matrix}{matrisen}
+$A$
+\Tr{has}{har} $n$
+\Tr{linear independent eigenvectors}{st linjärt oberoende egenvektorer}
+$\bdu_1,\dots,\bdu_n$
+\Tr{to the eigenvalues}{med motsvarande egenvärden}
+$\lambda_1,\dots,\lambda_n$,
+\Tr{then}{då är}:
 \vspace{-10pt}
-  $$ P=
-  \begin{pmatrix}
+  $$
+A=PDP^{-1}\;
+\mbox{ \Tr{with}{där} }\;
+   P=\begin{pmatrix}
     |&&|\\
-    \vec u_1&\dots&\vec u_n\\
+    \bdu_1&\dots&\bdu_n\\
     |&&|
   \end{pmatrix}
-  \mbox{ \ och \ \ }
+  \mbox{ \ \Tr{and}{och} \ \ }
   D = \begin{pmatrix}
     \lambda_1&\dots&0\\
     \vdots&\ddots&\vdots\\
     0&\dots&\lambda_n
-  \end{pmatrix}.
+  \end{pmatrix}
   $$
   \vspace{-12pt}
   \\
   \hline
-\end{tabular}
+\end{tabular}%>>>
 
-\subsection*{Huvudsatsen}
+\subsection*{\Tr{The Unifying Theorem: Equivalent claims for a square matrix}%<<<
+                {Huvudsatsen: Ekvivalents påståenden för en kvadratisk matris}
+               $A_{n\times n}$}
 
-%% Låt $A$ vara en $n\times n$--matris.\\*[10pt]
-\begin{tabular}{|p{0.475\linewidth}|p{0.475\linewidth}|}
-  \hline
-  &\\*[-10pt]
-%  Låt $A$ vara en $n\times n$--matris.\hfill\break
-  Ekvivalenta påståenden för en $n\times n$--matris $A$:
-& % Låt $A$ vara en $n\times n$--matris.\hfill\break
-  %% Följande påståenden är ekvivalenta:
-  Ekvivalenta påståenden för en $n\times n$--matris $A$:
-  \\
-  \hline
-  \\*[-24pt]
   \begin{itemize}\addtolength{\itemsep}{-5pt}
+  \item $A\sim I$ ($\mbox{rank}(A)=n$)
   \item $\det(A)\ne0$
-  \item $A$ är inverterbar
-  \item $A\sim I$ (dvs $A$ är radekvivalent med $I$)
-  \item Ekvationssystemet $A\vec x=\vec 0$ har endast den triviala
-    lösningen $\vec x=\vec 0$
-  \item Ekvationssystemet $A\vec x=\vec b$ har en entydig lösning för
-    varje val av högerledet $\vec b$
-  \item $A$:s rader är linjärt oberoende
-  \item $A$:s rader utgör en bas för $\mathbb{R}^n$
-  \item $A$:s kolonner är linjärt oberoende
-  \item $A$:s kolonner utgör en bas för $\mathbb{R}^n$
-  \item Avbildningen $F(\vec x)=A\vec x$ är omvändbar % injektiv, surjektiv och inverterbar.
-  \item $A$:s egenvärden är alla skilda från $0$
-  \end{itemize}
-  \vspace{-16pt}
-  &
-  \begin{itemize}\addtolength{\itemsep}{-5pt}
-  \item $\det(A)=0$
-  \item $A$ är inte inverterbar
-  \item $A$ är inte radekvivalent med $I$
-  \item Ekvationssystemet $A\vec x=\vec 0$ har oändligt många lösningar
-  \item Ekvationssystemet $A\vec x=\vec b$ saknar lösning eller också
-    har det oändligt många lösningar
-  \item $A$:s rader är linjärt beroende
-  \item $A$:s rader utgör inte bas för $\mathbb{R}^n$
-  \item $A$:s kolonner är linjärt beroende
-  \item $A$:s kolonner utgör inte bas för $\mathbb{R}^n$
-  \item Avbildningen $F(\vec x)=A\vec x$ är inte omvändbar % varken injektiv, surjektiv eller inverterbar.
-  \item $0$ är ett egenvärde till $A$
-  \end{itemize}
-  \vspace{-16pt}
-  \\
-  \hline
-\end{tabular}
+  \item \Tr{A unique inverse}{Existerar entydig invers} \/ $A^{-1}$ \Tr{exists}{}
+  \item
+    \Tr{The system}{Ekvationssystemet}
+    $A\bdx=\bdzero$
+    \Tr{has only the trivial solution}{har endast den triviala lösningen}
+    $\bdx=\bdzero$
+  \item
+    \Tr{The homogeneous system}{Ekvationssystemet}
+    $A\bdx=\bdb$
+    \Tr{has a unique solution for any}{har en entydig lösning för varje val av högerledet}
+    $\bdb$
+  \item $A$
+    \Tr{'s rows are linear independent and form a basis for}{:s rader är linjärt oberoende och utgör en bas för}
+    $\mathbb{R}^n$
+  \item $A$
+    \Tr{'s columns are linear independent and form a basis for}{:s kolonner är linjärt oberoende och utgör en bas för}
+    $\mathbb{R}^n$
+  \item
+    \Tr{The linear map}{Avbildningen}
+    $F(\bdx)=A\bdx$
+    \Tr{is invertible}{är omvändbar}
+  \item
+    \Tr{All eigenvalues of}{Alla egenvärden till}
+    $A$
+    \Tr{are different from}{är skilda från}
+    $0$.
+  \end{itemize}%>>>
 
 \label{fin@lpage}
 
 
 \end{document}
+
+% vim: foldmethod=marker
