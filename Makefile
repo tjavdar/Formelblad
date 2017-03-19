@@ -58,12 +58,11 @@ xr4: $(FILE)-x4.pdf $(FILE)-x4.pdfsq $(WWWDIR)/$(FILE)-x4.pdf
 tables: $(TEXTABLES)
 
 www-en:
-	make en
-	make WWWDIR=$(WWWDIR)/en www
+	make WWWDIR=$(WWWDIR)/en en www
 www-sv:
-	make sv
 	make WWWDIR=$(WWWDIR)/sv sv www
-www-en+sv www-sv+en: www-en www-sv
+www-en+sv: www-en www-sv
+www-sv+en: www-sv www-en
 
 www: xr xr2 xr4
 	@echo; echo Created and moved:
