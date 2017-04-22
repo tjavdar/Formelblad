@@ -72,8 +72,8 @@ Variables: &
   $\bds_{m\times1}$ (slack/surplus),
   $\bda$ (artificial)
 \cr
-B-N refactoring:
-  & $(A,I_m)=(B_{m\times m},N_{m\times n})$ (Basic columns, Non-basic columns) \cr
+Block partition:
+  & $(A,I_m)\rightsquigarrow(B_{m\times m},N_{m\times n})$ (Basic columns, Non-basic columns) \cr
   & $
      \tvavektor[\bdx,\bds]
      = \tvavektor[{\bdx_B}_{m\times 1},{\bdx_N}_{n\times 1}]
@@ -88,7 +88,7 @@ B-N refactoring:
 \end{tabular}
 %>>>
 
-\subsubsection*{Standard matrix representation for a max LP:}%<<<
+\subsubsection*{The normal max LP problem:}%<<<
 \[
   \boxed{
     \begin{array}[m]{ll}
@@ -118,7 +118,7 @@ B-N refactoring:
   \;\leftrightsquigarrow\;
   \boxed{\{\max\; z=\bdc^T\bdx; A\bdx\le\bdb,\, \bdx\ge\bdzero\}}
 \]
-\textbf{The standard min LP problem}: \hspace{4.3em}
+\textbf{The normal min LP problem}: \hspace{4.3em}
 $
   \boxed{
     \begin{array}[m]{ll}
@@ -136,7 +136,7 @@ $
 $
 %>>>
 
-\subsubsection*{The max LP in canonical form, initial and final Simplex Tableau at optimum:}%<<<
+\subsubsection*{The max LP in standard form, initial and final Simplex Tableau at optimum:}%<<<
 \[
   \begin{cases}
     \begin{array}[m]{*{5}{lc}}
@@ -144,13 +144,13 @@ $
       & &   A\bdx    &+&   I_m\bds     &=& \bdb \cr
     \end{array}
   \end{cases}
-  \;\rightsquigarrow\;
+  \rightsquigarrow\;
     \begin{array}[m]{c|ccc|c}
  \perp &     z   & \bdx^T & \bds^T     & \hat\bdb \cr\hline\rule{0pt}{10pt}
     z  &     1   &-\bdc^T & \bdzero^T  &   0    \cr %\hline
  \bds  & \bdzero & A      & I_m        & \bdb   \cr
     \end{array}
-  \;\sim\;\cdots\;\sim\;
+  \quad\sim\;\cdots\;\sim\quad
     \begin{array}[m]{c|ccc|c}
  \perp &     z   &     \bdx^T &     \bds^T   & \hat\bdb \cr\hline\rule{0pt}{10pt}
  z  &     1   &-\hat\bdc^T &     \bdy^{*T} & z^*\cr %\hline
@@ -159,7 +159,7 @@ $
 \]
 %>>>
 
-\subsubsection*{The final max LP Simplex Tableau refactored in Basic/Non-basic columns:}%<<<
+\subsubsection*{The final max LP Simplex Tableau partitioned in Basic/Non-basic columns:}%<<<
 \[
   \begin{cases}
     \begin{array}[m]{*{5}{lc}}
@@ -176,10 +176,84 @@ $
     \end{array}
 \]
 Here \fbox{$\bdy^*=B^{-1}\bdc_B$} are the dual vars and
-\fbox{$\hat\bdc_N=\bdc_N-\bdc_B^TB^{-1}N=\bdc-y^{*T}N<0$} the reduced costs at opt.
+\fbox{$\hat\bdc_N=\bdc_N-\bdc_B^TB^{-1}N=\bdc-y^{*T}N\le0$} the reduced costs at opt.
 %>>>
 
+% Weak + Strong Duality<<<
+\textbf{Weak duality}: For any feasible $\bdx$ in (P) and $\bdy$ in (D) holds:
+\fbox{$
+  z = \bdc^T\bdx \le \bdy^TA\bdx \le \bdy^T\bdb = w.
+$}
+\begin{itemize}
+  \item If (P) is unbounded $\ergo$ (D) is infeasible.
+        If (D) is unbounded $\ergo$ (P) is infeasible
+  \item If both $\bdx^*$ is feasible in (P) and
+                $\bdy^*$ is feasible in (D) and
+                \[
+                  \boxed{z^*=\bdc^T\bdx^* = \bdy^{*T}A\bdx^*=\bdb^T\bdy^*=w^*,}
+                  \eqno(\star)
+                \]
+                then
+                $\bdx^*$ is optimal in (P)
+           and  $\bdy^*$ is optimal in (D).
+\end{itemize}
+
+\textbf{Strong duality}: If either (P) or (D) has a bounded optimal solution,
+so has the other and $(\star)$ holds.%>>>
+
+\textbf{Complementary slackness at optimum}:%<<<
+$
+\begin{cases}
+  \bdy^{*T}(\bdb-A\bdx^*)=0
+  \iff y_i^*(b_i-\sum_{j=1}^{n} a_{ij}x_j^*) = 0, \;
+   i=1,\ldots,m
+\cr
+  (\bdy^{*T}A-\bdc)\bdx^*=0 \iff x_j^*(\sum_{i=1}^m y_i^*a_{ij}-c_j)=0,
+  \; j=1,\ldots, n.\cr
+\end{cases}
+$%>>>
+
+\textbf{Duality between normal LP's:}%<<<
+\(
+  (P):
+    \begin{cases}
+    \max~z=\bdc^T\bdx \cr
+     A\bdx\le\bdb,\;  \bdx\ge\bdzero
+    \end{cases}
+   \;\leftrightsquigarrow\;
+    (D):\begin{cases}
+    \min~w=\bdb^T\bdy\cr
+    A^T\bdy\ge\bdc,\;\bdy\ge\bdzero.
+    \end{cases}
+\)%>>>
+
+\medskip \textbf{Involution property}: %<<<
+The dual problem of the dual is the
+primal problem. (The dual of a min problem is a max problem and vice versa. The
+dual of a variable is a constraint slack and vice versa, etc.)%>>>
+
+\smallskip \textbf{Correspondence $(P)\leftrightsquigarrow (D)$}: %<<<
+\begin{tabular}[m]{|l|c|c|c|}
+  \hline
+  Constraint $i$-th in (P):
+  & $\textstyle\sum_j a_{ij}x_j\le b_i$
+  & $\textstyle\sum_j a_{ij}x_j\ge b_i$
+  & $\textstyle\sum_j a_{ij}x_j =  b_i$
+  \cr\hline
+  Sign of $y_i$ in $(D)_{\max}$:
+    & $y_i\le 0$
+    & $y_i\ge 0$
+    & $y_i$ free \cr
+  Sign of $y_i$ in $(D)_{\min}$:
+    & $y_i\ge 0$
+    & $y_i\le 0$
+    & $y_i$ free
+  \cr\hline
+\end{tabular}
+
+
+
 \label{LastPageNo}
-\end{document}
+\end{document}%>>>
 
 % vim: foldmethod=marker spelllang=en
