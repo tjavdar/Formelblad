@@ -201,7 +201,7 @@ $}
 \textbf{Strong duality}: If either (P) or (D) has a bounded optimal solution,
 so has the other and $(\star)$ holds.%>>>
 
-\textbf{Complementary slackness at optimum}:%<<<
+\textbf{Complementary slackness at optimum}: %<<<
 $
 \begin{cases}
   \bdy^{*T}(\bdb-A\bdx^*)=0
@@ -213,38 +213,41 @@ $
 \end{cases}
 $%>>>
 
-\textbf{Duality between normal LP's:}%<<<
+\textbf{Duality between normal LP's: }%<<<
 \(
-  (P):
+  (P)\!:
     \begin{cases}
     \max~z=\bdc^T\bdx \cr
      A\bdx\le\bdb,\;  \bdx\ge\bdzero
     \end{cases}
    \;\leftrightsquigarrow\;
-    (D):\begin{cases}
+    (D)\!:\begin{cases}
     \min~w=\bdb^T\bdy\cr
     A^T\bdy\ge\bdc,\;\bdy\ge\bdzero.
     \end{cases}
 \)%>>>
 
 \medskip \textbf{Involution property}: %<<<
-The dual problem of the dual is the
-primal problem. (The dual of a min problem is a max problem and vice versa. The
-dual of a variable is a constraint slack and vice versa, etc.)%>>>
+The dual of the dual is the
+primal problem. In particular, the dual of a min problem is a max problem and vice versa;
+a variable in (P) corresponds to a constraint in (D) and vice versa: %>>>
 
-\smallskip \textbf{Correspondence $(P)\leftrightsquigarrow (D)$}: %<<<
-\begin{tabular}[m]{|l|c|c|c|}
+\smallskip\hfil % \textbf{Correspondence}: %<<<
+\begin{tabular}[m]{|c|l|c|c|c|}
   \hline
-  Constraint $i$-th in (P):
-  & $\textstyle\sum_j a_{ij}x_j\le b_i$
-  & $\textstyle\sum_j a_{ij}x_j\ge b_i$
-  & $\textstyle\sum_j a_{ij}x_j =  b_i$
+  Corresp.~$(P)\leftrightsquigarrow (D)$
+  & Constraint${}_i$ in (P):
+  & $\textstyle\sum a_{ij}x_j\le b_i$
+  & $\textstyle\sum a_{ij}x_j\ge b_i$
+  & $\textstyle\sum a_{ij}x_j =  b_i$
   \cr\hline
-  Sign of $y_i$ in $(D)_{\max}$:
+  $(P)_{\min}\iff(D)_{\max}$
+    & Sign of $y_i$ in $(D)_{\max}$:
     & $y_i\le 0$
     & $y_i\ge 0$
     & $y_i$ free \cr
-  Sign of $y_i$ in $(D)_{\min}$:
+  $(P)_{\max}\iff(D)_{\min}$
+    & Sign of $y_i$ in $(D)_{\min}$:
     & $y_i\ge 0$
     & $y_i\le 0$
     & $y_i$ free
