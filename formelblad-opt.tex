@@ -55,42 +55,47 @@
 
 \subsubsection*{Notation:}%<<<
   \begin{tabular}{ll}
-Constant matrices: &
+Parameters: &
   $\bdb_{m\times1}$,
   $A_{m\times n}$,
   $\bdc_{n\times1}$,
-  $\bdzero=(0,\ldots,0)^T$,
-  $I_p$ (identity matrix, order $p$)
+  % $\bdzero=(0,\ldots,0)^T$,
+  % $I_m$ (unit matrix),
+  (intermediate values: $\hat \bdb$, $\hat\bdc$)
 \cr
 Variables: &
-  $z$, $w$ (primal/dual objective function),
-  $z^*$, $w^*$ (values at optimum)
+  $z$, $w$ (primal, dual objective~f-n),
+  $\bdx_{n\times1}$ (primal decision),
+  $\bdy_{m\times1}$ (dual ditto),
 \cr
   &
-  $\bdx_{n\times1}$ (primal decision),
-  $\bdy_{m\times1}$ (dual),
+  $z^*$, $\bdx^*$,
+  $w^*$, $\bdy^*$
+  (values at optimum);
   $\bds_{m\times1}$ (slack/surplus),
   $\bda$ (artificial)
 \cr
-Block partition:
-  & $(A,I_m)\rightsquigarrow(B_{m\times m},N_{m\times n})$ (Basic columns, Non-basic columns) \cr
-  & $
-     \tvavektor[\bdx,\bds]
-     = \tvavektor[{\bdx_B}_{m\times 1},{\bdx_N}_{n\times 1}]
-     $, $
-     \tvavektor[\bdc,\bdzero]
-     = \tvavektor[{\bdc_B}_{m\times 1},{\bdc_N}_{n\times 1}]$
-     $ \;\rightsquigarrow\;\tvavektor[
-       \text{Basic},
-       \text{Non-basic}
-     ]$
-     variables/coefficients.\cr
+Partitioning:
+  & $(A,I_m)\rightsquigarrow(B_{m\times m},N_{m\times n})$,
+    $(\bdx_B,\bdx_N)$,
+    $(\bdc_B,\bdc_N)$
+     $\rightsquigarrow$
+  (Basic, Non-basic) columns \cr
+%  & $(\bdx_B,\bdx_N)$,
+%    $(\bdc_B,\bdc_N)$
+%     $\rightsquigarrow$
+%       (Basic, Non-basic)
+%     variables/coefficients.\cr
 \end{tabular}
 %>>>
 
-\subsubsection*{The normal max LP problem:}%<<<
+%%\subsubsection*{The normal max LP problem:}%<<<
 \[
-  \boxed{
+  \begin{array}[m]{|c|c|}
+  \hline
+  \textbf{The normal max LP problem:} &
+  \textbf{The normal min LP problem:}
+  \\ \hline
     \begin{array}[m]{ll}
       \max & z = c_1x_1+c_2x_2+\cdots+c_nx_n \cr
       \mbox{s.t.} &
@@ -102,7 +107,6 @@ Block partition:
         \hfill x_1,x_2,\ldots,x_n  &\ge 0.
       \end{cases}
     \end{array}
-  } % boxed
   \;\leftrightsquigarrow\;
   \boxed{
     \begin{array}[m]{ll}
@@ -115,11 +119,7 @@ Block partition:
       \end{cases}
     \end{array}
   } % boxed
-  \;\leftrightsquigarrow\;
-  \boxed{\{\max\; z=\bdc^T\bdx; A\bdx\le\bdb,\, \bdx\ge\bdzero\}}
-\]
-\textbf{The normal min LP problem}: \hspace{4.3em}
-$
+  &
   \boxed{
     \begin{array}[m]{ll}
       \min & z=\bdc^T\bdx\cr
@@ -131,9 +131,11 @@ $
       \end{cases}
     \end{array}
   } % boxed
-  \;\leftrightsquigarrow\;
-\boxed{\{\min\; z=\bdc^T\bdx; A\bdx\ge\bdb,\, \bdx\ge\bdzero\}}
-$
+  \cr\hline
+  \end{array}
+% \;\leftrightsquigarrow\;
+% \boxed{\{\max\; z=\bdc^T\bdx; A\bdx\le\bdb,\, \bdx\ge\bdzero\}}
+\]
 %>>>
 
 \subsubsection*{The max LP in standard form, initial and final Simplex Tableau at optimum:}%<<<
@@ -159,7 +161,7 @@ $
 \]
 %>>>
 
-\subsubsection*{The final max LP Simplex Tableau partitioned in Basic/Non-basic columns:}%<<<
+\subsubsection*{The final max LP Simplex Tableau partitioned after Basic/Non-basic columns:}%<<<
 \[
   \begin{cases}
     \begin{array}[m]{*{5}{lc}}
@@ -180,6 +182,7 @@ Here \fbox{$\bdy^*=B^{-1}\bdc_B$} are the dual vars and
 %>>>
 
 % Weak + Strong Duality<<<
+\bigskip
 \textbf{Weak duality}: For any feasible $\bdx$ in (P) and $\bdy$ in (D) holds:
 \fbox{$
   z = \bdc^T\bdx \le \bdy^TA\bdx \le \bdy^T\bdb = w.
@@ -201,7 +204,7 @@ $}
 \textbf{Strong duality}: If either (P) or (D) has a bounded optimal solution,
 so has the other and $(\star)$ holds.%>>>
 
-\textbf{Complementary slackness at optimum}: %<<<
+\medskip\textbf{Complementary slackness at optimum}: %<<<
 $
 \begin{cases}
   \bdy^{*T}(\bdb-A\bdx^*)=0
@@ -213,26 +216,30 @@ $
 \end{cases}
 $%>>>
 
-\textbf{Duality between normal LP's: }%<<<
+\medskip\textbf{Duality between normal LP's: }%<<<
 \(
+\boxed{
   (P)\!:
-    \begin{cases}
+  \begin{cases}
     \max~z=\bdc^T\bdx \cr
-     A\bdx\le\bdb,\;  \bdx\ge\bdzero
-    \end{cases}
+    A\bdx\le\bdb,\;  \bdx\ge\bdzero
+  \end{cases}
+}
    \;\leftrightsquigarrow\;
-    (D)\!:\begin{cases}
-    \min~w=\bdb^T\bdy\cr
-    A^T\bdy\ge\bdc,\;\bdy\ge\bdzero.
-    \end{cases}
+   \boxed{
+     (D)\!:\begin{cases}
+       \min~w=\bdb^T\bdy\cr
+       A^T\bdy\ge\bdc,\;\bdy\ge\bdzero.
+     \end{cases}
+   }
 \)%>>>
 
-\medskip \textbf{Involution property}: %<<<
+\bigskip \textbf{Involution property}: %<<<
 The dual of the dual is the
 primal problem. In particular, the dual of a min problem is a max problem and vice versa;
 a variable in (P) corresponds to a constraint in (D) and vice versa: %>>>
 
-\smallskip\hfil % \textbf{Correspondence}: %<<<
+\medskip\hfil % \textbf{Correspondence}: %<<<
 \begin{tabular}[m]{|c|l|c|c|c|}
   \hline
   Corresp.~$(P)\leftrightsquigarrow (D)$
