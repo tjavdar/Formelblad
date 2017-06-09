@@ -1,0 +1,345 @@
+% vim: foldmethod=marker:spelllang=sv:spell
+% ------------------------------------------------------------------
+% Formelblad Matematiska verktyg 
+% Version 0.5 IvTj, 2011-01-13: 
+
+
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{a4,graphicx,amssymb}
+\usepackage{array} % For fancy tables
+%%% instead of \usepackage{fullpage} <<<
+\topmargin 0pt
+\advance \topmargin by -\headheight
+\advance \topmargin by -\headsep
+\textheight 8.9in
+\oddsidemargin 0pt
+\evensidemargin \oddsidemargin
+\marginparwidth 0.5in
+\textwidth 6.5in
+% >>>
+
+\pagestyle{headings}
+\textheight=720pt\parindent=0pt
+
+
+%% <<< Former \input\jobname.h ----------------
+
+%-------------
+%- LaTeX def's
+%-------------
+
+\let\UP\nearrow
+\let\DN\searrow
+\everymath{\displaystyle}
+
+%--------------------------- Facit macros ------
+
+\def\contentsname{} % Erase it
+\def\Facit#1{\par
+
+\addtocontents{toc}{{\small\protect\item[\textbf{\theenumi.}]#1\par\smallskip\hrule\par}}}
+\def\BeginUppg{\par\addtocontents{toc}{\par\protect\begin{enumerate}}
+               \par\begin{enumerate}}
+\def\EndUppg{\addtocontents{toc}{\protect\end{enumerate}}\par\end{enumerate}}
+
+\newcommand{\mymatrix}[2]{\left(\begin{array}{#1} #2\end{array}\right)}
+\newcommand{\mydet}[2]{\left|\begin{array}{#1} #2\end{array}\right|}
+
+\newcommand\dd[2]{\frac{\partial #1}{\partial #2}}
+\newcommand\lvec[1]{\stackrel{\longrightarrow}{#1}}
+
+\newcommand\tightSvar[1]{\fbox{\textbf{A:} #1}}
+\let\Svar\tightSvar
+
+%--------------------------- end Facit macros ------
+
+\makeatletter
+\renewcommand{\@oddhead}{}
+\renewcommand{\@evenhead}{}
+\renewcommand{\@oddfoot}
+{\ifnum\thepage=1 
+  \today\hfill file:~\small\texttt{\jobname.pdf}
+\else
+  Formelblad Trans \& Stat \hfill s.~\thepage{} av \pageref{LastPageNo} 
+\fi}
+      
+  \renewcommand{\@evenfoot}{\small
+        \texttt{\jobname.pdf},\hfill}
+
+\makeatother
+
+%% restore good old TeX \eqalign:
+\makeatletter
+
+\def\eqalign#1{\null\,\vcenter{\openup\jot\m@th
+  \ialign{\strut\hfil$\displaystyle{##}$&$\displaystyle{{}##}$\hfil
+      \crcr#1\crcr}}\,}
+
+\def\iint{\mathop{\relax\protect
+    \noexpand\intop\mkern-9mu\noexpand\intop}\displaylimits}
+
+\def\iiint{\mathop{\relax\protect
+    \noexpand\intop\mkern-9mu\noexpand\intop\mkern-9mu\noexpand\intop}\displaylimits}
+
+
+\makeatother
+
+
+\def\ppmatrix{\protect\pmatrix}
+\def\pcases{\protect\cases}
+\newcommand\pdet[1]{\protect\left|\protect\matrix{#1}\protect\right|}
+\newcommand\Ordo{\mathcal O}
+\let\ergo\Longrightarrow
+\let\vaxer\nearrow
+\let\avtar\searrow
+\newcommand\conj[1]{{\overline #1}}
+\let\ob\conj
+\newcommand\binom[2]{{#1\choose #2}}
+
+%% Boldface things %%
+
+\newcommand\bdF{\mathbf F}
+\newcommand\bdE{\mathbf E}
+\newcommand\bdC{\mathbf C}
+\newcommand\bdS{\mathbf S}
+\newcommand\bdG{\mathbf G}
+\newcommand\bdN{\mathbf N}
+
+\newcommand\bda{\mathbf a}
+\newcommand\bdb{\mathbf b}
+\newcommand\bdc{\mathbf c}
+\newcommand\bde{\mathbf e}
+\newcommand\bdf{\mathbf f}
+\newcommand\bdg{\mathbf g}
+\newcommand\bdh{\mathbf h}
+\newcommand\bdi{\mathbf i}
+\newcommand\bdj{\mathbf j}
+\newcommand\bdk{\mathbf k}
+\newcommand\bdm{\mathbf m}
+\newcommand\bdn{\mathbf n}
+\newcommand\bdp{\mathbf p}
+\newcommand\bdq{\mathbf q}
+\newcommand\bdr{\mathbf r}
+\newcommand\bdu{\mathbf u}
+\newcommand\bdv{\mathbf v}
+\newcommand\bdx{\mathbf x}
+\newcommand\bdy{\mathbf y}
+\newcommand\bdw{\mathbf w}
+\newcommand\bdzero{\mathbf 0}
+
+% - sets -
+\def\Rone{{\mathbb R}}
+\def\Cone{{\mathbb C}}
+\def\Zone{{\mathbb Z}}
+
+% - operators -
+
+\def\norm#1{{\Vert #1\Vert}}
+\def\SP#1{\langle #1\rangle}
+\def\Ordo{\mathcal O}
+\def\Fourier#1{\mathcal F\left\{#1\right\}}
+\def\Laplace#1{\mathcal L\left\{#1\right\}}
+\def\invFourier#1{\mathcal F^{-1}\left\{#1\right\}}
+\def\invLaplace#1{\mathcal L^{-1}\left\{#1\right\}}
+\let\invFF\invFourier
+\let\FF\Fourier
+\let\invLL\invLaplace
+\let\LL\Laplace
+
+% - förkortnngar
+
+\newcommand\mha{med hjälp av }
+\newcommand\bis{^{\prime\prime}}
+\newcommand\triss{^{'''}}
+\newcommand\PartInt[2]{\left\lceil\matrix{\mbox{\small #1}\cr
+                                       \mbox{\small #2}}\right\rceil}
+\def\tfrac{\textstyle\frac}
+
+%adjust row height in tables #1 - overall height #2 - depth:
+\newcommand\TblHeight[2]{\lower#2em\vbox to#1em{\hsize=0pt}}
+\def\tvavektor[#1,#2]{\protect\pmatrix{#1\cr #2}}
+\def\trevektor[#1,#2,#3]{\protect\pmatrix{#1\cr #2\cr #3}}
+\let\ob\overline
+\let\iff\Leftrightarrow
+
+
+%% End \input\jobname.h fold >>> -
+
+
+\let\ergo\Rightarrow
+
+\begin{document}
+
+
+\subsection*{Formelblad Diskretmatematik} 
+\hrule
+\bigskip
+
+\subsubsection*{De grundläggande logiska konnektiven och deras sanningsvärdestabeller}%<<<
+
+\begin{tabular}[m]{|l*{3}{|c}|}%<<<
+\cline{2-4}
+\multicolumn{1}{c|}{} & \textbf{och} &\textbf{eller} & \textbf{inte}\\
+\hline
+  Engelska &   AND    &   OR     &   NOT  \\
+\hline
+  Logiksymbol      & $\wedge$ & $\vee$   & $\neg$ \\
+\hline
+  Mängdsymbol      & $\cap$   & $\cup$   & ${}^c$ \\
+\hline
+Boolesk symbol   & $\cdot$  &    $+$   & \raise5pt\hbox{$-$} \\
+\hline
+  C-program        & \&\& & $||$ & ! \\
+\hline
+ & & & \\[-8pt]
+ \raise5pt\hbox{Gate (en)\,/\,grind (sv)}
+  & \lower0pt\hbox{\includegraphics[scale=0.7]{Figs/gate_and}}
+  & \lower0pt\hbox{\includegraphics[scale=0.7]{Figs/gate_or}} 
+  & \lower0pt\hbox{\includegraphics[scale=0.7]{Figs/gate_not}}
+     \\
+\hline
+\end{tabular}%>>>
+\hfil
+\begin{tabular}[m]{|*{7}{>{$}c<{$}|}}%<<<
+  \hline
+    p & q & \neg p & p \wedge q & p \vee q & p \to q & p \leftrightarrow q\\
+  \hline
+    0 & 0 &    1   &       0    &     0    &    1    &         1     \\
+  \hline
+    0 & 1 &    1   &       0    &     1    &    1    &         0     \\
+  \hline
+    1 & 0 &    0   &       0    &     1    &    0    &         0     \\
+  \hline
+    1 & 1 &    0   &       1    &     1    &    1    &         1     \\
+  \hline
+  \multicolumn{7}{l}{\rule{0pt}{12pt}Omskrivningar:} \\
+  \multicolumn{7}{l}{$ p\to q \iff \neg p \vee q $} \\
+  \multicolumn{7}{l}{$p \leftrightarrow q
+                      \iff 
+                      (p\to q) \wedge ( q \to p ) 
+  $}
+\end{tabular}%>>>
+%>>>
+
+\subsubsection*{Räkneregler i satslogiken och i booleska algebran}%<<<
+\begin{tabular}[t]{|l|*{3}{>{$}c<{$}|}}
+\hline
+\textbf{Lagar}
+ & \textbf{Mängdlära} & \textbf{Satslogik} &\textbf{Boolesk algebra} \\
+\hline
+Dubbelnegation \rule{0pt}{10pt}
+               &  \scriptstyle  (P^c)^c = P
+               &  \neg (\neg p) \iff p & \ob{\ob p} = p \\
+\hline
+Idempotens
+                & \scriptstyle  P\cup P = P
+                & p\vee p \iff p & p + p = p\\
+                & \scriptstyle  P\cap P = P
+                & p\wedge p \iff p & p^2 = p\\
+\hline
+Invers
+                & \scriptstyle  P\cup P^c =\mkern2mu\mathcal U
+                & p\vee\neg p \iff 1   & p + \ob p = 1\\
+                & \scriptstyle  P\cap P^c =\varnothing
+                & p\wedge\neg p \iff 0 & p\,\ob p = 0\\
+\hline
+Dominans
+                & \scriptstyle  P \cup \mkern2mu\mathcal U = \mkern2mu\mathcal U
+                & p \vee 1 \iff 1 & p + 1 = 1 \\
+                & \scriptstyle  P \cap \varnothing = P
+                & p\wedge0 \iff 0 & p \cdot 0  = 0 \\
+\hline
+Identitet
+                & \scriptstyle  P \cup \varnothing = P
+                & p \vee 0 \iff p  & p + 0 = p \\
+                & \scriptstyle  P \cap \mkern2mu\mathcal U = P
+                & p\wedge 1 \iff p & p\cdot 1 = p\\
+\hline
+Kommutativa
+                  & \scriptstyle  P\cup Q=Q\cup P
+                  & p \vee q \iff q \vee p & p + q = q + p \\
+                  & \scriptstyle  P\cap Q=Q\cap P
+                  & p \wedge q \iff q \wedge p & pq = qp\\
+\hline
+Associativa
+                  & \scriptstyle  (P\cup Q)\cup R = P\cup(Q\cup R)
+                  & (p \vee q) \vee r \iff p \vee (q \vee r) 
+                  & (p + q) + r = p + (q + r) \\
+                  & \scriptstyle  (P\cap Q)\cap R = P\cap(Q\cap R)
+                  & (p \wedge q)\wedge r \iff p \wedge (q\wedge r) 
+                  & (pq)r = p(qr)\\
+\hline
+de Morgan \rule{0pt}{10pt}
+                  & \scriptstyle  (P\cup Q)^c = P^c\cap Q^c
+                  & \neg ( p \vee q ) \iff \neg p \wedge \neg q 
+                  & \ob {p + q}  = \ob p\,\ob q \\
+                  & \scriptstyle  (P\cap Q)^c = P^c\cup Q^c
+                  & \neg ( p \wedge q ) \iff \neg p \vee \neg q 
+                  & \ob {pq}  = \ob p+\ob q \\
+\hline
+Distributiva
+                  & \scriptstyle (P\cup Q)\cap R = (P\cap R)\cup(Q\cap R)
+                  & p \vee (q \wedge r ) \iff (p \vee q) \wedge (p \vee r) 
+                  & p + qr = (p + q)(p + r) \\
+                  & \scriptstyle (P\cap Q)\cup R = (P\cup R)\cap(Q\cup R)
+                  & p \wedge (q\vee r)\iff (p \wedge q) \vee (p\wedge r) 
+                  & p(q+r) = pq+pr\\
+\hline
+Absorbering
+                  & \scriptstyle  P\cup (P\cap Q)=P
+                  & p \vee (p \wedge q ) \iff p 
+                  & p + pq = p \\
+                  & \scriptstyle  P\cap (P\cup Q)=P
+                  & p \wedge (p\vee q)\iff p
+                  & p(p+q) = p\\
+\hline
+\end{tabular}
+%>>>
+
+\subsubsection*{Inferensregler (Logiska Implikationer)}%<<<
+\begin{tabular}[t]{*{4}{>{$}l<{$}}l}
+  L_0
+  & p\land (p\to q) &\ergo& q
+  & \emph{Modus Ponens} 
+  \cr
+  L_1
+  & (p\to q)\land\lnot q &\ergo& \lnot p
+  & \emph{Modus Tollens}
+  \cr
+  L_2
+  & (p\to q)\land(q\to r) &\ergo&  (p\to r)
+  & \emph{Hypotetisk syllogism}
+  \cr
+  L_3
+  & \lnot p \land (p\lor q) &\ergo& q
+  & \emph{Disjunktiv syllogism}
+  \cr
+  L_4
+  & p\land q &\ergo& p
+  & \emph{Konunktiv förenkling}
+  \cr
+  L_5
+  & p &\ergo& p\lor q
+  & \emph{Disjunktiv förstärkning}
+  \cr
+  L_6
+  & (p\to q) \land (r\to s) \land (p\lor r) &\ergo& q\lor s
+  & \emph{Konstruktiv dilemma}
+  \cr
+  L_7
+  & (p\to q) \land (r\to s) \land (\lnot q\lor \lnot s) &\ergo& \lnot p\lor \lnot r
+  & \emph{Destruktiv dilemma}
+  \cr
+  L_8
+  & \lnot p\to F_0 &\ergo& p
+  & \emph{Reductio ad absurdum} (motsägelse)
+  \cr
+  L_9
+  & (p\to r) \land (q\to r) &\ergo& (p\lor q)\to r
+  & \emph{Tudelad bevis} (by cases)
+  \cr
+\end{tabular}%>>>
+
+\end{document}
