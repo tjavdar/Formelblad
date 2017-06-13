@@ -51,10 +51,7 @@
 
 \pagestyle{fancy}
 
-% LANG SETTINGS -------------------
-\newcount\Lang   \newcommand\Tr[2]{\ifnum\Lang=0 #1\else #2\fi}
-\Lang=0\relax   %% 0 - En || 1 -- Se
-%------------ /LANG SETTINGS ------------------
+\input Lang.h % En-Sv settings outsourced
 %% -- Latex def's:
 \let\ent\Leftrightarrow
 \def\trevektor[#1,#2,#3]{\begin{pmatrix}#1\cr #2\cr #3\end{pmatrix}}
