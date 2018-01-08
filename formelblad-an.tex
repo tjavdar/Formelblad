@@ -1,5 +1,6 @@
 % vim: foldmethod=marker
 % CHANGELOG:
+% Ändring:    IvTj, 2017-01, +Taylor
 % Ändring:    IvTj, 2012-01, Dln(x) = 1/x --> Dln(|x|) = 1/x
 % Ändring:    IvTj, 2009-01, Lagt till Eulers formler, nya headers
 % Ändring:    IvTj, 2008-02, Tagit bort JTH-logot från s. 1
@@ -10,7 +11,6 @@
 \voffset-1.5cm
 \documentclass{article}
 \usepackage[swedish]{babel}
-% \usepackage{t1enc,graphicx,a4wide,amsfonts,amsmath,fancyhdr}
 \usepackage[utf8]{inputenc} % <-- IvtTj: Changed encoding to UTF-8
 \usepackage{graphicx,a4wide,amsfonts,amsmath,fancyhdr}
 \everymath{\displaystyle}   % <-- Ändring IvTj
@@ -26,7 +26,7 @@
 \addtolength{\headheight}{25ex}
 \addtolength{\headsep}{-3ex}
 \addtolength{\textheight}{20mm}
-\addtolength{\textwidth}{12mm}
+\addtolength{\textwidth}{17mm}
 %\footheight{ 0ex}
 \footskip 3ex
 \pagestyle{fancy}
@@ -36,8 +36,6 @@
 \newcommand{\three}{\marginpar{(3p)}}
 \newcommand{\four}{\marginpar{(4p)}}
 \newcommand{\Le}{\Leftrightarrow}
-
-%\newcommand{\D}{\frac{d}{dx}}
 
 \newcommand{\D}{D}
 
@@ -455,7 +453,7 @@ f(a)=b\\f'(a)\neq0    %% <-- ändring IvTj
 \medskip
 
 \fbox{\parbox{105ex}
-{\textbf{L'Hôpital\Tr{'s rools}{sregler}}:
+{\textbf{L'Hôpital\Tr{'s rules}{s regler}}:
 \Tr{If}{Om}
 $\lim_{x\to a}\dfrac{f(x)}{g(x)}=\Bigl[\dfrac00\Bigl]$
 \Tr{or}{eller}
@@ -647,62 +645,125 @@ Lösningsmetod: $y=y_h+y_p$ där $y_h$ är den allmäna lösningen till motsvara
 homogena ekvation $y''+ay'+by=0$ (se satsen nedan) och $y_p$ är en
 partikulärlösning till ekvationen $y''+ay'+by=f(x)$.
 
-\begin{theorem}
-  Låt $a,b\in\mathbb{R}$ och betrakta den homogena differentialekvationen
-  $y''+ay'+by=0.$ Antag att $r_1$ och $r_2$ är rötterna till den
-  karakteristiska ekvationen $r^2+ar+b=0.$ Då gäller
-  \begin{itemize}
+% SKIP (>2018-01-08): Utförligt andra ordningens ODE suppressed <<<
+% \begin{theorem}
+%   Låt $a,b\in\mathbb{R}$ och betrakta den homogena differentialekvationen
+%   $y''+ay'+by=0.$ Antag att $r_1$ och $r_2$ är rötterna till den
+%   karakteristiska ekvationen $r^2+ar+b=0.$ Då gäller
+%   \begin{itemize}
+%
+%   \item[i)] Om $r_1, r_2\in\mathbb{R}$ och $r_1\neq r_2$ så kan varje  lösning
+%     skrivas $$y(x)=C_1e^{r_1x}+C_2e^{r_2x},$$där $C_1$ och $C_2$ är godtyckliga
+%     konstanter.
+%
+% \item[ii)] Om $r_1=r_2$ så kan varje lösning skrivas
+%   $$y(x)=(C_1+C_2x)e^{r_1x},$$där $C_1$ och $C_2$ är godtyckliga konstanter.
+%
+% \item[iii)] Om $r_1=\alpha+i\beta,$ $r_2=\alpha-i\beta,$ där $\beta\neq 0$ så
+%   kan varje lösning skrivas $$y(x)=e^{\alpha x}(C_1\cos(\beta x)+C_2\sin(\beta
+%   x)),$$där $C_1$ och $C_2$ är godtyckliga konstanter.
+%
+% \end{itemize}
+% \end{theorem}
+%
+% \textbf{Ansatser till partikulärlösning för olika högerled}:
+% \fbox{$y''+ay'+by=f(x)$}
+%
+%
+% \medskip
+%
+% $\begin{array}{|c|c|l|}\hline %% <-- Ändring IvTj
+%   \text{\textbf {Typ}}&
+%   \text{\bf Högerled} \ f(x)&
+%   \text{\bf Ansats för partikulära lösningen $y_p(x)$}\\
+%   \hline
+%   \text{I}&f(x)=P_n(x) & y_p(x) =
+%   \begin{cases}
+%     \hfill Q_n(x),       & b\neq0\\
+%     \hfill x\, Q_n(x),   & b=0, \; a\neq0\\
+%     \hfill x^2\, Q_n(x), & a=b=0\\
+%   \end{cases}
+%   \\
+%   \hline & & \\*[-9pt]
+%   \text{II}&f(x)=P_n(x)\,e^{kx}&y_p=z(x)e^{kx}\,,\;
+%    \text{ insättning ger ekvation av typ I}\EndRow
+%   \hline
+%   \text{III}&f(x)=\alpha\cos(kx)+\beta\sin(kx)
+%   &y_p(x) =
+%   \begin{cases}
+%     \hfill A\cos(kx)+B\sin(kx),                 & r_{1,2}\neq\pm ik  \\
+%     \hfill x\,\left(A\cos(kx)+B\sin(kx)\right), & r_{1,2}=\pm ik
+%   \end{cases} \\
+%   \hline\multicolumn{3}{|c|}{
+%   \text{\small Beteckningar: $P_n$, $Q_n$ -- polynom av grad $n$; $r_{1,2}$
+%    -- rötterna till den karakteristiska ekvationen}
+%   } \\
+% \hline
+% \end{array}$
+% SKIP>>>
 
-  \item[i)] Om $r_1, r_2\in\mathbb{R}$ och $r_1\neq r_2$ så kan varje  lösning
-    skrivas $$y(x)=C_1e^{r_1x}+C_2e^{r_2x},$$där $C_1$ och $C_2$ är godtyckliga
-    konstanter.
-
-\item[ii)] Om $r_1=r_2$ så kan varje lösning skrivas
-  $$y(x)=(C_1+C_2x)e^{r_1x},$$där $C_1$ och $C_2$ är godtyckliga konstanter.
-
-\item[iii)] Om $r_1=\alpha+i\beta,$ $r_2=\alpha-i\beta,$ där $\beta\neq 0$ så
-  kan varje lösning skrivas $$y(x)=e^{\alpha x}(C_1\cos(\beta x)+C_2\sin(\beta
-  x)),$$där $C_1$ och $C_2$ är godtyckliga konstanter.
-
-\end{itemize}
-\end{theorem}
-
-\textbf{Ansatser till partikulärlösning för olika högerled}:
-\fbox{$y''+ay'+by=f(x)$}
-
-
-\medskip
-
-$\begin{array}{|c|c|l|}\hline %% <-- Ändring IvTj
-  \text{\textbf {Typ}}&
-  \text{\bf Högerled} \ f(x)&
-  \text{\bf Ansats för partikulära lösningen $y_p(x)$}\\
-  \hline
-  \text{I}&f(x)=P_n(x) & y_p(x) =
-  \begin{cases}
-    \hfill Q_n(x),       & b\neq0\\
-    \hfill x\, Q_n(x),   & b=0, \; a\neq0\\
-    \hfill x^2\, Q_n(x), & a=b=0\\
-  \end{cases}
-  \\
-  \hline & & \\*[-9pt]
-  \text{II}&f(x)=P_n(x)\,e^{kx}&y_p=z(x)e^{kx}\,,\;
-   \text{ insättning ger ekvation av typ I}\EndRow
-  \hline
-  \text{III}&f(x)=\alpha\cos(kx)+\beta\sin(kx)
-  &y_p(x) =
-  \begin{cases}
-    \hfill A\cos(kx)+B\sin(kx),                 & r_{1,2}\neq\pm ik  \\
-    \hfill x\,\left(A\cos(kx)+B\sin(kx)\right), & r_{1,2}=\pm ik
-  \end{cases} \\
-  \hline\multicolumn{3}{|c|}{
-  \text{\small Beteckningar: $P_n$, $Q_n$ -- polynom av grad $n$; $r_{1,2}$
-   -- rötterna till den karakteristiska ekvationen}
-  } \\
-\hline
-\end{array}$
 %>>>
 }
+
+\subsubsection*{Taylor \& Maclaurin}%<<<
+\vspace{-10pt}
+\begin{tabular}[t]{|ll|}
+\hline
+&\\*[-11pt]
+Taylor\Tr{ poly, deg}{polynom, grad} $n$: &
+$
+P_n(f)(x)
+= f(a)
++ \frac{f'(a)}{1!}(x-a)
++ \frac{f''(a)}{2!}(x-a)^2
++\cdots
++ \frac{f^{(n)}(a)}{n!}(x-a)^n
+$
+\\*[7pt]
+Maclaurin\Tr{ poly, deg}{polynom, grad} $n$: &
+$
+P_n(f)(x)
+= f(0)
++ \frac{f'(0)}{1!}\,x
++ \frac{f''(0)}{2!}\,x^2
++\cdots
++ \frac{f^{(n)}(0)}{n!}\,x^n
+$\\*[7pt]
+\hline
+\end{tabular}
+
+\vspace{3pt}
+
+\begin{tabular}[t]{|l|l|}
+\hline &\\*[-11pt]
+$e^t=1+\frac{t}{1!}+\frac{t^2}{2!}+\cdots+\frac{t^{n}}{n!} + \cdots$
+&
+$\ln (1+t)=t-\frac{t^2}{2}+\frac{t^3}{3}-\cdots
+     +(-1)^{n+1}\frac{t^{n}}{n}+\cdots$, \,$|t|<1$
+\\*[8pt]
+$
+\cos(t)=1-\frac{t^2}{2!}+\frac{t^4}{4!}-\cdots
+ +(-1)^{n}\frac{t^{2n}}{(2n)!} + \cdots
+$
+ &
+ $\frac1{1-t}=1 + t + t^2 + t^3 + \cdots +t^n +\cdots$, $|t|<1$
+\\*[8pt]
+$
+\sin(t)=t-\frac{t^3}{3!}+\frac{t^5}{5!}\cdots
+  +(-1)^n\frac{t^{2n+1}}{(2n+1)!} + \cdots
+$
+&
+$
+(1+t)^\alpha=1
++\frac{\alpha}{1!} t
++\frac{\alpha(\alpha-1)}{2!} t^2
+%+\frac{\alpha(\alpha-1)(\alpha-2)}{3!} t^3
++ \cdots$, $|t|<1$
+\\*[8pt]
+\hline
+\end{tabular}
+
+%>>>
 
 \label{LastPageNo}
 
