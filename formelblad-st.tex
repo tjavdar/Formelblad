@@ -7,6 +7,7 @@
 %         0.9 Combined En-Swe version via \Tr{}{}
 %         1.0 Spawned Tables in separate file
 %         1.2 Ny upplägg, No joint distributions, mm, 2014-09-09
+%         1.4 \xi -> X, \in -> \sim, bug i Stickprov i par:
 
 \documentclass[a4paper]{article}
 
@@ -178,9 +179,9 @@ $
 \int_{-\infty}^\infty x f(x)\,dx , & $X$ -- continuous r.~v. with pdf $f$.
 }
 }{
-\mu=E(\xi)=\cases{
-\sum_k x_kP(\xi=x_k), & $\xi$ -- diskret stokastisk variabel\cr
-\int_{-\infty}^\infty x f(x)\,dx , & $\xi$ -- kontinuerlig s.~v. med frekvensfunktion $f$.
+\mu=E(X)=\cases{
+\sum_k x_kP(X=x_k), & $X$ -- diskret stokastisk variabel\cr
+\int_{-\infty}^\infty x f(x)\,dx , & $X$ -- kontinuerlig s.~v. med frekvensfunktion $f$.
 }
 }
 $
@@ -194,9 +195,9 @@ $
 \int_{-\infty}^\infty (x-\mu)^2 f(x)\,dx , &  $X$ -- continuous r.~v. with pdf $f$.
 }
 }{
-V(\xi)=E[(x-\mu)^2]=\cases{
-\sum_k (x_k-\mu)^2 P(\xi=x_k), & $\xi$ -- diskret s.~v.\cr
-\int_{-\infty}^\infty (x-\mu)^2 f(x)\,dx , & $\xi$ -- kontinuerlig s.~v.
+V(X)=E[(x-\mu)^2]=\cases{
+\sum_k (x_k-\mu)^2 P(X=x_k), & $X$ -- diskret s.~v.\cr
+\int_{-\infty}^\infty (x-\mu)^2 f(x)\,dx , & $X$ -- kontinuerlig s.~v.
 }
 }
 $
@@ -207,23 +208,23 @@ $
 $\sigma=\sqrt{\Var(X)}$
 }
 {
-$\sigma=\sqrt{V(\xi)}$
+$\sigma=\sqrt{V(X)}$
 }
 
 
 \textbf{\Tr{Steiner's theorem}{Steiner's sats}}:
 $
 \Tr{
-\sigma^2=E(X^2)-\mu^2 %=E(\xi^2)-[E(\xi)]^2
+\sigma^2=E(X^2)-\mu^2 %=E(X^2)-[E(X)]^2
 =\cases{
 \sum_k x_k^2 P(X=x_k)-\mu^2, & $X$ -- discrete random variable\cr
 \int_{-\infty}^\infty x^2 f(x)\,dx -\mu^2 , &  $X$ -- continuous r.~v. with pdf $f$.
 }
 }{
-\sigma^2=E(\xi^2)-\mu^2 %=E(\xi^2)-[E(\xi)]^2
+\sigma^2=E(X^2)-\mu^2 %=E(X^2)-[E(X)]^2
 =\cases{
-\sum_k x_k^2 P(\xi=x_k)-\mu^2, & $\xi$ -- diskret s.~v.\cr
-\int_{-\infty}^\infty x^2 f(x)\,dx -\mu^2 , & $\xi$ -- kontinuerlig s.~v.
+\sum_k x_k^2 P(X=x_k)-\mu^2, & $X$ -- diskret s.~v.\cr
+\int_{-\infty}^\infty x^2 f(x)\,dx -\mu^2 , & $X$ -- kontinuerlig s.~v.
 }
 }
 $
@@ -237,8 +238,8 @@ Suppose that $\{X_k\}_{k=1}^n$ are (discrete or continuous) random variables wit
 $E(X_k)=\mu_k$ and variances $\Var(X_k)=\sigma_k^2$, $k=1,...,n$, and let
  $\{a_k\}_{k=1}^n$ be constants. Then
 }{%
-Antag att $\{\xi_k\}_{k=1}^n$ är (diskreta eller kontinuerliga) stokastiska variabler med
-väntevärden $E(\xi_k)=\mu_k$ och varianser $V(\xi_k)=\sigma_k^2$, $k=1,...,n$, samt
+Antag att $\{X_k\}_{k=1}^n$ är (diskreta eller kontinuerliga) stokastiska variabler med
+väntevärden $E(X_k)=\mu_k$ och varianser $V(X_k)=\sigma_k^2$, $k=1,...,n$, samt
  $\{a_k\}_{k=1}^n$ är konstanter. Då gäller
 }
 \[
@@ -250,9 +251,9 @@ E(a_1X_1+\cdots+a_nX_n)& =a_1\mu_1+\cdots + a_n\mu_n\cr
 } % eqalign
 }{
 \eqalign{
-   E(a_1\xi_1+\cdots+a_n\xi_n)& =a_1\mu_1+\cdots + a_n\mu_n\cr
-V(a_1\xi_1+\cdots+a_n\xi_n)& =a_1^2\sigma_1^2+\cdots + a_n^2\sigma_n^2
-   \quad(\mbox{om $\xi_1,\ldots,\xi_n$ är oberoende}).
+   E(a_1X_1+\cdots+a_nX_n)& =a_1\mu_1+\cdots + a_n\mu_n\cr
+V(a_1X_1+\cdots+a_nX_n)& =a_1^2\sigma_1^2+\cdots + a_n^2\sigma_n^2
+   \quad(\mbox{om $X_1,\ldots,X_n$ är oberoende}).
 } % eqalign
 }
 \]
@@ -260,14 +261,14 @@ V(a_1\xi_1+\cdots+a_n\xi_n)& =a_1^2\sigma_1^2+\cdots + a_n^2\sigma_n^2
 If $\{X_k\}_{k=1}^n$ are \textbf{normal and independent} r.\,v.,
 then their linear combinations also are normally distributed:
 }{%
-Om $\{\xi_k\}_{k=1}^n$ är \textbf{normalfördelade och oberoende},
+Om $\{X_k\}_{k=1}^n$ är \textbf{normalfördelade och oberoende},
 så är deras linjärkombinationer också normalfördelade:
 }
 \[
-\Tr{X}{\xi}_k\Tr{\sim}{\in} N(\mu_k,\sigma_k),\;
+\Tr{X}{X}_k\Tr{\sim}{\sim} N(\mu_k,\sigma_k),\;
 k=1,...,n
 \;\Rightarrow\;
-a_1\Tr{X}{\xi}_1+\cdots+a_n\Tr{X}{\xi}_n\Tr{\sim}{\in} N\bigl(a_1\mu_1+\cdots a_n\mu_n,
+a_1\Tr{X}{X}_1+\cdots+a_n\Tr{X}{X}_n\Tr{\sim}{\sim} N\bigl(a_1\mu_1+\cdots a_n\mu_n,
                    \sqrt{a_1^2\sigma_1^2+\cdots a_n^2\sigma_n^2}\,\bigr).
 \]
 \Tr{%
@@ -276,45 +277,43 @@ For \textbf{sums} and \textbf{averages of i.d.~normal} variables, in particular,
 I synnerhet, för \textbf{summor} och \textbf{snitt av lika normalfördelade oberoende} variabler gäller:
 }
 $$
-\Tr{X}{\xi}_k\Tr{\sim}{\in} N(\mu,\sigma),\;
+\Tr{X}{X}_k\Tr{\sim}{\sim} N(\mu,\sigma),\;
 k=1,...,n
 \;\Rightarrow\;
 \cases{
-\Tr{X}{\xi}_1+\cdots+\Tr{X}{\xi}_n \Tr{\sim}{\in} N(n\mu,\sigma\sqrt{n})\cr\noalign{\vskip5pt}
-\frac{\Tr{X}{\xi}_1+\cdots+\Tr{X}{\xi}_n}{n} = \Tr{\ob X}{\ob\xi} \Tr{\sim}{\in} N(\mu,\frac{\sigma}{\sqrt{n}})
+\Tr{X}{X}_1+\cdots+\Tr{X}{X}_n \Tr{\sim}{\sim} N(n\mu,\sigma\sqrt{n})\cr\noalign{\vskip5pt}
+\frac{\Tr{X}{X}_1+\cdots+\Tr{X}{X}_n}{n} = \Tr{\ob X}{\ob X} \Tr{\sim}{\sim} N(\mu,\frac{\sigma}{\sqrt{n}})
 \Leftrightarrow
-z:=\frac{\Tr{\ob X}{\ob\xi} -\mu}{\sigma/\sqrt{n}}\Tr{\sim}{\in} N(0,1).
+z:=\frac{\Tr{\ob X}{\ob X} -\mu}{\sigma/\sqrt{n}}\Tr{\sim}{\sim} N(0,1).
 }
 $$
 %>>>
 
-\subsection*{\Tr{The Central Limit Theorem}{Centrala gränsvärdessatsen}} %<<<
+\subsection*{\Tr{The Central Limit Theorem (CLT)}{Centrala gränsvärdessatsen (CGS)}} %<<<
 
 \Tr{%
 Suppose that $X_1,\cdots, X_n$ are \textbf{independent identically distributed}  (i.i.d.)
 random variables with expectation $\mu$ and standard deviation $\sigma$. Then for large $n$
 holds:
 }{%
-Antag att $\xi_1,\cdots, \xi_n$ är \textbf{oberoende likafördelade} stokastiska
+Antag att $X_1,\cdots, X_n$ är \textbf{oberoende likafördelade} stokastiska
 variabler med väntevärde $\mu$ och standardavvikelse $\sigma$. För stora $n$
 gäller:
 }
 
 \begin{itemize}
-  \item $\sum_{k=1}^n \Tr{X}{\xi}_k=\Tr{X}{\xi}_1+\cdots+\Tr{X}{\xi}_n\;
-    \Tr{\stackrel{\mbox{\tiny appr}}{\sim}}{\widetilde\in}\; N(n\mu,\sigma\sqrt{n})$,
+  \item $S_n=\sum_{k=1}^n \Tr{X}{X}_k=\Tr{X}{X}_1+\cdots+\Tr{X}{X}_n\;
+    \stackrel{\mbox{\tiny appr}}{\sim}\; N(n\mu,\sigma\sqrt{n})$,
         \ \Tr{i.e.}{dvs}, \,
-        $P(\sum_{k=1}^n \Tr{X}{\xi}_k\le x)\approx
+        $P(S_n\le x)\approx
         \Phi(z),\, z=\frac{x-n\mu}{\sigma\sqrt{n}}
-       % \Bigl(\frac{x-n\mu}{\sigma\sqrt{n}}\Bigr)
-       % = \Phi\Bigl(\frac{x/n-\mu}{\sigma/\sqrt{n}}\Bigr)
         $;
 
-  \item $\Tr{\ob X}{\ob\xi}=\frac1n
-    \sum_{k=1}^n \Tr{X}{\xi}_k=\frac{\Tr{X}{\xi}_1+\cdots+\Tr{X}{\xi}_n}n\;
-    \Tr{\stackrel{\mbox{\tiny appr}}{\sim}}{\widetilde\in}\; N(\mu,\frac\sigma{\sqrt{n}})$,
+      \item $\Tr{\ob X}{\ob X}=\frac{S_n}n
+    =\frac{\Tr{X}{X}_1+\cdots+\Tr{X}{X}_n}n\;
+    \stackrel{\mbox{\tiny appr}}{\sim}\; N(\mu,\frac\sigma{\sqrt{n}})$,
         \ \Tr{i.e.}{dvs}, \,
-        $P(\Tr{\ob X}{\ob\xi}\le \ob x)\approx\Phi(z)$, \,
+        $P(\Tr{\ob X}{\ob X}\le \ob x)\approx\Phi(z)$, \,
         $z=\frac{\ob x-\mu}{\sigma/\sqrt{n}}\cdot$
 \end{itemize}
 %>>>
@@ -335,11 +334,11 @@ gäller:
 \cline{1-1}
 \multicolumn{1}{ |c| }{\textbf{\Tr{Discrete}{Diskreta}}:} \cr
 \hline
-\EspaceAuDessus     \Tr{$X$ from}{$\xi$ från}
+\EspaceAuDessus     \Tr{$X$ from}{$X$ från}
                   & $f(x)$
-                  & \Tr{$F(x)=P(X\le x)$}{$F(x)=P(\xi\le x)$}
-                  & \Tr{$\mu=E(X)$}{$\mu=E(\xi)$}
-                  & \Tr{$\sigma=\sqrt{\Var(X)}$}{$\sigma=\sqrt{V(\xi)}$}
+                  & \Tr{$F(x)=P(X\le x)$}{$F(x)=P(X\le x)$}
+                  & \Tr{$\mu=E(X)$}{$\mu=E(X)$}
+                  & \Tr{$\sigma=\sqrt{\Var(X)}$}{$\sigma=\sqrt{V(X)}$}
                   \duPlancher
 \hline
   \EspaceAuDessus $\mbox{Unifd}(1,n)$  &
@@ -371,11 +370,11 @@ gäller:
 \begin{tabular}{|c|c|c|c|c|}
 \cline{1-1} \multicolumn{1}{ |c| }{\textbf{\Tr{Continuous}{Kontinuerliga}}:} \cr
 \hline
-\EspaceAuDessus     \Tr{$X$ from}{$\xi$ från}
+\EspaceAuDessus     \Tr{$X$ from}{$X$ från}
                   & $f(x)$
-                  & \Tr{$F(x)=P(X\le x)$}{$F(x)=P(\xi\le x)$}
-                  & \Tr{$\mu=E(X)$}{$\mu=E(\xi)$}
-                  & \Tr{$\sigma=\sqrt{\Var(X)}$}{$\sigma=\sqrt{V(\xi)}$}
+                  & \Tr{$F(x)=P(X\le x)$}{$F(x)=P(X\le x)$}
+                  & \Tr{$\mu=E(X)$}{$\mu=E(X)$}
+                  & \Tr{$\sigma=\sqrt{\Var(X)}$}{$\sigma=\sqrt{V(X)}$}
                   \duPlancher
 \hline
   \EspaceAuDessus $\mbox{Unifc}(a,b)$  &
@@ -407,7 +406,8 @@ mean $\mu$ och standard deviation $\sigma$. Point estimators
 for the mean and the variance of the population are
 }{%
 \textbf{Punktskattningar}:
-Låt $x_1,\dots,x_n$ vara ett observerat stickprov från en fördelning med
+Låt $x_1,\dots,x_n$ vara de observerade värden för ett stickprov
+$\left\{X_k\right\}_1^n$ från en population med
 väntevärde $\mu$ och standardavvikelse $\sigma.$ Väntevärdesriktiga skattningar
 av $\mu$ och $\sigma^2$ är då
 }
@@ -484,28 +484,16 @@ av $\mu$ och $\sigma^2$ är då
 \begin{itemize}
 
 \item \textbf{\Tr{Two samples (paired data)}{Två parade stickprov}}: %<<<
-  $\{(x_i,y_i)\}_{i=1}^n$
+  $\{(X_i,Y_i)\}_{i=1}^n$
   \Tr{with}{där}
-   $x_i\Tr{\sim}{\in} N(\mu_i,\sigma_x)$ \Tr{and}{och}
-   $y_i\Tr{\sim}{\in} N(\mu_i+\Delta,\sigma_y)$, $i=1,\dots,n$.
-   \Tr{Then}{Då} $\{z_i\}_1^n=\{y_i-x_i\}_1^n$
+   $X_i\Tr{\sim}{\sim} N(\mu_i,\sigma_x)$ \Tr{and}{och}
+   $Y_i\Tr{\sim}{\sim} N(\mu_i+\Delta,\sigma_y)$, $i=1,\dots,n$.
+   \Tr{Then}{Då} $\{Z_i\}_1^n=\{Y_i-X_i\}_1^n$
    \Tr{is a sample from}{är ett stickprov från}
-   $N(\Delta,\sigma_z)$
-   \Tr{with}{där}
-   $\sigma_z=\sqrt{\sigma_x^2+\sigma_y^2}$\,.
-   \Tr{The two-sided $\CI_{1-\alpha}$ for}{Det tvåsidiga $CI_{1-\alpha}$ för} $\Delta$:
+   $N(\Delta,\sigma_z)$.
+  % \Tr{with}{där} $\sigma_z=\sqrt{\sigma_x^2+\sigma_y^2}$\,. <- Lögn, kan vara korrelerade!
+   \Tr{The two-sided $\CI_{1-\alpha}$ for}{Det tvåsidiga $\CI_{1-\alpha}$ för} $\Delta$:
 
-%%   \Tr{The two-tailed $(1-\alpha)$--confidence interval for $\Delta$ is given by}
-%%      {Tvåsidiga konfidensintervall för $\Delta$ med konfidensgrad $1-\alpha$ är då}
-%% Fredriks gamla%<<<
-%% \begin{eqnarray*}
-%%   \overline{z}-\lambda_{\alpha/2}\frac{\sigma}{\sqrt{n}}
-%%   \leq\Delta\leq
-%%   \overline{z}+\lambda_{\alpha/2}\frac{\sigma}{\sqrt{n}}\;\;\;\mbox{ om }\sigma \mbox{ känd}\\
-%%   \overline{z}-t_{\alpha/2}(n-1)\frac{s}{\sqrt{n}}\leq\Delta\leq
-%%   \overline{z}+t_{\alpha/2}(n-1)\frac{s}{\sqrt{n}}\;\;\;\mbox{ om }\sigma\mbox{
-%%   ej känd}
-%% \end{eqnarray*}%>>>
 \[
 \CI_{1-\alpha}(\Delta) = [\ob z-\varepsilon,\ob z+\varepsilon],\quad
    \varepsilon =
@@ -518,9 +506,9 @@ av $\mu$ och $\sigma^2$ är då
 \]%>>>
 
 \item \textbf{\Tr{Two independent samples (pooled test)}{Två oberoende stickprov}}:
-$\{x_i\}_{i=1}^{n}$ \Tr{from}{från} $N(\mu_x,\sigma)$
+$\{X_i\}_{i=1}^{n}$ \Tr{from}{från} $N(\mu_x,\sigma)$
   \Tr{and}{och}
-  $\{y_i\}_{i=1}^{m}$ \Tr{from}{från} $N(\mu_y,\sigma)$.
+  $\{Y_i\}_{i=1}^{m}$ \Tr{from}{från} $N(\mu_y,\sigma)$.
   \Tr{The two-tailed $\CI_{1-\alpha}$ for $\mu_x-\mu_y$ is given by}
       {Det tvåsidiga $\CI_{1-\alpha}$ för $\mu_x-\mu_y$ ges av}
 \[

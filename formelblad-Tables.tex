@@ -59,13 +59,13 @@
 
 \Tr{Tables for}
    {Tabeller för}
-   $P(\Tr{X}{\xi}\le x)$
+   $P(\Tr{X}{X}\le x)$
    \Tr{if}
       {då}
-   $\Tr{X}{\xi}\in\Bin(n,p)$.  % , $p\le0.5$.
+   $\Tr{X}{X}\sim\Bin(n,p)$.  % , $p\le0.5$.
   \Tr{Use that}
      {Använd att}
-     $P(\Tr{X}{\xi}\le x)=P(\Tr{Y}{\eta}\ge n-x)$,  $\Tr{Y}{\eta}\in\Bin(n,1-p)$,
+     $P(\Tr{X}{X}\le x)=P(\Tr{Y}{Y}\ge n-x)$,  $\Tr{Y}{Y}\sim\Bin(n,1-p)$,
    \Tr{if}{om}
   $p>0.5$.
 
@@ -73,7 +73,7 @@
 
 \subsection*{\Tr{The Poisson Distribution}{Poissonfördelningen}}%<<<
 
-\Tr{Table for}{Tabell för} $P(\Tr{X}{\xi}\le x)$ \Tr{for}{då} $\Tr{X}{\xi}\in\mbox{Po}(\lambda)$.
+\Tr{Table for}{Tabell för} $P(\Tr{X}{X}\le x)$ \Tr{for}{då} $\Tr{X}{X}\sim\mbox{Po}(\lambda)$.
 \input Tables/poissoncdf%>>>
 
 \newpage
@@ -81,7 +81,7 @@
 \subsection*{\Tr{The Standard Normal Distribution}{Normalfördelningen}}%<<<
 
 \Tr{Table for}{Tabell för}
-$\Phi(x)=P(\Tr{X}{\xi}\le x)=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^x e^{-t^2/2}\,dt$,  $\Tr{X}{\xi}\in N(0,1)$.
+$\Phi(x)=P(\Tr{X}{X}\le x)=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^x e^{-t^2/2}\,dt$,  $\Tr{X}{X}\sim N(0,1)$.
 \Tr{For}{För}
 $x<0$,
 \Tr{use}{använd att}
@@ -99,13 +99,13 @@ $\Phi(-x)=1-\Phi(x)$.
 \begin{minipage}[b]{0.69\hsize}
 \Tr{For}
    {För}
-   $\Tr{X\sim}{\xi\in} N(0,1)$,
+   $\Tr{X\sim}{X\sim} N(0,1)$,
 \Tr{the table gives the value of}
    {tabellen ger det värde}
    $\Tr{z}{\lambda}_\alpha$\/
    \Tr{for which}
       {för vilket}
-   $P(\Tr{X}{\xi}>\Tr{z}{\lambda}_\alpha)=\alpha$:
+   $P(\Tr{X}{X}>\Tr{z}{\lambda}_\alpha)=\alpha$:
    %=\Phi^{-1}(1-\alpha)$
 
 \medskip
@@ -129,7 +129,7 @@ $\Phi(-x)=1-\Phi(x)$.
    $t$,
    \Tr{such that}
       {för vilket}
-   $P(\Tr{X}{\xi} > t)=\alpha$
+   $P(\Tr{X}{X} > t)=\alpha$
    \Tr{for degrees of freedom}
       {givet antalet frihetsgrader}
    $f$.
@@ -186,13 +186,13 @@ $f /\alpha$
 
 \subsection*{\Tr{The}{} $\chi^2$-\Tr{distribution quantiles}{fördelningens kvantiler} $\chi^2_{\alpha,f}$} %<<<
 
-% Tabellen ger det $x$ för vilket $P(\Tr{X}{\xi} > x)=\alpha$ givet antalet frihetsgrader $f$.
+% Tabellen ger det $x$ för vilket $P(\Tr{X}{X} > x)=\alpha$ givet antalet frihetsgrader $f$.
 \Tr{Tables for}
    {Tabell för}
    $x$,
    \Tr{such that}
       {för vilket}
-   $P(\Tr{X}{\xi} > x)=\alpha$
+   $P(\Tr{X}{X} > x)=\alpha$
    \Tr{for degrees of freedom}
       {givet antalet frihetsgrader}
    $f$.
@@ -250,7 +250,7 @@ When both $n_A,n_B\ge10$, can assume that
 }{%
   När både $n_A,n_B\ge10$ gäller}
 \(
-   W_A \stackrel\sim\in N(\mu_A,\sigma_A),
+  W_A \stackrel{\mbox{\tiny appr}}\sim N(\mu_A,\sigma_A),
 \)
 \Tr{where}{där}
 \[
