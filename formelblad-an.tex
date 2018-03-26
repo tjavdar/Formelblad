@@ -631,19 +631,47 @@ då erhålls.
 
 \vspace{5 mm}
 
-\textbf{1:a ordningens separabel ODE:} \fbox{$g(y)y'=h(x)$}
+\textbf{Första ordningens separabel ODE:} \fbox{$g(y)y'=h(x)$}
 
 Lösningsmetod: Separera variablerna enligt $g(y)dy=h(x)dx$ och integrera sedan
 ekvationen.
 
 \vspace{5 mm}
 
-\textbf{2:a ordningens linjära ODE med konstanta koefficienter:}
-\fbox{$y''(x)+ay'(x)+by(x)=f(x)$}
+\textbf{Andra ordningens linjära ODE med konstanta koefficienter:}
+% \fbox{$y''(x)+ay'(x)+by(x)=f(x)$}
+\[
+  \boxed{y''+ay'+by=f(x)} \iff P(D)y(x) = f(x),
+  \mbox{ karakteristiskt polynom: }
+  P(r) = r^2+ar+b=(r-r_1)(r-r_2).
+\]
 
-Lösningsmetod: $y=y_h+y_p$ där $y_h$ är den allmäna lösningen till motsvarande
-homogena ekvation $y''+ay'+by=0$ (se satsen nedan) och $y_p$ är en
-partikulärlösning till ekvationen $y''+ay'+by=f(x)$.
+Allmän lösning: $y(x)=y_h(x)+y_p(x)$ där $y_h$ är den allmäna lösningen till den
+homogena ekvationen
+\[
+  P(D)y_h(x)=0
+ \;\rightsquigarrow\;
+ y_h(x)=
+ \begin{cases}
+   C_1\,e^{r_1x} + C_2\,e^{r_2x},& r_1\neq r_2,\\
+   \hfill
+   (C_0+C_1x)\,e^{rx},& r_1=r_2=r,\\
+ \end{cases}
+\]
+och $y_p(x)$ är en godtycklig partikulärlösning
+till ekvationen \/$P(D)y(x)=f(x)$, erhållen via lämplig ansats.
+Alternativ framställning ifall rötterna $r_{1,2}$ till det karakteristiska polynomet $P(r)$
+är komplext konjugata:
+\[
+   r_1=\ob r_2 = \alpha \pm i\beta
+   \;\rightsquigarrow\;
+   y_h(x)
+    =  C_1\,e^{(\alpha+i\beta)x} + C_2\,e^{(\alpha-i\beta)x}
+   = e^{\alpha x}\Bigl[
+    A\cos(\beta x) + B\sin(\beta x)
+    \Bigr].
+\]
+Konstanterna $A$, $B$ och $C_i$, $i=0,1,2$, ovan är godtyckliga.
 
 % SKIP (>2018-01-08): Utförligt andra ordningens ODE suppressed <<<
 % \begin{theorem}
@@ -710,7 +738,7 @@ partikulärlösning till ekvationen $y''+ay'+by=f(x)$.
 \begin{tabular}[t]{|ll|}
 \hline
 &\\*[-11pt]
-Taylor\Tr{ poly, deg}{polynom, grad} $n$: &
+Taylor\Tr{ poly, order}{polynom, ordning} $n$: &
 $
 P_n(f)(x)
 = f(a)
@@ -720,7 +748,7 @@ P_n(f)(x)
 + \frac{f^{(n)}(a)}{n!}(x-a)^n
 $
 \\*[7pt]
-Maclaurin\Tr{ poly, deg}{polynom, grad} $n$: &
+Maclaurin\Tr{ poly, deg}{polynom, ordn.}~$n$: &
 $
 P_n(f)(x)
 = f(0)
