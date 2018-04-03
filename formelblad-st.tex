@@ -126,48 +126,72 @@
 
 \subsection*{\Tr{Probability laws}{Sannolikhetslära}}%<<<
 
-\textbf{\Tr{Notation}{Beteckningar}}:
-   $A$, $B$, ... -- \Tr{events}{händelser},
+%\textbf{\Tr{Notation}{Beteckningar}}:
+   $A$, $B$, ... $\subset\Omega$ -- \Tr{events}{händelser},
    $\Omega$ -- \Tr{the sample space}{utfallsrummet},
-   $P(A)$ -- \Tr{the probability of event}{sannolikheten för händelsen} $A$.
+   $A^c$ -- \Tr{the complement of}{komplementet till} $A$,
+   $P(A)$ -- \Tr{the probability of event}{sannolikheten för} $A$:
 
-   \textbf{\Tr{Properties}{Egenskaper}}:
-\parbox[m]{0.8\hsize}{
+%\textbf{\Tr{Properties}{Egenskaper}}:
 \begin{itemize}\advance\itemsep by -5pt
-  \item $0\le P(A)\le 1$
-  \item $P(\Omega)=1$
-  \item $P(A\cup B)\le P(A)+P(B)$ \Tr{equality if}{med likhet då} $A\cap B=\varnothing$
-    (\Tr{i.e., mutually exclusive}{dvs är disjunkta})
+  \item $0\le P(A)\le 1$, \/ $P(\Omega)=1$. \/
+  \Tr{If}{Om}
+  $A\cup B=\varnothing$,
+    \Tr{then}{då}
+  $P(A\cap B)=P(A)+P(B)$
+  \item \Tr{If}{Om}
+    $A_j\cap A_j=\varnothing$
+    \Tr{for all}{för alla} $i\neq j$,
+    \Tr{then}{då}
+    $P(A_i\cup \ldots \cup A_n\cup \ldots)=P(A_1)+\cdots + P(A_n)+\cdots$
+%  \item $P(A\cup B)\le P(A)+P(B)$, \Tr{equality if}{med likhet då} $A\cap B=\varnothing$
+%   (\Tr{i.e., mutually exclusive}{dvs är disjunkta})
    \item $P(A^c) = 1-P(A)$ ($A^c$ \Tr{is the complement of}{är komplementet till} $A$)
   \item $P(A\cup B) = P(A)+P(B)-P(A\cap B)$.
+  \item de Morgan:
+    $P[(A\cup B)^c]=P(A^c\cap B^c)$,
+    $P[(A\cap B)^c]=P(A^c\cup B^c)$.
 \end{itemize}
-}
 
 \textbf{\Tr{Conditional probability}{Betingad sannolikhet}}:
-  $P(A|B) = \frac{P(A\cap B)}{P(B)}$
+$P(A|B) = \frac{P(A\cap B)}{P(B)}$
 
-  \textbf{Total \Tr{probability}{sannolikhet}}:
-  \Tr{If}{Om}
-  $\Omega=A_1\cup A_2\cdots\cup A_n$,
-  \Tr{and the events}{där händelserna}
-  $\{A_k\}_1^n$
-  \Tr{are mutually exclusive, then}{är parvis disjunkta, är}
+\textbf{\Tr{Independent events}{Oberoende händelser}}: $P(A\cap B) = P(A)P(B)$
+
+\medskip
+\textbf{Total \Tr{Probability Law}{sannolikhet}}:
+  $P(B) = P(B|A)P(A) + P(B|A^c)P(A^c)$.
+  \Tr{Generally, for events}{Allmännt, för händelserna}
 \[
+  \bigl\{A_k\bigr\}_{k=1}^n:
+  \left\{
+  \begin{array}{l}
+  A_i\cap A_j = \varnothing, \; i\neq j, \\
+  A_1\cup \dots\cup A_n=\Omega \\
+  \end{array}
+\right\}
+  \;\rightsquigarrow\;
 P(B) = \sum_{k=1}^n P(B\cap A_k)
      = \sum_{k=1}^n P(B|A_k) P(A_k)
 \]
 
-\textbf{\Tr{Bayes's theorem}{Bayes formula}}:
-  \Tr{If}{Om}
-  $\Omega=A_1\cup A_2\cdots\cup A_n$,
-  \Tr{and the events}{där händelserna}
-  $\{A_k\}_1^n$
-  \Tr{are mutually exclusive, then}{är parvis disjunkta, är}
-$$
-P(A_m|B) = \frac{P(A_m\cap B)}{P(B)}
-      = \frac{P(B|A_m) P(A_m)}
+\textbf{\Tr{Bayes's theorem}{Bayes formula}}: $
+P(A|B) = \frac{P(B|A)P(A)}{P(B|A)P(A) + P(B|A^c)P(A^c)}
+$, $P(B) > 0$. \/
+\Tr{Generally, for events}{Allmännt, för händelserna}
+\[
+  \bigl\{A_i\bigr\}_{i=1}^n:
+  \left\{
+  \begin{array}{l}
+  A_i\cap A_j = \varnothing, \; i\neq j, \\
+  A_1\cup \dots\cup A_n=\Omega \\
+  \end{array}
+\right\}
+  \;\rightsquigarrow\;
+P(A_j|B) = \frac{P(A_j\cap B)}{P(B)}
+      = \frac{P(B|A_j) P(A_j)}
              {\sum_{k=1}^n P(B|A_k) P(A_k)}
-$$%>>>
+ \]%>>>
 
 \subsection*{\Tr{Expectation and Variance}{Väntevärde och varians}}%<<<
 
@@ -189,6 +213,8 @@ $
 \medskip
 \textbf{\Tr{Variance}{Varians}}:
 $
+\sigma^2
+=
 \Tr{
 \Var(X)=E[(x-\mu)^2]=\cases{
 \sum_k (x_k-\mu)^2 P(X=x_k), & $X$ -- discrete random variable\cr
@@ -204,30 +230,22 @@ $
 
 \medskip
 \textbf{\Tr{Standard deviation}{Standardavvikelse}}:
-\Tr{
-$\sigma=\sqrt{\Var(X)}$
-}
-{
-$\sigma=\sqrt{V(X)}$
-}
-
-
-\textbf{\Tr{Steiner's theorem}{Steiner's sats}}:
-$
-\Tr{
-\sigma^2=E(X^2)-\mu^2 %=E(X^2)-[E(X)]^2
-=\cases{
-\sum_k x_k^2 P(X=x_k)-\mu^2, & $X$ -- discrete random variable\cr
-\int_{-\infty}^\infty x^2 f(x)\,dx -\mu^2 , &  $X$ -- continuous r.~v. with pdf $f$.
-}
-}{
-\sigma^2=E(X^2)-\mu^2 %=E(X^2)-[E(X)]^2
-=\cases{
-\sum_k x_k^2 P(X=x_k)-\mu^2, & $X$ -- diskret s.~v.\cr
-\int_{-\infty}^\infty x^2 f(x)\,dx -\mu^2 , & $X$ -- kontinuerlig s.~v.
-}
-}
-$
+\Tr{ $\sigma=\sqrt{\Var(X)}$ } { $\sigma=\sqrt{V(X)}$ }
+\hfil
+\textbf{\Tr{Steiner's theorem}{Steiner's sats}}: $\sigma^2=E(X^2)-\mu^2$
+%%% \Tr{
+%%% \sigma^2=E(X^2)-\mu^2 %
+%%% =\cases{
+%%% \sum_k x_k^2 P(X=x_k)-\mu^2, & $X$ -- discrete random variable\cr
+%%% \int_{-\infty}^\infty x^2 f(x)\,dx -\mu^2 , &  $X$ -- continuous r.~v. with pdf $f$.
+%%% }
+%%% }{
+%%% \sigma^2=E(X^2)-\mu^2 %=E(X^2)-[E(X)]^2
+%%% =\cases{
+%%% \sum_k x_k^2 P(X=x_k)-\mu^2, & $X$ -- diskret s.~v.\cr
+%%% \int_{-\infty}^\infty x^2 f(x)\,dx -\mu^2 , & $X$ -- kontinuerlig s.~v.
+%%% }
+%%% }
 %>>>
 
 \subsection*{\Tr{Linear combinations, sums and averages of random variables}%<<<
