@@ -79,7 +79,7 @@ www: # Exports only LAST modified (sv+en(if bi-lang))*(x1+x2+x4)
 	else \
 	  make -s $(WWWDIR)/$(FILE).pdf; \
 	fi
-	@echo "  pushd $(ALLMATTEDIR); make  www; popd   # To pub sharp"; echo
+	@echo "  make -C $(ALLMATTEDIR) www   # To pub sharp"; echo
 
 www-all: $(TARG_UNI) $(TARG_SV) $(TARG_EN) #
 

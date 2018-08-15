@@ -83,7 +83,7 @@
 
 \begin{document}
 
-\subsection*{\Tr{Trigonometry}{Trigonometri}} %<<<
+\subsubsection*{\Tr{Generic stuff}{Almänna formler}} %<<<
 
 % Standarda värden för sin/cos/tan + symmetrirelationer t höger
 {% Local scope def's
@@ -94,12 +94,46 @@
 \newcommand\tW{{\sqrt2}}
 \newcommand\tH{{\sqrt3}}
 $
+\begin{array}[m]{|l|l|}
+\hline
+\multicolumn{2}{|l|}{
+  \mbox{ \Tr{The conjugate and the square rules}{Konjugat- och kvadreringsreglerna}: }
+} \\
+\hline
+
+\rule[-4pt]{0pt}{15pt}
+   (a-b)(a+b) = a^2-b^2 & (a\pm b)^2 = a^2\pm2ab+b^2 \\
+\hline
+\hline
+\multicolumn{2}{|l|}{
+  \mbox{ \Tr{Roots of a second-degree polynomial}{Rötter till andragradspolynom}: }
+} \\
+\hline
+\rule[-2pt]{0pt}{15pt}
+x^2+px+q = 0 & x^2+bx+c = 0 \\
+  \displaystyle
+\rule[-10pt]{0pt}{32pt}
+  x_{1,2} = -\frac p2\pm\sqrt{\Bigl(\frac p2\Bigr)^2-q}
+&
+  \displaystyle
+   x_{1,2} = -\frac{-b\pm\sqrt{b^2-4ac}}{2a}
+\\
+\hline
+\end{array}
+% --
+\quad
+% --
 \begin{array}{|c|c|c|c|c|c|}
+\hline
+\multicolumn{6}{|l|}{
+  \mbox{\Tr{Trigonometric functions of standard angles}{Trigonometriska funktioner av standardvinklar}}
+} \\
+\hline
 \hline\vPad
 \mbox{(Std.~\Tr{angles}{vinklar})}^\circ
   & \CC{0} &\CC{30} &\CC{45} &\CC{60} &\CC{90}   % &\CC{120} &\CC{135} &\CC{150} &\CC{180}
  \myEnd
- x \mbox{ (\textbf{rad})}
+ x \mbox{ (rad)}
         & 0     & \pi/6 & \pi/4 &  \pi/3 & \pi/2 % & 2\pi/3 & 3\pi/4 & 5\pi/6 &\pi
  \\\hline\hline\vPad
  \cos(x)&   1   & \tH/2 & 1/\tW &  1/2  &   0    % & -1/2   & -1/\tW & -\tH/2 & -1
@@ -111,20 +145,20 @@ $
                                                  % &-\tH  &    -1  & -1/\tH &  0
  \\\hline
 \end{array}
-\quad
-\begin{array}[m]{|l|l|}
-\hline
-  \cos(-x) = \cos(x)    & \cos(x\pm\pi) = -\cos(x) \\
-  \sin(-x) = -\sin(x)   & \sin(x\pm\pi) = -\sin(x) \\
-\hline
-\hline
-  \sin(\pi-x) = \sin(x) &  \cos(x+2\pi) = \cos(x) \\
-  \cos(\pi-x) = -\cos(x)&  \sin(x+2\pi) = \sin(x) \\
-\hline
-\hline
- \tan(-x) = \tan(x)     & \tan(x\pm\pi) = \tan(x) \\
-\hline
-\end{array}
+%%% mer trigonometri; commented out: 2018-08-15:
+%%% \begin{array}[m]{|l|l|}
+%%% \hline
+%%%   \cos(-x) = \cos(x)    & \cos(x\pm\pi) = -\cos(x) \\
+%%%   \sin(-x) = -\sin(x)   & \sin(x\pm\pi) = -\sin(x) \\
+%%% \hline
+%%% \hline
+%%%   \sin(\pi-x) = \sin(x) &  \cos(x+2\pi) = \cos(x) \\
+%%%   \cos(\pi-x) = -\cos(x)&  \sin(x+2\pi) = \sin(x) \\
+%%% \hline
+%%% \hline
+%%%  \tan(-x) = \tan(x)     & \tan(x\pm\pi) = \tan(x) \\
+%%% \hline
+%%% \end{array}
 $
 }%>>>
 
@@ -421,7 +455,7 @@ $\lambda\in\mathbb R$.
   Mult.~\Tr{with scalar}{med tal}: & $\lambda(A+B)=\lambda A+\lambda B$
   \\*[2pt]\hline & \\*[-9pt]
   \Tr{Multiplication}{Multiplikation}:
-  &$AB\ne BA$ (\Tr{in general}{i allmänheti})
+  &$AB\ne BA$ (\Tr{in general}{i allmänhet})
   \\*[2pt]
   &$(AB)C=A(BC)$, \ $A(B+C)=AB+AC$, \  $(A+B)C=AC+BC$
   \\*[2pt]\hline & \\*[-11pt]
@@ -675,7 +709,7 @@ $\lambda\in\mathbb R$.
     |&&|
   \end{pmatrix},\!
   $$
-  \Tr{where the columns of}{där koonnerna i}
+  \Tr{where the columns of}{där kolonnerna i}
   $P$
   \Tr{are populated by the components of}{består av komponenterna till}
   $\vec f_1,\dots,\vec f_n$
@@ -761,40 +795,87 @@ A=PDP^{-1}\;
   \hline
 \end{tabular}%>>>
 
-\subsection*{\Tr{The Unifying Theorem: Equivalent claims for a square matrix}%<<<
-                {Huvudsatsen: Ekvivalents påståenden för en kvadratisk matris}
-               $A_{n\times n}$}
+\subsection*{\Tr{The Great Unifying Theorem for square matrices} {Huvudsatsen för kvadratiska matriser}:}%<<<
 
+\Tr{Let $A$ be a $n\times n$ matrix}{Låt $A$ vara en $n\times n$ matris}.
+\medskip
+
+%%%% \Tr{The GUT below rules them all, in the sense that}{Huvudsatsen är vattendelare i följande bemärkelse}:
+%%%% \begin{itemize}
+%%%%   \item
+%%%%    \Tr{Any square matrix}
+%%%%       {Varje kvadratisk matris}
+%%%%    $A_{n\times n}$
+%%%%    \Tr{is either GUT-compliant or not}{antingen uppfyller Huvudsatsen eller gör inte det}.
+%%%%   \item
+%%%%    \Tr{If}{Ifall} $A$
+%%%%    \Tr{satisfies any of the conditions of the GUT, it compulsory satisfies them all}
+%%%%       {uppfyller någon av Huvudsatsens krav, den upfyller obligatoriskt alla de övriga}.
+%%%%   \item
+%%%%       \Tr{Equivalently, if $A$ breaks any of the conditions of the GUT, it breaks them all}
+%%%%       {Ekvivalent, skulle $A$ bryta mot en av Huvudsatsens krav, den bryter även mot alla de övriga}.
+%%%% \end{itemize}
+%%%% \medskip
+
+%% Låt $A$ vara en $n\times n$--matris.\\*[10pt]
+\begin{tabular}{|p{0.475\linewidth}|p{0.475\linewidth}|}
+  \hline
+  &\\*[-10pt]
+%  Låt $A$ vara en $n\times n$--matris.\hfill\break
+  \textbf{\Tr{The GUT equivalent statements}{Huvudsatsens ekvivalenta påståenden}}: &
+  \textbf{\Tr{Its converse}{Dess motsats}}:
+  \\
+  \hline
+  \\*[-24pt]
   \begin{itemize}\addtolength{\itemsep}{-5pt}
-  \item $A\sim I$ ($\mbox{rank}(A)=n$)
+    \item $A\sim I$ ($A$ \Tr{is row-equivalent to}{är radekvivalent med} $I$)
+  \item $\mbox{rank}(A)=n$
   \item $\det(A)\ne0$
-  \item \Tr{A unique inverse}{Existerar entydig invers} \/ $A^{-1}$ \Tr{exists}{}
-  \item
-    \Tr{The system}{Ekvationssystemet}
-    $A\bdx=\bdzero$
+  \item $A$ \Tr{has a unique inverse}{har entydig invers} \/ $A^{-1}$
+  \item \Tr{The homogeneous system}{Det homogena systemet}
+    $A\vec x=\vec 0$
     \Tr{has only the trivial solution}{har endast den triviala lösningen}
-    $\bdx=\bdzero$
-  \item
-    \Tr{The homogeneous system}{Ekvationssystemet}
-    $A\bdx=\bdb$
-    \Tr{has a unique solution for any}{har en entydig lösning för varje val av högerledet}
-    $\bdb$
-  \item $A$
-    \Tr{'s rows are linear independent and form a basis for}{:s rader är linjärt oberoende och utgör en bas för}
-    $\mathbb{R}^n$
-  \item $A$
-    \Tr{'s columns are linear independent and form a basis for}{:s kolonner är linjärt oberoende och utgör en bas för}
-    $\mathbb{R}^n$
-  \item
-    \Tr{The linear map}{Avbildningen}
-    $F(\bdx)=A\bdx$
-    \Tr{is invertible}{är omvändbar}
-  \item
-    \Tr{All eigenvalues of}{Alla egenvärden till}
-    $A$
-    \Tr{are different from}{är skilda från}
-    $0$.
-  \end{itemize}%>>>
+    $\vec x=\vec 0$
+  \item \Tr{The inhomogeneous system}{Det inhomogena systemet}
+    $A\vec x=\vec b$
+    \Tr{is uniquely solvable for any right-hand side}
+       {har en entydig lösning för varje val av högerledet} $\vec b$
+  \item \Tr{The rows of $A$ are linearly independent}{$A$:s rader är linjärt oberoende}
+  \item \Tr{The rows of $A$ form a basis for}        {$A$:s rader utgör en bas för} $\mathbb{R}^n$
+  \item \Tr{The columns of $A$ are linearly independent}{$A$:s kolonner är linjärt oberoende}
+  \item \Tr{The columns of $A$ form a basis for}        {$A$:s kolonner utgör en bas för} $\mathbb{R}^n$
+  \item \Tr{All eigenvalues of $A$ are different from}{$A$:s egenvärden är alla skilda från} $0$
+  \item \Tr{The linear map}{Avbildningen}
+        $F(\vec x)=A\vec x$
+        \Tr{is invertible}{är omvändbar}
+  \end{itemize}
+  \vspace{-16pt}
+  &
+  \begin{itemize}\addtolength{\itemsep}{-5pt}
+    \item $A\not\sim I$ ($A$ \Tr{is not row-equivalent to}{är ej radekvivalent med} $I$)
+  \item $\mbox{rank}(A)<n$
+  \item $\det(A)=0$
+  \item $A$ \Tr{is singular (not invertible)}{är singulär (ej inverterbar)}
+  \item \Tr{The homogeneous system}{Det homogena systemet}
+    $A\vec x=\vec 0$
+    \Tr{has infinitely many solutions}{har oändligt många lösningar}
+  \item \Tr{The inhomogeneous system}{Det inhomogena systemet}
+    $A\vec x=\vec b$
+    \Tr{is either inconsistent or has infinitely many solutions}
+       {är antingen ölosbart eller har oändligt många lösningar}
+  \item \Tr{The rows of $A$ are linearly dependent}   {$A$:s rader är linjärt beroende}
+  \item \Tr{The rows of $A$ do not span}              {$A$:s rader spänner inte upp} $\mathbb{R}^n$
+  \item \Tr{The columns of $A$ are linearly dependent}{$A$:s kolonner är linjärt beroende}
+  \item \Tr{The columns of $A$ do not span}           {$A$:s kolonner spänner inte upp} $\mathbb{R}^n$
+  \item $\lambda=0$ \Tr{is an eigenvalue of}{är ett egenvärde till} $A$
+  \item \Tr{The linear map}{Avbildningen}
+        $F(\vec x)=A\vec x$
+        \Tr{is not invertible}{är inte omvändbar}
+  \end{itemize}
+  \vspace{-16pt}
+  \\
+  \hline
+\end{tabular}
 
 \label{fin@lpage}
 
