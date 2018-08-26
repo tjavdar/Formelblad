@@ -7,6 +7,7 @@
 
 default : x
 
+
 # Mtargets includes: lang, implicit, rip, last<<<
 U = QDirty
 RIP_FROM=*.tex
@@ -73,7 +74,7 @@ xsq: $(FILEx3)
 tables: $(TEXTABLES)
 
 www: # Exports only LAST modified (sv+en(if bi-lang))*(x1+x2+x4)
-	@if [ -n $(isBILANG) ]; then \
+	@if [ -n "$(isBILANG)" ]; then \
 	  make -s $(WWWDIR)/en/$(FILE).pdf; \
 	  make -s $(WWWDIR)/sv/$(FILE).pdf; \
 	else \
