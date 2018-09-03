@@ -1,7 +1,7 @@
 % vim: foldmethod=marker:spelllang=sv:spell
 % ------------------------------------------------------------------
-% Formelblad Matematiska verktyg 
-% Version 0.5 IvTj, 2011-01-13: 
+% Formelblad Matematiska verktyg
+% Version 0.5 IvTj, 2011-01-13:
 
 
 \documentclass{article}
@@ -59,12 +59,12 @@
 \renewcommand{\@oddhead}{}
 \renewcommand{\@evenhead}{}
 \renewcommand{\@oddfoot}
-{\ifnum\thepage=1 
+{\ifnum\thepage=1
   \today\hfill file:~\small\texttt{\jobname.pdf}
 \else
-  Formelblad Trans \& Stat \hfill s.~\thepage{} av \pageref{LastPageNo} 
+  Formelblad Trans \& Stat \hfill s.~\thepage{} av \pageref{LastPageNo}
 \fi}
-      
+
   \renewcommand{\@evenfoot}{\small
         \texttt{\jobname.pdf},\hfill}
 
@@ -173,9 +173,43 @@
 \begin{document}
 
 
-\subsection*{Formelblad Diskretmatematik} 
+\subsection*{Formelblad Diskretmatematik}
 \hrule
 \bigskip
+
+\subsubsection*{Binomialsatsen. Geometrisk summa. Eulers polyederformel för planära grafer $G(V,E)$}%<<<
+\vspace{-15pt}
+\[
+  \begin{array}[t]{|l|l|l|}
+\hline
+  (a+b)^n = \sum_{k=0}^{n} \binom{n}{k} a^{n-k}b^k &
+  \sum_{k=0}^{n} x^k = 1 + x  + \cdots +x^n = \frac{x^{n+1}-1}{x-1},\quad x \neq 1 &
+  %\sum_{k=0}^{\infty} z^k = \frac{1}{1-z},\quad |z| < 1
+  |V|-|E|+ \#(\mbox{faces}) = 2
+\\\hline
+  \end{array}
+\]%>>>
+
+\subsubsection*{Arithmetic mod $n$:} \vspace{-1.2em} %<<<
+\[
+  \begin{array}[t]{|*{4}{l|}}
+    \hline \rule{0pt}{12pt}
+ %   \Zone = \{0,\pm1,\pm2,\cdots\}
+     [a]_n=[b]_n\iff a+tn = b,\, t\in \Zone
+    & \Zone_n=\{[0]_n,\cdots,[n-1]_n\}
+    & a\perp b \iff \gcd(a,b)=1
+    \cr
+    \hline \rule{0pt}{12pt}
+    U_n=\{x\in\Zone_n\!: x\perp n\},\, \phi(n)=|U_n|&
+    [a+b]_n = [[a]_n + [b]_n]_n &
+    [ab]_n = [[a]_n[b]_n]_n
+    \\[3pt] \hline \rule{0pt}{12pt}
+    \mbox{Fermats lilla \& Eulers satserna:}
+    & p-\mbox{prime}, a\perp p\ergo [a^{p-1}]_p=[1]_p
+    & a\perp n\ergo [a^{\phi(n)}]_n=[1]_n\\[2pt]
+    \hline
+  \end{array}
+\]%>>>
 
 \subsubsection*{De grundläggande logiska konnektiven och deras sanningsvärdestabeller}%<<<
 
@@ -196,7 +230,7 @@ Boolesk symbol   & $\cdot$  &    $+$   & \raise5pt\hbox{$-$} \\
  & & & \\[-8pt]
  \raise5pt\hbox{Gate (en)\,/\,grind (sv)}
   & \lower0pt\hbox{\includegraphics[scale=0.7]{Figs/gate_and}}
-  & \lower0pt\hbox{\includegraphics[scale=0.7]{Figs/gate_or}} 
+  & \lower0pt\hbox{\includegraphics[scale=0.7]{Figs/gate_or}}
   & \lower0pt\hbox{\includegraphics[scale=0.7]{Figs/gate_not}}
      \\
 \hline
@@ -217,8 +251,8 @@ Boolesk symbol   & $\cdot$  &    $+$   & \raise5pt\hbox{$-$} \\
   \multicolumn{7}{l}{\rule{0pt}{12pt}Omskrivningar:} \\
   \multicolumn{7}{l}{$ p\to q \iff \neg p \vee q $} \\
   \multicolumn{7}{l}{$p \leftrightarrow q
-                      \iff 
-                      (p\to q) \wedge ( q \to p ) 
+                      \iff
+                      (p\to q) \wedge ( q \to p )
   $}
 \end{tabular}%>>>
 %>>>
@@ -265,31 +299,31 @@ Kommutativa
 \hline
 Associativa
                   & \scriptstyle  (P\cup Q)\cup R = P\cup(Q\cup R)
-                  & (p \vee q) \vee r \iff p \vee (q \vee r) 
+                  & (p \vee q) \vee r \iff p \vee (q \vee r)
                   & (p + q) + r = p + (q + r) \\
                   & \scriptstyle  (P\cap Q)\cap R = P\cap(Q\cap R)
-                  & (p \wedge q)\wedge r \iff p \wedge (q\wedge r) 
+                  & (p \wedge q)\wedge r \iff p \wedge (q\wedge r)
                   & (pq)r = p(qr)\\
 \hline
 de Morgan \rule{0pt}{10pt}
                   & \scriptstyle  (P\cup Q)^c = P^c\cap Q^c
-                  & \neg ( p \vee q ) \iff \neg p \wedge \neg q 
+                  & \neg ( p \vee q ) \iff \neg p \wedge \neg q
                   & \ob {p + q}  = \ob p\,\ob q \\
                   & \scriptstyle  (P\cap Q)^c = P^c\cup Q^c
-                  & \neg ( p \wedge q ) \iff \neg p \vee \neg q 
+                  & \neg ( p \wedge q ) \iff \neg p \vee \neg q
                   & \ob {pq}  = \ob p+\ob q \\
 \hline
 Distributiva
                   & \scriptstyle (P\cup Q)\cap R = (P\cap R)\cup(Q\cap R)
-                  & p \vee (q \wedge r ) \iff (p \vee q) \wedge (p \vee r) 
+                  & p \vee (q \wedge r ) \iff (p \vee q) \wedge (p \vee r)
                   & p + qr = (p + q)(p + r) \\
                   & \scriptstyle (P\cap Q)\cup R = (P\cup R)\cap(Q\cup R)
-                  & p \wedge (q\vee r)\iff (p \wedge q) \vee (p\wedge r) 
+                  & p \wedge (q\vee r)\iff (p \wedge q) \vee (p\wedge r)
                   & p(q+r) = pq+pr\\
 \hline
 Absorbering
                   & \scriptstyle  P\cup (P\cap Q)=P
-                  & p \vee (p \wedge q ) \iff p 
+                  & p \vee (p \wedge q ) \iff p
                   & p + pq = p \\
                   & \scriptstyle  P\cap (P\cup Q)=P
                   & p \wedge (p\vee q)\iff p
@@ -299,47 +333,64 @@ Absorbering
 %>>>
 
 \subsubsection*{Inferenslagar (Logiska implikationer)}%<<<
-\begin{tabular}[t]{*{4}{>{$}l<{$}}l}
-  L_0
-  & p\land (p\to q) &\ergo& q
-  & \emph{Modus Ponens} 
-  \cr
-  L_1
-  & (p\to q)\land\lnot q &\ergo& \lnot p
-  & \emph{Modus Tollens}
-  \cr
-  L_2
-  & (p\to q)\land(q\to r) &\ergo&  (p\to r)
-  & \emph{Hypotetisk syllogism}
-  \cr
-  L_3
-  & \lnot p \land (p\lor q) &\ergo& q
-  & \emph{Disjunktiv syllogism}
-  \cr
-  L_4
-  & p\land q &\ergo& p
-  & \emph{Konunktiv förenkling}
-  \cr
-  L_5
-  & p &\ergo& p\lor q
-  & \emph{Disjunktiv förstärkning}
-  \cr
-  L_6
-  & (p\to q) \land (r\to s) \land (p\lor r) &\ergo& q\lor s
-  & \emph{Konstruktiv dilemma}
-  \cr
-  L_7
-  & (p\to q) \land (r\to s) \land (\lnot q\lor \lnot s) &\ergo& \lnot p\lor \lnot r
-  & \emph{Destruktiv dilemma}
-  \cr
-  L_8
-  & \lnot p\to F_0 &\ergo& p
-  & \emph{Reductio ad absurdum} (motsägelse)
-  \cr
-  L_9
-  & (p\to r) \land (q\to r) &\ergo& (p\lor q)\to r
-  & \emph{Tudelad bevis} (by cases)
-  \cr
-\end{tabular}%>>>
+\begin{array}[t]{|*{2}{rrcl|}}
+  \hline \rule{0pt}{11pt}
+    L_0\!: & p\land (p\to q) &\ergo& q
+  & L_5\!: & p &\ergo& p\lor q \\
+    L_1\!: & (p\to q)\land\lnot q &\ergo& \lnot p
+  & L_6\!: & (p\to q) \land (r\to s) \land (p\lor r) &\ergo& q\lor s \\
+    L_2\!: & (p\to q)\land(q\to r) &\ergo&  (p\to r)
+  & L_7\!: & (p\to q) \land (r\to s) \land (\lnot q\lor \lnot s) &\ergo& \lnot p\lor \lnot r \\
+    L_3\!: & \lnot p \land (p\lor q) &\ergo& q
+  & L_8\!: & \lnot p\to F_0 &\ergo& p \\
+    L_4\!: & p\land q &\ergo& p
+  & L_9\!: & (p\to r) \land (q\to r) &\ergo& (p\lor q)\to r \\[1pt]
+  \hline
+\end{array}
+%>>>
+
+%%% \subsubsection*{Inferenslagar (Logiska implikationer)}%<<<
+%%% \begin{tabular}[t]{*{4}{>{$}l<{$}}l}
+%%%   L_0
+%%%   & p\land (p\to q) &\ergo& q
+%%%   & \emph{Modus Ponens}
+%%%   \cr
+%%%   L_1
+%%%   & (p\to q)\land\lnot q &\ergo& \lnot p
+%%%   & \emph{Modus Tollens}
+%%%   \cr
+%%%   L_2
+%%%   & (p\to q)\land(q\to r) &\ergo&  (p\to r)
+%%%   & \emph{Hypotetisk syllogism}
+%%%   \cr
+%%%   L_3
+%%%   & \lnot p \land (p\lor q) &\ergo& q
+%%%   & \emph{Disjunktiv syllogism}
+%%%   \cr
+%%%   L_4
+%%%   & p\land q &\ergo& p
+%%%   & \emph{Konunktiv förenkling}
+%%%   \cr
+%%%   L_5
+%%%   & p &\ergo& p\lor q
+%%%   & \emph{Disjunktiv förstärkning}
+%%%   \cr
+%%%   L_6
+%%%   & (p\to q) \land (r\to s) \land (p\lor r) &\ergo& q\lor s
+%%%   & \emph{Konstruktiv dilemma}
+%%%   \cr
+%%%   L_7
+%%%   & (p\to q) \land (r\to s) \land (\lnot q\lor \lnot s) &\ergo& \lnot p\lor \lnot r
+%%%   & \emph{Destruktiv dilemma}
+%%%   \cr
+%%%   L_8
+%%%   & \lnot p\to F_0 &\ergo& p
+%%%   & \emph{Reductio ad absurdum} (motsägelse)
+%%%   \cr
+%%%   L_9
+%%%   & (p\to r) \land (q\to r) &\ergo& (p\lor q)\to r
+%%%   & \emph{Tudelad bevis} (by cases)
+%%%   \cr
+%%% \end{tabular}%>>>
 
 \end{document}
