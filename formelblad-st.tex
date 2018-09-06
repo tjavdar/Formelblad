@@ -24,6 +24,7 @@
 \textwidth 6.6in
 \parindent=0pt
 \advance\parskip by 1pt
+\advance\textheight by 50 pt
 % >>>
 
 \pagestyle{headings}
@@ -124,8 +125,18 @@
 
 \begin{document}
 
+\section*{\Tr{Cheat Sheet Mathematical Statistics}{Matematisk Statistik, formelblad}}%<<<
 
-\section*{\Tr{Cheat Sheet Mathematical Statistics}{Matematisk Statistik, formelblad}}
+\subsection*{\Tr{Some notsums and series}{Några summor och serier}}
+\[
+  \begin{array}[m]{|l|l|l|}
+   \hline
+  \sum_{k=0}^{n}z^k = 1 + z + z^2 + \cdots +z^n = \frac{1-z^{n+1}}{1-z},\; z \neq 1
+ &\sum_{k=0}^{\infty}z^k = \frac{1}{1-z},\; |z| < 1
+ &\sum_{k=0}^{\infty}\frac{z^k}{k!} = e^z \cr
+   \hline
+  \end{array}
+\]%>>>
 
 \subsection*{\Tr{Probability laws}{Sannolikhetslära}}%<<<
 
@@ -139,9 +150,9 @@
 \begin{itemize}\advance\itemsep by -5pt
   \item $0\le P(A)\le 1$, \/ $P(\Omega)=1$. \/
   \Tr{If}{Om}
-  $A\cup B=\varnothing$,
+  $A\cap B=\varnothing$,
     \Tr{then}{då}
-  $P(A\cap B)=P(A)+P(B)$
+  $P(A\cup B)=P(A)+P(B)$
   \item \Tr{If}{Om}
     $A_j\cap A_j=\varnothing$
     \Tr{for all}{för alla} $i\neq j$,
