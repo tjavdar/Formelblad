@@ -1,0 +1,796 @@
+% vim: foldmethod=marker
+% CHANGELOG:
+% Ändring:    IvTj, 2017-01, +Taylor
+% Ändring:    IvTj, 2012-01, Dln(x) = 1/x --> Dln(|x|) = 1/x
+% Ändring:    IvTj, 2009-01, Lagt till Eulers formler, nya headers
+% Ändring:    IvTj, 2008-02, Tagit bort JTH-logot från s. 1
+% Rättelse:   IvTj, 2008-02, atan(x)+atan(x) = pi/2 --> atan(x)+atan(1/x) = pi/2
+% Rättelse:   IvTj, 2008-02, Vinkel 145^\circ --> 135^circ
+% Version 1.1 IvTj, 2007-12, tilläg, ommöblering, latin1->UTF-8
+% Version 1.0 FrAb, 2007-10
+\voffset-1.5cm
+\documentclass{article}
+\usepackage[swedish]{babel}
+\usepackage[utf8]{inputenc} % <-- IvtTj: Changed encoding to UTF-8
+\usepackage{graphicx,a4wide,amsfonts,amsmath,fancyhdr}
+\everymath{\displaystyle}   % <-- Ändring IvTj
+\usepackage{ae,aecompl} %% nice pdf output! <-- Ändring IvTj
+
+\parindent=0pt
+
+\input Lang.h % En-Sv settings outsourced
+
+
+% Macros <<<
+\addtolength{\topmargin}{-35mm}
+\addtolength{\headheight}{25ex}
+\addtolength{\headsep}{-3ex}
+\addtolength{\textheight}{20mm}
+\addtolength{\textwidth}{17mm}
+%\footheight{ 0ex}
+\footskip 3ex
+\pagestyle{fancy}
+
+\newcommand{\one}{\marginpar{(1p)}}
+\newcommand{\two}{\marginpar{(2p)}}
+\newcommand{\three}{\marginpar{(3p)}}
+\newcommand{\four}{\marginpar{(4p)}}
+\newcommand{\Le}{\Leftrightarrow}
+
+\newcommand{\D}{D}
+
+\newtheorem{theorem}{Sats}
+\begin{document}
+
+%% <-- 2009-01-21: ändring IvTj, nya headers/footers
+%\lhead{\ifnum\thepage=1  \includegraphics[scale=1.3]{jth-logo.eps}\fi} % <-- Ändring IvTj
+\chead{\ifnum\thepage=1 {} \else \Tr{Cheatsheet Basic Calculus}{Formelblad Basic Calculus}\fi}
+\rhead{\ifnum\thepage=1 \textbf{\Tr{CHEATSHEET BASIC CALCULUS}{FORMELBLAD BASIC CALCULUS}}
+               \else sid. \thepage{} av \pageref{LastPageNo}  \fi}
+
+\lfoot{\ifnum\thepage=1\small\today\fi}
+\cfoot{}
+\rfoot{\ifnum\thepage=1\small File: \texttt{\jobname.pdf}\fi}
+\parindent 0 cm
+\normalsize
+%% \begin{flushright}\ifnum\thepage=1
+%% %{\today}
+%% \fi\end{flushright}
+
+
+
+\let\iff\Leftrightarrow % <-- ändring IvTj
+\let\ob\overline        % <-- ändring IvTj
+\newcommand\Rone{\mathbb{R}}
+\def\EndRow{\\*[3pt]}
+
+%\psfig{figure=CTH-logo-4cm.eps%,width=19mm}
+ %\psfig{figure=k-ing.eps,width=29mm}} <-- ändring IvTj
+%>>>
+
+\vspace{-1.5cm}
+
+\subsection*{\Tr{The square-, conjugate- and binomial formulas}{Kvadrerings-, konjugat- och binomialformlerna}}%<<<
+
+
+\begin{tabular}[m]{|c|c|}
+  \hline
+  \Tr{The binomial coeffients}{Binomiala koefficienter:}
+    $\binom nk = \frac{n!}{k!(n-k)!}$
+&
+$n! = \begin{cases}
+                \hfil1,& n=0\\
+                1\cdot2\cdot3\cdots\cdot n,& n=1,2,\dots
+                \end{cases}$
+  \\\hline
+\end{tabular}
+
+\medskip
+
+\begin{tabular}[m]{|c|c|c|}
+      \hline
+      &&\\*[-11pt]
+    $(a + b)^2 = a^2 + 2ab+b^2$
+    &
+    $(a+b)(a-b) = a^2-b^2$
+    &
+    $(a+b)^n =
+    \sum_{k=0}^n\binom nk a^{n-k}b^k$\\
+      \hline
+\end{tabular}
+%
+% Pascals triangel:
+% \begin{verbatim}
+%       1
+%     1 2 1
+%    1 3 3 1
+%   1 4 6 4 1
+% \end{verbatim}
+%>>>
+
+\subsection*{\Tr{Powers, exponentials and logarithms}{Potenser, exponentialfunktioner, logaritmer}}%<<<
+
+
+$\begin{array}{|l|l|l|l|l|}\hline
+  &&&&\\*[-11pt]
+  a^0=1 &a^xa^y=a^{x+y} &
+  %\frac{a^x}{a^y}=a^{x-y}&(a^x)^y=a^{xy} <-- ändring IvTj
+  a^x/a^y=a^{x-y}&(a^x)^y=a^{xy}
+  & (ab)^x=a^xb^x
+\EndRow
+  \ln(1)=0 &\ln(xy)=\ln(x)+\ln(y) &\ln\big(\frac{x}{y}\big)
+  =\ln(x)-\ln(y) &
+  \ln(\frac1x) = -\ln(x) &
+  \ln(x^y)=y\ln(x)
+\EndRow
+  e^{\ln(x)}=x & \ln(e^x)=x & \log_a(x)
+  =\frac{\ln(x)}{\ln(a)} & a^x=e^{x\ln(a)} &
+  (\log_ba)(\log_ab) = 1
+\EndRow
+\hline\end{array}$%>>>
+
+\subsubsection*{\Tr{The trigonometric functions}{De trigonometriska funktionerna}}%<<<
+
+% Standarda värden för sin/cos/tan + symmetrirelationer t höger %<<<
+{% Local scope def's
+\let\F\frac
+\newcommand\CC[1]{#1^\circ}
+\def\vPad{&&&&&\\*[-10pt]}
+\def\myEnd{\\\hline\vPad}
+\newcommand\tW{{\sqrt2}}
+\newcommand\tH{{\sqrt3}}
+$
+\begin{array}{|c|c|c|c|c|c|}
+\hline\vPad
+\mbox{(Std.~\Tr{angles}{vinklar})}^\circ
+  & \CC{0} &\CC{30} &\CC{45} &\CC{60} &\CC{90}   % &\CC{120} &\CC{135} &\CC{150} &\CC{180}
+ \myEnd
+ x \mbox{ (\textbf{rad})}
+        & 0     & \pi/6 & \pi/4 &  \pi/3 & \pi/2 % & 2\pi/3 & 3\pi/4 & 5\pi/6 &\pi
+ \\\hline\hline\vPad
+ \cos(x)&   1   & \tH/2 & 1/\tW &  1/2  &   0    % & -1/2   & -1/\tW & -\tH/2 & -1
+ \myEnd
+ \sin(x)&   0   &   1/2 & 1/\tW & \tH/2 &   1    % & \tH/2  &  1/\tW &   1/2  &  0
+ \myEnd
+ \tan(x)&   0   & 1/\tH &   1   & \tH   &
+                                    \mbox{ej def}
+                                                 % &-\tH  &    -1  & -1/\tH &  0
+ \\\hline
+\end{array}
+\quad
+\begin{array}[m]{|l|l|}
+\hline
+  \cos(-x) = \cos(x)    & \cos(x\pm\pi) = -\cos(x) \\
+  \sin(-x) = -\sin(x)   & \sin(x\pm\pi) = -\sin(x) \\
+\hline
+\hline
+  \sin(\pi-x) = \sin(x) &  \cos(x+2\pi) = \cos(x) \\
+  \cos(\pi-x) = -\cos(x)&  \sin(x+2\pi) = \sin(x) \\
+\hline
+\hline
+ \tan(-x) = -\tan(x)     & \tan(x\pm\pi) = \tan(x) \\
+\hline
+\end{array}
+$
+}%>>>
+
+% Trig.~ekv: %<<<
+\medskip
+\textbf{Trig.~\Tr{eqns}{ekv}}:
+\raise8pt\hbox{
+$
+\begin{array}[t]{|c|c|c|}
+  \hline
+%  \multicolumn{3}{|c|}{\mbox{Trigonometriska ekvationer}}\\ % <-- Ändring IvTj
+%  \cline{1-3}
+  \sin(x)=c\,, \;|c|\leq 1,      \mbox{ löses av:} &
+  \cos(x)=c\,, \;|c|\leq 1,      \mbox{ löses av:} &
+  \tan(x)=c\,, \;c\in\mathbb{R}, \mbox{ löses av:}
+\\[2pt]
+x=
+\begin{cases}
+     x_0+2n\pi,   & n\in\mathbb{Z}\cr
+    \pi-x_0+2k\pi,& k\in\mathbb{Z}
+\end{cases}
+&
+x=\pm x_0+n2\pi\,,\;n\in\mathbb{Z}
+&x=x_0+n\pi\,,\;n\in\mathbb{Z}
+\\[11pt]
+\hline
+\end{array}
+$} % raised hbox
+%>>>
+
+% Trigrormlerna%<<<
+\medskip
+$\begin{array}{|l|l|}\hline &\\*[-11pt] % <-- ändring IvTj
+ %\sin(-x)=-\sin(x) &\cos(-x)=\cos(x) \EndRow
+ \cos^2(x)+\sin^2(x)=1  &
+ \cos(2x)=\cos^2(x)-\sin^2(x) \EndRow %% <-- ändring IvTj
+ \sin(2x)=2\sin(x)\cos(x)&\cos(2x)=2\cos^2(x)-1=1-2\sin^2(x) \EndRow
+ \sin^2(x) = (1-\cos(2x))/2 &
+ \cos^2(x) = (1+\cos(2x))/2 \EndRow % <-- ändring IvTj
+ \sin(x)=\sin(\pi-x)=\cos(\frac{\pi}{2}-x) &
+ \cos(x)=\sin(\frac{\pi}{2}-x)=-\cos(\pi-x)\EndRow
+ % \sin(x\pm\pi) = -\sin(x) & \cos(x\pm\pi) = -\cos(x) \EndRow % <-- ändring IvTj
+ \sin(x\pm y)=\sin(x)\cos(y)\pm\sin(y)\cos(x) &
+ \cos(x\pm y)=\cos(x)\cos(y)\mp\sin(x)\sin(y)\EndRow
+% \sin(2x)=2\sin(x)\cos(x)&\cos(2x)=2\cos^2(x)-1=1-2\sin^2 x \EndRow
+ \sin(x)\sin(y)=\frac{1}{2}(\cos(x-y)-\cos(x+y)) &
+ \sin(x)\cos(y)=\frac{1}{2}(\sin(x-y)+\sin(x+y)) \EndRow
+ \cos(x)\cos(y)=\frac{1}{2}(\cos(x-y)+\cos(x+y)) &
+ \tan(x\pm y)=\dfrac{\tan(x)\pm\tan(y)}{1\mp\tan(x)\tan(y)}\\*[8pt]
+ \cline{1-2}\multicolumn{2}{|c|}{     % <-- ändring IvTj
+   a\cos x+b\sin x=A\sin(x+\varphi) = A\cos(x-\psi),\;
+              A=\sqrt{a^2+b^2}
+     \mbox{ \ och \ }
+              \left\{ \begin{array}{l}
+              \sin\varphi=\cos\psi=a/A \\
+              \cos\varphi=\sin\psi=b/A
+\end{array}\right.}
+ \EndRow\hline\end{array}$ %>>>
+
+%>>>
+
+\subsubsection*{\Tr{The inverse trigonometric functions}{De inversa trigonometriska funktionerna}}%<<<
+
+$\begin{array}{|lll|}\hline && \\*[-9pt]
+  y=\sin(x),\hspace{2 mm} x\in[-\frac{\pi}{2},\frac{\pi}{2}]&
+  \iff &
+  x=\arcsin(y),\hspace{2 mm} y\in[-1,1] \EndRow
+  y=\cos(x),\hspace{2 mm} x\in[0,\pi]&
+  \iff &
+  x=\arccos(y),\hspace{2 mm} y\in[-1,1] \EndRow
+  y=\tan(x),\hspace{2 mm} x\in(-\frac{\pi}{2},\frac{\pi}{2})&
+  \iff &
+  x=\arctan(y), \hspace{2 mm} y\in\mathbb{R}\\*[6pt]\hline
+\end{array}$
+
+\vspace{1 mm}
+
+$\begin{array}{|l|l|l|}\hline & & \\*[-11pt]
+\arcsin(-x)=-\arcsin(x) & \arccos(-x)=\pi-\arccos(x) &
+  \arctan(x)+\arctan(\tfrac1x)=\frac\pi2, \; x>0 \EndRow % <-- ändring IvTj
+\arctan(-x)=-\arctan(x) &\arccos(x)=\frac{\pi}{2}-\arcsin(x) &
+  \arctan(x)+\arctan(\tfrac1x)=-\frac\pi2, \; x < 0 \\*[6pt] % <-- ändring IvTj
+\hline
+\end{array}$%>>>
+
+\subsection*{\Tr{The complex numbers}{Komplexa tal}}%<<<
+
+$  % <-- Ändring IvTj
+\begin{array}{|l|l|}
+  \hline & \\*[-8pt]
+  z=x+iy    =|z|\,e^{ i\varphi}=|z|(\cos\varphi+i\sin\varphi) &
+ x=\text{Re}(z)\in\Rone,\;
+ y=\text{Im}(z)\in\Rone,\;
+ |z| = |\ob z| = \sqrt{x^2+y^2}
+  \EndRow
+  \ob z=x-iy=|z|\,e^{-i\varphi}=|z|(\cos\varphi-i\sin\varphi) &
+  \varphi = \arg (z),
+  \;
+  %\text{ där }
+  \cos\varphi = x/|z|,
+  %\text{ och }
+  \;
+  \sin\varphi = y/|z|  ;
+  \;
+  \arg(\ob z) = -\varphi
+  \EndRow
+  \ob{\ob z} = z ;
+  \;\,
+  \ob{zw} = \ob z\,\,\ob w ;
+  \;\,
+  \ob{z / w} = \ob z/\ob w ;
+  \;\,
+  z\ob z = |z|^2
+  &
+  |zw| = |z|\,|w| ;
+  \quad
+  |z/w| = |z|/|w| ;
+  \quad
+  |z+w| \le |z| + |w|
+  \EndRow \cline{1-2} \multicolumn{2}{|l|}{}\\*[-9pt]
+  \multicolumn{2}{|c|}{
+    \text{\Tr{The Euler's formulae}{Eulers formler}: \ }
+  \left\{\begin{matrix}
+  e^{i\varphi}   =  \cos \varphi + i \sin \varphi\\
+  e^{-i\varphi}  =  \cos \varphi - i \sin \varphi\\
+  \end{matrix}\right.
+  \hfil
+  \left\{\begin{matrix}
+    \cos\varphi = (e^{i\varphi}+e^{-i\varphi})/2\\
+    \sin\varphi = (e^{i\varphi}-e^{-i\varphi})/2i\\
+  \end{matrix}\right.
+  }
+  \\*[9pt]
+  \cline{1-2}
+  \multicolumn{2}{|l|}{}\\*[-7pt]
+  \multicolumn{2}{|c|}{\text{\Tr{The de Moivre's formula }{de Moivres formel}: \ }
+  (\cos\varphi+i\sin\varphi)^n
+  =(e^{i\varphi})^n
+  =e^{in\varphi}
+  =\cos(n\varphi)+i\sin(n\varphi)
+  }
+  \EndRow
+  \hline
+\end{array}
+$
+
+%% Ett komplext tal $z$ har formen $z=x+iy$ där $x,y\in\mathbb{R}$ och $i^2=-1$.
+%%
+%% $\text{Re}(z)=x$ --- realdelen av $z$; $\text{Im}(z)=y=$imaginärdelen av $z$
+%%
+%% $\vert z\vert=\sqrt{x^2+y^2}$
+%%
+%% $z=x+iy\Rightarrow \text{ komplexkonjugatet }\overline{z}=x-iy$
+%%
+%% \vspace{5 mm}
+%%
+%% $\begin{array}{|l|l|}
+%% \hline \overline{\overline{z}}=z &\vert z\vert\geq 0 \text{ för alla }z \text{ med likhet }\Le z=0
+%% \\ & \\ \overline{zw}=\overline{z}\cdot\overline{w}&\vert zw\vert=\vert z\vert\cdot\vert w\vert
+%% \\ & \\\overline{\left(\frac{z}{w}\right)}=\frac{\overline{z}}{\overline{w}}&\left\vert\frac{z}{w}\right\vert=\frac{\vert z\vert}{\vert w\vert}
+%% \\ & \\z\overline{z}=\vert z\vert^2&\vert z+w\vert\leq\vert z\vert+\vert w\vert
+%% \\\hline
+%% \end{array}$
+%%
+%%\vspace{1 cm}
+%%
+%%Polär form: $$z=x+iy=r(\cos\theta+i\sin\theta)=re^{i\theta}\Le\left\{\begin{array}{l}r^2=x^2+y^2=\vert z\vert^2\\r\cos\theta=x\\r\sin\theta=y\end{array}\right.$$
+%%
+%%De Moivres formel: $$\text{Om } n\in\mathbb{Z} \text{ så gäller att } \left(e^{i\theta}\right)^n=e^{in\theta} \;\text{ eller, } \left(\cos \theta+i\sin\theta\right)^n=\cos n\theta+i\sin n\theta\,.$$
+%>>>
+
+\subsection*{\Tr{The polynomials and their roots}{Polynom och deras nollställen}} %<<<
+%% <-- änding IvTj
+\Tr{Polynomial of degree}{Polynom av grad} $n$:\, $P_n(z)
+   =a_nz^n+a_{n-1}z^{n-1}+\dots+a_1z+a_0
+   =\sum_{k=0}^n a_kz^k$,
+   $a_n\neq 0$
+
+ \Tr{The factor thm}{Faktorsatsen}: $P_n(z_0)=0 \iff P_n(z) = (z-z_0)Q_{n-1}(z)$,
+ \Tr{where}{där} $Q_{n-1}$
+ \Tr{is a polynomial of degree}{är polynom av grad} $n-1$
+
+\bigskip
+
+\Tr{Polynomials with real coeffients}{Polynom med reella koefficienter}:
+\Tr{If}{Om}
+$P_n(z_0)=0$
+\Tr{and}{och}
+$\text{Im}(z_0)\neq0$,
+\Tr{then}{då är}
+$P_n(\ob z_0)=0$,
+\Tr{and hence}{och därmed}
+   $$
+   P_n(z)
+    =(z-z_0)(z-\ob z_0)Q_{n-2}(z)
+    =(z^2-2\text{Re}(z_0)z +|z_0|^2)Q_{n-2}(z)
+   $$
+  \Tr{Completing squares in second-degree polynomials}
+   {Kvadratkomplettering och andragradsekvationer}:
+\[
+z^2+pz+q
+  =\left(z+\frac{p}{2}\right)^2-\frac{p^2}{4}+q
+  =(z-z_1)(z-z_2)
+  ,\quad
+  z_{1,2}=-\frac{p}{2}\pm\sqrt{\frac{p^2}{4}-q}.
+  %%\; \mbox{ (med } \sqrt{-1} = i).
+\]
+
+\vspace{-1em}
+% Andragradsekvationer:
+% % \subsubsection*{Andragradsekvationer}
+% $x^2+px+q=(x-x_1)(x-x_2)=0\iff
+% x_{1,2}
+% =\begin{cases}
+%   -\frac{p}{2}\pm\sqrt{\frac{p^2}{4}-q},&\frac{p^2}{4}-q\geq 0
+%   \\*[9pt]
+%   -\frac{p}{2}\pm i\sqrt{q-\frac{p^2}{4}},&\frac{p^2}{4}-q< 0
+% \end{cases}
+% $
+%>>>
+
+
+\vspace{-5pt}
+\subsection*{\Tr{Derivatives}{Derivator}}%<<<
+
+$$Df(x)=\frac{df(x)}{dx}=f'(x)
+=\lim_{h\rightarrow 0}\frac{f(x+h)-f(x)}{h};
+\qquad D=\frac d{dx}
+$$
+
+
+% Tangent och Normal <-- Ändring IvTj
+     \begin{tabular}[m]{|l|}
+        \hline  \\*[-11pt]
+      \Tr{Tangent line to the curve}
+        {Tangentlinje till kurvan}
+        $y=f(x)$
+        \Tr{at the point}{i punkten}
+        $(a,f(a))$:
+        \; $y=f(a)+f'(a)(x-a)$\\
+       \hline  \\*[-10pt]
+       \Tr{Normal line to the curve}{Normallinje till kurvan} $y=f(x)$
+        \Tr{at the point}{i punkten}
+      $(a,f(a))$:
+       $\begin{cases}
+         y=f(a)-\dfrac1{f'(a)}(x-a),&
+         f'(a)\neq0\\
+         \hfill x=a\hfill,&  f'(a)=0
+         \end{cases}$ \\*[8pt]
+       \hline
+     \end{tabular}
+
+\medskip
+
+$\begin{array}{|c|c|c|}\hline & &\\*[-8pt]
+(\alpha f(x)+\beta g(x))'=\alpha f'(x)+\beta g'(x)&
+\D f(g(x))=f'(g(x))g'(x)
+&\Bigl(\dfrac{f}{g}\Bigr)'
+ =\dfrac{f'g-fg'}{g^2}
+\EndRow
+(fg)'=f'g+fg' & \D e^x = e^x &
+(f^{-1})'(b) = \dfrac1{f'(a)}\,\mbox{ om }
+\begin{cases}
+f(a)=b\\f'(a)\neq0    %% <-- ändring IvTj
+\end{cases}
+\EndRow
+\D x^r=rx^{r-1}
+&   \D\ln(|x|)=\dfrac{1}{x} &\D a^x=a^x\ln(a)
+\EndRow
+ \D\sin(x)=\cos(x) & \D\cos(x)=-\sin(x) &
+  \D\tan(x)=\dfrac{1}{\cos^2(x)}=1+\tan^2(x)
+\EndRow
+\D\arcsin(x)=\dfrac{1}{\sqrt{1-x^2}} &
+\D\arccos(x)=-\dfrac{1}{\sqrt{1-x^2}} &
+\D\arctan(x)=\dfrac{1}{1+x^2}
+\\*[9pt]
+\hline
+\end{array}$
+
+\medskip
+
+\fbox{\parbox{105ex}
+{\textbf{L'Hôpital\Tr{'s rules}{s regler}}:
+\Tr{If}{Om}
+$\lim_{x\to a}\dfrac{f(x)}{g(x)}=\Bigl[\dfrac00\Bigl]$
+\Tr{or}{eller}
+$\lim_{x\to a}\dfrac{f(x)}{g(x)}=\Bigl[\dfrac\infty\infty\Bigl]$,
+\Tr{both $f$ and $g$ have continuous derivatives in some neighbourhood of $a$, then the existence of}
+{både $f$ och $g$ har kontinuerliga derivator i en omgivning av $a$, då ett existerande gränsvärde}
+$$
+\lim_{x\to a}\dfrac{f'(x)}{g'(x)}=A
+\quad\Rightarrow\quad
+ \lim_{x\to a}\dfrac{f(x)}{g(x)}
+=\lim_{x\to a}\dfrac{f'(x)}{g'(x)}=A.
+$$
+\Tr{The rules of L'Hôpital can be used recursively and are in vigour also when}
+{L'Hôpitalsreglerna kan användas rekursivt och är uppfyllda även då}
+$a=\infty$ \Tr{or}{eller}
+$a=-\infty$.
+}}
+
+
+\medskip
+
+\fbox{\parbox{104ex}{\textbf{\Tr{Oblique asymptotes}{Sneda asymptoter}}:
+\Tr{The line}{Linjen}
+$y=kx+m$
+\Tr{is an oblique asymptote to the function}
+{är en sned asymptot till funktionen}
+$f(x)$ \Tr{for}{då} $x\to\infty$ \Tr{if}{då}
+$$
+\lim_{x\to\infty}(f(x)-kx-m) = 0.
+\quad\mbox{\Tr{Then}{Då är} \ }
+  k=\lim_{x\to\infty} \frac{f(x)}{x}
+  \mbox{ \ \Tr{and}{och} \ }
+  m=\lim_{x\to\infty}(f(x)-kx).
+$$
+}
+} % fbox
+
+%>>>
+
+\subsection*{\Tr{Indefinite integrals}{Obestämda integraler}}%<<<
+
+%% 2007-11-30: Bytt dx --> \,dx (Tjavdar)
+
+$
+\begin{array}{|l|l|}\hline   & \\*[-5pt] % <-- ändring IvTj
+
+ \mbox{Beteckning: }F'(x) = f(x) &
+ \int (\alpha f(x)+\beta g(x))\,dx
+ =\alpha\int f(x)\,dx
+ +\beta\int g(x)\,dx \\
+ & \\
+ \int f(ax)\,dx = \frac1a F(ax) + C &
+ \int f(x)g(x)\,dx=F(x)g(x)-\int F(x)g'(x)\,dx
+ \\*[9pt]
+ \cline{1-2}
+ \multicolumn{2}{|l|}{}\\*[-6pt]
+ \multicolumn{2}{|l|}{
+   \mbox{\Tr{Change of variables}{Variabelbyte}: }
+\int f(g(x))g'(x)\,dx=
+\genfrac{\{}{\}}{0pt}{}{t=g(x)}{dt=g'(x)\,dx}
+  = \int f(t)dt = F(g(x)) + C
+  }
+\\*[12pt]\hline
+\end{array}
+$
+
+\medskip
+
+$\begin{array}{|l|l|}\hline   & \\*[-5pt]
+  %\int_a^b f(x)g(x)\,dx=\Big[F(x)g(x)\Big]_a^b-\int_a^b F(x)g'(x)\,dx &  F \text{ är en primitiv funktion till }f \\ & \\ \int_a^bf(x)\,dx=F(b)-F(a) &\ F \text{ är en primitiv funktion till }f  \\
+\int x^a\,dx=\dfrac{x^{a+1}}{a+1}+C, \hspace{2 mm} a\neq -1 & \int\frac{1}{x}\,dx=\ln\vert x\vert +C \\ & \\ \int e^x\,dx=e^x+C &\int a^x\,dx=\frac{a^x}{\ln(a)}+C, \hspace{2 mm} 0<a\neq 1 \\ & \\ \int \sin(x)\,dx=-\cos(x)+C &\int\cos(x)\,dx=\sin(x)+C \\ & \\ \int \frac{1}{\cos^2(x)}\,dx=\tan(x)+C &\int\frac{1}{\sin^2(x)}\,dx=-\frac{1}{\tan(x)}+C \\ & \\ \int\frac{1}{\sqrt{a^2-x^2}}\,dx=\arcsin\Bigl(\frac xa\Bigr)+C,\;\, a>0 &\int\frac{1}{x^2+a^2}\,dx=\frac{1}{a}\arctan\left(\frac{x}{a}\right)+C\\ &\\ \int\frac{1}{\sqrt{x^2+a}}\,dx=\ln\vert x+\sqrt{x^2+a}\vert+C,\hspace{2 mm}a\neq 0 &\int\frac{f'(x)}{f(x)}\,dx=\ln\vert f(x)\vert +C
+\\*[10pt]
+\cline{1-2}
+\multicolumn{2}{|l|}{}\\*[-7pt]
+\multicolumn{2}{|l|}{
+
+\int\frac{(ax+b)\,dx}{(x-c)(x-d)}
+=\{\text{\Tr{partial fractions}{partialbråksuppdelning}}\}=
+\begin{cases}
+
+A\int\frac{dx}{x-c} +B\int\frac{dx}{x-d} &, c\neq d \\*[10pt]
+
+A\int\frac{dx}{x-c} +B\int\frac{dx}{(x-c)^2} &, c=d
+\end{cases}
+}\\
+%%\multicolumn{2}{l}{}\\*[-7pt]
+\hline
+\end{array}
+$
+%>>>
+
+\subsection*{\Tr{Definite integrals}{Bestämda integraler}}%<<<
+
+\Tr{The fundamental theorem of Calculus}{Analysens huvudsats}:
+\Tr{If}{om} $f$
+\Tr{is continuous, then}{är kontinuerlig, då är} \/
+$\frac d{dx}\Bigl(\int_a^x f(t)\,dt\Bigr)=f(x)$.
+
+%% Insättningsformeln:  $\int_a^b f(x)\,dx
+%%                      = \bigl[F(x)\bigr]_{a}^b = F(b)-F(a)$, där
+%% $F(x)$ är en primitiv funktion till $f$
+
+\medskip
+
+$
+\begin{array}{|l|l|}\hline   & \\*[-5pt] % <-- ändring IvTj
+
+  \mbox{\Tr{Notation}{Beteckning}: }F'(x) = f(x) &
+ \int_a^b (\alpha f(x)+\beta g(x))\,dx
+ =\alpha\int_a^b f(x)\,dx
+ +\beta\int_a^b g(x)\,dx \\
+ & \\
+ \int_a^b f(x)\,dx = \bigl[F(x)\bigr]_{a}^b = F(b)-F(a)&
+ \int_a^b f(x)\,dx = \int_a^c f(x)\,dx + \int_c^b f(x)\,dx\\
+ & \\
+ \int_a^b f(x)\,dx = -\int_b^a f(x)\,dx &
+ \int_a^b f(x)g(x)\,dx=\bigl[F(x)g(x)\bigr]_{a}^b-\int_a^b F(x)g'(x)\,dx
+ \\*[9pt]
+ \cline{1-2}
+ \multicolumn{2}{|l|}{}\\*[-6pt]
+ \multicolumn{2}{|l|}{
+  \mbox{\Tr{Change of variables}{Variabelbyte}: }
+\int_a^b f(g(x))g'(x)\,dx=
+\genfrac{\{}{\}}{0pt}{}{t=g(x)}{dt=g'(x)\,dx}
+= \int_{g(a)}^{g(b)} f(t)dt = \bigl[F(t)\bigr]_{g(a)}^{g(b)}
+  }
+\\*[12pt]\hline
+\end{array}
+$
+
+\medskip
+
+\textbf{\Tr{Improper integrals}{Generaliserade integraler}:}\\
+\begin{tabular}{|l|l|}
+\hline & \\*[-9pt]
+$\int_a^\infty f(x)\,dx
+ \stackrel{\mbox{\tiny def}}{=}
+ \lim_{N\to\infty}\int_a^N f(x)\,dx$
+&
+$\int_a^b f(x)\,dx
+ \stackrel{\mbox{\tiny def}}{=}
+ \lim_{\varepsilon\to0^+}\int_{a+\varepsilon}^b f(x)\,dx$,
+ \Tr{if $f$ is not finite at}{om $f$ ej begränsad i}
+ $a$\\*[8pt]
+\hline
+\end{tabular}
+%>>>
+
+\subsection*{\Tr{Some standard limits}{Standardgränsvärden}:}%<<<
+
+\def\EndRow{\\*[6pt]}
+$\begin{array}{|ll|ll|l|}\hline& &&&\\*[-8pt]
+  \lim_{x\rightarrow\infty}\frac{1}{x^p}=0, \hspace{2 mm} p>0 & &\lim_{x\rightarrow\infty}x^p=\infty,\hspace{2 mm} p>0&& \lim_{x\to\pm\infty}\arctan(x)=\pm\dfrac{\pi}{2}
+\EndRow
+  \lim_{x\rightarrow\infty}a^x=0,\hspace{2 mm} 0<a<1 & &\lim_{x\rightarrow\infty}a^x=\infty, \hspace{2 mm}a>1 &&\lim_{x\to0}\frac{\sin(x)}x=1
+\EndRow
+\lim_{x\rightarrow\infty}(1+\frac{t}{x})^x=e^t & &\lim_{x\rightarrow 0}\frac{\ln(1+x)}{x}=1 &&\lim_{x\rightarrow 0}\frac{1-\cos(x)}{x^2}=\frac12
+\EndRow \lim_{x\rightarrow \infty}\frac{x^p}{a^x}=0, \hspace{2 mm} a>1 & &\lim_{x\rightarrow\infty}\frac{\ln(x)}{x^p}=0, \hspace{2 mm}p>0&&\lim_{x\rightarrow 0}\frac{\arcsin(x)}{x}=1
+\EndRow
+\lim_{x\rightarrow0^+}x^p\ln(x)=0, \hspace{2 mm}p>0 \hspace{10 mm}& & \lim_{x\rightarrow 0}\frac{e^x-1}{x}=1 && \lim_{x\rightarrow 0}\frac{\arctan(x)}{x}=1
+\\*[9pt]\hline
+\end{array}$
+%>>>
+
+\Tr{% No ODEs in En-version
+}{
+\subsection*{Några resultat om differentialekvationer}%<<<
+
+\textbf{1:a ordningens linjär ODE:} % <-- Ändring IvTj
+\fbox{$y'+g(x)y=f(x) \iff \bigl(y(x)e^{G(x)}\bigr)' = f(x)\,e^{G(x)}$, där $G'(x)=g(x)$}
+
+Lösningsmetod: Multiplicera ekvationen med den integrerande faktorn $e^{G(x)}$
+där $G(x)$ är en primitiv funktion till $g(x)$. Integrera sedan ekvationen som
+då erhålls.
+
+\vspace{5 mm}
+
+\textbf{Första ordningens separabel ODE:} \fbox{$g(y)y'=h(x)$}
+
+Lösningsmetod: Separera variablerna enligt $g(y)dy=h(x)dx$ och integrera sedan
+ekvationen.
+
+\vspace{5 mm}
+
+\textbf{Andra ordningens linjära ODE med konstanta koefficienter:}
+% \fbox{$y''(x)+ay'(x)+by(x)=f(x)$}
+\[
+  \boxed{y''+ay'+by=f(x)} \iff P(D)y(x) = f(x),
+  \mbox{ karakteristiskt polynom: }
+  P(r) = r^2+ar+b=(r-r_1)(r-r_2).
+\]
+
+Allmän lösning: $y(x)=y_h(x)+y_p(x)$ där $y_h$ är den allmäna lösningen till den
+homogena ekvationen
+\[
+  P(D)y_h(x)=0
+ \;\rightsquigarrow\;
+ y_h(x)=
+ \begin{cases}
+   C_1\,e^{r_1x} + C_2\,e^{r_2x},& r_1\neq r_2,\\
+   \hfill
+   (C_0+C_1x)\,e^{rx},& r_1=r_2=r,\\
+ \end{cases}
+\]
+och $y_p(x)$ är en godtycklig partikulärlösning
+till ekvationen \/$P(D)y(x)=f(x)$, erhållen via lämplig ansats.
+Alternativ framställning ifall rötterna $r_{1,2}$ till det karakteristiska polynomet $P(r)$
+är komplext konjugata:
+\[
+   r_1=\ob r_2 = \alpha \pm i\beta
+   \;\rightsquigarrow\;
+   y_h(x)
+    =  C_1\,e^{(\alpha+i\beta)x} + C_2\,e^{(\alpha-i\beta)x}
+   = e^{\alpha x}\Bigl[
+    A\cos(\beta x) + B\sin(\beta x)
+    \Bigr].
+\]
+Konstanterna $A$, $B$ och $C_i$, $i=0,1,2$, ovan är godtyckliga.
+
+% SKIP (>2018-01-08): Utförligt andra ordningens ODE suppressed <<<
+% \begin{theorem}
+%   Låt $a,b\in\mathbb{R}$ och betrakta den homogena differentialekvationen
+%   $y''+ay'+by=0.$ Antag att $r_1$ och $r_2$ är rötterna till den
+%   karakteristiska ekvationen $r^2+ar+b=0.$ Då gäller
+%   \begin{itemize}
+%
+%   \item[i)] Om $r_1, r_2\in\mathbb{R}$ och $r_1\neq r_2$ så kan varje  lösning
+%     skrivas $$y(x)=C_1e^{r_1x}+C_2e^{r_2x},$$där $C_1$ och $C_2$ är godtyckliga
+%     konstanter.
+%
+% \item[ii)] Om $r_1=r_2$ så kan varje lösning skrivas
+%   $$y(x)=(C_1+C_2x)e^{r_1x},$$där $C_1$ och $C_2$ är godtyckliga konstanter.
+%
+% \item[iii)] Om $r_1=\alpha+i\beta,$ $r_2=\alpha-i\beta,$ där $\beta\neq 0$ så
+%   kan varje lösning skrivas $$y(x)=e^{\alpha x}(C_1\cos(\beta x)+C_2\sin(\beta
+%   x)),$$där $C_1$ och $C_2$ är godtyckliga konstanter.
+%
+% \end{itemize}
+% \end{theorem}
+%
+% \textbf{Ansatser till partikulärlösning för olika högerled}:
+% \fbox{$y''+ay'+by=f(x)$}
+%
+%
+% \medskip
+%
+% $\begin{array}{|c|c|l|}\hline %% <-- Ändring IvTj
+%   \text{\textbf {Typ}}&
+%   \text{\bf Högerled} \ f(x)&
+%   \text{\bf Ansats för partikulära lösningen $y_p(x)$}\\
+%   \hline
+%   \text{I}&f(x)=P_n(x) & y_p(x) =
+%   \begin{cases}
+%     \hfill Q_n(x),       & b\neq0\\
+%     \hfill x\, Q_n(x),   & b=0, \; a\neq0\\
+%     \hfill x^2\, Q_n(x), & a=b=0\\
+%   \end{cases}
+%   \\
+%   \hline & & \\*[-9pt]
+%   \text{II}&f(x)=P_n(x)\,e^{kx}&y_p=z(x)e^{kx}\,,\;
+%    \text{ insättning ger ekvation av typ I}\EndRow
+%   \hline
+%   \text{III}&f(x)=\alpha\cos(kx)+\beta\sin(kx)
+%   &y_p(x) =
+%   \begin{cases}
+%     \hfill A\cos(kx)+B\sin(kx),                 & r_{1,2}\neq\pm ik  \\
+%     \hfill x\,\left(A\cos(kx)+B\sin(kx)\right), & r_{1,2}=\pm ik
+%   \end{cases} \\
+%   \hline\multicolumn{3}{|c|}{
+%   \text{\small Beteckningar: $P_n$, $Q_n$ -- polynom av grad $n$; $r_{1,2}$
+%    -- rötterna till den karakteristiska ekvationen}
+%   } \\
+% \hline
+% \end{array}$
+% SKIP>>>
+
+%>>>
+}
+
+\subsubsection*{Taylor \& Maclaurin}%<<<
+\vspace{-10pt}
+\begin{tabular}[t]{|ll|}
+\hline
+&\\*[-11pt]
+Taylor\Tr{ poly, order}{polynom, ordning} $n$: &
+$
+P_n(f)(x)
+= f(a)
++ \frac{f'(a)}{1!}(x-a)
++ \frac{f''(a)}{2!}(x-a)^2
++\cdots
++ \frac{f^{(n)}(a)}{n!}(x-a)^n
+$
+\\*[7pt]
+Maclaurin\Tr{ poly, deg}{polynom, ordn.}~$n$: &
+$
+P_n(f)(x)
+= f(0)
++ \frac{f'(0)}{1!}\,x
++ \frac{f''(0)}{2!}\,x^2
++\cdots
++ \frac{f^{(n)}(0)}{n!}\,x^n
+$\\*[7pt]
+\hline
+\end{tabular}
+
+\vspace{3pt}
+
+\[
+\begin{array}[t]{|rcll|rcll|}
+\hline &\\*[-10pt]
+e^t&=&1+\frac{t}{1!}+\frac{t^2}{2!}+\frac{t^{3}}{3!} + \cdots &
+&
+\ln (1+t)&=&t-\frac{t^2}{2}+\frac{t^3}{3}-\frac{t^4}{4} +\cdots, &|t|<1
+\\*[8pt]
+\cos(t)&=&1-\frac{t^2}{2!}+\frac{t^4}{4!}-\frac{t^6}{6!}+\cdots &
+&
+\frac1{1-t}&=&1 + t + t^2 + t^3 + t^4 +\cdots, & |t|<1
+\\*[8pt]
+\sin(t)&=&t-\frac{t^3}{3!}+\frac{t^5}{5!} - \frac{t^7}{7!} + \cdots &
+&
+\frac{1}{(1-t)^2} &=& 1+2t+3t^2+4t^3+\cdots
+, & |t|<1
+\\[8pt]
+\arctan(t)&=&t-\frac{t^3}{3}+\frac{t^5}{5} - \frac{t^7}{7} + \cdots, &  |t|<1
+&
+(1+t)^\alpha&=&1
++\frac{\alpha}{1!} t
++\frac{\alpha(\alpha-1)}{2!} t^2
+%+\frac{\alpha(\alpha-1)(\alpha-2)}{3!} t^3
++ \cdots, & |t|<1
+\\*[8pt]
+\hline
+\end{array}
+\]
+%>>>
+
+\label{LastPageNo}
+
+\end{document}
