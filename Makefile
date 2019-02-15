@@ -1,33 +1,29 @@
 # Makefle för formelblad CHANGES <<<
 
+# 2019-02-17: New tabeller-st.tex supported by include's from ./tabeller-st/*.tex
 # 2017-06-policy: Bi+Unilang divide, LANGctrl centralized -> Lang.h
 # 2016-08-08: More include files/common targets and rules
 # 2015-01-28: file to be done is the LAST-touched, unless explicitly defined
 # 2011-03-11: No more intermediate dvi>>>
 
-default : x
+1st: t
 
-
-# Mtargets includes: lang, implicit, rip, last<<<
+# Mtargets includes: lang, implicit, rip, last + Var-defs: <<<
 U = QDirty
 RIP_FROM=*.tex
 LAST_POOL=*.tex
+TEX2PDF_SIMPLE := "Just define to use simple %.tex -> %.pdf-rules in Mtargets.implicit"
+
 include ../bz/Mtargets.lang
 include ../bz/Mtargets.implicit
 include ../bz/Mtargets.rip-off-compute
 include ../bz/Mtargets.last-edit
-# >>>
 
-# Vardef:<<<
-ifndef FILE
-FILE        := $(basename $(LAST))
-endif
-FILEx24     := $(FILE)-x2.pdf $(FILE)-x4.pdf
-FILEx3      := $(FILE).pdf $(FILEx24)
+FILE          := $(basename $(LAST))
+FILEx3        := $(FILE).pdf $(FILE)-x2.pdf $(FILE)-x4.pdf
 ALLMATTEDIR   := ../allmatte
 WWWDIR        := ../allmatte/formelblad
-BNAME         := formelblad
-
+ 
 LANGIPUT    := '^.*input Lang.h'
 isBILANG    := $(shell grep -l $(LANGIPUT) $(FILE).tex)
 MATCH_BI    := $(shell grep -l $(LANGIPUT) *.tex)
@@ -42,7 +38,11 @@ TARG_UNI    := $(addprefix $(WWWDIR)/,$(MATCH_UNI))
 # Rules, some implicit # <<<
 
 # The cornerstone implicit rule:
+
+t: $(FILE).pdf   # (default)
+
 $(WWWDIR)/%.pdf $(WWWDIR)/en/%.pdf $(WWWDIR)/sv/%.pdf : %.tex
+	# Scanning: $@
 	if [ -n "$(findstring /sv/,$@)" ]; then make -s clean sv; fi
 	if [ -n "$(findstring /en/,$@)" ]; then make -s clean en; fi
 	make -sB FILE=$(basename $<) xsq 2>/dev/null
@@ -62,16 +62,12 @@ sl: Lang.h # Global *swap* LANG
 
 e:  e-last #
 v:  v-last #
-p:   $(FILE).lpr #
-
-x: $(FILE).pdf   # (default)
+p:  $(FILE).lpr #
 
 xsq: $(FILEx3)
 	for i in $(FILEx3); do pdf-squeeze.sh  $$i; done
 
 # Special rules
-
-tables: $(TEXTABLES)
 
 www: # Exports only LAST modified (sv+en(if bi-lang))*(x1+x2+x4)
 	@if [ -n "$(isBILANG)" ]; then \
@@ -85,8 +81,8 @@ www: # Exports only LAST modified (sv+en(if bi-lang))*(x1+x2+x4)
 www-all: $(TARG_UNI) $(TARG_SV) $(TARG_EN) #
 
 ls-lang:  # List distribution by languages
-	@echo ">> Sv+En-lang formelblad:"; echo $(MATCH_BI)
-	@echo ">> Uni-lang formelblad:"; echo $(MATCH_UNI)
+	@echo ">> Sv+En: $(MATCH_BI:.pdf=)"
+	@echo ">> Uni-l: $(MATCH_UNI:.pdf=)"
 ls-targ:  # List targets (long paths)
 	@echo ">> Unilang targets:"; for i in $(TARG_UNI);do echo $$i; done
 	@echo ">> Sv-lang targets:"; for i in $(TARG_SV) ;do echo $$i; done
@@ -107,4 +103,4 @@ help lhelp: #
 cl: clean
 
 clean: TeXclean
-	rm -f *.pdf *.bak *.ps foo* *.gpg *~
+	rm -f *.pdf  *~
