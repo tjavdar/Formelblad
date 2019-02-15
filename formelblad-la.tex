@@ -324,7 +324,7 @@ $\lambda\in\mathbb R$.
   \begin{tabular}{|p{0.2\linewidth}|p{0.75\linewidth}|}
   \hline
   &\\*[-8pt]
-  \Tr{Straight line equation}{Räta linjens ekvation}:
+  \Tr{Straight line}{Rät linje}:
   &
   \Tr{A straight line $L$ through the point}{En rät $L$ linje genom punkten}
   $P_0=(x_0,y_0,z_0)$
@@ -343,14 +343,14 @@ $\lambda\in\mathbb R$.
   $\mathbf n=(a,b,c)^t$:
   \[
   (\mathbf{r} - \mathbf{r}_P)\circ\mathbf{n} = 0
-  \iff
-  \left[
-     \trevektor[x,y,z]
-    -\trevektor[x_0,y_0,z_0]
-  \right]
-  \circ
-  \trevektor[a,b,c]=0
-  \iff
+ %%% \iff
+ %%% \left[
+ %%%    \trevektor[x,y,z]
+ %%%   -\trevektor[x_0,y_0,z_0]
+ %%% \right]
+ %%% \circ
+ %%% \trevektor[a,b,c]=0
+ \quad \iff \quad
   ax+by+cz=d
   \]
   \Tr{Here}{Här}
@@ -366,10 +366,10 @@ $\lambda\in\mathbb R$.
   &
   \Tr{The plane through the pt}{Ett plan genom punkten}
   $P=(x_0,y_0,z_0)$
-  \Tr{parallel to the (linear independent) vectors}{utmed (de linjärt oberoende) vektorerna}
-  $\bdv=(v_x,v_y,v_z)^t$
+  \Tr{parallel to the linearly independent vectors}{parallellt med de linjärt oberoende vektorerna}
+  $\vec v$
   \Tr{and}{och}
-  $\vec w=(w_x,w_y,w_z)^t$
+  $\vec w$
   \Tr{has a parametric reresentation}{har parametriska framställningen}
   \\
   &
@@ -381,7 +381,7 @@ $\lambda\in\mathbb R$.
  %%   = \trevektor[x_0,y_0,z_0]
  %%   +s\trevektor[v_x,v_y,v_z]
  %%   +t\trevektor[w_x,w_y,w_z],
-     \,s,t\in\Rone.
+     \; s,t\in\Rone
   $$
   \vspace{-2.2em}
   %%&På parameterfri form är planets ekvation $Ax+By+Cz+D=0$ där $\vec
@@ -402,9 +402,9 @@ $\lambda\in\mathbb R$.
   \Tr{Linear independence}{Linjärt oberoende}:
   &
   \Tr{The vectors}{Vektorerna}
-  $\bdu_1,\dots\bdu_n$
+  $\{\bdu_1,\dots\bdu_n\}$
   \Tr{are linear independent if an only if the homogeneous system}
-     {är linjärt oberonde då och endast då det homogena ekvationssysemet}
+     {är linjärt oberonde om ekvationssysemet}
   $\lambda_1\bdu_1+\dots\lambda_n\bdu_n=\bdzero$
   \Tr{has only the trivial solution}{har endast den triviala lösningen}
   $\lambda_1=\lambda_2=\cdots\lambda_n=0$
@@ -422,21 +422,12 @@ $\lambda\in\mathbb R$.
 %%%  (\Tr{i.e. at least one}{dvs minst en} $\lambda_k\neq0$, $1\le k\le n$)
 %%%  \\*[2pt] \hline
   &\\*[-8pt]
-    \Tr{Elementary Row}{Elementära rad-}
-    \\
-    \Tr{Operations (ERO)}{operationer (ERO)}:
+    \Tr{Elementary Row Operations}{Elementära radoperationer}
+    (ERO):
  &
- \vspace{-2.8em}
-  \begin{enumerate}
-      \addtolength{\itemsep}{-5pt}
-  \item
-    \Tr{Swap two equations}{Platsbyte på ekvationer}
-  \item
-    \Tr{Multiplication of both sides with constant}{Multiplikation av en ekvation med ett tal} $\lambda\neq0$
-  \item
-    \Tr{Addition of a multiple of an equation to another one}{Addition av en multipel av en ekvation till en annan}
-  \end{enumerate}
-  \vspace{-2em}
+  1) \Tr{Swap two equations}{Byta plats på två ekvationer}; \;
+  2) \Tr{Multiply of both sides with a number}{Multiplikation av en ekvation med ett tal} $\lambda\neq0$; \;
+  3) \Tr{Add a multiple of an equation to another one}{Addera multipel av en ekvation till en annan}
 \\ \hline
   &\\*[-8pt]
   \Tr{Gauss elimination}{Gausseliminering}:
@@ -446,83 +437,92 @@ $\lambda\in\mathbb R$.
   \\[2pt] \hline
 \end{tabular}%>>>
 
-\subsection*{\Tr{Matrises}{Matriser}}%<<<
+\subsection*{\Tr{Matrices}{Matriser}} %<<<
 
 \begin{tabular}{|p{0.2\linewidth}|p{0.75\linewidth}|}
   \hline & \\*[-9pt]
-  Addition: & $A+B=B+A$, $(A+B)+C=A+(B+C)$
+  Addition: & $(A+B)+C=A+(B+C)$;\; $A+B=B+A$
   \\*[2pt]\hline & \\*[-9pt]
   Mult.~\Tr{with scalar}{med tal}: & $\lambda(A+B)=\lambda A+\lambda B$
   \\*[2pt]\hline & \\*[-9pt]
   \Tr{Multiplication}{Multiplikation}:
-  &$AB\ne BA$ (\Tr{in general}{i allmänhet})
-  \\*[2pt]
-  &$(AB)C=A(BC)$, \ $A(B+C)=AB+AC$, \  $(A+B)C=AC+BC$
+  %% &$AB\ne BA$ (\Tr{in general}{i allmänhet}) \\*[2pt]
+  &$(AB)C=A(BC)$; \ $A(B+C)=AB+AC$, \  $(A+B)C=AC+BC$
   \\*[2pt]\hline & \\*[-11pt]
   \Tr{Transposition}{Transponering}:
   &
   \Tr{Rows and columns swap places, e.g.}{Rader och kolonner byter plats, t\,ex},\;
   $ \begin{pmatrix}a_{11}&a_{12}&a_{13}\\a_{21}&a_{22}&a_{23}\end{pmatrix}^T=
     \begin{pmatrix}a_{11}&a_{21}\\a_{12}&a_{22}\\a_{13}&a_{23}\\\end{pmatrix}$\\*[3pt]
-  &$(A+B)^T=A^T+B^T$,\; \
-  $(AB)^T=B^TA^T$,\; \
+  &$(A+B)^T=A^T+B^T$;\; \
+  $(AB)^T=B^TA^T$;\; \
   $(A^{-1})^T=(A^T)^{-1}$\\*[2pt]
   & \\*[-9pt]
   \hline
-  \Tr{The unit matrix}{Enhetsmatrisen}
-  &$I=
-  \begin{pmatrix}
-    1&0&\cdots&0\\
-    0&1&\cdots&0\\
-    \vdots&\vdots&\ddots&\vdots\\
-    0&0&\cdots&1
-  \end{pmatrix}
-  $, $AI=IA=A$
-  \\*[24pt]\hline & \\*[-9pt]
   \Tr{Row equivalence}{Radekvivalens}:
   &
   $A\sim A'$\;
   \Tr{if $A$ can be driven to $A'$ with a finite number of ERO:s}
       {om $A$ kan omformas till $A'$ med ändligt antal ERO:s}
   \\*[2pt] \hline
+  \Tr{Rank}{Rang}: &
+  $\mbox{rank}(A) = \max$
+  \Tr{number of linearly independent column vectors of}{antalet av linjärt oberoende kolonnvektorer av} $A$
+  \\ \hline
+\end{tabular}%>>>
+
+\subsection*{\Tr{Square matrices}{Kvadratiska matriser}}%<<<
+\begin{tabular}{|p{0.2\linewidth}|p{0.75\linewidth}|}
+  \hline
+  \Tr{The unit matrix}{Identitetsmatrisen}:
+  &
+  $I= \mbox{diag}(1,1,\dots,1)
+  %% \begin{pmatrix}
+  %%   1&0&\cdots&0\\
+  %%   0&1&\cdots&0\\
+  %%   \vdots&\vdots&\ddots&\vdots\\
+  %%   0&0&\cdots&1
+  %% \end{pmatrix}
+  $, \;
+  $AI=IA=A$
+  \\*[2pt]\hline
   \rule{0pt}{10pt}
   $$
-  A\sim I
+  A_{n\times n}\sim I
   $$
+  $$\mbox{rank}(A_{n\times n})=n$$
   &
-  \Tr{Gauss elimination (forward and backward) when solving
-  a square linear system of full rank matrix $A$
-  reveals the similarity to the unit matrix}{%
-  Gausselimination (nedåt och uppåt) i kvadratiska ekvationssystem
-  med entydig lösning uppenbarar radekvivalens med enhetsmatrisen} $I$:
-  \vspace{-9pt}
-  $$
-  AX=B \;\rightsquigarrow\; (A|B)\sim\cdots\sim (I|X)
-  $$
-  \vspace{-3em}
+  \Tr{Often shown via}{Visas ofta genom}
+  Gauss-Jordan
+  \Tr{elimination for full rank square matrices, forward and backward, when solving a linear system}
+  {elimination, ned- och uppåt, i kvadratiska matriser av full rang, när man löser ett linjär system},
+  \[
+      AX=B \;\rightsquigarrow\; (A|B)\sim\cdots\sim (I|X),
+  \]
+  \Tr{or finding the inverse via}{eller för att bestämma inversen}:
+  \/ $
+      (A|I)\sim \cdots\sim (I|A^{-1})
+  $
   \\ \hline
   \rule{0pt}{12pt}%
   \Tr{Matrix inverse}{Matrisinvers}:
   &
   $AA^{-1}=A^{-1}A=I$; \quad
-  \Tr{Find the inverse via}{Bestämma inversen genom} ERO:
-  $(A|I)\sim \cdots\sim (I|A^{-1})$
-  \\[3pt]
-  $2\times 2$--inverse\Tr{s}{r}:&
-  $A_{2\times2}^{-1}
-  =\begin{pmatrix}a&b\\c&d\end{pmatrix}^{-1}
-  =\dfrac1{\det(A)}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}
-  =\dfrac1{ad-bc}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}$
   \\[12pt]
   \Tr{Properties}{Räkneregler}:
   &
   $(AB)^{-1}=B^{-1}A^{-1}$; \quad
-  $(A^t)^{-1}=(A^{-1})^t$
-  \\*[3pt]
-  \Tr{Orthogonal matrices}{Ortogonala matriser}:
-  &
-  $A^{-1}=A^T$
-  \\
+  $(A^T)^{-1}=(A^{-1})^T$; \quad
+  $A^{-n} = (A^{-1})^n = (A^n)^{-1}$
+  \\*[7pt]
+  \Tr{Orthogonal matrices}{Ortogonala matriser}: & $A^{-1}=A^T$
+  \\[3pt]
+  $2\times 2$--matri\Tr{x }{s}inverse\Tr{s}{r}:&
+  $A_{2\times2}^{-1}
+  =\begin{pmatrix}a&b\\c&d\end{pmatrix}^{-1}
+  =\dfrac1{\det(A)}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}
+  =\dfrac1{ad-bc}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}$
+  \\[10pt]
   \hline
 \end{tabular}%>>>
 
@@ -599,64 +599,12 @@ $\lambda\in\mathbb R$.
   \hline
 \end{tabular}%>>>
 
-\subsection*{\Tr{Linear maps}{Linjära avbildningar}}%<<<
-
-\begin{tabular}{|p{0.17\linewidth}|p{0.78\linewidth}|}
-  \hline & \\*[-9pt]
-  Definition:
-  &
-  \begin{tabular}[t]{ll}
-  $F\!:\mathbb{R}^n\to\mathbb{R}^n$--lin\Tr{ear}{jär}
-  &
-  $\ent F(\bdu+\bdv)=F(\bdu)+F(\bdv)$s
-  \Tr{and}{och}
-  $F(\lambda\bdu)=\lambda F(\bdu)$.
-  \\
- &
- $\ent F(\bdu)=A\bdu$,  $A_{n\times n} = (F(\vec e_1),\ldots, F(\vec e_n))$
-  \end{tabular}
-  \\*[2pt] \hline & \\*[-9pt]
-  \Tr{Map composition}{Sammansättning}:
-  &
-  \Tr{If}{Om}
-  $F(\bdu)=A\bdu$
-  \Tr{and}{och}
-  $G(\bdu)=B\bdu$,
-  $\;\rightsquigarrow\;$
-  $
-  (F\circ G)(\bdu)
-  =
-  F\bigl(G(\bdu)\bigr)
-  =F\bigl(B\bdu\bigr)
-  =AB\bdu
-  $.
-  \\*[2pt] \hline & \\*[-9pt]
-  \Tr{Isometric maps}{Isometriska}:
-  &
-  $F:\R^n\to\R^n,F(\bdu)=A\bdu$
-  \Tr{is isometric}{är isometrisk}
-  $\ent \norm{F(\bdu)}=\norm{\bdu}$
-  \Tr{for all}{för alla}
-  $\bdu\in\R^n\ent$\\
-  \Tr{}{avbildningar}
-  &
-  $\bdu\circ\bdv=F(\bdu)\circ
-  F(\bdv)$
-  \Tr{for all}{för alla}
-  $\bdu$
-  \Tr{and}{och}
-  $\bdv\in\R^n\ent A$
-  \Tr{is an ON-matrix}{är en ON-matris}
-  $\ent A^{-1}=A^T$ \\
-  \hline
-\end{tabular}%>>>
-
 \subsection*{\Tr{Bases and changes of bases}{Baser och basbyten}}%<<<
 \begin{tabular}{|p{0.2\linewidth}|p{0.75\linewidth}|}
   \hline & \\*[-9pt]
   \Tr{Bases}{Baser}:
   &
-  \Tr{Any set of $n$ linear independent vectors}{En uppsättning av $n$ linjärt oberoende vektorer}
+  \Tr{Any set of $n$ linearly independent vectors}{En uppsättning av $n$ linjärt oberoende vektorer}
   $\underline{\vec e}=\{\vec e_1,\dots,\vec e_n\}$
   \Tr{is a basis for}{bildar en bas för}
   $\R^n$.
@@ -717,8 +665,60 @@ $\lambda\in\mathbb R$.
   $
   \underline{\vec e}.
   $
-  \\*[2pt] \hline\\*[-9pt]
-  \Tr{In linear maps}{I linjära avbildningar}:
+  \\*[2pt]  \hline
+\end{tabular}%>>>
+
+\subsection*{\Tr{Linear maps}{Linjära avbildningar}}%<<<
+
+\begin{tabular}{|p{0.17\linewidth}|p{0.78\linewidth}|}
+  \hline & \\*[-9pt]
+  Definition:
+  &
+  \begin{tabular}[t]{ll}
+  $F\!:\mathbb{R}^n\to\mathbb{R}^n$--lin\Tr{ear}{jär}
+  &
+  $\ent F(\bdu+\bdv)=F(\bdu)+F(\bdv)$s
+  \Tr{and}{och}
+  $F(\lambda\bdu)=\lambda F(\bdu)$.
+  \\
+ &
+ $\ent F(\bdu)=A\bdu$,  $A_{n\times n} = (F(\vec e_1),\ldots, F(\vec e_n))$
+  \end{tabular}
+  \\*[2pt] \hline & \\*[-9pt]
+  \Tr{Map composition}{Sammansättning}:
+  &
+  \Tr{If}{Om}
+  $F(\bdu)=A\bdu$
+  \Tr{and}{och}
+  $G(\bdu)=B\bdu$
+  $\;\rightsquigarrow\;$
+  $
+  (F\circ G)(\bdu)
+  =
+  F\bigl(G(\bdu)\bigr)
+  =F\bigl(B\bdu\bigr)
+  =AB\bdu
+  $.
+  \\*[2pt] \hline & \\*[-9pt]
+  \Tr{Isometric maps}{Isometriska}:
+  &
+  $F:\R^n\to\R^n,F(\bdu)=A\bdu$
+  \Tr{is isometric}{är isometrisk}
+  $\ent \norm{F(\bdu)}=\norm{\bdu}$
+  \Tr{for all}{för alla}
+  $\bdu\in\R^n\ent$\\
+  \Tr{}{avbildningar}
+  &
+  $\bdu\circ\bdv=F(\bdu)\circ
+  F(\bdv)$
+  \Tr{for all}{för alla}
+  $\bdu$
+  \Tr{and}{och}
+  $\bdv\in\R^n\ent A$
+  \Tr{is an ON-matrix}{är en ON-matris}
+  $\ent A^{-1}=A^T$ \\
+  \hline\\*[-9pt]
+  \Tr{Change of basis}{Basbyte}:
   &
   %% Om $F$ har
   %% avbildningsmatris $A$ i basen $\vec e_1,\dots,\vec e_n$ och
@@ -728,9 +728,12 @@ $\lambda\in\mathbb R$.
     F(\bdx) = \underline{\vec e}AX = \underline{\vec f}(PAP^{-1})Y
   $,
   \Tr{with}{med}
-  $\underline{\vec e},\; \underline{\vec f},\; P$ \Tr{as above}{som ovan}
+  $
+  \underline{\vec e}=\{\vec e_1,\ldots,\vec e_n\},\;
+  \underline{\vec f}=\{\vec f_1,\ldots,\vec f_n\},\;
+  P=(\vec f_1,\ldots,\vec f_n)$ % \Tr{as above}{som ovan}
   \\
-  \hline
+ \hline
 \end{tabular}%>>>
 
 \subsection*{\Tr{Egenvalues och egenvectors}{Egenvärden och egenvektorer}}%<<<
@@ -769,7 +772,7 @@ $\lambda\in\mathbb R$.
 $n\times n$-\Tr{matrix}{matrisen}
 $A$
 \Tr{has}{har} $n$
-\Tr{linear independent eigenvectors}{st linjärt oberoende egenvektorer}
+\Tr{linearly independent eigenvectors}{st linjärt oberoende egenvektorer}
 $\bdu_1,\dots,\bdu_n$
 \Tr{to the eigenvalues}{med motsvarande egenvärden}
 $\lambda_1,\dots,\lambda_n$,
@@ -875,10 +878,21 @@ A=PDP^{-1}\;
   \vspace{-16pt}
   \\
   \hline
-\end{tabular}
+\end{tabular}%>>>
+
+\subsection*{\Tr{Least squares solution to an overdetermined system}%<<<
+                {Minsta kvadratlösning till ett överdeterminerat system}\/ $A_{m\times n} X_n=B_m$, $m>n$}
+
+\Tr{In case the columns of the matrix}{Om kolonnvektorerna av matrisen}
+$A$
+\Tr{are linearly independent, the unique solution of the square system}
+  {är linjärt oberoende, den entydiga lösningen till det kvadratiska systemet}
+\[
+  A^TAX = A^TB
+\]
+\Tr{minimizes the error}{minimerar felet} \/ $|AX-B|^2$.%>>>
 
 \label{fin@lpage}
-
 
 \end{document}
 

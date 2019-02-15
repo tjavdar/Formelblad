@@ -618,36 +618,48 @@ $\begin{array}{|ll|ll|l|}\hline& &&&\\*[-8pt]
 \end{array}$
 %>>>
 
-\Tr{% No ODEs in En-version
-}{
-\subsection*{Några resultat om differentialekvationer}%<<<
+\subsection*{\Tr{Ordinary differential equations}{Några resultat om differentialekvationer}}%<<<
 
-\textbf{1:a ordningens linjär ODE:} % <-- Ändring IvTj
-\fbox{$y'+g(x)y=f(x) \iff \bigl(y(x)e^{G(x)}\bigr)' = f(x)\,e^{G(x)}$, där $G'(x)=g(x)$}
+\textbf{\Tr{First-order linear}{1:a ordningens linjär} ODE:} % <-- Ändring IvTj
+\fbox{$y'+g(x)y=f(x) \iff \bigl(y(x)e^{G(x)}\bigr)' = f(x)\,e^{G(x)}$, där $G'(x)=g(x)$.}
 
-Lösningsmetod: Multiplicera ekvationen med den integrerande faktorn $e^{G(x)}$
-där $G(x)$ är en primitiv funktion till $g(x)$. Integrera sedan ekvationen som
-då erhålls.
+\medskip
+\Tr{To solve, multiply the equation by the integrating factor}
+   {Lösningsmetod: Multiplicera ekvationen med den integrerande faktorn}
+   $e^{G(x)}$
+\Tr{where}{där}
+   $G(x)$
+\Tr{is any antiderivative of}{är en primitiv funktion till}
+   $g(x)$.
+\Tr{Then integrate the equation}{Integrera sedan ekvationen som då erhålls}.
 
-\vspace{5 mm}
-
-\textbf{Första ordningens separabel ODE:} \fbox{$g(y)y'=h(x)$}
-
-Lösningsmetod: Separera variablerna enligt $g(y)dy=h(x)dx$ och integrera sedan
-ekvationen.
 
 \vspace{5 mm}
 
-\textbf{Andra ordningens linjära ODE med konstanta koefficienter:}
+\textbf{\Tr{First-order separable}{Första ordningens separabel} ODE}:
+\fbox{$g(y)y'=h(x) \iff G(y(x)) = F(x) + C$.}
+
+\medskip
+\Tr{To solve, separate variables,}{Lösningsmetod: Separera variablerna enligt}
+\, $g(y)\,dy=h(x)\,dx \iff \int g(y)\,dy=\int h(x)\,dx + C$, \,
+\Tr{and integrate the equation}{och integrera sedan ekvationen}.
+
+\vspace{5 mm}
+
+\textbf{
+\Tr{Second-order linear ODE with constant coefficients}{Andra ordningens linjära ODE med konstanta koefficienter}:}
 % \fbox{$y''(x)+ay'(x)+by(x)=f(x)$}
 \[
   \boxed{y''+ay'+by=f(x)} \iff P(D)y(x) = f(x),
-  \mbox{ karakteristiskt polynom: }
+  \mbox{ \Tr{Characteristic polynomial}{karakteristiskt polynom}: }
   P(r) = r^2+ar+b=(r-r_1)(r-r_2).
 \]
 
-Allmän lösning: $y(x)=y_h(x)+y_p(x)$ där $y_h$ är den allmäna lösningen till den
-homogena ekvationen
+\Tr{General solution}{Allmän lösning}:
+\, $y(x)=y_h(x)+y_p(x)$, \,
+\Tr{where}{där}
+  $y_h$
+\Tr{is the general solution of the homogeneous equation}{är den allmäna lösningen till den homogena ekvationen}
 \[
   P(D)y_h(x)=0
  \;\rightsquigarrow\;
@@ -658,10 +670,17 @@ homogena ekvationen
    (C_0+C_1x)\,e^{rx},& r_1=r_2=r,\\
  \end{cases}
 \]
-och $y_p(x)$ är en godtycklig partikulärlösning
-till ekvationen \/$P(D)y(x)=f(x)$, erhållen via lämplig ansats.
-Alternativ framställning ifall rötterna $r_{1,2}$ till det karakteristiska polynomet $P(r)$
-är komplext konjugata:
+\Tr{and}{och}
+  $y_p(x)$
+\Tr{is an arbitrary particular solution to the equation}{är en godtycklig partikulärlösning till ekvationen}
+\/$P(D)y(x)=f(x)$\/
+\Tr{obtained by a proper ansatz}{erhållen via lämplig ansats}.
+
+\Tr{Alternative form in case the roots}{Alternativ framställning ifall rötterna}
+  $r_{1,2}$
+\Tr{of the characteristic polynomial}{till det karakteristiska polynomet}
+  $P(r)$
+\Tr{are complex conjugate}{är komplext konjugata}:
 \[
    r_1=\ob r_2 = \alpha \pm i\beta
    \;\rightsquigarrow\;
@@ -671,7 +690,9 @@ Alternativ framställning ifall rötterna $r_{1,2}$ till det karakteristiska pol
     A\cos(\beta x) + B\sin(\beta x)
     \Bigr].
 \]
-Konstanterna $A$, $B$ och $C_i$, $i=0,1,2$, ovan är godtyckliga.
+\Tr{All constants above}{Alla konstanter ovan},
+  $A$, $B$ \Tr{and}{och} $C_i$, $i=0,1,2$,
+\Tr{are arbitrary}{är godtyckliga}.
 
 % SKIP (>2018-01-08): Utförligt andra ordningens ODE suppressed <<<
 % \begin{theorem}
@@ -731,7 +752,6 @@ Konstanterna $A$, $B$ och $C_i$, $i=0,1,2$, ovan är godtyckliga.
 % SKIP>>>
 
 %>>>
-}
 
 \subsubsection*{Taylor \& Maclaurin}%<<<
 \vspace{-10pt}
