@@ -127,15 +127,11 @@
 
 \section*{\Tr{Cheat Sheet Mathematical Statistics}{Matematisk Statistik, formelblad}}%<<<
 
-\subsection*{\Tr{Some notsums and series}{Några summor och serier}}
+\subsection*{\Tr{Some notable sums and series}{Några summor och serier}}
 \[
-  \begin{array}[m]{|l|l|l|}
-   \hline
-  \sum_{k=0}^{n}z^k = 1 + z + z^2 + \cdots +z^n = \frac{1-z^{n+1}}{1-z},\; z \neq 1
- &\sum_{k=0}^{\infty}z^k = \frac{1}{1-z},\; |z| < 1
- &\sum_{k=0}^{\infty}\frac{z^k}{k!} = e^z \cr
-   \hline
-  \end{array}
+  \sum_{k=0}^{n}z^k = 1 + z + z^2 + \cdots +z^n = \frac{1-z^{n+1}}{1-z},\; z \neq 1;
+  \hspace{3em}\sum_{k=0}^{\infty}z^k = \frac{1}{1-z},\; |z| < 1;
+  \hspace{3em}\sum_{k=0}^{\infty}\frac{z^k}{k!} = e^z
 \]%>>>
 
 \subsection*{\Tr{Probability laws}{Sannolikhetslära}}%<<<
@@ -209,57 +205,43 @@ P(A_j|B) = \frac{P(A_j\cap B)}{P(B)}
 
 \subsection*{\Tr{Expectation and Variance}{Väntevärde och varians}}%<<<
 
-\textbf{\Tr{Expectation}{Väntevärde}}:
-$
-\Tr{
-\mu=E(X)=\cases{
-\sum_k x_kP(X=x_k), & $X$ -- discrete random variable\cr
-\int_{-\infty}^\infty x f(x)\,dx , & $X$ -- continuous r.~v. with pdf $f$.
-}
-}{
-\mu=E(X)=\cases{
-\sum_k x_kP(X=x_k), & $X$ -- diskret stokastisk variabel\cr
-\int_{-\infty}^\infty x f(x)\,dx , & $X$ -- kontinuerlig s.~v. med frekvensfunktion $f$.
-}
-}
-$
+\(
+\begin{array}[m]{|l|l|l|}
+\hline
+\rule{0pt}{11pt}
+\mbox{\textbf{\Tr{Expectation}{Väntevärde}}}
+& \mbox{\textbf{\Tr{Of a random variable}{av en stokastisk variabel} }} X
+& \mbox{\textbf{\Tr{Of a function of a r.v}{av en funktion av en s.v.} }} g(X) \cr 
+  \hline
+  \rule{0pt}{15pt}
+  \mbox{\textbf{\Tr{Discrete r.v.}{Diskret s.v.} }}
+  & \mu=E(X) = \sum_k x_kP(X=x_k)
+  &  E[g(X)] = \sum_k g(x_k)P(X=x_k)  \\[10pt]
+  \hline
+  \rule{0pt}{18pt}
+  \mbox{\textbf{\Tr{Continuous r.v.~of}{Kontinuerlig s.v.~med} pdf }} f(x)
+  & \mu=E(X) = \int_{-\infty}^\infty x f(x)\,dx
+  & E[g(X)] = \int_{-\infty}^\infty g(x) f(x)\,dx \\[10pt]
+  \hline
+\end{array}
+\)
 
 \medskip
-\textbf{\Tr{Variance}{Varians}}:
-$
-\sigma^2
-=
-\Tr{
-\Var(X)=E[(x-\mu)^2]=\cases{
-\sum_k (x_k-\mu)^2 P(X=x_k), & $X$ -- discrete random variable\cr
-\int_{-\infty}^\infty (x-\mu)^2 f(x)\,dx , &  $X$ -- continuous r.~v. with pdf $f$.
-}
-}{
-V(X)=E[(x-\mu)^2]=\cases{
-\sum_k (x_k-\mu)^2 P(X=x_k), & $X$ -- diskret s.~v.\cr
-\int_{-\infty}^\infty (x-\mu)^2 f(x)\,dx , & $X$ -- kontinuerlig s.~v.
-}
-}
-$
-
-\medskip
-\textbf{\Tr{Standard deviation}{Standardavvikelse}}:
-\Tr{ $\sigma=\sqrt{\Var(X)}$ } { $\sigma=\sqrt{V(X)}$ }
-\hfil
-\textbf{\Tr{Steiner's theorem}{Steiner's sats}}: $\sigma^2=E(X^2)-\mu^2$
-%%% \Tr{
-%%% \sigma^2=E(X^2)-\mu^2 %
-%%% =\cases{
-%%% \sum_k x_k^2 P(X=x_k)-\mu^2, & $X$ -- discrete random variable\cr
-%%% \int_{-\infty}^\infty x^2 f(x)\,dx -\mu^2 , &  $X$ -- continuous r.~v. with pdf $f$.
-%%% }
-%%% }{
-%%% \sigma^2=E(X^2)-\mu^2 %=E(X^2)-[E(X)]^2
-%%% =\cases{
-%%% \sum_k x_k^2 P(X=x_k)-\mu^2, & $X$ -- diskret s.~v.\cr
-%%% \int_{-\infty}^\infty x^2 f(x)\,dx -\mu^2 , & $X$ -- kontinuerlig s.~v.
-%%% }
-%%% }
+\(
+\begin{array}[m]{|l|l|l|}
+\hline
+\rule{0pt}{11pt}
+\mbox{\textbf{\Tr{Variance}{Varians}}}
+  & \mbox{\textbf{\Tr{Standard deviation}{Standardavvikelse}}}
+  & \mbox{\textbf{\Tr{Steiner's theorem}{Steiner's sats}}} \cr
+  \hline
+  \rule{0pt}{13pt}
+  \sigma^2 = \Var(X) = E[(X-\mu)^2]
+  & \sigma = \sqrt{\Var(X)}
+  & \sigma^2=E(X^2)-\mu^2 \cr
+  \hline
+\end{array}
+\)
 %>>>
 
 \subsection*{\Tr{Linear combinations, sums and averages of random variables}%<<<
@@ -615,23 +597,22 @@ $\Tr{s_p}{\sigma^*_\obs}$
 
 \vspace{-5pt}
 \begin{center}
-\begin{tabular}[t]{|c|*{4}{>{$}c<{$}}|}
-  \cline{2-5}\multicolumn{1}{c|}{}
-   &
-   \mbox{\Tr{Null hypothesis}{Nollhypotes}} &
-   \mbox{\Tr{Alt.~hypothesis}{Mothypotes}}  &
-   \mbox{\Tr{Test variable}{Testvariabel}} &
-   \mbox{\Tr{$H_0$ rejected if}{När $H_0$ förkastas}}
-   \\ \hline
-     &&H_1:{\md}\neq{\md}_0&r=\min(r^-,r^+)&r\leq r_{\alpha/2} \\
-     \mbox{\textbf{\Tr{Sign test}{Teckentest}}}
-      &H_0:{\md}={\md}_0&H_1:{\md}>{\md}_0&r^-&r^-\leq r_\alpha \\
-     \mbox{\Tr{for the median}{för medianen}}
-     &&H_1:{\md}<{\md}_0&r^+&r^+\leq r_\alpha
- \\\hline
-\end{tabular}
+%%%%% \begin{tabular}[t]{|c|*{4}{>{$}c<{$}}|}
+%%%%%   \cline{2-5}\multicolumn{1}{c|}{}
+%%%%%    &
+%%%%%    \mbox{\Tr{Null hypothesis}{Nollhypotes}} &
+%%%%%    \mbox{\Tr{Alt.~hypothesis}{Mothypotes}}  &
+%%%%%    \mbox{\Tr{Test variable}{Testvariabel}} &
+%%%%%    \mbox{\Tr{$H_0$ rejected if}{När $H_0$ förkastas}}
+%%%%%    \\ \hline
+%%%%%      &&H_1:{\md}\neq{\md}_0&r=\min(r^-,r^+)&r\leq r_{\alpha/2} \\
+%%%%%      \mbox{\textbf{\Tr{Sign test}{Teckentest}}}
+%%%%%       &H_0:{\md}={\md}_0&H_1:{\md}>{\md}_0&r^-&r^-\leq r_\alpha \\
+%%%%%      \mbox{\Tr{for the median}{för medianen}}
+%%%%%      &&H_1:{\md}<{\md}_0&r^+&r^+\leq r_\alpha
+%%%%%  \\\hline
+%%%%% \end{tabular}
 
-\vspace{5pt}
 \begin{tabular}[t]{|c|*{3}{>{$}c<{$}}|}
   \cline{2-4}\multicolumn{1}{c|}{}
    &
