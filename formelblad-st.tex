@@ -244,6 +244,78 @@ P(A_j|B) = \frac{P(A_j\cap B)}{P(B)}
 \)
 %>>>
 
+\subsection*{\Tr{Parameters of some distributions}%<<<
+             {Några ofta förekommande fördelningar}}
+
+\def\EspaceAuDessus{&&&&\\*[-10pt]}\def\duPlancher{\\*[2pt] \hline}
+\begin{tabular}{|c|c|c|c|c|}
+\cline{1-2}
+\multicolumn{2}{ |l| }{\textbf{\Tr{Continuous distributions}{Kontinuerliga fördelningar}}:} \cr
+\hline
+\EspaceAuDessus     \Tr{$X$ from}{$X$ från}
+                  & $f(x)$
+                  & \Tr{$F(x)=P(X\le x)$}{$F(x)=P(X\le x)$}
+                  & \Tr{$\mu=E(X)$}{$\mu=E(X)$}
+                  & \Tr{$\sigma=\sqrt{\Var(X)}$}{$\sigma=\sqrt{V(X)}$}
+                  \duPlancher
+\hline
+  \EspaceAuDessus $\mbox{Unif}(a,b)$  &
+                  $ \frac{1}{b-a},\; a\le\! x\le\! b $ &
+                  $\frac{x-a}{b-a},\; a\le\! x\le\! b $ &
+                  $\frac{a+b}{2}$ &
+                  $\frac{b-a}{2\sqrt{3}}$
+                  \cr &&&&\\[-23pt]
+                  \duPlancher
+  \EspaceAuDessus $\mbox{Exp}(\lambda)$  &
+                  $\lambda e^{-\lambda x}$,\, $x\ge0$ &
+                  $1-e^{-\lambda x}$ &
+                  $1/\lambda$ & $1/\lambda$\duPlancher
+  \EspaceAuDessus $N(\mu,\sigma) $ &
+                  %% $\frac{1}{\sigma\sqrt{2\pi}}\,e^{-(x-\mu)^2/2\sigma^2}$ &
+                  $\frac{1}{\sigma\sqrt{2\pi}}\,e^{-(\frac{x-\mu}\sigma)^2/2}$ &
+                  $\Phi\Bigl(\frac{x-\mu}{\sigma}\Bigr)
+                  =\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\frac{x-\mu}{\sigma}} e^{-t^2/2}\,dt$ &
+                  $\mu$ & $\sigma$\\*[10pt]\hline
+\end{tabular}
+
+\medskip
+\begin{tabular}{|c|c|c|c|c|}
+\cline{1-2}
+\multicolumn{2}{ |l| }{\textbf{\Tr{Discrete distributions}{Diskreta fördelningar}} ($x=0,1,2,\ldots$):} \cr
+\hline
+\EspaceAuDessus     \Tr{$X$ from}{$X$ från}
+                  & $f(x)=P(X=x)$
+                  & \Tr{$F(x)=P(X\le x)$}{$F(x)=P(X\le x)$}
+                  & \Tr{$\mu=E(X)$}{$\mu=E(X)$}
+                  & \Tr{$\sigma=\sqrt{\Var(X)}$}{$\sigma=\sqrt{V(X)}$}
+                  \duPlancher
+\hline
+\EspaceAuDessus $\mbox{Unif}\{1,n\}$  &
+                  $ \frac{1}{n},\; 1\le\! x\le\! n $ &
+                  $ \frac{x}{n},\; 1\le\! x\le\! n $ &
+                  $\frac{n+1}{2}$ &
+                  $\frac{\sqrt{n^2-1}}{2\sqrt{3}}$
+                  \cr &&&&\\[-23pt]
+                  \duPlancher
+  \EspaceAuDessus $\mbox{Geo}(p)$,\, $x\ge1$ &
+                  $p(1-p)^{x-1}$ &
+                  $1 - (1-p)^x$ &
+                  $1/p$ & $\sqrt{1-p}\big/p$\duPlancher
+  \EspaceAuDessus $\mbox{Hyp}(N,n,p)$ &
+                  $\frac{\binom{Np}x\binom{N(1-p)}{n-x}}{\binom{N}{n}}$ &
+                  $\sum_{k=0}^x\frac{\binom{Np}k\binom{N(1-p)}{n-k}}{\binom{N}{n}}$ &
+                  $np$ & $\sqrt{\tfrac{N-n}{N-1}\,np(1-p)}$\duPlancher
+  \EspaceAuDessus $\mbox{Bin}\,(n,p)$    &
+                  $\binom nx p^x(1-p)^{n-x}$ &
+                  $\sum_{k=0}^x\binom nk p^k(1-p)^{n-k}$ &
+                  $np$ & $\sqrt{np(1-p)}$\duPlancher
+  \EspaceAuDessus $\Po(\mu) $ &
+                  $e^{-\mu}\,\frac{\mu^x}{x!}$ &
+                  $e^{-\mu}\,\sum_{k=0}^x \frac{\mu^k}{k!}$ &
+                  $\mu$ & $\sqrt{\mu}$\duPlancher
+\end{tabular}
+%>>>
+
 \subsection*{\Tr{Linear combinations, sums and averages of random variables}%<<<
              {Linjära kombinationer, summor och snitt av stokastiska variabler}
          }
@@ -286,7 +358,7 @@ a_1\Tr{X}{X}_1+\cdots+a_n\Tr{X}{X}_n\Tr{\sim}{\sim} N\bigl(a_1\mu_1+\cdots a_n\m
                    \sqrt{a_1^2\sigma_1^2+\cdots a_n^2\sigma_n^2}\,\bigr).
 \]
 \Tr{%
-For \textbf{sums} and \textbf{averages of i.d.~normal} variables, in particular, holds:
+For \textbf{sums} and \textbf{averages of i.i.d.~normal} variables, in particular, holds:
 }{%
 I synnerhet, för \textbf{summor} och \textbf{snitt av lika normalfördelade oberoende} variabler gäller:
 }
@@ -295,42 +367,96 @@ $$
 k=1,...,n
 \;\Rightarrow\;
 \cases{
-\Tr{X}{X}_1+\cdots+\Tr{X}{X}_n \Tr{\sim}{\sim} N(n\mu,\sigma\sqrt{n})\cr\noalign{\vskip5pt}
-\frac{\Tr{X}{X}_1+\cdots+\Tr{X}{X}_n}{n} = \Tr{\ob X}{\ob X} \Tr{\sim}{\sim} N(\mu,\frac{\sigma}{\sqrt{n}})
+X = \Tr{X}{X}_1+\cdots+\Tr{X}{X}_n \Tr{\sim}{\sim} N(n\mu,\sigma\sqrt{n})
 \Leftrightarrow
-z:=\frac{\Tr{\ob X}{\ob X} -\mu}{\sigma/\sqrt{n}}\Tr{\sim}{\sim} N(0,1).
+Z=\frac{X-n\mu}{\sigma\sqrt{n}}\Tr{\sim}{\sim} N(0,1)
+\cr\noalign{\vskip5pt}
+\overline{X}
+=\frac{\Tr{X}{X}_1+\cdots+\Tr{X}{X}_n}{n} \sim N(\mu,\frac{\sigma}{\sqrt{n}})
+\hspace{8pt}\Leftrightarrow
+Z=\frac{\Tr{\ob X}{\ob X} -\mu}{\sigma/\sqrt{n}}\Tr{\sim}{\sim} N(0,1)
 }
 $$
+
+\medskip\textbf{\Tr{A Poisson process of intensity}{Poissonprocess med intensitet}} $\lambda$: %<<<
+\Tr{A point process where times between consecutive points are i.i.d.~random variables that are $\Exp(\lambda)$}
+   {Fullständig slumpmässig följd av händelser med tider mellan händelserna som är $\Exp(\lambda)$}:
+%%% \begin{center}
+%%%   \fbox{
+%%% \Tr{If}{om} \/
+%%% $
+%%%      \Bigl\{\mkern-6mu
+%%%      \begin{array}{l}
+%%%        X_k  \sim\Po(\lambda t_k)\\
+%%%        k=1,2,\ldots,n
+%%%      \end{array}
+%%%    \mkern-6mu\Bigr\} \/
+%%%    $
+%%%    \Tr{then}{då}
+%%%    $
+%%%      X = X_1+X_2+\cdots + X_n \sim \Po(\mu),\; \mu=\lambda(t_1+\cdots+t_n)
+%%%    $
+%%%   }
+%%% \end{center}
+\[
+ % \mbox{\Tr{If}{Om} }\;
+  \Bigl\{\mkern-6mu
+  \begin{array}{l}
+    X_k  \sim\Po(\lambda t_k)\\
+    k=1,2,\ldots,n
+  \end{array}
+\mkern-6mu\Bigr\}
+% \;\mbox{ \Tr{then}{då} }\;
+\Rightarrow
+  X = X_1+X_2+\cdots + X_n \sim \Po(\mu),\; \mu=\lambda(t_1+\cdots+t_n)
+\]%>>>
 %>>>
 
 \subsection*{\Tr{The Central Limit Theorem (CLT)}{Centrala gränsvärdessatsen (CGS)}} %<<<
 
 \Tr{%
-Suppose that $X_1,\cdots, X_n$ are \textbf{independent identically distributed}  (i.i.d.)
+Let $X_1,\cdots, X_n$ be \textbf{independent identically distributed}  (i.i.d.)
 random variables with expectation $\mu$ and standard deviation $\sigma$. Then for large $n$
 holds:
 }{%
-Antag att $X_1,\cdots, X_n$ är \textbf{oberoende likafördelade} stokastiska
+Låt $X_1,\cdots, X_n$ vara \textbf{oberoende likafördelade} stokastiska
 variabler med väntevärde $\mu$ och standardavvikelse $\sigma$. För stora $n$
 gäller:
 }
 
 \begin{itemize}
-  \item $S_n=\sum_{k=1}^n \Tr{X}{X}_k=\Tr{X}{X}_1+\cdots+\Tr{X}{X}_n\;
+  \item $X=\sum_{k=1}^n \Tr{X}{X}_k=\Tr{X}{X}_1+\cdots+\Tr{X}{X}_n\;
     \stackrel{\mbox{\tiny appr}}{\sim}\; N(n\mu,\sigma\sqrt{n})$,
         \ \Tr{i.e.}{dvs}, \,
-        $P(S_n\le x)\approx
+        $P(X\le x)\approx
         \Phi(z),\, z=\frac{x-n\mu}{\sigma\sqrt{n}}
-        $;
+        $
 
-      \item $\Tr{\ob X}{\ob X}=\frac{S_n}n
+      \item $\Tr{\ob X}{\ob X}=\frac{X}n
     =\frac{\Tr{X}{X}_1+\cdots+\Tr{X}{X}_n}n\;
     \stackrel{\mbox{\tiny appr}}{\sim}\; N(\mu,\frac\sigma{\sqrt{n}})$,
-        \ \Tr{i.e.}{dvs}, \,
+    \hspace{26pt}\Tr{i.e.}{dvs}, \,
         $P(\Tr{\ob X}{\ob X}\le \ob x)\approx\Phi(z)$, \,
-        $z=\frac{\ob x-\mu}{\sigma/\sqrt{n}}\cdot$
+        $z=\frac{\ob x-\mu}{\sigma/\sqrt{n}}$
 \end{itemize}
 %>>>
+
+% Chebyshev + LBN <<<
+\[
+  \begin{array}[m]{|c|c|}
+    \hline
+    \mbox{\textbf{\Tr{The Chebyshev inequality}{Tjebyshevs olikhet}}}
+    &
+    \mbox{\textbf{\Tr{The Law of Big Numbers}{De stora talens lag}} }
+    (\{X_k\}_1^n - \mbox{ i.i.d.},\; E(X_k)=\mu,\; \Var(X_k)=\sigma^2)\mkern-5mu:
+  \cr\hline\rule[-10pt]{0pt}{27pt}
+  P(|X-\mu_X|\ge a) \le\frac{\sigma_X^2}{a^2}, \; a>0
+  &
+  \lim_{n\to\infty}P(|\overline X-\mu|\ge\varepsilon)
+  = \lim_{n\to\infty}\frac{\sigma^2}{n\varepsilon^2}=0, \; \varepsilon>0
+  \\ \hline
+  \end{array}
+\] %>>>
 
 \subsection*{\Tr{Approximations of distributions}{Approximationer}}%<<<
 \medskip
@@ -339,126 +465,79 @@ gäller:
 \end{center}
 %>>>
 
-\subsection*{\Tr{Parameters of some distributions}%<<<
-             {Några ofta förekommande fördelningar}}
-
-\def\EspaceAuDessus{&&&&\\*[-10pt]}\def\duPlancher{\\*[2pt] \hline}
-
-\begin{tabular}{|c|c|c|c|c|}
-\cline{1-2}
-\multicolumn{2}{ |l| }{\textbf{\Tr{Discrete distributions}{Diskreta fördelningar}} ($x=0,1,2,\ldots$):} \cr
-\hline
-\EspaceAuDessus     \Tr{$X$ from}{$X$ från}
-                  & $f(x)=P(X=x)$
-                  & \Tr{$F(x)=P(X\le x)$}{$F(x)=P(X\le x)$}
-                  & \Tr{$\mu=E(X)$}{$\mu=E(X)$}
-                  & \Tr{$\sigma=\sqrt{\Var(X)}$}{$\sigma=\sqrt{V(X)}$}
-                  \duPlancher
-\hline
-\EspaceAuDessus $\mbox{Unif}\{1,n\}$  &
-                  $ \frac{1}{n},\; 1\le\! x\le\! n $ &
-                  $ \frac{x}{n},\; 1\le\! x\le\! n $ &
-                  $\frac{n+1}{2}$ &
-                  $\frac{\sqrt{n^2-1}}{2\sqrt{3}}$
-                  \cr &&&&\\[-23pt]
-                  \duPlancher
-  \EspaceAuDessus $\mbox{Geo}(p)$,\, $x\ge1$ &
-                  $p(1-p)^{x-1}$ &
-                  $1 - (1-p)^x$ &
-                  $1/p$ & $\sqrt{1-p}\big/p$\duPlancher
-  \EspaceAuDessus $\mbox{Hyp}(N,n,p)$ &
-                  $\frac{\binom{Np}x\binom{N(1-p)}{n-x}}{\binom{N}{n}}$ &
-                  $\sum_{k=0}^x\frac{\binom{Np}k\binom{N(1-p)}{n-k}}{\binom{N}{n}}$ &
-                  $np$ & $\sqrt{\tfrac{N-n}{N-1}\,np(1-p)}$\duPlancher
-  \EspaceAuDessus $\mbox{Bin}\,(n,p)$    &
-                  $\binom nx p^x(1-p)^{n-x}$ &
-                  $\sum_{k=0}^x\binom nk p^k(1-p)^{n-k}$ &
-                  $np$ & $\sqrt{np(1-p)}$\duPlancher
-  \EspaceAuDessus $\Po(\mu) $ &
-                  $e^{-\mu}\,\frac{\mu^x}{x!}$ &
-                  $e^{-\mu}\,\sum_{k=0}^x \frac{\mu^k}{k!}$ &
-                  $\mu$ & $\sqrt{\mu}$\duPlancher
-\end{tabular}
-
-\medskip
-\begin{tabular}{|c|c|c|c|c|}
-\cline{1-2}
-\multicolumn{2}{ |l| }{\textbf{\Tr{Continuous distributions}{Kontinuerliga fördelningar}}:} \cr
-\hline
-\EspaceAuDessus     \Tr{$X$ from}{$X$ från}
-                  & $f(x)$
-                  & \Tr{$F(x)=P(X\le x)$}{$F(x)=P(X\le x)$}
-                  & \Tr{$\mu=E(X)$}{$\mu=E(X)$}
-                  & \Tr{$\sigma=\sqrt{\Var(X)}$}{$\sigma=\sqrt{V(X)}$}
-                  \duPlancher
-\hline
-  \EspaceAuDessus $\mbox{Unif}(a,b)$  &
-                  $ \frac{1}{b-a},\; a\le\! x\le\! b $ &
-                  $\frac{x-a}{b-a},\; a\le\! x\le\! b $ &
-                  $\frac{a+b}{2}$ &
-                  $\frac{b-a}{2\sqrt{3}}$
-                  \cr &&&&\\[-23pt]
-                  \duPlancher
-  \EspaceAuDessus $\mbox{Exp}(\lambda)$  &
-                  $\lambda e^{-\lambda x}$,\, $x\ge0$ &
-                  $1-e^{-\lambda x}$ &
-                  $1/\lambda$ & $1/\lambda$\duPlancher
-  \EspaceAuDessus $N(\mu,\sigma) $ &
-                  %% $\frac{1}{\sigma\sqrt{2\pi}}\,e^{-(x-\mu)^2/2\sigma^2}$ &
-                  $\frac{1}{\sigma\sqrt{2\pi}}\,e^{-(\frac{x-\mu}\sigma)^2/2}$ &
-                  $\Phi\Bigl(\frac{x-\mu}{\sigma}\Bigr)
-                  =\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\frac{x-\mu}{\sigma}} e^{-t^2/2}\,dt$ &
-                  $\mu$ & $\sigma$\\*[10pt]\hline
-\end{tabular}
-
-\medskip
-\textbf{\Tr{A Poisson process of intensity}{Poissonprocess med intensitet}} $\lambda$:
-
-\Tr{A point process where times between consecutive points are i.i.d.~random variables that are $\Exp(\lambda)$}
-   {Fullständig slumpmässig följd av händelser i tiden, antal punkter $\Po(\lambda t)$, tid mellan punkter: $\Exp(\lambda)$}.
-%>>>
-
 \subsection*{\Tr{Statistical inference}{Statistisk inferens}}%<<<
 
+\subsubsection*{\Tr{Point estimators}{Punktskattningar}}
+
 \Tr{%
-\textbf{Point estimators}:
+\textbf{One sample}:
 Let $x_1,\dots,x_n$ be the observed values of a sample $\left\{X_k\right\}_1^n$ from a population with
 mean $\mu$ och standard deviation $\sigma$. Point estimators
 for the mean and the variance of the population are
 }{%
-\textbf{Punktskattningar}:
+\textbf{En stickprov}:
 Låt $x_1,\dots,x_n$ vara de observerade värden för ett stickprov
 $\left\{X_k\right\}_1^n$ från en population med
 väntevärde $\mu$ och standardavvikelse $\sigma.$ Väntevärdesriktiga skattningar
 av $\mu$ och $\sigma^2$ är då
 }
 
-\Tr{%
-\begin{itemize}
-  \item % $\hat\mu = \ob X = \frac1n\sum_{k=1}^{n}X_k$, computed from the observed values as
-    $\overline{x}=\frac{1}{n}\sum_{k=1}^n x_k$
-
- \item $\displaystyle
-     %\left(\sigma^2_\obs\right)^*=
+\[
+  \begin{array}[m]{|l|l|}
+  \hline
+  \overline{x}=\mu^*_\obs=\frac{1}{n}\sum_{i=1}^n x_i
+  &
      s^2
+     =\left(\sigma^2_\obs\right)^*
      =\frac{1}{n-1}\sum_{i=1}^n(x_i-\overline{x})^2
-     =\frac{1}{n-1}\left(\sum_{i=1}^nx_i^2-n\overline{x}^2\right)\;\;\;$
-     (if the mean is not known).
-\end{itemize}
-}{%
-\begin{itemize}
-  \item $\displaystyle \mu^*_\obs=\overline{x}=\frac{1}{n}\sum_{i=1}^n x_i$
+     =\frac{1}{n-1}\Bigl(\sum_{i=1}^nx_i^2-n\overline{x}^2\Bigr)
+     %\; \mu~\mbox{\Tr{not known}{ej känd}}
+  \cr\hline
+  \end{array}
+\]
 
- \item $\displaystyle
-     \left(\sigma^2_\obs\right)^*
-     =s^2
-     =\frac{1}{n-1}\sum_{i=1}^n(x_i-\overline{x})^2
-     =\frac{1}{n-1}\left(\sum_{i=1}^nx_i^2-n\overline{x}^2\right)\;\;\;$
-     (då $\mu$ ej känd).
-\end{itemize}
-}%>>>
+\textbf{\Tr{Two samples}{Två stickprov}},
+$\{X_k\}_1^n$ \Tr{and}{och} $\{Y_k\}_1^n$
+\Tr{with observations}{med observationer}
+$\{x_k\}_1^n$ \Tr{and}{och} $\{y_k\}_1^n$,
+\Tr{point estimator for the covariance}{skattning för kovariancen}:
+\[
+  \begin{array}[m]{|l|l|}
+  \hline
+  s_{xy} = \widehat{\Cov(X,Y)}^*_{\obs}
+     =\frac{1}{n-1}\sum_{i=1}^n(x_i-\overline{x})(y_i-\overline{y})
+     =\frac{1}{n-1}\Bigl(\sum_{i=1}^nx_iy_i-n\bar{x}\bar{y}\Bigr)
+   & 
+     %\mbox{\Tr{in particular}{i synnerhet}}, \;
+     \Bigl\{\mkern-6mu
+     \begin{array}[m]{rcl}
+       s_{xx} &=& s_x^2 = (\sigma^2_X)_\obs^*\\[2pt]
+       s_{yy} &=& s_y^2 = (\sigma^2_Y)_\obs^*\\
+     \end{array}
+  \cr\hline
+\end{array}
+\]
 
-\subsection*{\Tr{Confidence Interval -- One Sample}{Konfidensintervall - ett stickprov}}%<<<
+\textbf{\Tr{Correlation coefficient}{Korrelationskoefficient}}:
+\fbox{$
+  r =  \frac{s_{xy}}{s_xs_y}
+    =  \frac{s_{xy}}
+            { \sqrt{s_{xx}s_{yy}} }
+$}
+\hfil
+\textbf{\Tr{Linear regression}{Linjär regression}}:
+\fbox{$
+  y = a + bx, \;
+  \Bigl\{\mkern-6mu
+  \begin{array}[m]{l}
+  b =  s_{xy}/s_{xx} \cr
+  a = \bar y - b\bar x
+  \end{array}
+$}
+
+%>>>
+
+\subsubsection*{\Tr{Confidence Interval -- One Sample}{Konfidensintervall - ett stickprov}}%<<<
 
 \begin{eqnarray*}\begin{array}{|ccc|}\hline
      \mbox{\Tr{Estimated paramter $\theta$}{Parameter $\theta$ som skattas}}
@@ -499,7 +578,7 @@ av $\mu$ och $\sigma^2$ är då
 \end{eqnarray*}
 %>>>
 
-\subsection*{\Tr{Confidence Interval for the Mean -- Two Samples}%<<<
+\subsubsection*{\Tr{Confidence Interval for the Mean -- Two Samples}%<<<
                    {Konfidensintervall -- två normalfördelade stickprov}}
 
 \begin{itemize}
