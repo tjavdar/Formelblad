@@ -64,6 +64,11 @@ e:  e-last #
 v:  v-last #
 p:  $(FILE).lpr #
 
+x2:  $(FILE)-x2.pdf #
+p2:  $(FILE)-x2.lpr #
+x4:  $(FILE)-x4.pdf #
+p4:  $(FILE)-x4.lpr #
+
 xsq: $(FILEx3)
 	for i in $(FILEx3); do pdf-squeeze.sh  $$i; done
 
