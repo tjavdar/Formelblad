@@ -448,8 +448,10 @@ gäller:
     \mbox{\textbf{\Tr{The Chebyshev inequality}{Tjebyshevs olikhet}}}
     &
     \mbox{\textbf{\Tr{The Law of Big Numbers}{De stora talens lag}} }
+    \rule{0pt}{13pt}
     (\{X_k\}_1^n - \mbox{ i.i.d.},\; E(X_k)=\mu,\; \Var(X_k)=\sigma^2)\mkern-5mu:
-  \cr\hline\rule[-10pt]{0pt}{27pt}
+    \\[3pt]\hline
+    \rule[-10pt]{0pt}{27pt}
   P(|X-\mu_X|\ge a) \le\frac{\sigma_X^2}{a^2}, \; a>0
   &
   \lim_{n\to\infty}P(|\overline X-\mu|\ge\varepsilon)
@@ -485,10 +487,10 @@ av $\mu$ och $\sigma^2$ är då
 \[
   \begin{array}[m]{|l|l|}
   \hline
-  \overline{x}=\mu^*_\obs=\frac{1}{n}\sum_{i=1}^n x_i
+  \overline{x}=\hat\mu_\obs=\frac{1}{n}\sum_{i=1}^n x_i
   &
      s^2
-     =\left(\sigma^2_\obs\right)^*
+     =\widehat{\sigma^2}_\obs
      =\frac{1}{n-1}\sum_{i=1}^n(x_i-\overline{x})^2
      =\frac{1}{n-1}\Bigl(\sum_{i=1}^nx_i^2-n\overline{x}^2\Bigr)
      %\; \mu~\mbox{\Tr{not known}{ej känd}}
@@ -504,15 +506,15 @@ $\{x_k\}_1^n$ \Tr{and}{och} $\{y_k\}_1^n$,
 \[
   \begin{array}[m]{|l|l|}
   \hline
-  s_{xy} = \widehat{\Cov(X,Y)}^*_{\obs}
+  s_{xy} = \widehat{\Cov(X,Y)}_{\obs}
      =\frac{1}{n-1}\sum_{i=1}^n(x_i-\overline{x})(y_i-\overline{y})
      =\frac{1}{n-1}\Bigl(\sum_{i=1}^nx_iy_i-n\bar{x}\bar{y}\Bigr)
    & 
      %\mbox{\Tr{in particular}{i synnerhet}}, \;
      \Bigl\{\mkern-6mu
-     \begin{array}[m]{rcl}
-       s_{xx} &=& s_x^2 = (\sigma^2_X)_\obs^*\\[2pt]
-       s_{yy} &=& s_y^2 = (\sigma^2_Y)_\obs^*\\
+       \begin{array}[m]{rcl} \rule{0pt}{14pt}
+       s_{xx} &=& s_x^2 = (\widehat{\sigma^2_X})_\obs\\[2pt]
+       s_{yy} &=& s_y^2 = (\widehat{\sigma^2_Y})_\obs\\[2pt]
      \end{array}
   \cr\hline
 \end{array}
@@ -527,7 +529,7 @@ $}
 \hfil
 \textbf{\Tr{Linear regression}{Linjär regression}}:
 \fbox{$
-  y = a + bx, \;
+  \hat y = a + bx, \;
   \Bigl\{\mkern-6mu
   \begin{array}[m]{l}
   b =  s_{xy}/s_{xx} \cr
@@ -539,7 +541,7 @@ $}
 
 \subsubsection*{\Tr{Confidence Interval -- One Sample}{Konfidensintervall - ett stickprov}}%<<<
 
-\begin{eqnarray*}\begin{array}{|ccc|}\hline
+\begin{eqnarray*}\begin{array}{|c|c|c|}\hline
      \mbox{\Tr{Estimated paramter $\theta$}{Parameter $\theta$ som skattas}}
    & \mbox{\Tr{Point estimate}{Punktskattning}}
    & \mbox{\Tr{Two-tailed}{Tvåsidigt konfidensintervall} }
@@ -548,28 +550,24 @@ $}
 \hline && \\
 \mu \;\mbox{\Tr{from}{från} } N(\mu,\sigma),\; \sigma \mbox{ \Tr{known}{känd}}
  & \overline{x}
- &  [\ob x-\varepsilon,\ob x+\varepsilon],\;
-    \varepsilon = \Tr{z}{\lambda}_{\alpha/2}\frac{\sigma}{\sqrt{n}}\\&&\\
+ &  \ob x \pm \Tr{z}{\lambda}_{\alpha/2}\frac{\sigma}{\sqrt{n}}\\&&\\
 
 \hline &&\\
 \mu \;\mbox{\Tr{from}{från} } N(\mu,\sigma),\; \sigma \mbox{ \Tr{not known}{ej känd}}
  & \overline{x}
-& [\ob x-\varepsilon,\ob x+\varepsilon],\;  \varepsilon = t_{\alpha/2,n-1}\frac{s}{\sqrt{n}}\\&&\\
+& \ob x \pm t_{\alpha/2,n-1}\frac{s}{\sqrt{n}}\\&&\\
+
+\hline &&\\p \;\mbox{ \Tr{from}{från} Bin}(n,p) & \frac xn
+& \hat p_\obs\pm
+\Tr{z}{\lambda}_{\alpha/2}\sqrt{\frac{\hat p_\obs(1-\hat p_\obs)}{n}}
+
+\\&&\\
 
 \hline &&\\
 \sigma^2 \;\mbox{\Tr{from}{från} } N(\mu,\sigma)
  & s^2&\frac{(n-1)s^2}{\chi^2_{\alpha/2,n-1}}
   \leq\sigma^2
   \leq \frac{(n-1)s^2}{\chi^2_{1-\alpha/2,n-1}}
-
-\\&&\\
-
-\hline &&\\p \;\mbox{ \Tr{from}{från} Bin}(n,p) & \Tr{\hat p=\frac x n}{p^*_\obs}
-& [
-  \Tr{\hat p}{p^*_\obs}-\varepsilon ,
-  \Tr{\hat p}{p^*_\obs}+\varepsilon ],\;
- \varepsilon =
- \Tr{z}{\lambda}_{\alpha/2}\sqrt{\frac{\Tr{\hat p}{p^*_\obs}(1-\Tr{\hat p}{p^*_\obs})}{n}}
 
  \\&&\\
 \hline
@@ -591,12 +589,12 @@ $}
    \Tr{Then}{Då} $\{Z_i\}_1^n=\{Y_i-X_i\}_1^n$
    \Tr{is a sample from}{är ett stickprov från}
    $N(\Delta,\sigma_z)$.
-  % \Tr{with}{där} $\sigma_z=\sqrt{\sigma_x^2+\sigma_y^2}$\,. <- Lögn, kan vara korrelerade!
    \Tr{The two-sided $\CI_{1-\alpha}$ for}{Det tvåsidiga $\CI_{1-\alpha}$ för} $\Delta$:
 
 \[
-\CI_{1-\alpha}(\Delta) = [\ob z-\varepsilon,\ob z+\varepsilon],\quad
-   \varepsilon =
+\CI_{1-\alpha}(\Delta)
+   = \ob z
+     \pm
    \cases{
       \Tr{z}{\lambda}_{\alpha/2}\,\frac{\sigma_z}{\sqrt{n}}\;,
           & \Tr{if}{om} $\sigma_z$ \Tr{is known}{är känd} \cr
@@ -612,19 +610,20 @@ $\{X_i\}_{i=1}^{n}$ \Tr{from}{från} $N(\mu_x,\sigma)$
   \Tr{The two-tailed $\CI_{1-\alpha}$ for $\mu_x-\mu_y$ is given by}
       {Det tvåsidiga $\CI_{1-\alpha}$ för $\mu_x-\mu_y$ ges av}
 \[
-\CI_{1-\alpha}(\mu_x-\mu_y) = [(\ob x-\ob y)-\varepsilon,(\ob x-\ob y)+\varepsilon],\quad
-   \varepsilon =
+  \CI_{1-\alpha}(\mu_x-\mu_y)
+  = (\ob x-\ob y)
+    \pm
    \cases{
    \Tr{z}{\lambda}_{\alpha/2}\,\sigma\sqrt{\frac1n+\frac1m},
           & \Tr{if}{om} $\sigma$ \Tr{is known}{är känd} \cr
-          t_{\alpha/2,n+m-2}\,\Tr{s_p}{\sigma^*_\obs}\sqrt{\frac1n+\frac1m}\,,
+          t_{\alpha/2,n+m-2}\,s_p\sqrt{\frac1n+\frac1m}\,,
       & \Tr{if}{om} $\sigma$ \Tr{is not known}{är ej känd}, \cr
    }
 \]
 \Tr{where}{där}
-$\Tr{s_p}{\sigma^*_\obs}$
-\Tr{is the pooled (weighted) standard deviation}{är den vägda standardavvikelsen}
-\/$ \Tr{s_p}{\sigma^*_\obs} =\sqrt{\frac{(n-1)s_x^2+(m-1)s_y^2}{n+m-2}}\,\cdot$
+$s_p$
+\Tr{is the pooled (weighted) standard deviation}{är den vägda (pooled) standardavvikelsen}
+\/$s_p =\sqrt{\frac{(n-1)s_x^2+(m-1)s_y^2}{n+m-2}}\,\cdot$
 
 \end{itemize}
 %>>>
