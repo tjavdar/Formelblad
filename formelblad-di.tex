@@ -173,12 +173,12 @@
 \begin{document}
 
 
-\subsection*{Formelblad Diskretmatematik}
+\subsection*{Formelblad Diskret matematik}
 \hrule
 \bigskip
 
-\subsubsection*{Binomialsatsen. Geometrisk summa. Eulers polyederformel för planära grafer $G(V,E)$}%<<<
-\vspace{-15pt}
+\subsubsection*{Binomialsatsen. Geometrisk summa. Eulers polyederformel för plana grafer $G(V,E)$} %<<<
+\vspace{-2em}
 \[
   \begin{array}[t]{|l|l|l|}
 \hline
@@ -190,24 +190,33 @@
   \end{array}
 \]%>>>
 
-\subsubsection*{Arithmetic mod $n$:} \vspace{-1.2em} %<<<
+\subsubsection*{Arithmetic mod $n$ %<<<
+\textnormal{(i tabellen nedan är alla tal hela, $m>1,\,n>1$, och $p$ är ett primtal):}}
+\vspace{-2.2em}
 \[
   \begin{array}[t]{|*{4}{l|}}
     \hline \rule{0pt}{12pt}
  %   \Zone = \{0,\pm1,\pm2,\cdots\}
-     [a]_n=[b]_n\iff a+tn = b,\, t\in \Zone
-    & \Zone_n=\{[0]_n,\cdots,[n-1]_n\}
+      [a]_n=[b]_n\iff a+tn = b,\, t\in \Zone
+    & [a+b]_n = [[a]_n + [b]_n]_n
+    & [ab]_n = [[a]_n[b]_n]_n
+    \cr\hline \rule{0pt}{12pt}
+      \Zone_n=\{[0]_n,\cdots,[n-1]_n\}
     & a\perp b \iff \gcd(a,b)=1
-    \cr
-    \hline \rule{0pt}{12pt}
-    U_n=\{x\in\Zone_n\!: x\perp n\},\, \phi(n)=|U_n|&
-    [a+b]_n = [[a]_n + [b]_n]_n &
-    [ab]_n = [[a]_n[b]_n]_n
-    \\[3pt] \hline \rule{0pt}{12pt}
-    \mbox{Fermats lilla \& Eulers satserna:}
-    & p-\mbox{prime}, a\perp p\ergo [a^{p-1}]_p=[1]_p
-    & a\perp n\ergo [a^{\phi(n)}]_n=[1]_n\\[2pt]
-    \hline
+    & U_n=\{x\in\Zone_n\!: x\perp n\} % ,\, |U_n|=\phi(n)
+    \\[1pt] \hline
+      \rule{0pt}{16pt}
+      \phi(n) =  |U_n| = n\prod_{p|n}\Bigl(1-\frac1p\Bigr)
+      & \phi(p^k) = (p-1)p^{k-1}
+    & m\perp n\ergo \phi(mn)=\phi(m)\phi(n)
+    \\ \hline
+    \multicolumn{3}{|l|}{\rule{0pt}{12pt}
+      \begin{array}[m]{l rl|rl}
+        &\mbox{Fermats lilla sats:} & a\perp p\ergo [a^{p-1}]_p=[1]_p
+        &\mbox{Eulers sats:}        & a\perp n\ergo [a^{\phi(n)}]_n=[1]_n
+      \end{array}
+    }
+    \\[2pt] \hline
   \end{array}
 \]%>>>
 
@@ -217,15 +226,15 @@
 \cline{2-4}
 \multicolumn{1}{c|}{} & \textbf{och} &\textbf{eller} & \textbf{inte}\\
 \hline
-  Engelska &   AND    &   OR     &   NOT  \\
+Engelska/Python &   \textbf{and}    &   \textbf{or}     &   \textbf{not}  \\
 \hline
   Logiksymbol      & $\wedge$ & $\vee$   & $\neg$ \\
 \hline
   Mängdsymbol      & $\cap$   & $\cup$   & ${}^c$ \\
 \hline
-Boolesk symbol   & $\cdot$  &    $+$   & \raise5pt\hbox{$-$} \\
+Boolesk symbol   & $\cdot$  &    $+$   & \raise5pt\hbox{$\rule{8pt}{0.72pt}$} \\
 \hline
-  C-program        & \&\& & $||$ & ! \\
+C/C++ m.fl.      & \&\& & $||$ & ! \\
 \hline
  & & & \\[-8pt]
  \raise5pt\hbox{Gate (en)\,/\,grind (sv)}
@@ -248,9 +257,9 @@ Boolesk symbol   & $\cdot$  &    $+$   & \raise5pt\hbox{$-$} \\
   \hline
     1 & 1 &    0   &       1    &     1    &    1    &         1     \\
   \hline
-  \multicolumn{7}{l}{\rule{0pt}{12pt}Omskrivningar:} \\
-  \multicolumn{7}{l}{$ p\to q \iff \neg p \vee q $} \\
-  \multicolumn{7}{l}{$p \leftrightarrow q
+  \multicolumn{7}{l}{\rule{0pt}{12pt}\textbf{Ekvivalenser}:} \\
+  \multicolumn{7}{l}{$E_{10}$: $p\to q \iff \neg p \vee q $} \\
+  \multicolumn{7}{l}{$E_{11}$: $p \leftrightarrow q
                       \iff
                       (p\to q) \wedge ( q \to p )
   $}
@@ -258,45 +267,53 @@ Boolesk symbol   & $\cdot$  &    $+$   & \raise5pt\hbox{$-$} \\
 %>>>
 
 \subsubsection*{Ekvivalenser i mängdläran, logiken och i den booleska algebran}%<<<
+\vspace{-1em}
 \begin{tabular}[t]{|l|*{3}{>{$}c<{$}|}}
 \hline
 \textbf{Lagar}
  & \textbf{Mängdlära} & \textbf{Satslogik} &\textbf{Boolesk algebra} \\
 \hline
+$E_{0}$: 
 Dubbelnegation \rule{0pt}{10pt}
                &  \scriptstyle  (P^c)^c = P
                &  \neg (\neg p) \iff p & \ob{\ob p} = p \\
 \hline
+$E_{1}$: 
 Idempotens
                 & \scriptstyle  P\cup P = P
                 & p\vee p \iff p & p + p = p\\
                 & \scriptstyle  P\cap P = P
                 & p\wedge p \iff p & p^2 = p\\
 \hline
+$E_{2}$: 
 Invers
                 & \scriptstyle  P\cup P^c =\mkern2mu\mathcal U
                 & p\vee\neg p \iff 1   & p + \ob p = 1\\
                 & \scriptstyle  P\cap P^c =\varnothing
                 & p\wedge\neg p \iff 0 & p\,\ob p = 0\\
 \hline
+$E_{3}$: 
 Dominans
                 & \scriptstyle  P \cup \mkern2mu\mathcal U = \mkern2mu\mathcal U
                 & p \vee 1 \iff 1 & p + 1 = 1 \\
                 & \scriptstyle  P \cap \varnothing = \varnothing
                 & p\wedge0 \iff 0 & p \cdot 0  = 0 \\
 \hline
+$E_{4}$: 
 Identitet
                 & \scriptstyle  P \cup \varnothing = P
                 & p \vee 0 \iff p  & p + 0 = p \\
                 & \scriptstyle  P \cap \mkern2mu\mathcal U = P
                 & p\wedge 1 \iff p & p\cdot 1 = p\\
 \hline
+$E_{5}$: 
 Kommutativa
                   & \scriptstyle  P\cup Q=Q\cup P
                   & p \vee q \iff q \vee p & p + q = q + p \\
                   & \scriptstyle  P\cap Q=Q\cap P
                   & p \wedge q \iff q \wedge p & pq = qp\\
 \hline
+$E_{6}$: 
 Associativa
                   & \scriptstyle  (P\cup Q)\cup R = P\cup(Q\cup R)
                   & (p \vee q) \vee r \iff p \vee (q \vee r)
@@ -305,6 +322,7 @@ Associativa
                   & (p \wedge q)\wedge r \iff p \wedge (q\wedge r)
                   & (pq)r = p(qr)\\
 \hline
+$E_{7}$: 
 de Morgan \rule{0pt}{10pt}
                   & \scriptstyle  (P\cup Q)^c = P^c\cap Q^c
                   & \neg ( p \vee q ) \iff \neg p \wedge \neg q
@@ -313,6 +331,7 @@ de Morgan \rule{0pt}{10pt}
                   & \neg ( p \wedge q ) \iff \neg p \vee \neg q
                   & \ob {pq}  = \ob p+\ob q \\
 \hline
+$E_{8}$: 
 Distributiva
                   & \scriptstyle (P\cup Q)\cap R = (P\cap R)\cup(Q\cap R)
                   & p \vee (q \wedge r ) \iff (p \vee q) \wedge (p \vee r)
@@ -321,6 +340,7 @@ Distributiva
                   & p \wedge (q\vee r)\iff (p \wedge q) \vee (p\wedge r)
                   & p(q+r) = pq+pr\\
 \hline
+$E_{9}$: 
 Absorbering
                   & \scriptstyle  P\cup (P\cap Q)=P
                   & p \vee (p \wedge q ) \iff p
@@ -333,6 +353,7 @@ Absorbering
 %>>>
 
 \subsubsection*{Inferenslagar (Logiska implikationer)}%<<<
+\vspace{-1em}
 \begin{array}[t]{|*{2}{rrcl|}}
   \hline \rule{0pt}{11pt}
     L_0\!: & p\land (p\to q) &\ergo& q
