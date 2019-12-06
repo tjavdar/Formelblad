@@ -1,3 +1,5 @@
+% 2019-12-06: Primal<->Dual section total revamp
+
 \documentclass[a4paper]{article}
 
 \usepackage[utf8]{inputenc}
@@ -155,7 +157,7 @@ Partitioning:
 \]
 %>>>
 
-\subsubsection*{The final max LP Simplex Tableau partitioned after Basic/Non-basic columns:}%<<<
+\subsubsection*{The final max LP Simplex Tableau (at optimum) partitioned after (B)asic/(N)on-basic columns:}%<<<
 \[
   \begin{cases}
     \begin{array}[m]{*{5}{lc}}
@@ -210,8 +212,18 @@ $
 \end{cases}
 $%>>>
 
-\medskip\textbf{Duality between normal LP's: }%<<<
+
+\vspace{-1em}
+\subsubsection*{Duality}
 \(
+\boxed{
+  \begin{array}[m]{l}
+   \textbf{Normal LP's have:}  \\
+   \bullet~\mbox{normal constraints:}~\max\!:\,\le,\,\min\!:\,\ge \\
+   \bullet~\mbox{normal decis.~vars:}~\bdx\ge\bdzero,\;\bdy\ge\bdzero \\
+  \end{array}
+}
+\;\rightsquigarrow\;
 \boxed{
   (P)\!:
   \begin{cases}
@@ -219,7 +231,7 @@ $%>>>
     A\bdx\le\bdb,\;  \bdx\ge\bdzero
   \end{cases}
 }
-   \;\leftrightsquigarrow\;
+   \;\overset{1:1}\leftrightsquigarrow\;
    \boxed{
      (D)\!:\begin{cases}
        \min~w=\bdb^T\bdy\cr
@@ -228,32 +240,43 @@ $%>>>
    }
 \)%>>>
 
-\bigskip \textbf{Involution property}: %<<<
-The dual of the dual is the
-primal problem. In particular, the dual of a min problem is a max problem and vice versa;
-a variable in (P) corresponds to a constraint in (D) and vice versa: %>>>
+\bigskip\textbf{(P)rimal-to-(D)ual correspondence rules:}
+\begin{itemize}
+  \item Involution property: (P) $\overset{1:1}\leftrightsquigarrow$(D),
+    i.e., the Dual of the Dual is the Primal
+  \item \fbox{Normal (P)} $\overset{1:1}\leftrightsquigarrow$ \fbox{Normal (D)}
+  \item \fbox{Constraints of reversed inequality} $\overset{1:1}\leftrightsquigarrow$
+    \fbox{Non-positive decision~variables}
+  \item \fbox{'='-Constraints} $\overset{1:1}\leftrightsquigarrow$
+    \fbox{Non-restricted decision variables}
+\end{itemize}
 
-\medskip\hfil % \textbf{Correspondence}: %<<<
-\begin{tabular}[m]{|c|l|c|c|c|}
-  \hline
-  Corresp.~$(P)\leftrightsquigarrow (D)$
-  & Constraint${}_i$ in (P):
-  & $\textstyle\sum a_{ij}x_j\le b_i$
-  & $\textstyle\sum a_{ij}x_j\ge b_i$
-  & $\textstyle\sum a_{ij}x_j =  b_i$
-  \cr\hline
-  $(P)_{\min}\iff(D)_{\max}$
-    & Sign of $y_i$ in $(D)_{\max}$:
-    & $y_i\le 0$
-    & $y_i\ge 0$
-    & $y_i$ free \cr
-  $(P)_{\max}\iff(D)_{\min}$
-    & Sign of $y_i$ in $(D)_{\min}$:
-    & $y_i\ge 0$
-    & $y_i\le 0$
-    & $y_i$ free
-  \cr\hline
-\end{tabular}
+%%% \bigskip \textbf{Involution property}: %<<<
+%%% The dual of the dual is the
+%%% primal problem. In particular, the dual of a min problem is a max problem and vice versa;
+%%% a variable in (P) corresponds to a constraint in (D) and vice versa: %>>>
+%%%
+%%% \medskip\hfil % \textbf{Correspondence}: %<<<
+%%% \begin{tabular}[m]{|c|l|c|c|c|}
+%%%   \hline
+%%%   Corresp.~$(P)\leftrightsquigarrow (D)$
+%%%   & Constraint${}_i$ in (P):
+%%%   & $\textstyle\sum a_{ij}x_j\le b_i$
+%%%   & $\textstyle\sum a_{ij}x_j\ge b_i$
+%%%   & $\textstyle\sum a_{ij}x_j =  b_i$
+%%%   \cr\hline
+%%%   $(P)_{\min}\iff(D)_{\max}$
+%%%     & Sign of $y_i$ in $(D)_{\max}$:
+%%%     & $y_i\le 0$
+%%%     & $y_i\ge 0$
+%%%     & $y_i$ free \cr
+%%%   $(P)_{\max}\iff(D)_{\min}$
+%%%     & Sign of $y_i$ in $(D)_{\min}$:
+%%%     & $y_i\ge 0$
+%%%     & $y_i\le 0$
+%%%     & $y_i$ free
+%%%   \cr\hline
+%%% \end{tabular}
 
 
 
