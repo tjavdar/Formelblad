@@ -228,17 +228,21 @@ P(A_j|B) = \frac{P(A_j\cap B)}{P(B)}
 
 \medskip
 \(
-\begin{array}[m]{|l|l|l|}
+\begin{array}[m]{|l|l|l|l|}
 \hline
 \rule{0pt}{11pt}
 \mbox{\textbf{\Tr{Variance}{Varians}}}
-  & \mbox{\textbf{\Tr{Standard deviation}{Standardavvikelse}}}
-  & \mbox{\textbf{\Tr{Steiner's theorem}{Steiner's sats}}} \cr
+  & \mbox{\textbf{\Tr{Std.~deviation}{Std.~avvikelse}}}
+  & \mbox{\textbf{\Tr{Steiner's theorem}{Steiner's sats}}}
+  & \mbox{\textbf{\Tr{Covariance}{Kovarians}}}
+  \\
   \hline
   \rule{0pt}{13pt}
   \sigma^2 = \Var(X) = E[(X-\mu)^2]
   & \sigma = \sqrt{\Var(X)}
-  & \sigma^2=E(X^2)-\mu^2 \cr
+  & \sigma^2=E(X^2)-\mu^2
+  & \Cov(X,Y) = E[(X-\mu_X)(Y-\mu_Y)]
+  \cr
   \hline
 \end{array}
 \)
@@ -477,7 +481,7 @@ Let $x_1,\dots,x_n$ be the observed values of a sample $\left\{X_k\right\}_1^n$ 
 mean $\mu$ och standard deviation $\sigma$. Point estimators
 for the mean and the variance of the population are
 }{%
-\textbf{En stickprov}:
+\textbf{Ett stickprov}:
 Låt $x_1,\dots,x_n$ vara de observerade värden för ett stickprov
 $\left\{X_k\right\}_1^n$ från en population med
 väntevärde $\mu$ och standardavvikelse $\sigma.$ Väntevärdesriktiga skattningar
@@ -498,23 +502,23 @@ av $\mu$ och $\sigma^2$ är då
   \end{array}
 \]
 
-\textbf{\Tr{Two samples}{Två stickprov}},
-$\{X_k\}_1^n$ \Tr{and}{och} $\{Y_k\}_1^n$
+\textbf{\Tr{Paired samples}{Stickprov i par}}\/
+$\{(X_k,Y_k)\}_1^n$
 \Tr{with observations}{med observationer}
-$\{x_k\}_1^n$ \Tr{and}{och} $\{y_k\}_1^n$,
-\Tr{point estimator for the covariance}{skattning för kovariancen}:
+$\{(x_k,y_k)\}_1^n$:
+%\Tr{point estimator for the covariance}{skattning för kovariancen}:
 \[
-  \begin{array}[m]{|l|l|}
+  \begin{array}[m]{|l|l|l|}
   \hline
-  s_{xy} = \widehat{\Cov(X,Y)}_{\obs}
-     =\frac{1}{n-1}\sum_{i=1}^n(x_i-\overline{x})(y_i-\overline{y})
-     =\frac{1}{n-1}\Bigl(\sum_{i=1}^nx_iy_i-n\bar{x}\bar{y}\Bigr)
+  s_{xy}
+     =\sum_{i=1}^n(x_i-\overline{x})(y_i-\overline{y})
+     =\sum_{i=1}^nx_iy_i-n\bar{x}\bar{y}
+   &
+    \widehat{\Cov(X,Y)}_{\obs} = \frac{s_{xy}}{n-1}
    & 
-     %\mbox{\Tr{in particular}{i synnerhet}}, \;
-     \Bigl\{\mkern-6mu
        \begin{array}[m]{rcl} \rule{0pt}{14pt}
-       s_{xx} &=& s_x^2 = (\widehat{\sigma^2_X})_\obs\\[2pt]
-       s_{yy} &=& s_y^2 = (\widehat{\sigma^2_Y})_\obs\\[2pt]
+       s_x^2 = (\widehat{\sigma^2_X})_\obs= \frac{s_{xx}}{n-1}\\[8pt]
+       s_y^2 = (\widehat{\sigma^2_Y})_\obs= \frac{s_{yy}}{n-1}\\
      \end{array}
   \cr\hline
 \end{array}
@@ -522,7 +526,7 @@ $\{x_k\}_1^n$ \Tr{and}{och} $\{y_k\}_1^n$,
 
 \textbf{\Tr{Correlation coefficient}{Korrelationskoefficient}}:
 \fbox{$
-  r =  \frac{s_{xy}}{s_xs_y}
+  r = \frac{1}{n-1} \frac{s_{xy}}{s_xs_y}
     =  \frac{s_{xy}}
             { \sqrt{s_{xx}s_{yy}} }
 $}
@@ -622,7 +626,7 @@ $\{X_i\}_{i=1}^{n}$ \Tr{from}{från} $N(\mu_x,\sigma)$
 \]
 \Tr{where}{där}
 $s_p$
-\Tr{is the pooled (weighted) standard deviation}{är den vägda (pooled) standardavvikelsen}
+\Tr{is the pooled (weighted) standard deviation}{är den sammanvägda (pooled) standardavvikelsen}
 \/$s_p =\sqrt{\frac{(n-1)s_x^2+(m-1)s_y^2}{n+m-2}}\,\cdot$
 
 \end{itemize}
