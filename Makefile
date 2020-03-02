@@ -54,11 +54,11 @@ $(WWWDIR)/%.pdf $(WWWDIR)/en/%.pdf $(WWWDIR)/sv/%.pdf : %.tex
 	ls -ohl  $(dir $@)$(basename $<)*pdf
 
 en: Lang.h # Global switch LANG to en
-	@$(LANG_EN)   # def'd in bz/Mtargets.lang
+	@$(LANG_EN) $<  # def'd in bz/Mtargets.lang
 sv: Lang.h # Global switch LANG to sv
-	@$(LANG_SV)   # def'd in bz/Mtargets.lang
+	@$(LANG_SV) $<  # def'd in bz/Mtargets.lang
 sl: Lang.h # Global *swap* LANG
-	@$(LANG_SWAP) # def'd in bz/Mtargets.lang
+	@$(LANG_SWAP) $< # def'd in bz/Mtargets.lang
 
 e:  e-last #
 v:  v-last #
