@@ -1,0 +1,1329 @@
+% Preambules, etc %<<<
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{a4}
+\usepackage{graphicx}
+%%% instead of \usepackage{fullpage}
+\topmargin -35pt
+\advance \topmargin by -\headheight
+\advance \topmargin by -\headsep
+\textheight 8.9in
+\oddsidemargin 0pt
+\evensidemargin \oddsidemargin
+\marginparwidth 0.5in
+\textwidth 6.5in
+%%%%%%%%%
+\usepackage{amsmath,amssymb}
+\pagestyle{myheadings}
+
+\everymath{\displaystyle}
+\textheight=720pt\parindent=0pt
+%>>>
+
+\newcommand{\Tr}[2]{#1}
+\def\TABELLDIR{tabeller-st}
+
+%% <<< Former jobname.h ----------------
+
+%-------------
+%- LaTeX def's
+%-------------
+
+\let\UP\nearrow
+\let\DN\searrow
+\everymath{\displaystyle}
+
+%--------------------------- Facit macros ------
+
+\def\contentsname{} % Erase it
+\def\Facit#1{\par
+
+\addtocontents{toc}{{\small\protect\item[\textbf{\theenumi.}]#1\par\smallskip\hrule\par}}}
+\def\BeginUppg{\par\addtocontents{toc}{\par\protect\begin{enumerate}}
+               \par\begin{enumerate}}
+\def\EndUppg{\addtocontents{toc}{\protect\end{enumerate}}\par\end{enumerate}}
+
+\newcommand{\mymatrix}[2]{\left(\begin{array}{#1} #2\end{array}\right)}
+\newcommand{\mydet}[2]{\left|\begin{array}{#1} #2\end{array}\right|}
+
+\newcommand\dd[2]{\frac{\partial #1}{\partial #2}}
+\newcommand\lvec[1]{\stackrel{\longrightarrow}{#1}}
+
+\newcommand\tightSvar[1]{\fbox{\textbf{A:} #1}}
+\let\Svar\tightSvar
+
+%--------------------------- end Facit macros ------
+
+%% restore good old TeX \eqalign:
+\makeatletter
+\renewcommand{\@oddhead}{}
+\renewcommand{\@evenhead}{}
+\renewcommand{\@oddfoot}
+{\ifnum\thepage=1
+  \small\today\hfill file:~\small\texttt{\jobname.pdf}
+\else
+ \small
+ \Tr{Formula sheet, Mathematics for Intelligent Systems}{Formelblad
+   Matematik för intelligenta system}
+ \hfill s.~\thepage{} av \pageref{LastPageNo}
+\fi}
+
+  \renewcommand{\@evenfoot}{\small
+        \texttt{\jobname.pdf},\hfill}
+
+\def\eqalign#1{\null\,\vcenter{\openup\jot\m@th
+  \ialign{\strut\hfil$\displaystyle{##}$&$\displaystyle{{}##}$\hfil
+      \crcr#1\crcr}}\,}
+
+\def\iint{\mathop{\relax\protect
+    \noexpand\intop\mkern-9mu\noexpand\intop}\displaylimits}
+
+\def\iiint{\mathop{\relax\protect
+    \noexpand\intop\mkern-9mu\noexpand\intop\mkern-9mu\noexpand\intop}\displaylimits}
+\def\oiint{\bigcirc\mkern-24mu\int\mkern-15mu\int\displaylimits}
+\def\oint{\bigcirc\mkern-21.3mu\int\displaylimits}
+\def\EndRow{\\*[3pt]}
+
+\makeatother
+
+\def\obs{{\mbox{\tiny obs}}}
+\def\CI{\mbox{CI}}
+\def\Bin{\mbox{Bin}}
+\def\Po{\mbox{Po}}
+\def\Exp{\mbox{Exp}}
+\def\Var{\mbox{Var}}
+\def\Cov{\mbox{Cov}}
+\def\md{\mbox{md}}
+
+\def\ppmatrix{\protect\pmatrix}
+\def\pcases{\protect\cases}
+\newcommand\pdet[1]{\protect\left|\protect\matrix{#1}\protect\right|}
+\newcommand\Ordo{\mathcal O}
+\let\iff\Leftrightarrow
+\let\ergo\Rightarrow
+\let\vaxer\nearrow
+\let\avtar\searrow
+\newcommand\conj[1]{{\overline #1}}
+\let\ob\conj
+%\newcommand\binom[2]{{#1\choose #2}}
+
+%% Boldface things %%
+
+\newcommand\bdF{\mathbf F}
+\newcommand\bdG{\mathbf G}
+\newcommand\bdN{\mathbf N}
+
+\newcommand\bda{\mathbf a}
+\newcommand\bdb{\mathbf b}
+\newcommand\bdc{\mathbf c}
+\newcommand\bde{\mathbf e}
+\newcommand\bdf{\mathbf f}
+\newcommand\bdg{\mathbf g}
+\newcommand\bdh{\mathbf h}
+\newcommand\bdi{\mathbf i}
+\newcommand\bdj{\mathbf j}
+\newcommand\bdk{\mathbf k}
+\newcommand\bdm{\mathbf m}
+\newcommand\bdn{\mathbf n}
+\newcommand\bdp{\mathbf p}
+\newcommand\bdq{\mathbf q}
+\newcommand\bdr{\mathbf r}
+\newcommand\bdu{\mathbf u}
+\newcommand\bdv{\mathbf v}
+\newcommand\bdx{\mathbf x}
+\newcommand\bdy{\mathbf y}
+\newcommand\bdw{\mathbf w}
+\newcommand\bdzero{\mathbf 0}
+
+% - sets -
+\def\Rone{{\mathbb R}}
+
+% - operators -
+
+\def\ddn{\partial_n}
+\def\dist{\mathop{\mathrm{dist}}}
+\def\Grad{\mathop{\mathrm{grad}}}
+\def\rot{\mathop{\mathrm{rot}}}
+\def\Curl{\mathop{\mathrm{curl}}}
+\def\Rot{\mathop{\mathrm{rot}}}
+\def\norm#1{{\Vert #1\Vert}}
+\newcommand\DDet[1]{\left|\protect\matrix{#1}\right|}
+\newcommand\Div{\mathop{\mathrm{div}}}
+
+\newcommand{\D}{D}
+
+% - förkortnngar
+
+\newcommand\mha{med hjälp av }
+\newcommand\bis{^{\prime\prime}}
+\newcommand\triss{^{'''}}
+\newcommand\PartInt[2]{\left\lceil\matrix{\mbox{\small #1}\cr
+                                       \mbox{\small #2}}\right\rceil}
+
+%adjust row height in tables #1 - overall height #2 - depth:
+\newcommand\TblHeight[2]{\lower#2em\vbox to#1em{\hsize=0pt}}
+\def\tvavektor[#1,#2]{\protect\pmatrix{#1\cr #2}}
+\def\trevektor[#1,#2,#3]{\protect\pmatrix{#1\cr #2\cr #3}}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+
+%% End \input\jobname.h fold >>> -
+
+\begin{document}
+
+\section*{
+\Tr{Formula Sheet Mathematics for Intelligent Systems}
+   {Formelblad Matematik för intelligenta system}
+}
+
+\subsection*{Asymptotic growth of functions. }%<<<
+Below: $f$ and $g$ below are functions of one real variable and
+$N,N_{1,2},C,c_{1,2}$ and $\alpha$ are positive constants.
+\[
+  \begin{array}[m]{|*{3}{c|}}
+    \hline
+    \rule[-5pt]{0pt}{15pt}
+      f \prec g
+    & f \asymp g \;\iff\; f\in\Theta(g)\;\iff\; g\in\Theta(f)
+    & f \in \Ordo(g)
+    \\ \hline
+    \rule[-14pt]{0pt}{33pt}
+      \lim_{x\to\infty} \frac{f(x)}{g(x)} = 0
+    &
+    \begin{cases}
+      |f(x)| \le c_1 |g(x)|,\; x>N_1 \\
+      |g(x)| \le c_2 |f(x)|,\; x>N_2 \\
+    \end{cases}
+    &
+    |f(x)| \le C |g(x)|,\;x>N \\
+  \hline
+  \end{array}
+  \hspace{1em}
+  \boxed{
+    \begin{array}[m]{l}
+      \lim_{x\to\infty} \frac{\ln x}{x^\alpha}=0\\[5pt]
+      \lim_{x\to\infty}  \frac{x^\alpha}{e^x}=0\\
+    \end{array}
+  }
+\]%>>>
+
+\subsection*{\Tr{Derivatives of functions of one variable} {Derivator}}%<<<
+
+$$Df(x)=\frac{df(x)}{dx}=f'(x)
+=\lim_{h\rightarrow 0}\frac{f(x+h)-f(x)}{h};
+\qquad D=\frac d{dx}
+$$
+
+$\begin{array}{|c|c|c|}\hline & &\\*[-8pt]
+(\alpha f(x)+\beta g(x))'=\alpha f'(x)+\beta g'(x)&
+\D f(g(x))=f'(g(x))g'(x)
+&\Bigl(\dfrac{f}{g}\Bigr)'
+ =\dfrac{f'g-fg'}{g^2}
+\EndRow
+(fg)'=f'g+fg' & \D e^x = e^x &
+(f^{-1})'(b) = \dfrac1{f'(a)}\,\mbox{ om }
+\begin{cases}
+f(a)=b\\f'(a)\neq0    %% <-- ändring IvTj
+\end{cases}
+\EndRow
+\D x^r=rx^{r-1}
+&   \D\ln(|x|)=\dfrac{1}{x} &\D a^x=a^x\ln(a)
+\EndRow
+ \D\sin(x)=\cos(x) & \D\cos(x)=-\sin(x) &
+  \D\tan(x)=\dfrac{1}{\cos^2(x)}=1+\tan^2(x)
+\EndRow
+\D\arcsin(x)=\dfrac{1}{\sqrt{1-x^2}} &
+\D\arccos(x)=-\dfrac{1}{\sqrt{1-x^2}} &
+\D\arctan(x)=\dfrac{1}{1+x^2}
+\\*[9pt]
+\hline
+\end{array}$
+%>>>
+
+\subsection*{\Tr{Derivatives, differentiability, tangent planes and normal lines, the chain rule} %<<<
+                {Derivator, differentiabilitet, normal och tangentplan, kedjeregeln}
+}
+\begin{itemize}
+
+\item %% Partial derivatives for a function of two variables at a point $(a,b)$:%<<<
+  \Tr{Partial derivatives for a function of two variables at a point}
+     {Partiella derivator för funktion av två variabler i punkten}
+$(a,b)$:
+ %
+ $$
+%%  \eqalign{
+%%  \dd fx(a,b)&=D_xf(a,b)=D_1f(a,b)=f'_x(a,b)=\lim_{h\to0}\frac{f(a+h,b)-f(a,b)}{h}\cr
+%%  \dd fy(a,b)&=D_yf(a,b)=D_2f(a,b)=f'_y(a,b)=\lim_{k\to0}\frac{f(a,b+k)-f(a,b)}{k}\cr
+%% } % eqalign
+  \dd fx(a,b)=f'_x(a,b)=\lim_{h\to0}\frac{f(a+h,b)-f(a,b)}{h},\qquad\quad
+  \dd fy(a,b)=f'_y(a,b)=\lim_{k\to0}\frac{f(a,b+k)-f(a,b)}{k}.
+ $$
+% Partial derivatives for functions of more than 2 variables are defined in a similar way.%>>>
+
+\item % The gradient of %<<<
+  \Tr{The gradient of}
+     {Gradiententen av}
+  $f:\Rone^n\to\Rone$: $\mbox{grad}\, f(\bdx)
+  =\nabla f(\bdx)
+  =(\dd f{x_1}(\bdx), \ldots, \dd f{x_n}(\bdx))^T
+  =(f'_{x_1}(\bdx),\ldots, f'_{x_n}(\bdx))^T
+  $.%>>>
+
+% \item %% Diff-bility %<<<
+%   \Tr{A function}
+%      {Funktionen}
+%   $f:\Rone^n\to\Rone$
+%   \Tr{is differentiable at a point}
+%      {är differentierbar i punkten}
+%   $\bda=(a_1,\cdots,a_n)$
+%   \Tr{if}
+%      {om}
+%   $$
+%     f(\bda+\bdh) = f(\bda)+\nabla f(\bda)\circ\bdh + |\bdh|\rho(\bdh)
+%   $$
+%   \Tr{in a neighbourhood of}
+%      {i någon omgivning av}
+%   $\bda$,
+%   \Tr{so that}
+%      {så att}
+%   $\rho(\bdh)\to0$,
+%   \Tr{as}
+%      {då}
+%   $\bdh\to\bdzero$.
+%   %>>>
+
+\item % Tangentplan%<<<
+  \Tr{Tangent plane at}
+     {Tangentplan i} $(a,b,c)$:\,
+  \begin{tabular}[m]{|c|c|}
+  \hline
+  \Tr{to a function surface}
+     {till funktionsytan}
+     $z=f(x,y)$
+  &
+  \Tr{to an implicit surface}
+     {till implicita ytan}
+  $F(x,y,z)=0$
+  \cr\hline
+  \rule[-17pt]{0pt}{40pt}
+  $z = f(a,b)+\nabla f(a,b)\circ\begin{pmatrix}x-a\\y-b\end{pmatrix}$
+  &
+  $\nabla F(a,b,c)\circ\begin{pmatrix}x-a\\y-b\\z-c\end{pmatrix}=0$
+  \cr\hline
+  \end{tabular}%>>>
+
+\item %% The directional derivative  %<<<
+  \Tr{The directional derivative of a differentiable}
+     {Riktningsderivatan av en differentierbar}
+$f:\Rone^n\to\Rone$
+\Tr{in the direction}
+   {i riktningen}
+$\bdv$, $|\bdv|=1$,
+\Tr{at the point}
+   {i punkten}
+$\bda$:
+%
+ $$
+ \dd f{\bdv}(a,b)=f'_{\bdv}(a,b)=\lim_{t\to0}\frac{f(\bda+t\bdv)-f(\bda)}{t}
+                 =\nabla f(\bda) \circ \bdv.
+ $$
+ % >>>
+
+% \item % Differential %<<<
+%   \Tr{The the differential (the total derivative) and the linearization of}
+%      {Differentialen (totalderivatan) och lineariseringen av}
+% $f:\Rone^n\to\Rone$
+% \Tr{at a point}
+%    {i punkten}
+% $\bda$:
+%   $$
+%   \begin{array}[t]{rcll}
+%     df(\bda)&=&\nabla f(\bda)\circ d\bdx
+%             &= f'_{x_1}(\bda)dx_1+\cdots+f'_{x_n}(\bda)dx_n;
+%             \\[5pt]
+%    f(\bda+\bdh)-f(\bda)
+%    = \Delta f(\bda)
+%    &\approx&  \nabla f(\bda)\circ\bdh
+%    &= f'_{x_1}(\bda)\,h_1+\cdots+f'_{x_n}(\bda)\,h_n;
+%    \\[2pt]
+%    %\mbox{} f(\bda+\bdh)-f(\bda)
+%    &=& f'_{\bdv}(\bda)\,|\bdh|, &\bdv=\frac{\bdh}{|\bdh|}\cdot
+%   \end{array}
+%   $$
+%   \Tr{For differentiable function of two variables linearization corresponds to the change on the tangent plane}
+%      {För differentierbara funktioner av två variabler lineariserigen motsvarar ändringen på tangentplanet:}
+%   $$
+%   \Delta f(a,b)=f(a+h,b+k) - f(a,b)
+%   \approx
+%   \left(\mkern-7mu
+%   \begin{array}{c}
+%     f'_x(a,b)\cr
+%     f'_y(a,b)
+%   \end{array}
+%   \mkern-7mu\right)
+%    \circ\begin{pmatrix}h\\k\end{pmatrix} = f'_{\bdv}(a,b)\sqrt{h^2+k^2},
+%    \quad \bdv=\frac{1}{\sqrt{h^2+k^2}}\begin{pmatrix}h\\k\end{pmatrix}.
+%   $$
+%   %>>>
+
+\item % The chain rule %<<<
+  \Tr{The chain rule. If}
+     {Kedjeregeln. Om}
+  $f:\Rone^n\to\Rone$,
+  $\bdr=\bdr(t)=(x_1(t),\dots, x_n(t))$, and $\varphi(t)=f(\bdr(t))$,
+  \Tr{then:}
+     {då är}
+  $$
+  \varphi'(t)=\frac{d}{dt} f(\bdr(t))
+          =f'_{x_1}(\bdr(t))\,x_1'(t)+\cdots +f'_{x_n}(\bdr(t))\,x_n'(t)
+          =\nabla f(\bdr(t))\circ\bdr'(t).
+  $$
+  %>>>
+
+\item % Derivator av högre ordning %<<<
+    \Tr{\textbf{The higher-order derivatives} are defined recursively, e.g.}
+       {\textbf{Högre ordningens derivator} definieras rekursivt, dvs}
+  \ $f''_{xx}\stackrel{\mbox{\tiny def}}=(f'_x)'_x$,
+  \ $f''_{xy}\stackrel{\mbox{\tiny def}}=(f'_x)'_y$, \ etc.
+A f-n
+$f\in C^n(\Omega)$
+\Tr{if $f$ and all derivatives up to order}
+   {om $f$ och alla dess derivator till ordning}
+$n$
+\Tr{are continuous functions at every point of}
+   {är kontinuerliga funktioner i alla punkter av}
+$\Omega$.%>>>
+
+\item % The mixed derivatives theorem %<<<
+  \Tr{The mixed derivatives theorem gives a sufficient condition for equality of the mixed derivatives, e.g.:}
+     {Ett tillräckligt villkor för likhet av de blandade derivatorna är:}
+  $$
+  f:\Rone^2\to\Rone,\, f\in C^2(\Omega) \quad\ergo\quad f''_{xy}=f''_{yx}.
+  $$%>>>
+
+\end{itemize}%>>>
+
+\subsection*{\Tr{Taylor formula of order $n$ for a smooth function of two variables}%<<<
+                {Taylors formel för funktioner av två variabler}
+}
+
+\[
+f(x_0+h,y_0+k)
+= \sum_{k=0}^n \frac1{k!}(hD_x+kD_y)^kf(x_0,y_0) + \Ordo(|(h,k)|^{n+1}).
+%\quad (x_0,y_0) \mbox{ internal pt of $D_f$ }, f\in C^{n+1}(D_f).
+\]
+%>>>
+
+\subsection*{\Tr{Extremes of functions}%<<<
+                {Lokala och globala extrema}
+}
+
+\begin{itemize}
+
+\item % Critical pts %<<<
+  \Tr{A point }
+     {Punkten}
+$\bdx_0$
+\Tr{is critical (stationary) if }
+   {är kritisk (stationär) om}
+$\nabla f(\bdx_0)=0$.
+  \Tr{A point }
+     {Punkten}
+$\bdx_0$
+\Tr{is singular if}
+   {är singulär om}
+$\nabla f(\bdx_0)$
+\Tr{does not exist.}
+   {ej existerar.}
+
+%% For differentiable
+%% functions of two variables these are the points
+%% where the tangent plane is parallel to
+%% the $xy$-plane.%>>>
+
+\item \Tr{Local extremes:}{Lokala extrema:} %<<<
+  $\bdx_0$
+  \Tr{is a loc max pt of}
+     {är lok max till}
+  $f$
+  \Tr{if}
+     {om}
+  $f(\bdx_0)>f(\bdx)$
+  \Tr{in some nb-hood of}
+     {i ngn omgivning av}
+  $\bdx_0$;
+  \Tr{loc min, if}
+     {lok min, om}
+  $f(\bdx_0)<f(\bdx)$.
+  \Tr{If}
+     {Om}
+  $f$
+  \Tr{has a local extreme and is differentiable at}
+     {har ett lok extremum och är diff-bar i}
+  $\bdx_0$,
+  \Tr{then}
+     {då är}
+  $\bdx_0$
+  \Tr{is a critical point of}
+     {en kritisk punkt av}
+  $f$,
+  \Tr{i.e.}
+     {dvs}
+  $\nabla f(\bdx_0)=\bdzero$.
+  %>>>
+
+  \item % Global extremes:  %<<<
+    \Tr{Global extremes}
+       {Globala extrema}:
+  $\bdx_0$
+  \Tr{is a global max pt of}
+     {är ett glob max till}
+  $f$
+  \Tr{if}
+     {om}
+  $f(\bdx_0)\ge f(\bdx)$
+  (glob min,
+  \Tr{if}
+     {om}
+  $f(\bdx_0)\le f(\bdx)$),
+%  \Tr{for all}
+%     {}
+  $\bdx\in D_f$.%>>>
+
+\item % Optimering på kompakta områden %<<<
+  \Tr{If}
+     {Om}
+ $f\in  C(D_f)$
+ \Tr{and}
+    {och}
+ $D$
+ \Tr{is compact,}
+    {är kompakt, når}
+ $f$
+ \Tr{reaches both it's global max and min in}
+    {både sina globala max och min i}
+ $D$.%>>>
+
+\end{itemize}%>>>
+
+\subsection*{\Tr{Sufficient conditions for local extremes of smooth functions}%<<<
+                {Tillräckliga villkor för lokala extrema}
+}
+
+\begin{itemize}
+
+  \item % Hessian: % <<<
+    \Tr{Hessian: the square matrix of the second partial derivatives}
+       {Hessianen: matrisen av de andra partiella derivatorna}
+    $\mathcal{H}(\bdx_0)=[f''_{x_ix_j}(\bdx_0)]$, $1\le i,j\le n$,
+    \Tr{computed at the pt}
+       {beräknade i}
+    $\bdx_0$.
+    \Tr{If the mixed derivatives are equal (e.g. if}
+       {Ifall de blandade derivatorna är lika (t\,ex om}
+    $f$
+    \Tr{is}
+       {är}
+    $C^2$
+    \Tr{at}
+       {i}
+    $\bdx_0$),
+    \Tr{then}
+       {då är}
+    $\mathcal{H}(\bdx_0)$
+    \Tr{is symmetric.}
+       {symmetrisk.}
+  % >>>
+
+  \item % Quadratic form % <<<
+    \Tr{Quadratic form}
+       {Kvadratisk form}
+    $Q(\bdh)=\sum_{i=1}^n\sum_{j=1}^n f''_{x_ix_j}(x_0)h_ih_j =\bdh^T\mathcal H(\bdx_0)\bdh$.
+    \Tr{For}
+       {För}
+    $n=2$,
+    \Tr{and}
+       {och}
+    $f''_{xy}(\bdx_0)=f''_{yx}(\bdx_0)$,
+    \Tr{then}
+       {är}
+    $$
+    Q(h,k)
+    = (h,k) \mathcal H(x_0)\!\begin{pmatrix}h\\k\end{pmatrix}
+    = f''_{xx}(\bdx_0)h^2+2f''_{xy}(\bdx_0)hk+f''_{yy}(\bdx_0)k^2
+    = (h,k)\begin{pmatrix}
+      f''_{xx}(\bdx_0) & f''_{xy}(\bdx_0)\\
+      f''_{xy}(\bdx_0) & f''_{yy}(\bdx_0)
+    \end{pmatrix}
+    \!
+    \begin{pmatrix}h\\k\end{pmatrix}.
+    $$
+    \Tr{In a neighburhood of a critical point}
+       {I en omgivning av den kritiska punkten}
+    $\bdx_0$
+    \Tr{one has:}
+       {är}
+    $f(\bdx_0+\bdh)-f(\bdx)=Q(h,k)+\Ordo(|(h,k)|^3)$.
+  % >>>
+
+  \item % Typer av kritiska punkter % <<<
+    \Tr{Type of the crtical  point}
+       {Typ av den kritiska punkten}
+$\bdx_0$ (%
+\Tr{i.e.}
+   {dvs}
+$\nabla f(\bdx_0)=\bdzero$)
+\Tr{depending on the sign of}
+   {beroende på tecknet av}
+     $Q(\bdh)$
+     \Tr{at}
+        {i}
+     $\bdx_0$
+     \Tr{for}
+        {för}
+     $\bdh\neq\bdzero$:
+
+    \begin{tabular}[m]{|c|c|c|c|c|c|}
+      \hline
+      $Q(\bdh)$ &
+      \Tr{changes sign}
+         {växlar tecken} &
+          $Q(\bdh)>0$ &
+          $Q(\bdh)<0$ &
+          $Q(\bdh)\le0$ \ or \ %
+          $Q(\bdh)\ge0$ \\
+      \hline
+      $Q$\Tr{'s type}{:s typ} &
+      \Tr{indefinite}
+         {indefinit}
+          &
+          \Tr{positive definite}
+             {positiv definit}
+          &
+          \Tr{negative definite}
+             {negativ definit}
+          &
+          \Tr{postive/negative semi--definite}
+             {positiv/negativ semidefinit}
+          \\
+      \hline
+      \Tr{The pt $\bdx_0$ is}
+         {Punkten $\bdx_0$ är}
+      &
+      \Tr{a saddle pt}
+         {sadelpunkt}
+          &
+          \Tr{a local min}
+             {lok min}
+          &
+          \Tr{a local max}
+             {lok max}
+          &
+          \Tr{further investigation needed}
+             {vidare undersökningar krävs}
+          \\
+      \hline
+    \end{tabular}
+  % >>>
+
+  \item % Global Convexity %<<<
+    \fbox{$f(\bdx)$ is convex}
+    $\iff$ \fbox{$Q(\bdh)>0$ att any $\bdx$}
+    $\iff$ \fbox{all eigenvalues of $\mathcal{H}(\bdx)$ are strictly positive.}
+  \item A function $f(\bdx)$  is concave if $-f(\bdx)$ is convex.
+
+  \item If $f$ is convex,
+    any stationary point is a local minimum. If $f$ is concave, it is a
+    local maximum.%>>>
+
+  \item Sylvester's criterium: A real matrix $\mathcal H=\mathcal H^T$ is positive definite%<<<
+    iff all its principal minors are positive.%>>>
+
+\end{itemize}%>>>
+
+\subsection*{\Tr{Optimization under constraints. Lagrange multipliers}%<<<
+                {Optimering under bivillkor. Lagrange multiplikatorer}
+}
+
+\Tr{Necessary conditions for local extremes when looking for}
+   {Nödvändiga villkor för lokala extrema om man söker}
+
+\begin{itemize}
+
+  % in R^2 <<<
+\item $\begin{cases}\mbox{\small max/min}\, f(x,y)\hphantom{,z}\\
+    g(x,y)=0
+    \end{cases}
+    \;\rightsquigarrow\;
+    $
+    \Tr{At the crtitical points}
+       {I de kritiska punkterna är}
+    $\nabla f=\lambda\nabla g$\/
+    \Tr{or}
+       {eller}
+    $\nabla g=\bdzero$,
+    \Tr{i.e.}
+       {dvs}
+    $\begin{vmatrix}-\nabla f -\\ -\nabla g -\end{vmatrix}=0$.
+  % >>>
+
+  % in R^3, one restriction <<<
+  \item $\begin{cases}\mbox{\small max/min}\, f(x,y,z)\\
+      g(x,y,z)=0
+    \end{cases}
+    \;\rightsquigarrow\;
+    $
+    \Tr{At the crtitical points }
+       {I de kritiska punkterna är}
+    $\nabla f=\lambda\nabla g$\/
+    \Tr{or}
+       {eller}
+    $\nabla g=\bdzero$,
+    \Tr{i.e.}
+       {dvs}
+    $\nabla f\times\nabla g=\bdzero$.
+  % >>>
+
+  % in R^3, two restrictions <<<
+  \item $\begin{cases}\mbox{\small max/min}\, f(x,y,z)\cr
+      g_1(x,y,z)=0\\
+      g_2(x,y,z)=0
+    \end{cases}
+    \;\rightsquigarrow\;
+    $
+    \Tr{At the crtitical points }
+       {I de kritiska punkterna är}
+    $\nabla f=\lambda\nabla g_1+\mu\nabla g_2$,
+    \Tr{i.e.}
+       {dvs}
+    $\begin{vmatrix}-\nabla f -\\ -\nabla g_1 -\\ -\nabla g_2 - \end{vmatrix}=0$.
+    % >>>
+
+%  \item %% KKT: commented out (2020-10-06, ivtj) %<<<
+%%    \renewcommand{\vec}[1]{\mathbf{#1}}
+%    \begin{tabular}{p{0.5\linewidth}p{0.1\linewidth}p{0.4\linewidth}}
+%      %\hline
+%      {An optimal solution $\vec x^*=(x_1,x_2,\dots,x_n)$ to the
+%        optimization problem
+%        \begin{align*}
+%          &\max\quad&&z=f(\vec x)\\
+%          &{s.t.}&&g_1(\vec x)\le b_1,\\
+%          &&&\qquad\vdots\\
+%          &&&g_m(\vec x)\le b_m,
+%        \end{align*}}
+%              \vspace{-3ex}
+%          &&
+%            %\begin{minipage}[t]{0.5\linewidth}
+%          {    fulfills the KKT conditions:
+%            \begin{align*}
+%              &\nabla f(\vec x^*)-\sum_{i=1}^m\lambda_i\nabla
+%                  g_i(\vec x^*)=\vec 0,\\
+%                &\lambda_i(b_i-g_i(\vec x^*))=0,i=1,\dots,m\\
+%                &\lambda_i\ge0, i=1,\dots,m
+%            \end{align*}
+%                  }
+%      %\hline
+%    \end{tabular} /KKT %>>>
+  \end{itemize}%>>>
+
+\subsection*{\Tr{Probability laws}{Sannolikhetslära}}%<<<
+
+%\textbf{\Tr{Notation}{Beteckningar}}:
+   $A$, $B$, ... $\subset\Omega$ -- \Tr{events}{händelser},
+   $\Omega$ -- \Tr{the sample space}{utfallsrummet},
+   $A^c$ -- \Tr{the complement of}{komplementet till} $A$,
+   $P(A)$ -- \Tr{the probability of event}{sannolikheten för} $A$:
+
+%\textbf{\Tr{Properties}{Egenskaper}}:
+\begin{itemize}\advance\itemsep by -5pt
+  \item $0\le P(A)\le 1$, \/ $P(\Omega)=1$. \/
+  \Tr{If}{Om}
+  $A\cap B=\varnothing$,
+    \Tr{then}{då}
+  $P(A\cup B)=P(A)+P(B)$
+  \item \Tr{If}{Om}
+    $A_j\cap A_j=\varnothing$
+    \Tr{for all}{för alla} $i\neq j$,
+    \Tr{then}{då}
+    $P(A_i\cup \ldots \cup A_n\cup \ldots)=P(A_1)+\cdots + P(A_n)+\cdots$
+%  \item $P(A\cup B)\le P(A)+P(B)$, \Tr{equality if}{med likhet då} $A\cap B=\varnothing$
+%   (\Tr{i.e., mutually exclusive}{dvs är disjunkta})
+   \item $P(A^c) = 1-P(A)$ ($A^c$ \Tr{is the complement of}{är komplementet till} $A$)
+  \item $P(A\cup B) = P(A)+P(B)-P(A\cap B)$.
+  \item de Morgan:
+    $P[(A\cup B)^c]=P(A^c\cap B^c)$,
+    $P[(A\cap B)^c]=P(A^c\cup B^c)$.
+\end{itemize}
+
+\textbf{\Tr{Conditional probability}{Betingad sannolikhet}}:
+$P(A|B) = \frac{P(A\cap B)}{P(B)}$
+
+\textbf{\Tr{Independent events}{Oberoende händelser}}: $P(A\cap B) = P(A)P(B)$
+
+\medskip
+\textbf{Total \Tr{Probability Law}{sannolikhet}}:
+  $P(B) = P(B|A)P(A) + P(B|A^c)P(A^c)$.
+  \Tr{Generally, for events}{Allmänt, för händelserna}
+\[
+  \bigl\{A_k\bigr\}_{k=1}^n:
+  \left\{
+  \begin{array}{l}
+  A_i\cap A_j = \varnothing, \; i\neq j, \\
+  A_1\cup \dots\cup A_n=\Omega \\
+  \end{array}
+\right\}
+  \;\rightsquigarrow\;
+P(B) = \sum_{k=1}^n P(B\cap A_k)
+     = \sum_{k=1}^n P(B|A_k) P(A_k)
+\]
+
+\textbf{\Tr{Bayes's theorem}{Bayes formula}}: $
+P(A|B) = \frac{P(B|A)P(A)}{P(B|A)P(A) + P(B|A^c)P(A^c)}
+$, $P(B) > 0$. \/
+\Tr{Generally, for events}{Allmänt, för händelserna}
+\[
+  \bigl\{A_i\bigr\}_{i=1}^n:
+  \left\{
+  \begin{array}{l}
+  A_i\cap A_j = \varnothing, \; i\neq j, \\
+  A_1\cup \dots\cup A_n=\Omega \\
+  \end{array}
+\right\}
+  \;\rightsquigarrow\;
+P(A_j|B) = \frac{P(A_j\cap B)}{P(B)}
+      = \frac{P(B|A_j) P(A_j)}
+             {\sum_{k=1}^n P(B|A_k) P(A_k)}
+ \]%>>>
+
+\subsection*{\Tr{Expectation and Variance}{Väntevärde och varians}}%<<<
+
+\(
+\begin{array}[m]{|l|l|l|}
+\hline
+\rule{0pt}{11pt}
+\mbox{\textbf{\Tr{Expectation}{Väntevärde}}}
+& \mbox{\textbf{\Tr{Of a random variable}{av en stokastisk variabel} }} X
+& \mbox{\textbf{\Tr{Of a function of a r.v}{av en funktion av en s.v.} }} g(X) \cr
+  \hline
+  \rule{0pt}{15pt}
+  \mbox{\textbf{\Tr{Discrete r.v.}{Diskret s.v.} }}
+  & \mu=E(X) = \sum_k x_kP(X=x_k)
+  &  E[g(X)] = \sum_k g(x_k)P(X=x_k)  \\[10pt]
+  \hline
+  \rule{0pt}{18pt}
+  \mbox{\textbf{\Tr{Continuous r.v.~of}{Kontinuerlig s.v.~med} pdf }} f(x)
+  & \mu=E(X) = \int_{-\infty}^\infty x f(x)\,dx
+  & E[g(X)] = \int_{-\infty}^\infty g(x) f(x)\,dx \\[10pt]
+  \hline
+\end{array}
+\)
+
+\medskip
+\(
+\begin{array}[m]{|l|l|l|}
+\hline
+\rule{0pt}{11pt}
+\mbox{\textbf{\Tr{Variance}{Varians}}}
+  & \mbox{\textbf{\Tr{Standard deviation}{Standardavvikelse}}}
+  & \mbox{\textbf{\Tr{Steiner's theorem}{Steiner's sats}}} \cr
+  \hline
+  \rule{0pt}{13pt}
+  \sigma^2 = \Var(X) = E[(X-\mu)^2]
+  & \sigma = \sqrt{\Var(X)}
+  & \sigma^2=E(X^2)-\mu^2 \cr
+  \hline
+\end{array}
+\)
+%>>>
+
+\subsection*{\Tr{Parameters of some distributions}%<<<
+             {Några ofta förekommande fördelningar}}
+
+\def\EspaceAuDessus{&&&&\\*[-10pt]}\def\duPlancher{\\*[2pt] \hline}
+\begin{tabular}{|c|c|c|c|c|}
+\cline{1-2}
+\multicolumn{2}{ |l| }{\textbf{\Tr{Continuous distributions}{Kontinuerliga fördelningar}}:} \cr
+\hline
+\EspaceAuDessus     \Tr{$X$ from}{$X$ från}
+                  & $f(x)$
+                  & \Tr{$F(x)=P(X\le x)$}{$F(x)=P(X\le x)$}
+                  & \Tr{$\mu=E(X)$}{$\mu=E(X)$}
+                  & \Tr{$\sigma=\sqrt{\Var(X)}$}{$\sigma=\sqrt{V(X)}$}
+                  \duPlancher
+\hline
+  \EspaceAuDessus $\mbox{Unif}(a,b)$  &
+                  $ \frac{1}{b-a},\; a\le\! x\le\! b $ &
+                  $\frac{x-a}{b-a},\; a\le\! x\le\! b $ &
+                  $\frac{a+b}{2}$ &
+                  $\frac{b-a}{2\sqrt{3}}$
+                  \cr &&&&\\[-23pt]
+                  \duPlancher
+  \EspaceAuDessus $\mbox{Exp}(\lambda)$  &
+                  $\lambda e^{-\lambda x}$,\, $x\ge0$ &
+                  $1-e^{-\lambda x}$ &
+                  $1/\lambda$ & $1/\lambda$\duPlancher
+  \EspaceAuDessus $N(\mu,\sigma) $ &
+                  %% $\frac{1}{\sigma\sqrt{2\pi}}\,e^{-(x-\mu)^2/2\sigma^2}$ &
+                  $\frac{1}{\sigma\sqrt{2\pi}}\,e^{-(\frac{x-\mu}\sigma)^2/2}$ &
+                  $\Phi\Bigl(\frac{x-\mu}{\sigma}\Bigr)
+                  =\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\frac{x-\mu}{\sigma}} e^{-t^2/2}\,dt$ &
+                  $\mu$ & $\sigma$\\*[10pt]\hline
+\end{tabular}
+
+\medskip
+\begin{tabular}{|c|c|c|c|c|}
+\cline{1-2}
+\multicolumn{2}{ |l| }{\textbf{\Tr{Discrete distributions}{Diskreta fördelningar}} ($x=0,1,2,\ldots$):} \cr
+\hline
+\EspaceAuDessus     \Tr{$X$ from}{$X$ från}
+                  & $f(x)=P(X=x)$
+                  & \Tr{$F(x)=P(X\le x)$}{$F(x)=P(X\le x)$}
+                  & \Tr{$\mu=E(X)$}{$\mu=E(X)$}
+                  & \Tr{$\sigma=\sqrt{\Var(X)}$}{$\sigma=\sqrt{V(X)}$}
+                  \duPlancher
+\hline
+\EspaceAuDessus $\mbox{Unif}\{1,n\}$  &
+                  $ \frac{1}{n},\; 1\le\! x\le\! n $ &
+                  $ \frac{x}{n},\; 1\le\! x\le\! n $ &
+                  $\frac{n+1}{2}$ &
+                  $\frac{\sqrt{n^2-1}}{2\sqrt{3}}$
+                  \cr &&&&\\[-23pt]
+                  \duPlancher
+  \EspaceAuDessus $\mbox{Geo}(p)$,\, $x\ge1$ &
+                  $p(1-p)^{x-1}$ &
+                  $1 - (1-p)^x$ &
+                  $1/p$ & $\sqrt{1-p}\big/p$\duPlancher
+  \EspaceAuDessus $\mbox{Hyp}(N,n,p)$ &
+                  $\frac{\binom{Np}x\binom{N(1-p)}{n-x}}{\binom{N}{n}}$ &
+                  $\sum_{k=0}^x\frac{\binom{Np}k\binom{N(1-p)}{n-k}}{\binom{N}{n}}$ &
+                  $np$ & $\sqrt{\tfrac{N-n}{N-1}\,np(1-p)}$\duPlancher
+  \EspaceAuDessus $\mbox{Bin}\,(n,p)$    &
+                  $\binom nx p^x(1-p)^{n-x}$ &
+                  $\sum_{k=0}^x\binom nk p^k(1-p)^{n-k}$ &
+                  $np$ & $\sqrt{np(1-p)}$\duPlancher
+  \EspaceAuDessus $\Po(\mu) $ &
+                  $e^{-\mu}\,\frac{\mu^x}{x!}$ &
+                  $e^{-\mu}\,\sum_{k=0}^x \frac{\mu^k}{k!}$ &
+                  $\mu$ & $\sqrt{\mu}$\duPlancher
+\end{tabular}
+%>>>
+
+\subsection*{\Tr{Linear combinations, sums and averages of random variables}%<<<
+             {Linjära kombinationer, summor och snitt av stokastiska variabler}
+         }
+\Tr{%
+Suppose that $\{X_k\}_{k=1}^n$ are (discrete or continuous) random variables with expectations
+$E(X_k)=\mu_k$ and variances $\Var(X_k)=\sigma_k^2$, $k=1,...,n$, and let
+ $\{a_k\}_{k=1}^n$ be constants. Then
+}{%
+Antag att $\{X_k\}_{k=1}^n$ är (diskreta eller kontinuerliga) stokastiska variabler med
+väntevärden $E(X_k)=\mu_k$ och varianser $V(X_k)=\sigma_k^2$, $k=1,...,n$, samt
+ $\{a_k\}_{k=1}^n$ är konstanter. Då gäller
+}
+\[
+\Tr{
+\eqalign{
+E(a_1X_1+\cdots+a_nX_n)& =a_1\mu_1+\cdots + a_n\mu_n\cr
+\Var(a_1X_1+\cdots+a_nX_n)& =a_1^2\sigma_1^2+\cdots + a_n^2\sigma_n^2
+   \quad(\mbox{if $X_1,\ldots,X_n$ are independent}).
+} % eqalign
+}{
+\eqalign{
+   E(a_1X_1+\cdots+a_nX_n)& =a_1\mu_1+\cdots + a_n\mu_n\cr
+V(a_1X_1+\cdots+a_nX_n)& =a_1^2\sigma_1^2+\cdots + a_n^2\sigma_n^2
+   \quad(\mbox{om $X_1,\ldots,X_n$ är oberoende}).
+} % eqalign
+}
+\]
+% \Tr{%
+% If $\{X_k\}_{k=1}^n$ are \textbf{normal and independent} r.\,v.,
+% then their linear combinations also are normally distributed:
+% }{%
+% Om $\{X_k\}_{k=1}^n$ är \textbf{normalfördelade och oberoende},
+% så är deras linjärkombinationer också normalfördelade:
+% }
+% \[
+% \Tr{X}{X}_k\Tr{\sim}{\sim} N(\mu_k,\sigma_k),\;
+% k=1,...,n
+% \;\Rightarrow\;
+% a_1\Tr{X}{X}_1+\cdots+a_n\Tr{X}{X}_n\Tr{\sim}{\sim} N\bigl(a_1\mu_1+\cdots a_n\mu_n,
+%                    \sqrt{a_1^2\sigma_1^2+\cdots a_n^2\sigma_n^2}\,\bigr).
+% \]
+% \Tr{%
+% For \textbf{sums} and \textbf{averages of i.i.d.~normal} variables, in particular, holds:
+% }{%
+% I synnerhet, för \textbf{summor} och \textbf{snitt av lika normalfördelade oberoende} variabler gäller:
+% }
+% $$
+% \Tr{X}{X}_k\Tr{\sim}{\sim} N(\mu,\sigma),\;
+% k=1,...,n
+% \;\Rightarrow\;
+% \begin{cases}
+% X = \Tr{X}{X}_1+\cdots+\Tr{X}{X}_n \Tr{\sim}{\sim} N(n\mu,\sigma\sqrt{n})
+% \Leftrightarrow
+% Z=\frac{X-n\mu}{\sigma\sqrt{n}}\Tr{\sim}{\sim} N(0,1)
+% \cr\noalign{\vskip5pt}
+% \overline{X}
+% =\frac{\Tr{X}{X}_1+\cdots+\Tr{X}{X}_n}{n} \sim N(\mu,\frac{\sigma}{\sqrt{n}})
+% \hspace{8pt}\Leftrightarrow
+% Z=\frac{\Tr{\ob X}{\ob X} -\mu}{\sigma/\sqrt{n}}\Tr{\sim}{\sim} N(0,1)
+% \end{cases}
+% $$
+
+% \medskip\textbf{\Tr{A Poisson process of intensity}{Poissonprocess med intensitet}} $\lambda$: %<<<
+% \Tr{A point process where times between consecutive points are i.i.d.~random variables that are $\Exp(\lambda)$}
+%    {Fullständig slumpmässig följd av händelser med tider mellan händelserna som är $\Exp(\lambda)$}:
+%%% \begin{center}
+%%%   \fbox{
+%%% \Tr{If}{om} \/
+%%% $
+%%%      \Bigl\{\mkern-6mu
+%%%      \begin{array}{l}
+%%%        X_k  \sim\Po(\lambda t_k)\\
+%%%        k=1,2,\ldots,n
+%%%      \end{array}
+%%%    \mkern-6mu\Bigr\} \/
+%%%    $
+%%%    \Tr{then}{då}
+%%%    $
+%%%      X = X_1+X_2+\cdots + X_n \sim \Po(\mu),\; \mu=\lambda(t_1+\cdots+t_n)
+%%%    $
+%%%   }
+%%% \end{center}
+% \[
+%  % \mbox{\Tr{If}{Om} }\;
+%   \Bigl\{\mkern-6mu
+%   \begin{array}{l}
+%     X_k  \sim\Po(\lambda t_k)\\
+%     k=1,2,\ldots,n
+%   \end{array}
+% \mkern-6mu\Bigr\}
+% % \;\mbox{ \Tr{then}{då} }\;
+% \Rightarrow
+%   X = X_1+X_2+\cdots + X_n \sim \Po(\mu),\; \mu=\lambda(t_1+\cdots+t_n)
+% \]%>>>
+% %>>>
+
+\subsection*{\Tr{The Central Limit Theorem (CLT)}{Centrala gränsvärdessatsen (CGS)}} %<<<
+
+\Tr{%
+Let $X_1,\cdots, X_n$ be \textbf{independent identically distributed}  (i.i.d.)
+random variables with expectation $\mu$ and standard deviation $\sigma$. Then for large $n$
+holds:
+}{%
+Låt $X_1,\cdots, X_n$ vara \textbf{oberoende likafördelade} stokastiska
+variabler med väntevärde $\mu$ och standardavvikelse $\sigma$. För stora $n$
+gäller:
+}
+
+\begin{itemize}
+  \item $X=\sum_{k=1}^n \Tr{X}{X}_k=\Tr{X}{X}_1+\cdots+\Tr{X}{X}_n\;
+    \stackrel{\mbox{\tiny appr}}{\sim}\; N(n\mu,\sigma\sqrt{n})$,
+        \ \Tr{i.e.}{dvs}, \,
+        $P(X\le x)\approx
+        \Phi(z),\, z=\frac{x-n\mu}{\sigma\sqrt{n}}
+        $
+
+      \item $\Tr{\ob X}{\ob X}=\frac{X}n
+    =\frac{\Tr{X}{X}_1+\cdots+\Tr{X}{X}_n}n\;
+    \stackrel{\mbox{\tiny appr}}{\sim}\; N(\mu,\frac\sigma{\sqrt{n}})$,
+    \hspace{26pt}\Tr{i.e.}{dvs}, \,
+        $P(\Tr{\ob X}{\ob X}\le \ob x)\approx\Phi(z)$, \,
+        $z=\frac{\ob x-\mu}{\sigma/\sqrt{n}}$
+\end{itemize}
+%>>>
+
+% Chebyshev + LBN <<<
+% \[
+%   \begin{array}[m]{|c|c|}
+%     \hline
+%     \mbox{\textbf{\Tr{The Chebyshev inequality}{Tjebyshevs olikhet}}}
+%     &
+%     \mbox{\textbf{\Tr{The Law of Big Numbers}{De stora talens lag}} }
+%     \rule{0pt}{13pt}
+%     (\{X_k\}_1^n - \mbox{ i.i.d.},\; E(X_k)=\mu,\; \Var(X_k)=\sigma^2)\mkern-5mu:
+%     \\[3pt]\hline
+%     \rule[-10pt]{0pt}{27pt}
+%   P(|X-\mu_X|\ge a) \le\frac{\sigma_X^2}{a^2}, \; a>0
+%   &
+%   \lim_{n\to\infty}P(|\overline X-\mu|\ge\varepsilon)
+%   = \lim_{n\to\infty}\frac{\sigma^2}{n\varepsilon^2}=0, \; \varepsilon>0
+%   \\ \hline
+%   \end{array}
+% \] %>>>
+
+% \subsection*{\Tr{Approximations of distributions}{Approximationer}}%<<<
+% \medskip
+% \begin{center}
+%    \includegraphics[scale=0.65]{Figs/approx}
+% \end{center}
+% %>>>
+
+\subsection*{\Tr{Statistical inference}{Statistisk inferens}}%<<<
+
+\subsubsection*{\Tr{Point estimators}{Punktskattningar}}
+
+\Tr{%
+\textbf{One sample}:
+Let $x_1,\dots,x_n$ be the observed values of a sample $\left\{X_k\right\}_1^n$ from a population with
+mean $\mu$ och standard deviation $\sigma$. Point estimators
+for the mean and the variance of the population are
+}{%
+\textbf{En stickprov}:
+Låt $x_1,\dots,x_n$ vara de observerade värden för ett stickprov
+$\left\{X_k\right\}_1^n$ från en population med
+väntevärde $\mu$ och standardavvikelse $\sigma.$ Väntevärdesriktiga skattningar
+av $\mu$ och $\sigma^2$ är då
+}
+
+\[
+  \begin{array}[m]{|l|l|}
+  \hline
+  \overline{x}=\hat\mu_\obs=\frac{1}{n}\sum_{i=1}^n x_i
+  &
+     s^2
+     =\widehat{\sigma^2}_\obs
+     =\frac{1}{n-1}\sum_{i=1}^n(x_i-\overline{x})^2
+     =\frac{1}{n-1}\Bigl(\sum_{i=1}^nx_i^2-n\overline{x}^2\Bigr)
+     %\; \mu~\mbox{\Tr{not known}{ej känd}}
+  \cr\hline
+  \end{array}
+\]
+
+% \textbf{\Tr{Two samples}{Två stickprov}},
+% $\{X_k\}_1^n$ \Tr{and}{och} $\{Y_k\}_1^n$
+% \Tr{with observations}{med observationer}
+% $\{x_k\}_1^n$ \Tr{and}{och} $\{y_k\}_1^n$,
+% \Tr{point estimator for the covariance}{skattning för kovariancen}:
+% \[
+%   \begin{array}[m]{|l|l|}
+%   \hline
+%   s_{xy} = \widehat{\Cov(X,Y)}_{\obs}
+%      =\frac{1}{n-1}\sum_{i=1}^n(x_i-\overline{x})(y_i-\overline{y})
+%      =\frac{1}{n-1}\Bigl(\sum_{i=1}^nx_iy_i-n\bar{x}\bar{y}\Bigr)
+%    &
+%      %\mbox{\Tr{in particular}{i synnerhet}}, \;
+%      \Bigl\{\mkern-6mu
+%        \begin{array}[m]{rcl} \rule{0pt}{14pt}
+%        s_{xx} &=& s_x^2 = (\widehat{\sigma^2_X})_\obs\\[2pt]
+%        s_{yy} &=& s_y^2 = (\widehat{\sigma^2_Y})_\obs\\[2pt]
+%      \end{array}
+%   \cr\hline
+% \end{array}
+% \]
+
+% \textbf{\Tr{Correlation coefficient}{Korrelationskoefficient}}:
+% \fbox{$
+%   r =  \frac{s_{xy}}{s_xs_y}
+%     =  \frac{s_{xy}}
+%             { \sqrt{s_{xx}s_{yy}} }
+% $}
+% \hfil
+% \textbf{\Tr{Linear regression}{Linjär regression}}:
+% \fbox{$
+%   \hat y = a + bx, \;
+%   \Bigl\{\mkern-6mu
+%   \begin{array}[m]{l}
+%   b =  s_{xy}/s_{xx} \cr
+%   a = \bar y - b\bar x
+%   \end{array}
+% $}
+
+%>>>
+
+\subsubsection*{\Tr{Confidence Interval -- One Sample}{Konfidensintervall - ett stickprov}}%<<<
+
+\begin{eqnarray*}\begin{array}{|c|c|c|}\hline
+     \mbox{\Tr{Estimated paramter $\theta$}{Parameter $\theta$ som skattas}}
+   & \mbox{\Tr{Point estimate}{Punktskattning}}
+   & \mbox{\Tr{Two-tailed}{Tvåsidigt konfidensintervall} }
+   \CI_{1-\alpha}(\theta) \\
+
+\hline && \\
+\mu \;\mbox{\Tr{from}{från} } N(\mu,\sigma),\; \sigma \mbox{ \Tr{known}{känd}}
+ & \overline{x}
+ &  \ob x \pm \Tr{z}{\lambda}_{\alpha/2}\frac{\sigma}{\sqrt{n}}\\&&\\
+
+\hline &&\\
+\mu \;\mbox{\Tr{from}{från} } N(\mu,\sigma),\; \sigma \mbox{ \Tr{not known}{ej känd}}
+ & \overline{x}
+& \ob x \pm t_{\alpha/2,n-1}\frac{s}{\sqrt{n}}\\&&\\
+
+\hline &&\\p \;\mbox{ \Tr{from}{från} Bin}(n,p) & \frac xn
+& \hat p_\obs\pm
+\Tr{z}{\lambda}_{\alpha/2}\sqrt{\frac{\hat p_\obs(1-\hat p_\obs)}{n}}
+
+\\&&\\
+
+\hline &&\\
+\sigma^2 \;\mbox{\Tr{from}{från} } N(\mu,\sigma)
+ & s^2&\frac{(n-1)s^2}{\chi^2_{\alpha/2,n-1}}
+  \leq\sigma^2
+  \leq \frac{(n-1)s^2}{\chi^2_{1-\alpha/2,n-1}}
+
+ \\&&\\
+\hline
+
+  \end{array}
+\end{eqnarray*}
+%>>>
+
+\subsubsection*{\Tr{Confidence Interval for the Mean -- Two Samples}%<<<
+                   {Konfidensintervall -- två normalfördelade stickprov}}
+
+\begin{itemize}
+
+\item \textbf{\Tr{Two samples (paired data)}{Två parade stickprov}}: %<<<
+  $\{(X_i,Y_i)\}_{i=1}^n$
+  \Tr{with}{där}
+   $X_i\Tr{\sim}{\sim} N(\mu_i,\sigma_x)$ \Tr{and}{och}
+   $Y_i\Tr{\sim}{\sim} N(\mu_i+\Delta,\sigma_y)$, $i=1,\dots,n$.
+   \Tr{Then}{Då} $\{Z_i\}_1^n=\{Y_i-X_i\}_1^n$
+   \Tr{is a sample from}{är ett stickprov från}
+   $N(\Delta,\sigma_z)$.
+   \Tr{The two-sided $\CI_{1-\alpha}$ for}{Det tvåsidiga $\CI_{1-\alpha}$ för} $\Delta$:
+
+\[
+\CI_{1-\alpha}(\Delta)
+   = \ob z
+     \pm
+   \begin{cases}
+      \Tr{z}{\lambda}_{\alpha/2}\,\frac{\sigma_z}{\sqrt{n}}\;,
+          & \text{ \Tr{if}{om} } \sigma_z \text{ \Tr{is known}{är känd}} \cr
+      t_{\alpha/2,n-1}\,\frac{s_z}{\sqrt{n}}\;,
+      & \text{ \Tr{if}{om} } \sigma_z \text{ \Tr{is not known}{är ej känd}}
+    \end{cases}
+  \]%>>>
+
+\item \textbf{\Tr{Two independent samples (pooled test)}{Två oberoende stickprov}}:
+$\{X_i\}_{i=1}^{n}$ \Tr{from}{från} $N(\mu_x,\sigma)$
+  \Tr{and}{och}
+  $\{Y_i\}_{i=1}^{m}$ \Tr{from}{från} $N(\mu_y,\sigma)$.
+  \Tr{The two-tailed $\CI_{1-\alpha}$ for $\mu_x-\mu_y$ is given by}
+      {Det tvåsidiga $\CI_{1-\alpha}$ för $\mu_x-\mu_y$ ges av}
+\[
+  \CI_{1-\alpha}(\mu_x-\mu_y)
+  = (\ob x-\ob y)
+    \pm
+   \begin{cases}
+   \Tr{z}{\lambda}_{\alpha/2}\,\sigma\sqrt{\frac1n+\frac1m},
+          & \text{ \Tr{if}{om} } \sigma \text{ \Tr{is known}{är känd}} \cr
+          t_{\alpha/2,n+m-2}\,s_p\sqrt{\frac1n+\frac1m}\,,
+      & \text{ \Tr{if}{om} } \sigma \text{ \Tr{is not known}{är ej känd}},
+    \end{cases}
+  \]
+\Tr{where}{där}
+$s_p$
+\Tr{is the pooled (weighted) standard deviation}{är den vägda (pooled) standardavvikelsen}
+\/$s_p =\sqrt{\frac{(n-1)s_x^2+(m-1)s_y^2}{n+m-2}}\,\cdot$
+
+\end{itemize}
+%>>>
+
+% -----------------------
+  \subsection*{\Tr{The Normal distribution}{Normalfördelningen}} %<<<
+  For $X\sim \text{N}(0,1)$, the probability
+  \[
+   P(X\le x) =  \Phi(x)=\frac1{\sqrt{2\pi}}\int_{-\infty}^xe^{-t^2/2}\,dt.
+  \]
+ The table below tabulates the distribution $\Phi(x)$ for $0\le x <3$.
+ For $x<0$, use that $\Phi(-x)=1-\Phi(x)$.
+
+ \bigskip
+ \input \TABELLDIR/Norm.tex %>>>
+
+ \bigskip
+
+\subsection*{\Tr{Quantiles $z_\alpha$ for the Normal Distribution}{Normalfördelningens kvantiler $\lambda_\alpha$}} %<<<
+
+  \begin{minipage}[b]{0.69\hsize}
+\Tr{For}
+   {För}
+   $X\sim N(0,1)$,
+\Tr{the table gives the value of}
+   {tabellen ger det värde}
+   $\Tr{z}{\lambda}_\alpha$\/
+   \Tr{for which}
+      {för vilket}
+   $P(X>\Tr{z}{\lambda}_\alpha)=\alpha$:
+
+\medskip
+\input \TABELLDIR/nquantile.tex
+\end{minipage}
+%
+\hfill\lower1.2em
+\hbox{\includegraphics[width=5cm,height=1.6cm]{Figs/z-alpha.png}}
+
+%>>>
+
+\newpage
+\subsection*{\Tr{The}{Kvantilerna för} $t$-\Tr{distribution quantiles}{fördelningen}} %<<<
+ \Tr{Tables for}
+    {Tabell för}
+    $t$,
+   \Tr{such that}
+      {för vilket}
+   $P(X > t)=\alpha$
+   \Tr{for}
+      {för}
+    $f$
+   \Tr{degrees of freedom}
+      {frihetsgrader}.
+
+\bigskip
+
+\begin{tabular}{c|ccccccc}
+$t$-mark	& $\alpha=   0.1$
+	& $\alpha=  0.05$
+	& $\alpha= 0.025$
+	& $\alpha=  0.01$
+	& $\alpha= 0.005$
+	& $\alpha= 0.001$
+	& $\alpha=0.0005$
+\cr\hline
+$f=  1$ & 3.0777 & 6.3138 &12.7062 &31.8205 &63.6567 &318.3088 &636.6192\\
+$f=  2$ & 1.8856 & 2.9200 & 4.3027 & 6.9646 & 9.9248 &22.3271 &31.5991\\
+$f=  3$ & 1.6377 & 2.3534 & 3.1824 & 4.5407 & 5.8409 &10.2145 &12.9240\\
+$f=  4$ & 1.5332 & 2.1318 & 2.7764 & 3.7469 & 4.6041 & 7.1732 & 8.6103\\
+$f=  5$ & 1.4759 & 2.0150 & 2.5706 & 3.3649 & 4.0321 & 5.8934 & 6.8688\\
+$f=  6$ & 1.4398 & 1.9432 & 2.4469 & 3.1427 & 3.7074 & 5.2076 & 5.9588\\
+$f=  7$ & 1.4149 & 1.8946 & 2.3646 & 2.9980 & 3.4995 & 4.7853 & 5.4079\\
+$f=  8$ & 1.3968 & 1.8595 & 2.3060 & 2.8965 & 3.3554 & 4.5008 & 5.0413\\
+$f=  9$ & 1.3830 & 1.8331 & 2.2622 & 2.8214 & 3.2498 & 4.2968 & 4.7809\\
+$f= 10$ & 1.3722 & 1.8125 & 2.2281 & 2.7638 & 3.1693 & 4.1437 & 4.5869\\ \hline
+$f= 11$ & 1.3634 & 1.7959 & 2.2010 & 2.7181 & 3.1058 & 4.0247 & 4.4370\\
+$f= 12$ & 1.3562 & 1.7823 & 2.1788 & 2.6810 & 3.0545 & 3.9296 & 4.3178\\
+$f= 13$ & 1.3502 & 1.7709 & 2.1604 & 2.6503 & 3.0123 & 3.8520 & 4.2208\\
+$f= 14$ & 1.3450 & 1.7613 & 2.1448 & 2.6245 & 2.9768 & 3.7874 & 4.1405\\
+$f= 15$ & 1.3406 & 1.7531 & 2.1314 & 2.6025 & 2.9467 & 3.7328 & 4.0728\\
+$f= 16$ & 1.3368 & 1.7459 & 2.1199 & 2.5835 & 2.9208 & 3.6862 & 4.0150\\
+$f= 17$ & 1.3334 & 1.7396 & 2.1098 & 2.5669 & 2.8982 & 3.6458 & 3.9651\\
+$f= 18$ & 1.3304 & 1.7341 & 2.1009 & 2.5524 & 2.8784 & 3.6105 & 3.9216\\
+$f= 19$ & 1.3277 & 1.7291 & 2.0930 & 2.5395 & 2.8609 & 3.5794 & 3.8834\\
+$f= 20$ & 1.3253 & 1.7247 & 2.0860 & 2.5280 & 2.8453 & 3.5518 & 3.8495\\ \hline
+$f= 21$ & 1.3232 & 1.7207 & 2.0796 & 2.5176 & 2.8314 & 3.5272 & 3.8193\\
+$f= 22$ & 1.3212 & 1.7171 & 2.0739 & 2.5083 & 2.8188 & 3.5050 & 3.7921\\
+$f= 23$ & 1.3195 & 1.7139 & 2.0687 & 2.4999 & 2.8073 & 3.4850 & 3.7676\\
+$f= 24$ & 1.3178 & 1.7109 & 2.0639 & 2.4922 & 2.7969 & 3.4668 & 3.7454\\
+$f= 25$ & 1.3163 & 1.7081 & 2.0595 & 2.4851 & 2.7874 & 3.4502 & 3.7251\\
+$f= 26$ & 1.3150 & 1.7056 & 2.0555 & 2.4786 & 2.7787 & 3.4350 & 3.7066\\
+$f= 27$ & 1.3137 & 1.7033 & 2.0518 & 2.4727 & 2.7707 & 3.4210 & 3.6896\\
+$f= 28$ & 1.3125 & 1.7011 & 2.0484 & 2.4671 & 2.7633 & 3.4082 & 3.6739\\
+$f= 29$ & 1.3114 & 1.6991 & 2.0452 & 2.4620 & 2.7564 & 3.3962 & 3.6594\\
+$f= 30$ & 1.3104 & 1.6973 & 2.0423 & 2.4573 & 2.7500 & 3.3852 & 3.6460\\ \hline
+$f= 40$ & 1.3031 & 1.6839 & 2.0211 & 2.4233 & 2.7045 & 3.3069 & 3.5510\\
+$f= 60$ & 1.2958 & 1.6706 & 2.0003 & 2.3901 & 2.6603 & 3.2317 & 3.4602\\
+$f= 80$ & 1.2922 & 1.6641 & 1.9901 & 2.3739 & 2.6387 & 3.1953 & 3.4163\\
+$f=100$ & 1.2901 & 1.6602 & 1.9840 & 2.3642 & 2.6259 & 3.1737 & 3.3905\\
+$f=120$ & 1.2886 & 1.6577 & 1.9799 & 2.3578 & 2.6174 & 3.1595 & 3.3735\\
+
+\end{tabular}
+
+
+%>>>
+
+\label{LastPageNo}
+\end{document}
+
+% vim: spelllang=en:nospell:foldmethod=marker
