@@ -228,9 +228,9 @@
 \hline
 Engelska/Python &   \textbf{and}    &   \textbf{or}     &   \textbf{not}  \\
 \hline
-  Logiksymbol      & $\wedge$ & $\vee$   & $\neg$ \\
+  Logiksymbol      & $\wedge$ & $\vee$ & $\neg$ \\
 \hline
-  Mängdsymbol      & $\cap$   & $\cup$   & ${}^c$ \\
+  Mängdsymbol      & $\cap$   & $\cup$ &\raise5pt\hbox{$\rule{8pt}{0.72pt}$} \\
 \hline
 Boolesk symbol   & $\cdot$  &    $+$   & \raise5pt\hbox{$\rule{8pt}{0.72pt}$} \\
 \hline
@@ -275,7 +275,7 @@ C/C++ m.fl.      & \&\& & $||$ & ! \\
 \hline
 $E_{0}$: 
 Dubbelnegation \rule{0pt}{10pt}
-               &  \scriptstyle  (P^c)^c = P
+               &  \scriptstyle  \ob{(\ob P)} = P
                &  \neg (\neg p) \iff p & \ob{\ob p} = p \\
 \hline
 $E_{1}$: 
@@ -287,9 +287,9 @@ Idempotens
 \hline
 $E_{2}$: 
 Invers
-                & \scriptstyle  P\cup P^c =\mkern2mu\mathcal U
+                & \scriptstyle  P\cup \ob P =\mkern2mu\mathcal U
                 & p\vee\neg p \iff 1   & p + \ob p = 1\\
-                & \scriptstyle  P\cap P^c =\varnothing
+                & \scriptstyle  P\cap \ob P =\varnothing
                 & p\wedge\neg p \iff 0 & p\,\ob p = 0\\
 \hline
 $E_{3}$: 
@@ -324,10 +324,10 @@ Associativa
 \hline
 $E_{7}$: 
 de Morgan \rule{0pt}{10pt}
-                  & \scriptstyle  (P\cup Q)^c = P^c\cap Q^c
+                  & \scriptstyle  \ob{P\cup Q} = \ob P \cap \ob Q
                   & \neg ( p \vee q ) \iff \neg p \wedge \neg q
                   & \ob {p + q}  = \ob p\,\ob q \\
-                  & \scriptstyle  (P\cap Q)^c = P^c\cup Q^c
+                  & \scriptstyle  \ob{P\cap Q} = \ob P \cup \ob Q
                   & \neg ( p \wedge q ) \iff \neg p \vee \neg q
                   & \ob {pq}  = \ob p+\ob q \\
 \hline
