@@ -273,47 +273,47 @@ C/C++ m.fl.      & \&\& & $||$ & ! \\
 \textbf{Lagar}
  & \textbf{Mängdlära} & \textbf{Satslogik} &\textbf{Boolesk algebra} \\
 \hline
-$E_{0}$: 
+$E_{0}$:
 Dubbelnegation \rule{0pt}{10pt}
                &  \scriptstyle  \ob{(\ob P)} = P
                &  \neg (\neg p) \iff p & \ob{\ob p} = p \\
 \hline
-$E_{1}$: 
+$E_{1}$:
 Idempotens
                 & \scriptstyle  P\cup P = P
                 & p\vee p \iff p & p + p = p\\
                 & \scriptstyle  P\cap P = P
                 & p\wedge p \iff p & p^2 = p\\
 \hline
-$E_{2}$: 
+$E_{2}$:
 Invers
                 & \scriptstyle  P\cup \ob P =\mkern2mu\mathcal U
                 & p\vee\neg p \iff 1   & p + \ob p = 1\\
                 & \scriptstyle  P\cap \ob P =\varnothing
                 & p\wedge\neg p \iff 0 & p\,\ob p = 0\\
 \hline
-$E_{3}$: 
+$E_{3}$:
 Dominans
                 & \scriptstyle  P \cup \mkern2mu\mathcal U = \mkern2mu\mathcal U
                 & p \vee 1 \iff 1 & p + 1 = 1 \\
                 & \scriptstyle  P \cap \varnothing = \varnothing
                 & p\wedge0 \iff 0 & p \cdot 0  = 0 \\
 \hline
-$E_{4}$: 
+$E_{4}$:
 Identitet
                 & \scriptstyle  P \cup \varnothing = P
                 & p \vee 0 \iff p  & p + 0 = p \\
                 & \scriptstyle  P \cap \mkern2mu\mathcal U = P
                 & p\wedge 1 \iff p & p\cdot 1 = p\\
 \hline
-$E_{5}$: 
+$E_{5}$:
 Kommutativa
                   & \scriptstyle  P\cup Q=Q\cup P
                   & p \vee q \iff q \vee p & p + q = q + p \\
                   & \scriptstyle  P\cap Q=Q\cap P
                   & p \wedge q \iff q \wedge p & pq = qp\\
 \hline
-$E_{6}$: 
+$E_{6}$:
 Associativa
                   & \scriptstyle  (P\cup Q)\cup R = P\cup(Q\cup R)
                   & (p \vee q) \vee r \iff p \vee (q \vee r)
@@ -322,7 +322,7 @@ Associativa
                   & (p \wedge q)\wedge r \iff p \wedge (q\wedge r)
                   & (pq)r = p(qr)\\
 \hline
-$E_{7}$: 
+$E_{7}$:
 de Morgan \rule{0pt}{10pt}
                   & \scriptstyle  \ob{P\cup Q} = \ob P \cap \ob Q
                   & \neg ( p \vee q ) \iff \neg p \wedge \neg q
@@ -331,7 +331,7 @@ de Morgan \rule{0pt}{10pt}
                   & \neg ( p \wedge q ) \iff \neg p \vee \neg q
                   & \ob {pq}  = \ob p+\ob q \\
 \hline
-$E_{8}$: 
+$E_{8}$:
 Distributiva
                   & \scriptstyle (P\cup Q)\cap R = (P\cap R)\cup(Q\cap R)
                   & p \vee (q \wedge r ) \iff (p \vee q) \wedge (p \vee r)
@@ -340,7 +340,7 @@ Distributiva
                   & p \wedge (q\vee r)\iff (p \wedge q) \vee (p\wedge r)
                   & p(q+r) = pq+pr\\
 \hline
-$E_{9}$: 
+$E_{9}$:
 Absorbering
                   & \scriptstyle  P\cup (P\cap Q)=P
                   & p \vee (p \wedge q ) \iff p
@@ -356,19 +356,36 @@ Absorbering
 \vspace{-1em}
 \begin{array}[t]{|*{2}{rrcl|}}
   \hline \rule{0pt}{11pt}
-    L_0\!: & p\land (p\to q) &\ergo& q
-  & L_5\!: & p &\ergo& p\lor q \\
-    L_1\!: & (p\to q)\land\lnot q &\ergo& \lnot p
-  & L_6\!: & (p\to q) \land (r\to s) \land (p\lor r) &\ergo& q\lor s \\
-    L_2\!: & (p\to q)\land(q\to r) &\ergo&  (p\to r)
-  & L_7\!: & (p\to q) \land (r\to s) \land (\lnot q\lor \lnot s) &\ergo& \lnot p\lor \lnot r \\
+    L_0\!: & \lnot p\to F_0 &\ergo& p
+  & L_4\!: & p &\ergo& p\lor q \\
+    L_1\!: & p\land (p\to q) &\ergo& q
+  & L_5\!: & p\land q &\ergo& p \\
+    L_2\!: & (p\to q)\land\lnot q &\ergo& \lnot p
+  & L_6\!: & (p\to q)\land(q\to r) &\ergo&  (p\to r) \\
     L_3\!: & \lnot p \land (p\lor q) &\ergo& q
-  & L_8\!: & \lnot p\to F_0 &\ergo& p \\
-    L_4\!: & p\land q &\ergo& p
-  & L_9\!: & (p\to r) \land (q\to r) &\ergo& (p\lor q)\to r \\[1pt]
+  & L_7\!: & (p\to r) \land (q\to r)\land (p\lor q) &\ergo&  r
+  \\[1pt]
   \hline
 \end{array}
 %>>>
+
+%% \subsubsection*{Inferenslagar (Logiska implikationer)} % variant <= ht-20 %<<<
+%% \vspace{-1em}
+%% \begin{array}[t]{|*{2}{rrcl|}}
+%%   \hline \rule{0pt}{11pt}
+%%     L_0\!: & p\land (p\to q) &\ergo& q
+%%   & L_5\!: & p &\ergo& p\lor q \\
+%%     L_1\!: & (p\to q)\land\lnot q &\ergo& \lnot p
+%%   & L_6\!: & (p\to q) \land (r\to s) \land (p\lor r) &\ergo& q\lor s \\
+%%     L_2\!: & (p\to q)\land(q\to r) &\ergo&  (p\to r)
+%%   & L_7\!: & (p\to q) \land (r\to s) \land (\lnot q\lor \lnot s) &\ergo& \lnot p\lor \lnot r \\
+%%     L_3\!: & \lnot p \land (p\lor q) &\ergo& q
+%%   & L_8\!: & \lnot p\to F_0 &\ergo& p \\
+%%     L_4\!: & p\land q &\ergo& p
+%%   & L_9\!: & (p\to r) \land (q\to r) &\ergo& (p\lor q)\to r \\[1pt]
+%%   \hline
+%% \end{array}
+%% %>>>
 
 %%% \subsubsection*{Inferenslagar (Logiska implikationer)}%<<<
 %%% \begin{tabular}[t]{*{4}{>{$}l<{$}}l}
