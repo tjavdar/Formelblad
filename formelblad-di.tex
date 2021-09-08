@@ -258,9 +258,11 @@ C/C++ m.fl.      & \&\& & $||$ & ! \\
     1 & 1 &    0   &       1    &     1    &    1    &         1     \\
   \hline
   \multicolumn{7}{l}{\rule{0pt}{12pt}\textbf{Ekvivalenser}:} \\
-  \multicolumn{7}{l}{$E_{10}$: $p\to q \iff \neg p \vee q $} \\
+  \multicolumn{7}{l}{
+              $E_{10}$: $p\to q \,\iff\, \neg p \vee q \,\iff\, \neg q\to \neg  p$
+                     } \\
   \multicolumn{7}{l}{$E_{11}$: $p \leftrightarrow q
-                      \iff
+                      \,\iff\,
                       (p\to q) \wedge ( q \to p )
   $}
 \end{tabular}%>>>
@@ -353,7 +355,8 @@ Absorbering
 %>>>
 
 \subsubsection*{Inferenslagar (Logiska implikationer)}%<<<
-\vspace{-1em}
+\vspace{-2em}
+\[
 \begin{array}[t]{|*{2}{rrcl|}}
   \hline \rule{0pt}{11pt}
     L_0\!: & \lnot p\to F_0 &\ergo& p
@@ -367,6 +370,16 @@ Absorbering
   \\[1pt]
   \hline
 \end{array}
+\quad
+\begin{array}[t]{|l|}
+\hline \rule{0pt}{12pt}
+  \textbf{Predikatlogik} \\[4pt]
+  \neg [\forall x\,P(x)]  \iff   \exists x\,\neg  P(x)  \\[4pt]
+  \neg [\exists x\,P(x)]  \iff   \forall x\,\neg  P(x)
+\\[2pt]
+\hline
+\end{array}
+\]
 %>>>
 
 %% \subsubsection*{Inferenslagar (Logiska implikationer)} % variant <= ht-20 %<<<
