@@ -12,7 +12,7 @@
 U = QDirty
 RIP_FROM=*.tex
 LAST_POOL=*.tex
-TEX2PDF_SIMPLE := "Just define to use simple %.tex -> %.pdf-rules in Mtargets.implicit"
+SIMPLE := "Just define to use simple %.tex -> %.pdf-rules in Mtargets.implicit"
 
 include ../bz/Mtargets.lang
 include ../bz/Mtargets.implicit
