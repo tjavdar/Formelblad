@@ -194,12 +194,18 @@
 \textnormal{(i tabellen nedan är alla tal hela, $m>1,\,n>1$, och $p$ är ett primtal):}}
 \vspace{-2.2em}
 \[
-  \begin{array}[t]{|*{4}{l|}}
+  \begin{array}[t]{|*{4}{c|}}
     \hline \rule{0pt}{12pt}
- %   \Zone = \{0,\pm1,\pm2,\cdots\}
-      [a]_n=[b]_n\iff a+tn = b,\, t\in \Zone
-    & [a+b]_n = [[a]_n + [b]_n]_n
-    & [ab]_n = [[a]_n[b]_n]_n
+      [a]_n=[b]_n\iff b = a+tn
+    &
+    \multicolumn{2}{c|}
+    {
+    [a+b]_n = [a]_n + [b]_n
+    \hfill|\hfill
+    [ab]_n = [a]_n[b]_n
+    \hfill|\hfill
+    [ka]_{kb}=k[a]_b
+    }
     \cr\hline \rule{0pt}{12pt}
       \Zone_n=\{[0]_n,\cdots,[n-1]_n\}
     & a\perp b \iff \gcd(a,b)=1
@@ -257,7 +263,7 @@ C/C++ m.fl.      & \&\& & $||$ & ! \\
   \hline
     1 & 1 &    0   &       1    &     1    &    1    &         1     \\
   \hline
-  \multicolumn{7}{l}{\rule{0pt}{12pt}\textbf{Ekvivalenser}:} \\
+  \multicolumn{7}{l}{\rule{0pt}{14pt}\textbf{Ekvivalenser}:} \\
   \multicolumn{7}{l}{
               $E_{10}$: $p\to q \,\iff\, \neg p \vee q \,\iff\, \neg q\to \neg  p$
                      } \\
