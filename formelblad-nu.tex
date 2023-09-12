@@ -1,0 +1,1311 @@
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}\usepackage{mathtools,graphicx,amssymb,array}
+
+% Custom page dimensions + header/footer defs <<<
+\advance \topmargin by -4.5\headheight
+\advance \textheight by 125pt
+\oddsidemargin -10pt
+\evensidemargin \oddsidemargin
+\marginparwidth 0.5in
+\textwidth 6.6in
+\parindent=0pt
+\advance\parskip by 1pt
+
+\pagestyle{headings}
+
+\def\Nu{\textsc{Formula Sheet\hfill Numerical Methods}}
+\def\Opt{\textsc{Formula Sheet\hfill Optimization}}
+
+\makeatletter
+\renewcommand{\@oddhead}{%
+\ifnum\thepage=1
+  \Nu\hfill
+\else
+  \ifnum\thepage>4
+    \Opt
+  \else
+    \Nu
+  \fi
+  \hfill\thepage{}
+\fi
+}
+\renewcommand{\@evenhead}{}
+\renewcommand{\@oddfoot}
+{\ifnum\thepage=1
+  \today\hfill file:~\small\texttt{\jobname.pdf}
+\else
+\fi}
+
+\renewcommand{\@evenfoot}{\small \texttt{\jobname.pdf},\hfill}
+\makeatother
+%>>>
+
+\input ../bz/StdLaTeXdef.h \everymath{\displaystyle}
+
+\begin{document}
+
+\subsubsection*{General Calculus} % <<<
+
+  \begin{itemize}
+
+  \item Falling factorial: $x^{\scriptsize\b k}=x(x-1)\cdots(x-k+1)$. Thus,
+    the binomial coefficient:
+    $
+      \binom{n}{k}
+      = \frac{n^{\scriptsize\b k}}{k!}
+      = \frac{n!}{k!(n-k)!}
+      \cdot
+    $
+
+  \item The $k$:th falling power of a $x$ at step $h$:
+    $
+     x^{\scriptsize\b kh} =
+     x(x-h)(x-2h)\cdots (x-(k-1)h)
+    $.
+
+  \item Mean value theorem for a $C^{k+1}$ $f\!:\Rone\to\Rone$:
+    $
+    f(a+h)
+    =\sum_{i=0}^n\frac{f^{(j)}(a)}{j!}h^j
+             + f^{(n+1)}(\xi),
+             \; \xi=a+th,
+             \; 0<t<1
+    $.
+
+  \item Taylor poly of order $k$ of a $C^{k+1}$-function $f\!:\!\Rone^n\to\Rone$:
+    $f(\bdx+\bdh)=\sum_{j=0}^k
+    (\partial_1+\cdots+\partial_n)^j f(\bda)+\Ordo(\Norm{\bdh}^{k+1})$.
+
+  \item Linearization of a $C^2$-vector field $\bdf\!:\Rone^n\to\Rone^n$
+     around a point $\bdx$:
+   \[
+     \bdf(\bdx+\bdh)
+     =
+     f(\bdx)
+     +J_{\bdf}(x)\bdh + \Ordo(\Norm{\bdh}^2),
+     \quad
+     J_{\bdf}(x)
+     \defeq\frac{d\bdf(x)}{d\bdx}
+     =
+     \begin{bmatrix}
+       - & \nabla f_1(\bdx) & - \\
+         & \vdots & \\
+       - & \nabla f_n(\bdx) & - \\
+     \end{bmatrix}
+     =
+     \begin{bmatrix}
+       (f_1)'_{x_1} &\cdots&(f_1)'_{x_n} \\
+       \vdots & \ddots & \vdots \\
+       (f_n)'_{x_1} &\cdots&(f_n)'_{x_n} \\
+     \end{bmatrix}
+      \]
+\end{itemize}
+
+% >>>
+
+\subsubsection*{General Linear Algebra}% <<<
+
+\begin{itemize}
+
+  \item Norm of a $n\times n$-matrix $A$ as a linear map $\Rone^n\to\Rone^n$:
+    $\Norm{A}
+    =\max_{\Norm{\bdx}=1} \Norm{A\bdx}
+    =\max_{\bdx\neq\bdzero} \frac{\Norm{A\bdx}}{\Norm{\bdx}}\cdot
+    $
+
+  \item If $A=A^T$ is a symmetric $n\times n$ matrix,
+    then all its eigenvalues are real.
+    If
+    $\lambda_i\neq \lambda_j$,
+    $A\bdv_i=\lambda_i\bdv_i$
+    and
+    $A\bdv_j=\lambda_j\bdv_j$
+    then
+    $\bdv_i\perp\bdv_j$.
+  \item
+    The Spectral theorem: The matrix $A=A^T$ is symmetric
+    if and only if is orthogonally diagonalizable:
+    $A=VDV^T$,
+    where
+    $D=\diag[\lambda_1,\cdots,\lambda_n]$
+    and
+    $VV^T=I$.
+
+  \item
+    $A\succeq0$ is
+    \textbf{positive definite}, if
+    $\Angled{\bdx,A\bdx}=\bdx^T\!A\bdx\ge0$, $\forall\bdx\in\Rone^n$.
+    $A\preceq0$ is negative definite if $-A\succeq0$.
+
+  \item $A$ is \textbf{spd} (symmetric positive definite) if $A=A^T\succeq0$.
+    $A_{n\times n}\succ 0$ if and only if \/ $\frac{A+A^T}{2}$ \/ is \textbf{spd}.
+
+  \item (Sylvester criterion): $A\succeq 0$ if \textbf{all} its major minors are non-negative:
+    $\det A[1:i,1:i]\ge 0$, $i=1,2,\ldots,n$.
+
+\end{itemize}% >>>
+
+\subsubsection*{Roots of functions of one variable}% <<<
+
+\begin{itemize}
+  \item Let $\lim_{k\to\infty}a_k\to a$
+    and $\epsilon_k=|a-a_k|$.
+    Covergence is of order $\alpha$ if
+    $
+    \epsilon_{k+1}\le M\epsilon^\alpha,
+    $
+    $k>N$.
+    If
+    $
+    \Bigl\{\mkern-6mu
+    \begin{array}{l}
+      \alpha=1\!:~\text{lin.~conv.}, \\[-2pt]
+      \alpha=2\!:~\text{quadratic}. \\
+    \end{array}
+    \Bigr.
+    $
+
+  \item Fix point $x^*$ of $\phi(x)$:
+    $x^*=\phi(x^*)$.
+    If $|\phi'(x^*)|<1$ near $x^*$, then
+    $x^*$ is an attractor:
+    $x_{k+1}=\phi(x_k)\to x^*$
+    for $x_0$ near $x^*$.
+    Rate of convergence: $\epsilon_{k+1}=|\phi'(\xi_k)|\epsilon_k$,
+    $\xi_k$ between $x_k$ and $x_{k+1}$.
+    If $|\phi'(x^*)|>1$, then $x^*$ is a repeller.
+
+  \item Bisect to bracket a root $x^*\in(a,b)$, $f(a)f(b)<0$:
+     For $m=\frac{a+b}{2}$, if $f(m)f(a)<0$ then $b:=m$, else $a:=m$.
+     Convergence rate: $\epsilon_{k+1}\simeq \epsilon_k/2$.
+
+
+  \item Newton-Raphson's method for $f(x^*)=0$: If $x_0$ is close to $x^*$,
+    $x_{k+1}=x_k - \frac{f(x_k)}{f'(x_k)}\to x^*$.
+    If $f'(x^*)\neq0$ and $f''$ is continuous, the rate of convergence is quadratic:
+     $\epsilon_{k+1}\simeq C\epsilon_k^2$. For $x_k$ close to $x^*$,
+     $C\simeq |\frac{f''(x^*)}{2f'(x^*)}|\cdot$
+
+  \item Secant method for $f(x^*)=0$. For $x_0$ close to $x^*$:
+    $x_{k+1}=x_k - \frac{f(x_k)(x_k-x_{k-1})}{f(x_k)-f(x_{k-1})}\to x^*$,
+    % Convergence rate:
+     $\epsilon_{k+1}\simeq C\epsilon_k^{1.618}.$
+
+  \item Method independent estimate for the root $x^*$ of $f(x)=0$:
+    $\epsilon_k=|x_k-x^*|\le \frac{|f(x_k)|+\delta}{M}$. \\
+    Here
+    $M\!=\!\min_{x\,\mbox{\tiny near}\,x^*}|f'(x)|$ and $\delta$
+    is the rounding error in computing $f$.
+
+\end{itemize}
+% >>>
+
+\subsubsection*{Solutions of square non-linear systems, or, roots of vector fields $\Rone^n\to\Rone^n$}% <<<
+
+
+\begin{itemize}
+
+  \item Fix point $\bdx^*$
+    of a field $\bdphi$:
+    $\bdphi(\bdx^*)=\bdx^*$.
+    If
+    $
+      \Norm {J_{\bdphi}(\bdx)} \le m < 1
+    $
+    near $\bdx^*$,
+    then $\bdx^*$ is an attractor point, i.e., \\
+    $\bdx^{[i+1]}=\bdphi(\bdx^{[i]})\to\bdx^*$, $i\to\infty$, for
+    $\bdx^{[0]}$ near $\bdx^*$.
+
+  \item Newton-Raphson's iteration scheme to find the root $\bdx^*$ of
+    the system \/
+        $
+          \bdf(\bdx) = \bdzero
+          \,\iff
+          \begin{cases}
+            f_1(x_1,\ldots,x_n) = 0, \\[-5pt]
+            \hspace{3.3em}\vdots \\[-9pt]
+            f_n(x_1,\ldots,x_n) = 0. \\
+          \end{cases}
+        $
+        \[
+        \text{Starting at $\bdx^{[0]}$ near the root $\bdx^*$:}
+        \begin{cases}
+          \bdx^{[i+1]}
+          =
+          \bdx^{[i]}
+          -
+          J_{\bdf}^{-1}(\bdx^{[i]})\bdf(\bdx^{[i]}) \to \bdx^*, \\
+        \hfill\text{as }~i\to\infty,
+        \end{cases}
+        \iff
+          \begin{cases}
+            \bdx^{[i+1]}
+            =
+            \bdx^{[i]}+\bdh^{[i]}, \\ %~\text{where}\\
+            J_{\bdf}(\bdx^{[i]})\bdh^{[i]}=-\bdf(\bdx^{[i]}).
+          \end{cases}
+        \]
+  % for all starting
+\end{itemize}
+% >>>
+
+\subsubsection*{Polynomials: $p_n(x) = a_nx^n+\cdots+a_1x+a_0$}%<<<
+
+\begin{itemize}
+  \item Euklides division: $p_n(x)=(x-x_0)(b_{n-1}x^{n-1}+\cdots+b_1x+b_0)+r$,\; $r=p_n(x_0)$.
+    The coefficients $b_k$ can be obtained by synthetic division (Horner's rule) below:
+  \item Horner's rule:\;
+ $
+ \begin{array}{c|*{6}{c}}
+    & a_n     & a_{n-1} & \cdots & a_2& a_1& a_0 \\ \hline
+   \rule[0pt]{0pt}{11pt}
+   x& b_{n-1} & b_{n-2} & \cdots & b_1& b_0& p_n(x) \\
+ \end{array}
+ \quad
+    b_{k-1}
+    =
+    \begin{cases}
+      \hfil a_n ,& k=n \\
+      b_{k} + a_{k-1}x ,& k < n.\\
+    \end{cases}
+ $
+
+\item $k$ recursions of Horner at the same $x$
+ yield the derivatives as a last coefficient:
+ $b_0^{(k)}=\frac{D^kp_n(x)}{k!}$.
+
+% Commented utvidgad Horner:<<<
+%%%   \item Horner's rule:\;
+%%%  \(
+%%%  \begin{array}[t]{c|*{6}{c}}
+%%%     x & a_n     & a_{n-1} & \cdots & a_2& a_1& a_0 \\ \hline
+%%%    \rule[0pt]{0pt}{11pt}
+%%%    x& b_{n-1} & b_{n-2} & \cdots & b_1& b_0& p_n(x) \\
+%%%    \rule[0pt]{0pt}{11pt}
+%%%    x& b'_{n-2} & b'_{n-3} & \cdots & b'_0& p_n'(x) \\
+%%%    \rule[0pt]{0pt}{12pt}
+%%%    x& b''_{n-3} & b''_{n-4} & \cdots & \frac{p_n''(x)}{2!} \\
+%%%    \vdots & \vdots \\
+%%%    x& b^{(n-1)}_1 & \frac{p^{(n-1)}(x)}{(n-1)!} \\
+%%%    x& \frac{p^{(n)}(x)}{n!} \\
+%%%  \end{array}
+%%%     \begin{array}[t]{l}
+%%%       \\[3em]
+%%%     b_{n-1} = a_n,\\
+%%%     b_{k-1} = xb_{k}+a_{k-1}, \; k < n.\\
+%%%       \\[3pt]
+%%%       \text{The coefficients on each row} \\
+%%%       \text{are computed recursively} \\
+%%%       \text{from the ones} \\
+%%%       \text{on the previous one}. \\
+%%%     \end{array}
+%%%  \)% >>>
+
+\end{itemize}%>>>
+
+\subsubsection*{The Divided diffences (DD) $[\bdx\!:\!\bdf]$, $\bdx=\{x_i\}_0^n$, $\bdf=\{f_i\}_0^n=\{f(x_i)\}_0^n$} %<<<
+
+{\footnotesize
+\[
+  \begin{array}[m]{c|c*{6}{l}}
+    x_0 & {f_0}
+        & {[f_0\!:\!f_1]}
+        & {[f_0\!:\!f_2]}
+        & \cdots
+        & {[f_0\!:\!f_{n-1}]}
+        & {[f_0\!:\!f_{n}]} \\
+    x_1 & f_1 & [f_1\!:\!f_2] & [f_1\!:\!f_3]
+        & \hfill\cdots & [f_1\!:\!f_{n}] \\
+        & \vdots & \\
+    x_i & f_i & \hfil\cdots &  [f_i\!:\!f_{i+j}]\\
+        &   \vdots & \\
+    x_{n-1} & f_{n-1} & [f_{n-1}\!:\!f_n] \\
+    x_{n}   & f_{n} \\
+  \end{array}
+  \quad
+      [f_i:f_{i+j}]
+      =
+      \begin{cases}
+       \hfill f_i\hfill , & j=0, \\[4pt]
+        \frac{[f_{i+1}\!:\!f_{i+j}]-[f_i\!:\!f_{i+j-1}]}{x_{i+j}-x_i},
+        & j \ge 1.
+      \end{cases}
+\]
+}
+
+%>>>
+
+\subsubsection*{Weighted Divided diffences (wDD) $\wDD[\bddelta:\bdf]\!:$} %<<<
+{\footnotesize
+\[
+  \begin{array}[m]{c|c*{5}{l}}
+    \delta_0 & {f_0}
+             & {\wDD[f_0:f_1]}
+             & \cdots
+             & {\wDD[f_0:f_{n-1}]}
+             & {\wDD[f_0:f_{n}]} \\
+    \delta_1 & f_1 & \wDD[f_1:f_2]
+                 & \cdots & \wDD[f_1:f_{n}] \\
+                 & \vdots & \\
+    \delta_{n-1} & f_{n-1} & \wDD[f_{n-1}:f_n] \\
+    \delta_{n}   & f_{n} \\
+  \end{array}
+  \quad
+\begin{aligned}
+  \wDD[f_i:f_{i+j}]
+  =
+  \begin{cases}
+    \hfill f_i\hfill , & j=0
+    \\[7pt]
+  \frac{1}{\delta_i - \delta_{i+j}}
+  \begin{vmatrix}
+   \delta_i     & \wDD[f_i:f_{i+j-1}] \\
+   \delta_{i+j} & \wDD[f_{i+1}:f_{i+j}],
+  \end{vmatrix},
+    & j \ge 1.
+  \end{cases}
+\end{aligned}
+\]
+}
+Scaling scaling the \textbf{first} data vector does not change the scheme:
+$
+  \wDD[\bddelta:\bdf]
+  =\wDD[\lambda\bddelta:\bdf]
+$ for any $\lambda\neq0$.
+
+%>>>
+
+\subsubsection*{Interpolation Polynomials (IP)} %<<<
+\begin{itemize}
+
+  \item For $x_0<\cdots<x_n$,
+    there exists a unique IP $p_n(x)$ of $\deg p_n \le n$
+    satisfying $p_n(x_i)=f_i$,
+    $i=0,1,\ldots,n$.
+
+  \item Lagrangian form:
+      \(
+      \displaystyle
+        p_n(x) = \sum_{i=0}^{n} f_iL_i(x), \;
+        L_i(x) = \prod_{j\neq i}\frac{x-x_j}{x_i-x_j};
+        \quad L_i(x_j) =
+        \begin{cases}
+          1, i=j, \\
+          0, i\neq j.
+        \end{cases}
+      \)
+
+ \item Newton form:
+    $
+    \displaystyle
+      p_n(x) = \sum_{i=0}^{n} c_iN_i(x)
+    $,
+    where
+    $
+    c_i = {[f_0\!:\!f_i]}
+% \begin{cases}
+%   \hfill y_0\hfill,\; i=0, \\
+%   \frac{y_i-p_{i-1}(x_i)}{N_i(x_i)},\; i>0.
+% \end{cases}
+    $
+    (DD-scheme),
+    and
+    $
+    N_i(x) =
+    \begin{cases}
+      \hfill1\hfill,\; i=0, \\
+      (x-x_0)\ldots(x-x_{i-1}),\; i>0.
+    \end{cases}
+    $
+
+    \item Evaluation of the IP at a given point $x$ using wDD (Neville scheme):
+      $p_n(x)=\wDD[f_0:f_n]$, with $\delta_i=x-x_i$.
+
+    \item Pointwise error:
+    If $f\in C^{n+1}$ and $\{f_i\}_0^n=\{x_i\}_0^n$,
+      then \/
+    $
+      f(x)-p_n(x)
+    = \frac{f^{(n+1)}(\xi)}{(n+1)!}N_{n+1}(x)
+    %= [f_0\!:\!f_n]N_{n+1}(x)
+    $,
+    $x_0<\xi<x_n$.
+
+
+\end{itemize}
+%>>>
+
+\subsubsection*{Differentiation as a linear map, discretization  and numerical approximation of of derivatives}% <<<
+
+\begin{itemize}
+
+   \item $\calL$ is a linear map acting on the vector space of some class of functions if
+     $\calL (\alpha f+\beta g)=\alpha\calL f+\beta\calL g$.
+     Powers: $\calL^n\defeq\calL\calL^{n-1}$,
+     $\calL^0\!f=I\!f=f$ (identity).
+
+  \item Differentiation $D\!:\!f\to f'$ is linear.
+  Polynomial action, e.g.: $(D^2+6D+9I)f=f''+6f'+f=(D+3I)^2f$.
+
+  \item The step operator: $T_h\!:f(x)\to f(x+h)$,
+    $T_hT_{-h}=I$. Powers: $T^n_hf(x)=T_{nh}f(x)=f(x+nh)$.
+
+  \item Taylor/Maclaurin($a=0$) expansion an analytic function around  point $a$
+    $\iff$
+    action of forward differences:
+    \[
+      f(a+h)
+      =T_hf(a)
+      =\sum_{k=0}^\infty\frac{f^{(k)}(a)}{k!}h^k
+      =\sum_{k=0}^\infty\frac{(hD)^k}{k!}f(a)
+      = e^{hD}f(a); \quad
+      % \;\rightsquigarrow\; T_h = e^{hD};
+      \Delta_h=T_h-I=e^{hD}-I.
+      % , \quad \Delta_hf(a)= f(a+h)-f(a).
+    \]
+
+  \item The Mean Value Thm in terms of $T_h$ acting on $C^{n+1}$ functions:
+    $
+     T_h = \sum_{k=0}^n\frac{(hD)^k}{k!}
+      + \Ordo(h^{n+1})D^{n+1}
+    $.
+
+  \item Forward and backward
+    differences operators and correponding
+    approximation of the derivative:
+    \[
+      D_h=\frac{\Delta_h}{h}=\frac{T_h-I}{h}=\frac{e^{hD}-I}{h},\quad
+      D_{-h} =\frac{I-T_h}{h} = T_{-h}D_h=e^{-hD}D_h,
+      \quad
+      D_hf(a)=f'(a) + \Ordo(h)=D_{-h}f.
+    \]
+
+  \item Central
+    differences operators and correponding
+    approximation of $f'$ and $f''$:
+    \begin{align*}
+      \bar D_h
+      &= \frac{D_h+D_{-h}}{2}
+      = \frac{T_h-T_{-h}}{2h},
+      &
+      \bar D_hf(a)
+      &= \frac{f(a+h)-f(a-h)}{2h}
+      = f'(a) + \Ordo(h^2);
+      \\
+      \bar D_{\frac h2}^2
+      &= \frac14(D_{\frac h2}+D_{-\frac h2})^2
+      = \frac{T_h-2I+T_{-h}}{h^2},
+      &
+      \bar D_{\frac h2}^2f(a)
+       &= \frac{f(a+h)-2f(a)+f(a-h)}{h^2}
+        = f''(a) + \Ordo(h^2).
+    \end{align*}
+
+  \item Non-symmetric approximations for $f''$ and $f'''$:
+    \[
+      D_{\pm h}^2f(a) = f''(a) + \Ordo(h)
+      \quad
+     \{
+       D_h^3,
+       D_h^2D_{-h},
+       D_hD_{-h}^2,
+       D_{-h}^3
+     \}f(a)
+     =
+     f'''(a) + \Ordo(h);
+     \quad
+       \bar D_{h}\bar D_{\frac h2}^2 f(a)
+     =
+     f'''(a) + \Ordo(h^2).
+    \]
+
+  \item Divided differences (DD)
+    of $f$ on regular meshes $x_k=a+kh$:
+    $
+    [f_0\!:\!f_k]
+    =
+     \frac{T_h-I}{kh}[f_0\!:\!f_{k-1}]
+     = \cdots
+     =\frac{D_h^kf(a)}{k!}
+     \cdot
+    $
+    % $k=0,1,\ldots,n$
+
+  \item Newton interpolation polynomial
+    of $f\in C^{n+1}$ on regular meshes $x_i=a+kh$,
+    $k=0,1,\ldots,n$:
+    \[
+      P_n(x)
+      = \sum_{k=0}^n
+         \frac{D_h^kf(a)}{k!}
+        (x-a)^{\scriptsize\b kh},
+        \quad
+        (x-a)^{\scriptsize\b kh}
+         = (x-a)(x-a-h)\cdots(x-a-(k-1)h)
+    \]
+
+\end{itemize}% >>>
+
+\subsubsection*{Numerical integration}% <<<
+
+\begin{itemize}
+  \item (Open) Newton-Cotes approximations are
+  weighted sums of integrand values at equally spaced points:
+  \[
+\lower3em
+\hbox{\begin{array}[t]{l}
+    \int_a^bf(x)\,dx
+      = \sum_{i=0}^{n} w_if_i,
+      \\[17pt]
+      f_i =f(a+ih),
+      \\[12pt]
+      h = \frac{b-a}{n}
+    \end{array}}
+  \quad
+    \begin{array}[t]{*{12}{|c}|}
+      \hline n & h & \text{Rule name}& \text{Formula} & \text{Error term} \\ \hline
+      \rule[0pt]{0pt}{18pt} 1 & b-a &  \text{Trapezoidal}
+      & Q_hf = \frac{f_0+f_1}{2}\,h & -\frac{h^3}{12}f''(\xi)
+      \\[5pt] \hline
+      \rule[0pt]{0pt}{18pt} 2 & \frac{b-a}{2} &  \text{Simpson $\frac13$}
+      & Q^{(2)}_{h}f=\frac{f_0+4f_1+f_2}{3}\,h & -\frac{h^5}{90}f^{(4)}(\xi)
+      \\[5pt] \hline
+      \rule[0pt]{0pt}{18pt} 3 & \frac{b-a}{3} &  \text{Simpson $\frac38$}
+      & Q^{(3)}_{h}f=\frac{3(f_0+3f_1+3f_2+f_2)}{8}\,h & -\frac{3h^5}{80}f^{(4)}(\xi)
+      \\[5pt] \hline
+    \end{array}
+  \]
+
+  \item
+  \textbf{The composite rules} on a larger interval $[a,b]$ subdivided evenly in
+    $\{(a+ih,f_i)\}_0^n$, $x=\frac{b-a}{n}$:
+
+    \[
+      \int_a^bf(x)\,dx
+      =
+      \begin{cases}
+        h(f_0+2f_1+\cdots+2f_{n-1}+f_n)/2 + \Ordo(h^2),
+        & \text{(Trapezoidal)}
+        \\
+        h(f_0+4f_1+2f_2+4f_3+\cdots+2f_{n-2}+4f_{n-1}+f_n)/3 + \Ordo(h^4),
+        ~n=2m,
+        & \text{(Simpson $\frac13$)}
+      \end{cases}
+    \]
+
+\end{itemize}% >>>
+
+\subsubsection*{Log-scale wDD (weighted Div Diffs) to crank up convergence rate of finite differences schemes} %<<<
+
+\begin{itemize}
+\item
+Approximation of $F(0)=\lim_{x\to0}F(x)$ when $F(0)=F(h) + \Ordo(h^k)$ with
+\textbf{gap in powers $k$} in the Maclaurin expansion:
+\[
+  F(h) = F(0) + a_1h^k+a_2h^{2k}+\cdots+a_lh^{lk} + \Ordo(h^{(l+1)k}),\; h\to 0.
+\]
+The  wDD-table
+\[
+  \wDD[\bddelta:\bdF]
+  =\wDD[(1,q^k,q^{2k},\ldots,q^{lk}):(F(h),F(qh),F(q^2h),\ldots,F(q^lh)]
+\]
+ with refinement ratio $0<q<1$, has last term
+\[
+  \boxed{\calR^lF(h)=\wDD[F(h):F(q^lh)]=F(0) + \Ordo(h^{(l+1)k}).}
+\]
+
+  \item \textbf{Richardson extrapolation}
+    in approximating the derivatives $f'$, $f''$, etc., of a smooth function $f$:
+    \[
+    \begin{array}{c|*{5}{c}}
+      F(h) & D_{\pm h}f & \bar D_hf & \bar D^2_{\frac h2}f & \cdots \\[5pt]
+      \hline \rule[0pt]{0pt}{9pt}
+      k & 1 & 2 & 2 & \cdots \\
+    \end{array}
+  \]
+  \item \textbf{Romberg integration} = Richardson extrapolation
+    when approximating $\int_a^b \!\! f(x)\,dx$ of a smooth integrand $f$ with the
+    composite Trapezoidal rule:
+    \[
+      F(h)=Q_hf,\quad
+      h=\frac{b-a}{n},\quad
+      k=2,\quad
+      ~\text{where the refinement ratio}~
+      q=\frac1r,\quad
+      n,r\in\Zone_+.
+    \]
+\end{itemize}
+
+%>>>
+
+\newpage
+
+\subsubsection*{Linear Programming. Notation:}%<<<
+  \begin{tabular}{ll}
+Parameters: &
+  $\bdb_{m\times1}$,
+  $A_{m\times n}$,
+  $\bdc_{n\times1}$,
+  % $\bdzero=(0,\ldots,0)^T$,
+  % $I_m$ (unit matrix),
+  (intermediate values: $\hat \bdb$, $\hat\bdc$)
+\cr
+Variables: &
+  $z$, $w$ (primal and dual objective~functions),
+  $\bdx_{n\times1}$ (primal decision vars),
+  $\bdy_{m\times1}$ (dual vars),
+\cr
+  &
+  $z^*$, $\bdx^*$,
+  $w^*$, $\bdy^*$
+  (values at opt);
+  $\bds_{m\times1}=\bds^+\cup \bds^-$ (slack/surplus),
+  $\bda^-$ (artificial). % , $|\bds^-|=|\bda^-|$
+\cr
+\end{tabular}
+%>>>
+
+%%\subsubsection*{Normal max LP problem:}%<<<
+\[
+  \begin{array}[m]{c|c|c}
+    \textbf{Normal max LP problem:}
+    & \textbf{Normal min LP:}
+    & \textbf{Generic LP:}
+  \\ \hline
+    \begin{array}[m]{ll}
+      \max & z = c_1x_1+\cdots+c_nx_n, \;\bdx\ge0, \cr
+      \mbox{s.t.} &
+      \mkern-15mu
+      \begin{cases}
+        a_{11}x_1+\cdots+a_{1n}x_n &\le b_1 \\[-3pt]
+        \hfil\vdots &  \hfil\vdots          \\[-3pt]
+        a_{m1}x_1+\cdots+a_{mn}x_n &\le b_m \cr
+       %\hfill x_1,x_2,\ldots,x_n  &\ge 0.
+      \end{cases}
+    \end{array}
+  \;\leftrightsquigarrow\;
+  \boxed{
+    \begin{array}[m]{ll}
+      \max & z=\bdc^T\bdx\cr
+      \mbox{s.t.} &
+      \mkern-15mu
+      \begin{cases}
+      A\bdx\le\bdb\cr
+      \hfill\bdx\ge\bdzero
+      \end{cases}
+    \end{array}
+  } % boxed
+  &
+  \boxed{
+    \begin{array}[m]{ll}
+      \min & z=\bdc^T\bdx\cr
+      \mbox{s.t.} &
+      \mkern-15mu
+      \begin{cases}
+      A\bdx\ge\bdb\cr
+      \hfill\bdx\ge\bdzero
+      \end{cases}
+    \end{array}
+  } % boxed
+  &
+  \boxed{
+    \begin{array}[m]{ll}
+      \text{opt} & z=\bdc^T\bdx\cr
+      \mbox{s.t.} &
+      \mkern-15mu
+      \begin{cases}
+      A\bdx\lessgtr\bdb\cr
+      \hfill\bdx\ge\bdzero
+      \end{cases}
+    \end{array}
+  } % boxed
+  \end{array}
+\]
+The LP: \fbox{$\min z$, s.t. conditions}
+  $\iff$
+  LP: \fbox{$\max \;-z$, subject to the \textbf{same} conditions.}
+%>>>
+
+\subsubsection*{Normal max LP in standard form. Initial and Final Simplex Tableau at opt (actual layout):}%<<<
+\[
+  \begin{cases}
+    \begin{array}[m]{*{5}{lc}}
+    z &-& \bdc^T\bdx &+& \bdzero^T\bds &=&  0   \cr
+      & &   A\bdx    &+&   I_m\bds     &=& \bdb \cr
+    \end{array}
+  \end{cases}
+  \mkern-16mu\rightsquigarrow\;
+    \begin{array}[m]{c|ccc|c}
+ \perp &     z   & \bdx^T & \bds^T     & \hat\bdb \cr\hline\rule{0pt}{10pt}
+    z  &     1   &-\bdc^T & \bdzero^T  &   0    \cr %\hline
+ \bds  & \bdzero & A      & I_m        & \bdb   \cr
+    \end{array}
+  \quad\sim\cdots\sim\quad
+    \begin{array}[m]{c|ccc|c}
+ \perp &     z   &     \bdx^T &     \bds^T   & \hat\bdb \cr\hline\rule{0pt}{10pt}
+ z  &     1   &-\hat\bdc^T &     \bdy^{*T} & z^*\cr %\hline
+ \bdx_B& \bdzero &     B^{-1}A&     B^{-1}   & \bdx_B^*   \cr
+    \end{array}
+\]
+Split into Basic/Non-basic variables,
+$(\bdx,\bds)\to(\bdx_B,\bdx_N)$,
+ and matrices:
+    $B=\cols(\bdx_B)$,
+    $N=\cols(\bdx_N)$
+%>>>
+
+\subsubsection*{The Final Tableau of the Normal max LP at opt, layout split in (B)asic/(N)on-basic columns:}%<<<
+\[
+  \begin{cases}
+    \begin{array}[m]{*{5}{lc}}
+      z^* &+& \bdzero^T\bdx_B^* &-& \hat\bdc_N^T\bdx_N &=&  \bdc_B^TB^{-1}\bdb \cr
+    %%%          &&&&                       &=& \bdc_B^T\bdx_B^* = \bdb^T\bdy^*\cr
+      & &    I_m\bdx_B^*  &+& B^{-1}N\bdx_N     &=& B^{-1}\bdb \cr
+    \end{array}
+  \end{cases}
+  \;\rightsquigarrow\quad\;
+    \begin{array}[m]{c|ccc|c}
+   \perp &     z   & \bdx_B^T  & \bdx_N^T & \hat\bdb \cr\hline\rule{0pt}{10pt}
+      z^*&     1   & \bdzero^T &-\hat\bdc_N^T & \bdc_B^TB^{-1}\bdb \cr %\hline
+  \bdx_B & \bdzero &  I_m  & B^{-1}N      &  B^{-1}\bdb   \cr
+    \end{array}
+\]
+Here \fbox{$\bdy^{*T}=\bdc_B^TB^{-1}$} are the dual vars and
+\fbox{$\hat\bdc_N^T=\bdc_N^T-\bdc_B^TB^{-1}N=\bdc^T-y^{*T}N\le0$} the reduced costs at max.
+%>>>
+
+% Weak + Strong Duality<<<
+\bigskip
+\textbf{Weak duality}: For any feasible $\bdx$ in (P) and $\bdy$ in (D) holds:
+\fbox{$
+  z = \bdc^T\bdx \le \bdy^TA\bdx \le \bdy^T\bdb = w.
+$}
+\begin{itemize}
+  \item If (P) is unbounded $\ergo$ (D) is infeasible.
+        If (D) is unbounded $\ergo$ (P) is infeasible
+  \item If both $\bdx^*$ is feasible in (P) and
+                $\bdy^*$ is feasible in (D) and
+                \[
+                  \boxed{z^*=\bdc^T\bdx^* = \bdy^{*T}A\bdx^*=\bdb^T\bdy^*=w^*,}
+                  \eqno(\star)
+                \]
+                then
+                $\bdx^*$ is optimal in (P)
+           and  $\bdy^*$ is optimal in (D).
+\end{itemize}
+
+\textbf{Strong duality}: If either (P) or (D) has a bounded optimal solution,
+so has the other and $(\star)$ holds.%>>>
+
+\medskip\textbf{Complementary slackness at optimum}: %<<<
+$
+\begin{cases}
+  \bdy^{*T}(\bdb-A\bdx^*)=0
+  \iff y_i^*(b_i-\sum_{j=1}^{n} a_{ij}x_j^*) = 0, \;
+   i=1,\ldots,m
+\cr
+  (\bdy^{*T}A-\bdc)\bdx^*=0 \iff x_j^*(\sum_{i=1}^m y_i^*a_{ij}-c_j)=0,
+  \; j=1,\ldots, n.\cr
+\end{cases}
+$%>>>
+
+\vspace{-1em}\subsubsection*{Duality} %<<<
+\(
+\boxed{
+  \begin{array}[m]{l}
+   \textbf{Normal LP's have:}  \\
+   \bullet~\mbox{normal constraints:}~\max\!:\,\le,\,\min\!:\,\ge \\
+   \bullet~\mbox{normal decis.~vars:}~\bdx\ge\bdzero,\;\bdy\ge\bdzero \\
+  \end{array}
+}
+\;\rightsquigarrow\;
+\boxed{
+  (P)\!:
+  \begin{cases}
+    \max~z=\bdc^T\bdx \cr
+    A\bdx\le\bdb,\;  \bdx\ge\bdzero
+  \end{cases}
+}
+   \;\overset{1:1}\leftrightsquigarrow\;
+   \boxed{
+     (D)\!:\begin{cases}
+       \min~w=\bdb^T\bdy\cr
+       A^T\bdy\ge\bdc,\;\bdy\ge\bdzero.
+     \end{cases}
+   }
+\)%>>>
+
+\bigskip\textbf{(P)rimal-to-(D)ual correspondence rules:}%<<<
+\begin{itemize}
+  \item Involution property: (P) $\overset{1:1}\leftrightsquigarrow$(D),
+    i.e., the Dual of the Dual is the Primal
+  \item \fbox{Normal (P)} $\overset{1:1}\leftrightsquigarrow$ \fbox{Normal (D)}
+  \item \fbox{Constraints of reversed inequality} $\overset{1:1}\leftrightsquigarrow$
+    \fbox{Non-positive decision~variables}
+  \item \fbox{'='-Constraints} $\overset{1:1}\leftrightsquigarrow$
+    \fbox{Non-restricted decision variables}
+\end{itemize}%>>>
+
+%%% \bigskip \textbf{Involution property}: %<<<
+%%% The dual of the dual is the
+%%% primal problem. In particular, the dual of a min problem is a max problem and vice versa;
+%%% a variable in (P) corresponds to a constraint in (D) and vice versa: %>>>
+
+\subsubsection*{Non-linear programming (NLP). Convex sets $\Omega\subset\Rone^n$}% <<<
+
+Below
+$0\le \lambda\le 1$ and
+$\bdlambda=(\lambda_1,\ldots,\lambda_m)^T\ge\bdzero$
+and form a discrete distribution, i.e.,
+$\bdone^T\bdlambda=\sum_{i=1}^m \lambda_i=1$.
+
+\begin{itemize}
+  \item $\Omega$ is convex if
+    $(1-\lambda)\bdx^{(1)}+\lambda\bdx^{(2)}$
+    for any
+    $\bdx^{(1)},\bdx^{(2)}\in\Omega$ and
+    $0\le\lambda\le1$.
+
+  \item If $\Omega_i$ are all convex, then their
+    intersection $\cap_i \Omega_i$  (finite or infinite) is convex.
+
+  \item Convex linear combinations (CLC):
+    $\sum\lambda_i\bdx^{(i)}$, $\bdx^{(i)}\in\Omega$.
+    A set is convex iff it contains all
+    its CLC's.
+
+  \item The Separation Hyperplan Thm: Let $\Omega\neq\varnothing$ be convex,
+    closed and $\bdy\notin\Omega$.
+    Then there exist
+    a normal vector $\bdn$ and a scalar $b$, such that $\bdn^T\bdy>b$
+    and $\bdn^T\bdx\le b$ for all $\bdx\in\Omega$.
+    Moreover, if $\hat\bdx\in\partial\Omega$, then $\bdn^T(\bdx-\hat\bdx)<0$
+    for all $\bdx\in\Omega$.
+\end{itemize}
+% >>>
+
+\subsubsection*{Convex functions $\Rone^n\to\Rone^1$}% <<<
+
+\begin{itemize}
+  \item Let $\bdx=(1-\lambda)\bda+\lambda\bdb$.
+    The function
+    $f\!:\Rone^n\to\Rone$ is \textbf{convex} if
+    $
+    f(\bdx)
+    \le
+    (1-\lambda) f(\bda)+\lambda f(\bdb)
+    $.
+    Moreover,
+
+    \[
+      % \text{Moreover, the following inequality holds: }~
+      \frac{f(\bdx)-f(\bda)}{\Norm{\bdx-\bda}}
+      \le
+      \frac{f(\bdb)-f(\bda)}{\Norm{\bdb-\bda}}
+      \le
+      \frac{f(\bdb)-f(\bdx)}{\Norm{\bdb-\bdx}},
+      \quad 0 < \lambda < 1.
+    \]
+  Jensen's inequality generalises for any convex linear combination of points:
+    $
+    f(\sum_{i=1}^m\lambda_i\bdx^{(i)})
+    \le
+    \sum_{i=1}^m\lambda_i f(\bdx^{(i)}).
+    $
+
+   \item The function $f\!:\Rone^n\to\Rone$ is \textbf{concave} if $(-f)$ is convex, i.e.,
+    $
+    f[(1-\lambda)\bda+\lambda\bdb]
+    \ge
+    (1-\lambda) f(\bda)+\lambda f(\bdb)
+    $.
+
+  \item If both $f_{1,2}$ are convex and $\alpha_{1,2}\ge0$, then $\alpha_1f_1+\alpha_2 f_2$
+    and $\max\{f_1,f_2\}$ are convex.
+
+  \item If both
+    $f\!:\Rone\to\Rone$
+    and
+    $g\!:\Rone^n\to\Rone$
+    are convex and $f$ is increasing, then
+    $f\circ g(\bdx)=f[g(\bdx)]$ is convex.
+
+  \item (Graph above tangent) If $f$ is locally convex and differentiable at $\bda$, then
+  $f(\bdx)\ge f(\bda)+\nabla f(\bda)^T(\bdx-\bda)$.
+
+  \item If $f\!:\Rone\to\Rone\in C^2$ is locally convex at $a$, then $f''(a)>0$
+
+  \item If $f\!:\Rone^n\to\Rone\in C^2$ is locally convex, then the
+    Hessian matrix is \textbf{s}ymmetric and \textbf{p}ositive \textbf{d}efinite (\textbf{spd}):
+    \[
+      H(\bda)=\nabla\nabla^T f(\bda)
+      =
+      \left[\frac{\partial^2f(\bda)}{ \partial x_i\partial x_j}\right]_{i,j=1}^n
+      =H^T(\bda)\succeq 0,
+      ~\text{ i.e. }~
+      \bdx^T\!H(\bda)\bdx\ge0,
+      \quad \forall\bdx\in\Rone^n.
+    \]
+
+\end{itemize}
+% >>>
+
+\subsubsection*{Convex optimization problems}% <<<
+
+\begin{itemize}
+  \item An optimization problem $\{\text{min}~f(\bdx), \; \bdx\in\Omega\subset\Rone^n\}$
+    is \textbf{convex} if $f$ is convex
+    and $\Omega$ is convex.
+  \item If $\bdx^*\in\Omega$ is  a local optimum of \textbf{convex} problem
+    $\{\text{min}~f(\bdx), \; \bdx\in\Omega\}$, then $f(\bdx)\ge f(\bdx^*)$ for all $\bdx\in\Omega$.
+\end{itemize}% >>>
+
+\subsubsection*{Lagrangian relaxation of non-linear problems (NLP) under all-equality constraints}% <<<
+
+\begin{itemize}
+  \item Given is constrained NLP (opt = max/min):
+    \hfil
+\(
+  P\!:
+  \begin{cases}
+    \text{opt} & f(\bdx),\; \bdx\in S, \\
+      \hfill
+      \text{s.t.} & S\!: \bdg(\bdx)=\bdzero,
+  \end{cases}
+    \quad
+    \bdg(\bdx)
+    =
+    \begin{bmatrix}
+      g_1(\bdx)\\[-2pt] \vdots\\ g_m(\bdx)
+    \end{bmatrix}
+    \mkern-6mu,
+    \quad
+    \bdx\in\Rone^n.
+\)
+
+\item Lagrangian relaxation of the constrained NLP
+  $P$ to an unconstrained $L$ in $\Rone^{n+m}$:
+\[
+  L\!: \calL(\bdx,\bdlambda)
+  = f(\bdx)-\bdlambda^T\bdg(\bdx)
+  = f(\bdx)-\sum_{i=1}^m \lambda_ig_i(\bdx),
+  \quad
+  \bdlambda\in\Rone^m.
+\]
+\item Lagrange Theorem: If $f,\bdg\in C^1$, $(\bdx^*,\bdlambda^*)$ is a critical point of $L$ and
+$\{\nabla g_1(\bdx^*),\ldots,\nabla g_1(\bdx^*)\}$ are linearly independent, then
+$\bdx^*$ is also critical for $f_{|_S}$ from $P$ and their value values coincide:
+\[
+  \nabla \calL(\bdx^*,\bdlambda^*)
+  =
+  \tvavektor[\nabla_\bdx,\nabla_{\bdlambda}] \calL(\bdx^*,\bdlambda^*)
+  =
+  \begin{bmatrix}
+    \nabla f(\bdx^*)-\nabla\bdg^T\!(\bdx)\,\bdlambda \\
+    - \bdg(\bdx^*)
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    \bdzero_{n\times1} \\
+    \bdzero_{m\times1}
+  \end{bmatrix}
+  \;\ergo\;
+  \begin{cases}
+    \hfill
+    \nabla f(\bdx^*)&=\hfil \bdzero, \\
+    \calL(\bdx^*,\bdlambda^*)&=f(\bdx^*).
+  \end{cases}
+\]
+\Obs! $\bdx^*$ being a critical point for $f_{|_S}$ is necessary,
+but not sufficient for opt
+of smooth NLP's.
+\end{itemize}
+% >>>
+
+\subsubsection*{Optimization of non-linear problems (NLP) under all-inequality constraints}% <<<
+
+  All NLP's below are formulated in normal form:
+  \[
+    P_{\min}\!:
+    \begin{cases}
+      \min        & f(\bdx),\; \bdx\in\Rone^n, \\
+      \hfill
+      \text{s.t.} & \bdg(\bdx)\ge\bdzero,
+    \end{cases}
+    \quad
+    \text{or}
+    \quad
+    P_{\max}\!:
+    \begin{cases}
+      \max        & f(\bdx),\; \bdx\in\Rone^n, \\
+      \hfill
+      \text{s.t.} & \bdg(\bdx)\le\bdzero,
+    \end{cases}
+    \quad
+    \text{where}
+    \quad
+    \bdg(\bdx)
+    =
+    \begin{bmatrix}
+      g_1(\bdx)\\[-2pt] \vdots\\ g_m(\bdx)
+    \end{bmatrix}
+    \mkern-6mu.
+  \]
+ \Obs! There are no implicit assumptions about non-negativity of the decision variables $\bdx$.
+ If present, these have to be included explicitly as constraints, e.g., $g_i(\bdx)=x_i\ge0$.
+
+ \begin{itemize}
+   \item Lagrangian relaxation:
+    $
+      \calL(\bdx,\bdmu)
+      = f(\bdx)
+      -
+      \bdmu^T\bdg(\bdx)
+  $,
+  $
+  (\bdx,\bdmu)\in\Rone^{n+m},\;
+    \bdmu\ge\bdzero.
+   $
+
+  \item The point $(\bdx^*,\bdmu^*)\in\Rone^{n+m}$ is a saddle point for the Lagrangian, if
+    \[
+      \text{in}~P_{\min}:
+      \begin{cases}
+          \calL(M^*) = \min_{\bdx}\max_{\bdmu} \calL(\bdx  ,\bdmu),~\text{i.e.}, \\
+          \calL(\bdx^*,\bdmu  ) \le \calL(M^*) \le \calL(\bdx  ,\bdmu^*),
+        \end{cases}
+        \hspace{1em}
+        -\text{and}-
+        \hspace{2em}
+      \text{in}~P_{\max}:
+        \begin{cases}
+          \calL(M^*) = \max_{\bdx}\min_{\bdmu} \calL(\bdx  ,\bdmu),~\text{i.e.}, \\
+          \calL(\bdx  ,\bdmu^*) \le \calL(M^*) \le \calL(\bdx^*,\bdmu).
+      \end{cases}
+    \]
+
+    \item If a normal NLP has a saddle point $(\bdx^*,\bdmu^*)$, then $\bdx^*$
+    is an optimum for the corresponding
+    $P_{\min}$ or
+    $P_{\max}$.
+
+  \item The Kaush-Kuhn-Tucker (\textbf{KKT}) necessary conditions
+    for a point $\bdx^*$ to be a local optimum of a normal NLP
+    with $f,\bdg\in C^1$ and linearly independent gradients $\nabla g_i(\bdx^*)$
+    of the active constraints at that point: There exist a constant
+    vector $\bdmu\in\Rone^m_+$, such that
+
+    \[
+        \boxed{
+        \begin{array}[t]{rl}
+        \textbf{K1:}
+        & \text{Primal Feasibility:} \\[4pt]
+        \multicolumn{2}{r}{\text{in}~P_{\min}\!:\; \bdg(\bdx^*)\ge\bdzero} \\[5pt]
+        \multicolumn{2}{r}{\text{in}~P_{\max}\!:\; \bdg(\bdx^*)\le\bdzero} \\
+        \end{array}}
+        \hspace{2em}
+        \boxed{
+        \begin{array}[t]{l}
+        \textbf{K2: }
+        \bdx^*~\text{is stationary:} \\[3pt]
+         \nabla f(\bdx^*)=\sum_{i=1}^m\mu_i\nabla\bdg(\bdx^*) \\
+        \end{array}}
+        \hspace{1em}
+        \begin{array}[t]{l}
+          \boxed{
+            \begin{array}[t]{rl}
+              \textbf{K3:} & \text{Dual feasibility: }~\bdmu \ge \bdzero
+          \end{array}}
+          \\[5pt]
+          \boxed{
+            \begin{array}[t]{rl}
+              \textbf{K4:}&\text{Complementary slackness} \\
+                          &\mu_ig_i(\bdx^*) = 0,\; 1\le i\le m.
+          \end{array}}
+        \end{array}
+    \]
+ \end{itemize}
+
+% >>>
+
+\end{document}
+
+\subsubsection*{Linear Algebra}% <<<
+All matrices below are square $n\times n$.
+$I$ is the unit matrix and $\bdzero$ is the zero matrix.
+\begin{itemize}
+  \item
+    For a non-singular $A$, denote by $A^{-T}=(A^{T})^{-1}=(A^{-1})^{T}$.
+  \item
+    Conjugation: $A^*=PAP^{-1}$ is the $P$-conjugate of $A$.
+    Notation:
+    $A^{-*}\defeq (A^{-1})^*=PA^{-1}P^{-1}=(PAP^{-1})^{-1}=(A^*)^{-1}$.
+  \item
+    If $A=A^T$ is symmetric, then all its eigenvalues are real.
+    If
+    $\lambda_i\neq \lambda_j$,
+    $A\bdv_i=\lambda_i\bdv_i$
+    and
+    $A\bdv_j=\lambda_j\bdv_j$
+    then
+    $\bdv_i\perp\bdv_j$.
+  \item
+    The Spectral theorem: If $A=A^T$, then it is orthogonally diagonalizable:
+    $A=VDV^T$,
+    where
+    $D=\diag[\lambda_1,\cdots,\lambda_n]$
+    and
+    $VV^T=I$.
+
+  \item
+    A matrix $A$ is: \textbf{diagonally dominant}
+    if \/
+    $
+    |a_{ii}|
+    \ge
+    \sum_{j\neq i} |a_{ij}|
+    = |a_{i1}|+\cdots+|a_{i,j-1}|+ |a_{i,j+1}|+\cdots+ |a_{in}|+
+    $,
+    $1\le i\le n$.
+  \item
+    A matrix $A$ is
+    \textbf{positive definite}, $A\succeq 0$, if
+    $\Angled{\bdx,A\bdx}=\bdx^T\!A\bdx\ge0$, $\forall\bdx\in\Rone^n$.
+    $A$ is \textbf{spd} (symmetric positive definite)
+    if
+    $A=A^T\succeq0$.
+
+  \item
+    Transposition matrices: $T_{ij} = I$ with swapped rows $i$ and $j$.
+    $T_{ij}A$ swaps rows $i$ and $j$ of $A$, while
+    $T_{ij}A$ swaps cols $i$ and $j$ of $A$.
+  \item
+    Permutation matrices:
+    $
+    P=
+    T_{i_1j_1}
+      \cdots
+    T_{i_kj_k}
+    $
+    ($I$ with rows arbitrarily transposed).
+    Permutation matrices are orthogonal:
+    $P^{-1}=P^T$.
+\end{itemize}% >>>
+
+\subsubsection*{LU-decomposition}% <<<
+
+\begin{itemize}
+  \item
+    The partial upper triangular $U_k$ has elements $u_{ij}=0$ for $1\le j<j\le k$.
+    Thus $U=U_n$ is upper triangular.
+  \item
+    $\overset\circ L_k$ has
+    non-zero elements only in col $k$ strict under the main diagonal, i.e.,
+    $\overset\circ l_{ij}=0$ for $\overset\circ l_{ik}=0$, $i\le j$ or $j\neq k$.
+    $\overset\circ L_i\overset\circ L_j=\bdzero_{n\times n}$, $i\le j$
+  \item
+    $L_k = I+\overset\circ L_k$.
+    If
+    $l_{ik}=\frac{u_{ik}}{u_{kk}}$,
+    then
+    $U_k=L_k^{-1}U_{k-1}$,
+    $k< i\le n$.
+    $L_iL_j=I+L_i+L_j$ for $i\le j$.
+    $(I+\overset\circ L_k)(I-\overset\circ L_k)=1$
+    $\ergo$
+    $L_k^{-1} = I-\overset\circ L_k$.
+  \item
+    Forward row reduction on $A$,
+    $\det(A)\neq 0$,
+    is recursive left multiplication:
+    $U_1=L_1^{-1}A$,
+    \ldots,
+    $U_{k}=L_{k}^{-1}U_{k-1}$,
+    $1\le k\le n-1$.
+  \item
+    LU-decomposition  based on Gaussian elimination without pivoting
+    $A=LU$,
+    $U=U_{n-1}$ and
+    $L=L_1L_2\cdots L_{n-1}=I+\sum_{k=1}^{n-1}\overset\circ L_k$.
+  \item Pivoting before
+    step $k$ of row red.:
+    $U_k=L_k^{-1}T_{k}U_{k-1}$,
+    where $T_k:=T_{km}$ transposes
+    row $k\leftrightarrow m$ with
+    $m: |u_{mk}|=\max_{k\le i\le n}|u_{ik}|$.
+  \item LU-decomposition:
+    $PA=LU$,
+    where
+    $P=P_1$, \/
+    $
+    P_k
+    =
+    \begin{cases}
+      T_{n-1}\cdots T_k,& k < n-1, \\
+      \hfill I\hfill,& k = n-1, \\
+    \end{cases}
+    $
+    \/ and
+    $
+    \begin{cases}
+      L=L_{n-1}^*\cdots L_1^*, \\
+      L_k^* = P_{k+1} L_k P_{k+1}^T.
+    \end{cases}
+    $
+  \item Linear systems through LU-decomposition
+    $PA=LU$:
+    $
+    AX=B
+    \;\iff\;
+    \begin{cases}
+      LY=PB \\
+      UX=Y.
+    \end{cases}
+    $
+
+\end{itemize}% >>>
+
+\subsubsection*{LDL decomposition of spd matrices: $A=A^T\succ0$}% <<<
+% Below $A=A^T\succ 0$ is \textbf{spd} and non-singular, i.e.,
+% $\Angled{\bdx,A\bdx}>0$ for all $\bdx\neq\bdzero$.
+%  $L_k$, $U_k$ are the ones from the LU-decomposition of $A$.
+\begin{itemize}
+  \item
+    LU-decomposition of $LU=A=A^T\succ 0$ is numerically stable and accurate without pivoting.
+  \item
+    LDL-decomposition:
+    $0\prec A^T=A=LU=LDL^T$, where $D\succ 0$ is diagonal,
+    $L=L_1\cdots L_{n-1} = I + \sum_{k=1}^{n-1}\overset\circ L_k$.
+  \item
+    LDL-incrementally:
+    $D_k = (L_k\cdots L_1)A(L_k\cdots L_1)^T
+    =
+    \begin{bmatrix}
+      \widehat{D}_k & \bdzero \\
+      \bdzero       &\widehat{U}_{n-k} & \\
+    \end{bmatrix}
+    $,
+    $k=1,\cdots,n-1$,
+   where
+   $\widehat U_{n-k}=[U_k]_{k+1:n,k+1:n}$
+   is the lower-right
+   %$(n-k)\times(n-k)$
+   submatrix
+   of $U_k$.
+ \item Cholesky decomposition: For spd
+   $
+   0\prec A=A^T
+   =LDL^T
+   =L(\sqrt{D})^2L^{-T}
+   =L_cL_c^T
+   $,
+   where
+   $
+   L_c =L\sqrt{D}.
+   $
+\end{itemize}
+% >>>
+
+% vim: foldmethod=marker:spelllang=en:spell
