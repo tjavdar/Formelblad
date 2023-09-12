@@ -78,7 +78,7 @@ $(WWWDIR)/%.pdf: %.tex
 
 ifeq ("$(isBILANG)","")
 www: $(WWWDIR)/$(FILE).pdf #
-	@echo -e "\n# >> Pub sharp:\tmake -C $(ALLMATTEDIR) www\n"
+	@echo -e "\n# >> Pub sharp:\n\t\tmake -C $(ALLMATTEDIR) www\n"
 else
 www: $(WWWDIR)/en/$(FILE).pdf $(WWWDIR)/sv/$(FILE).pdf
 	@echo -e "\n# >> Pub sharp:  make -C $(ALLMATTEDIR) www\n"
