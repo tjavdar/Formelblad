@@ -60,47 +60,36 @@ Parameters: &
   (intermediate values: $\hat \bdb$, $\hat\bdc$)
 \cr
 Variables: &
-  $z$, $w$ (primal, dual objective~f-n),
-  $\bdx_{n\times1}$ (primal decision),
-  $\bdy_{m\times1}$ (dual ditto),
+  $z$, $w$ (primal and dual objective~functions),
+  $\bdx_{n\times1}$ (primal decision vars),
+  $\bdy_{m\times1}$ (dual vars),
 \cr
   &
   $z^*$, $\bdx^*$,
   $w^*$, $\bdy^*$
-  (values at optimum);
-  $\bds_{m\times1}$ (slack/surplus),
-  $\bda$ (artificial)
+  (values at opt);
+  $\bds_{m\times1}=\bds^+\cup \bds^-$ (slack/surplus),
+  $\bda^-$ (artificial). % , $|\bds^-|=|\bda^-|$
 \cr
-Partitioning:
-  & $(A,I_m)\rightsquigarrow(B_{m\times m},N_{m\times n})$,
-    $(\bdx_B,\bdx_N)$,
-    $(\bdc_B,\bdc_N)$
-     $\rightsquigarrow$
-  (Basic, Non-basic) columns \cr
-%  & $(\bdx_B,\bdx_N)$,
-%    $(\bdc_B,\bdc_N)$
-%     $\rightsquigarrow$
-%       (Basic, Non-basic)
-%     variables/coefficients.\cr
 \end{tabular}
 %>>>
 
-%%\subsubsection*{The normal max LP problem:}%<<<
+%%\subsubsection*{Normal max LP problem:}%<<<
 \[
-  \begin{array}[m]{|c|c|}
-  \hline
-  \textbf{The normal max LP problem:} &
-  \textbf{The normal min LP problem:}
+  \begin{array}[m]{c|c|c}
+    \textbf{Normal max LP problem:}
+    & \textbf{Normal min LP:}
+    & \textbf{Generic LP:}
   \\ \hline
     \begin{array}[m]{ll}
-      \max & z = c_1x_1+c_2x_2+\cdots+c_nx_n \cr
+      \max & z = c_1x_1+\cdots+c_nx_n, \;\bdx\ge0, \cr
       \mbox{s.t.} &
       \mkern-15mu
       \begin{cases}
-        a_{11}x_1+\cdots+a_{1n}x_n &\le b_1 \cr
-        \hfil\vdots &  \hfil\vdots          \cr
+        a_{11}x_1+\cdots+a_{1n}x_n &\le b_1 \\[-3pt]
+        \hfil\vdots &  \hfil\vdots          \\[-3pt]
         a_{m1}x_1+\cdots+a_{mn}x_n &\le b_m \cr
-        \hfill x_1,x_2,\ldots,x_n  &\ge 0.
+       %\hfill x_1,x_2,\ldots,x_n  &\ge 0.
       \end{cases}
     \end{array}
   \;\leftrightsquigarrow\;
@@ -127,14 +116,26 @@ Partitioning:
       \end{cases}
     \end{array}
   } % boxed
-  \cr\hline
+  &
+  \boxed{
+    \begin{array}[m]{ll}
+      \text{opt} & z=\bdc^T\bdx\cr
+      \mbox{s.t.} &
+      \mkern-15mu
+      \begin{cases}
+      A\bdx\lessgtr\bdb\cr
+      \hfill\bdx\ge\bdzero
+      \end{cases}
+    \end{array}
+  } % boxed
   \end{array}
-% \;\leftrightsquigarrow\;
-% \boxed{\{\max\; z=\bdc^T\bdx; A\bdx\le\bdb,\, \bdx\ge\bdzero\}}
 \]
+The LP: \fbox{$\min z$, s.t. conditions}
+  $\iff$
+  LP: \fbox{$\max \;-z$, subject to the \textbf{same} conditions.}
 %>>>
 
-\subsubsection*{The max LP in standard form, initial and final Simplex Tableau at optimum:}%<<<
+\subsubsection*{Normal max LP in standard form. Initial and Final Simplex Tableau at opt (actual layout):}%<<<
 \[
   \begin{cases}
     \begin{array}[m]{*{5}{lc}}
@@ -142,22 +143,27 @@ Partitioning:
       & &   A\bdx    &+&   I_m\bds     &=& \bdb \cr
     \end{array}
   \end{cases}
-  \rightsquigarrow\;
+  \mkern-16mu\rightsquigarrow\;
     \begin{array}[m]{c|ccc|c}
  \perp &     z   & \bdx^T & \bds^T     & \hat\bdb \cr\hline\rule{0pt}{10pt}
     z  &     1   &-\bdc^T & \bdzero^T  &   0    \cr %\hline
  \bds  & \bdzero & A      & I_m        & \bdb   \cr
     \end{array}
-  \quad\sim\;\cdots\;\sim\quad
+  \quad\sim\cdots\sim\quad
     \begin{array}[m]{c|ccc|c}
  \perp &     z   &     \bdx^T &     \bds^T   & \hat\bdb \cr\hline\rule{0pt}{10pt}
  z  &     1   &-\hat\bdc^T &     \bdy^{*T} & z^*\cr %\hline
  \bdx_B& \bdzero &     B^{-1}A&     B^{-1}   & \bdx_B^*   \cr
     \end{array}
 \]
+Split into Basic/Non-basic variables,
+$(\bdx,\bds)\to(\bdx_B,\bdx_N)$,
+ and matrices:
+    $B=\cols(\bdx_B)$,
+    $N=\cols(\bdx_N)$
 %>>>
 
-\subsubsection*{The final max LP Simplex Tableau (at optimum) partitioned after (B)asic/(N)on-basic columns:}%<<<
+\subsubsection*{The Final Tableau of the Normal max LP at opt, layout split in (B)asic/(N)on-basic columns:}%<<<
 \[
   \begin{cases}
     \begin{array}[m]{*{5}{lc}}
@@ -174,7 +180,7 @@ Partitioning:
     \end{array}
 \]
 Here \fbox{$\bdy^*=B^{-1}\bdc_B$} are the dual vars and
-\fbox{$\hat\bdc_N=\bdc_N-\bdc_B^TB^{-1}N=\bdc-y^{*T}N\le0$} the reduced costs at opt.
+\fbox{$\hat\bdc_N^T=\bdc_N^T-\bdc_B^TB^{-1}N=\bdc^T-y^{*T}N\le0$} the reduced costs at max.
 %>>>
 
 % Weak + Strong Duality<<<
@@ -212,9 +218,7 @@ $
 \end{cases}
 $%>>>
 
-
-\vspace{-1em}
-\subsubsection*{Duality}
+\vspace{-1em}\subsubsection*{Duality} %<<<
 \(
 \boxed{
   \begin{array}[m]{l}
@@ -240,7 +244,7 @@ $%>>>
    }
 \)%>>>
 
-\bigskip\textbf{(P)rimal-to-(D)ual correspondence rules:}
+\bigskip\textbf{(P)rimal-to-(D)ual correspondence rules:}%<<<
 \begin{itemize}
   \item Involution property: (P) $\overset{1:1}\leftrightsquigarrow$(D),
     i.e., the Dual of the Dual is the Primal
@@ -249,7 +253,7 @@ $%>>>
     \fbox{Non-positive decision~variables}
   \item \fbox{'='-Constraints} $\overset{1:1}\leftrightsquigarrow$
     \fbox{Non-restricted decision variables}
-\end{itemize}
+\end{itemize}%>>>
 
 %%% \bigskip \textbf{Involution property}: %<<<
 %%% The dual of the dual is the
