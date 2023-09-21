@@ -211,7 +211,7 @@ P(A_j|B) = \frac{P(A_j\cap B)}{P(B)}
 \rule{0pt}{11pt}
 \mbox{\textbf{\Tr{Expectation}{Väntevärde}}}
 & \mbox{\textbf{\Tr{Of a random variable}{av en stokastisk variabel} }} X
-& \mbox{\textbf{\Tr{Of a function of a r.v}{av en funktion av en s.v.} }} g(X) \cr 
+& \mbox{\textbf{\Tr{Of a function of a r.v}{av en funktion av en s.v.} }} g(X) \cr
   \hline
   \rule{0pt}{15pt}
   \mbox{\textbf{\Tr{Discrete r.v.}{Diskret s.v.} }}
@@ -494,7 +494,7 @@ av $\mu$ och $\sigma^2$ är då
   \overline{x}=\hat\mu_\obs=\frac{1}{n}\sum_{i=1}^n x_i
   &
      s^2
-     =\widehat{\sigma^2}_\obs
+     % =\widehat{\sigma^2}_\obs
      =\frac{1}{n-1}\sum_{i=1}^n(x_i-\overline{x})^2
      =\frac{1}{n-1}\Bigl(\sum_{i=1}^nx_i^2-n\overline{x}^2\Bigr)
      %\; \mu~\mbox{\Tr{not known}{ej känd}}
@@ -515,10 +515,14 @@ $\{(x_k,y_k)\}_1^n$:
      =\sum_{i=1}^nx_iy_i-n\bar{x}\bar{y}
    &
     \widehat{\Cov(X,Y)}_{\obs} = \frac{s_{xy}}{n-1}
-   & 
+   &
        \begin{array}[m]{rcl} \rule{0pt}{14pt}
-       s_x^2 = (\widehat{\sigma^2_X})_\obs= \frac{s_{xx}}{n-1}\\[8pt]
-       s_y^2 = (\widehat{\sigma^2_Y})_\obs= \frac{s_{yy}}{n-1}\\
+       s_x^2
+      %= (\widehat{\sigma^2_X})_\obs
+       = \frac{s_{xx}}{n-1}\\[8pt]
+       s_y^2
+      %= (\widehat{\sigma^2_Y})_\obs
+       = \frac{s_{yy}}{n-1}\\
      \end{array}
   \cr\hline
 \end{array}
