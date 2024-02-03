@@ -16,16 +16,21 @@
 
 \def\Nu{\textsc{Formula Sheet\hfill Numerical Methods}}
 \def\Opt{\textsc{Formula Sheet\hfill Optimization}}
+\def\NuOpt{\textsc{Formula Sheet\hfill Numerical Methods / Optimization}}
 
 \makeatletter
 \renewcommand{\@oddhead}{%
 \ifnum\thepage=1
   \Nu\hfill
 \else
-  \ifnum\thepage>4
-    \Opt
+  \ifnum\thepage=4
+    \NuOpt
   \else
-    \Nu
+    \ifnum\thepage>4
+      \Opt
+    \else
+      \Nu
+    \fi
   \fi
   \hfill\thepage{}
 \fi
@@ -479,11 +484,11 @@ $ for any $\lambda\neq0$.
       D_h=\frac{\Delta_h}{h}=\frac{T_h-I}{h}=\frac{e^{hD}-I}{h},\quad
       D_{-h} =\frac{I-T_h}{h} = T_{-h}D_h=e^{-hD}D_h,
       \quad
-      D_hf(a)=f'(a) + \Ordo(h)=D_{-h}f.
+      D_{\pm h}f(a)=f'(a) + \Ordo(h).
     \]
 
   \item Central
-    differences operators and correponding
+    differences differential operators and corresponding
     approximation of $f'$ and $f''$:
     \begin{align*}
       \bar D_h
@@ -495,18 +500,22 @@ $ for any $\lambda\neq0$.
       = f'(a) + \Ordo(h^2);
       \\
       \bar D_{\frac h2}^2
-      &= \frac14(D_{\frac h2}+D_{-\frac h2})^2
-      = \frac{T_h-2I+T_{-h}}{h^2},
+      % \Bigl(\frac{D_{\frac h2}+D_{-\frac h2}}{2}\Bigr)^2
+      &= \frac{(T_{\frac h2}-T_{-\frac h2})^2}{h^2}
+       = \frac{T_{h}-2I+T_{-h}}{h^2},
       &
       \bar D_{\frac h2}^2f(a)
        &= \frac{f(a+h)-2f(a)+f(a-h)}{h^2}
         = f''(a) + \Ordo(h^2).
     \end{align*}
 
-  \item Non-symmetric approximations for $f''$ and $f'''$:
+  \item Forward/backward approximations for
+    $f''\!: D_{\pm h}^2f(a) = f''(a) + \Ordo(h)$.
+    Non-symmetric ditto for $f'''$:
     \[
-      D_{\pm h}^2f(a) = f''(a) + \Ordo(h)
-      \quad
+       \bar D_{\pm h}\bar D_{\frac h2}^2 f(a)
+     = f'''(a) + \Ordo(h^2);
+     \qquad
      \{
        D_h^3,
        D_h^2D_{-h},
@@ -514,15 +523,11 @@ $ for any $\lambda\neq0$.
        D_{-h}^3
      \}f(a)
      =
-     f'''(a) + \Ordo(h);
-     \quad
-       \bar D_{h}\bar D_{\frac h2}^2 f(a)
-     =
-     f'''(a) + \Ordo(h^2).
+     f'''(a) + \Ordo(h).
     \]
 
   \item Divided differences (DD)
-    of $f$ on regular meshes $x_k=a+kh$:
+    of $f$ on even grid: $x_k=a+kh$:
     $
     [f_0\!:\!f_k]
     =
@@ -640,9 +645,301 @@ The  wDD-table
 
 %>>>
 
-\newpage
+\medskip\hrule
 
-\subsubsection*{Linear Programming. Notation:}%<<<
+% -- Convex sets and functions:
+
+\subsubsection*{Convex sets of $\Rone^n$}% <<<
+
+Below
+$\Omega\subset\Rone^n$,
+$0\le \lambda\le 1$,
+$\bdlambda=(\lambda_1,\ldots,\lambda_m)^T\ge\bdzero$
+and form a discrete distribution, i.e.,
+$\bdone^T\bdlambda=\sum_{i=1}^m \lambda_i=1$.
+
+\begin{itemize}
+  \item A set $\Omega\subset\Rone^n$ is convex if
+    $(1-\lambda)\bdx^{(1)}+\lambda\bdx^{(2)}$
+    for any
+    $\bdx^{(1)},\bdx^{(2)}\in\Omega$ and
+    $0\le\lambda\le1$.
+
+  \item If $\Omega_i\subset\Rone^n$ are all convex, then their
+    intersection (finite or infinite) $\cap_i \Omega_i$ is convex.
+
+  \item Convex linear combinations (CLC):
+    $\sum\lambda_i\bdx^{(i)}$, $\bdx^{(i)}\in\Omega$.
+    A set is convex iff it contains all
+    its CLC's.
+
+  \item The Separation Hyperplan Thm: Let $\Omega\neq\varnothing$ be convex,
+    closed and $\bdy\notin\Omega$.
+    Then there exist
+    a normal vector $\bdn$ and a scalar $b$, such that $\bdn^T\bdy>b$
+    and $\bdn^T\bdx\le b$ for all $\bdx\in\Omega$.
+    Moreover, if $\hat\bdx\in\partial\Omega$, then $\bdn^T(\bdx-\hat\bdx)<0$
+    for all $\bdx\in\Omega$.
+\end{itemize}
+% >>>
+
+\subsubsection*{Convex functions $\Rone^n\to\Rone^1$}% <<<
+
+\begin{itemize}
+  \item Let $\bdx=(1-\lambda)\bda+\lambda\bdb$.
+    The function
+    $f\!:\Rone^n\to\Rone$ is \textbf{convex} if
+    $
+    f(\bdx)
+    \le
+    (1-\lambda) f(\bda)+\lambda f(\bdb)
+    $.
+    Moreover,
+
+    \[
+      % \text{Moreover, the following inequality holds: }~
+      \frac{f(\bdx)-f(\bda)}{\Norm{\bdx-\bda}}
+      \le
+      \frac{f(\bdb)-f(\bda)}{\Norm{\bdb-\bda}}
+      \le
+      \frac{f(\bdb)-f(\bdx)}{\Norm{\bdb-\bdx}},
+      \quad 0 < \lambda < 1.
+    \]
+  Jensen's inequality generalises for any convex linear combination of points:
+    $
+    f(\sum_{i=1}^m\lambda_i\bdx^{(i)})
+    \le
+    \sum_{i=1}^m\lambda_i f(\bdx^{(i)}).
+    $
+
+   \item The function $f\!:\Rone^n\to\Rone$ is \textbf{concave} if $(-f)$ is convex, i.e.,
+    $
+    f[(1-\lambda)\bda+\lambda\bdb]
+    \ge
+    (1-\lambda) f(\bda)+\lambda f(\bdb)
+    $.
+
+  \item If both $f_{1,2}$ are convex and $\alpha_{1,2}\ge0$, then $\alpha_1f_1+\alpha_2 f_2$
+    and $\max\{f_1,f_2\}$ are convex.
+
+  \item If both
+    $f\!:\Rone\to\Rone$
+    and
+    $g\!:\Rone^n\to\Rone$
+    are convex and $f$ is increasing, then
+    $f\circ g(\bdx)=f[g(\bdx)]$ is convex.
+
+  \item (Graph above tangent) If $f$ is locally convex and differentiable at $\bda$, then
+  $f(\bdx)\ge f(\bda)+\nabla f(\bda)^T(\bdx-\bda)$.
+
+  \item If $f\!:\Rone\to\Rone\in C^2$ is locally convex at $a$, then $f''(a)>0$
+
+  \item If $f\!:\Rone^n\to\Rone\in C^2$ is locally convex, then the
+    Hessian matrix is \textbf{s}ymmetric and \textbf{p}ositive \textbf{d}efinite (\textbf{spd}):
+    \[
+      H(\bda)=\nabla\nabla^T f(\bda)
+      =
+      \left[\frac{\partial^2f(\bda)}{ \partial x_i\partial x_j}\right]_{i,j=1}^n
+      =H^T(\bda)\succeq 0,
+      ~\text{ i.e. }~
+      \bdx^T\!H(\bda)\bdx\ge0,
+      \quad \forall\bdx\in\Rone^n.
+    \]
+
+\end{itemize}
+% >>>
+
+% -- Non-linear programming and the KKT-conditions:
+
+\subsubsection*{Non-linear programming (NLP). Convex optimization problems}% <<<
+
+\begin{itemize}
+  \item An optimization problem $\{\text{min}~f(\bdx), \; \bdx\in\Omega\subset\Rone^n\}$
+    is \textbf{convex} if $f$ is convex
+    and $\Omega$ is convex.
+  \item If $\bdx^*\in\Omega$ is  a local optimum of \textbf{convex} problem
+    $\{\text{min}~f(\bdx), \; \bdx\in\Omega\}$, then $f(\bdx)\ge f(\bdx^*)$ for all $\bdx\in\Omega$.
+\end{itemize}% >>>
+
+\subsubsection*{Lagrangian relaxation of non-linear problems (NLP) under all-equality constraints}% <<<
+
+\begin{itemize}
+  \item Given is constrained NLP (opt = max/min):
+    \hfil
+\(
+  P\!:
+  \begin{cases}
+    \text{opt} & f(\bdx),\; \bdx\in S, \\
+      \hfill
+      \text{s.t.} & S\!: \bdg(\bdx)=\bdzero,
+  \end{cases}
+    \quad
+    \bdg(\bdx)
+    =
+    \begin{bmatrix}
+      g_1(\bdx)\\[-2pt] \vdots\\ g_m(\bdx)
+    \end{bmatrix}
+    \mkern-6mu,
+    \quad
+    \bdx\in\Rone^n.
+\)
+
+\item Lagrangian relaxation of the constrained NLP
+  $P$ to an unconstrained $L$ in $\Rone^{n+m}$:
+\[
+  L\!: \calL(\bdx,\bdlambda)
+  = f(\bdx)-\bdlambda^T\bdg(\bdx)
+  = f(\bdx)-\sum_{i=1}^m \lambda_ig_i(\bdx),
+  \quad
+  \bdlambda\in\Rone^m.
+\]
+\item Lagrange Theorem: If $f,\bdg\in C^1$, $(\bdx^*,\bdlambda^*)$ is a critical point of $L$ and
+$\{\nabla g_1(\bdx^*),\ldots,\nabla g_1(\bdx^*)\}$ are linearly independent, then
+$\bdx^*$ is also critical for $f_{|_S}$ from $P$ and their value values coincide:
+\[
+  \nabla \calL(\bdx^*,\bdlambda^*)
+  =
+  \tvavektor[\nabla_\bdx,\nabla_{\bdlambda}] \calL(\bdx^*,\bdlambda^*)
+  =
+  \begin{bmatrix}
+    \nabla f(\bdx^*)-\nabla\bdg^T\!(\bdx)\,\bdlambda \\
+    - \bdg(\bdx^*)
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    \bdzero_{n\times1} \\
+    \bdzero_{m\times1}
+  \end{bmatrix}
+  \;\ergo\;
+  \begin{cases}
+    \hfill
+    \nabla f(\bdx^*)&=\hfil \bdzero, \\
+    \calL(\bdx^*,\bdlambda^*)&=f(\bdx^*).
+  \end{cases}
+\]
+\Obs! $\bdx^*$ being a critical point for $f_{|_S}$ is necessary,
+but not sufficient for opt
+of smooth NLP's.
+\end{itemize}
+% >>>
+
+\subsubsection*{Optimization of normal non-linear problems (NLP) under all-inequality constraints}% <<<
+
+  All NLP's below are formulated in \textbf{normal form}:
+  \[
+    P_{\min}\!:
+    \begin{cases}
+      \min        & f(\bdx),\; \bdx\in\Rone^n, \\
+      \hfill
+      \text{s.t.} & \bdg(\bdx)\ge\bdzero,
+    \end{cases}
+    \quad
+    \text{or}
+    \quad
+    P_{\max}\!:
+    \begin{cases}
+      \max        & f(\bdx),\; \bdx\in\Rone^n, \\
+      \hfill
+      \text{s.t.} & \bdg(\bdx)\le\bdzero,
+    \end{cases}
+    \quad
+    \text{where}
+    \quad
+    \bdg(\bdx)
+    =
+    \begin{bmatrix}
+      g_1(\bdx)\\[-2pt] \vdots\\ g_m(\bdx)
+    \end{bmatrix}
+    \mkern-6mu.
+  \]
+ \Obs! There are no implicit assumptions about non-negativity of the decision variables $\bdx$.
+ If present, these have to be included explicitly as constraints, e.g., $g_i(\bdx)=x_i\ge0$.
+
+ \begin{itemize}
+   \item Lagrangian relaxation:
+    $
+      \calL(\bdx,\bdmu)
+      = f(\bdx)
+      -
+      \bdmu^T\bdg(\bdx)
+  $,
+  $
+  (\bdx,\bdmu)\in\Rone^{n+m},\;
+    \bdmu\ge\bdzero.
+   $
+
+  \item The point $(\bdx^*,\bdmu^*)\in\Rone^{n+m}$ is a saddle point for the Lagrangian, if
+    \[
+      \text{in}~P_{\min}:
+      \begin{cases}
+          \calL(M^*) = \min_{\bdx}\max_{\bdmu} \calL(\bdx  ,\bdmu),~\text{i.e.}, \\
+          \calL(\bdx^*,\bdmu  ) \le \calL(M^*) \le \calL(\bdx  ,\bdmu^*),
+        \end{cases}
+        \hspace{1em}
+        -\text{and}-
+        \hspace{2em}
+      \text{in}~P_{\max}:
+        \begin{cases}
+          \calL(M^*) = \max_{\bdx}\min_{\bdmu} \calL(\bdx  ,\bdmu),~\text{i.e.}, \\
+          \calL(\bdx  ,\bdmu^*) \le \calL(M^*) \le \calL(\bdx^*,\bdmu).
+      \end{cases}
+    \]
+
+    \item If a normal NLP has a saddle point $(\bdx^*,\bdmu^*)$, then $\bdx^*$
+    is an optimum for the corresponding
+    $P_{\min}$ or
+    $P_{\max}$.
+
+ \end{itemize}
+
+% >>>
+
+ \subsubsection*{The Karush-Kuhn-Tucker (KKT) conditions for $\bdx^*$ to be a local opt of a smooth normal NLP}% <<<
+
+
+    \medskip
+    \Thm.~For $x^*$ to be a local optimum of a normal min or max NLP $P$
+    with $f,\bdg\in C^1$ and linearly independent gradients $\nabla g_i(\bdx^*)$
+    of the constraints active at $\bdx^*$, it is necessary that the following
+    KKT conditions hold:
+
+    \[
+        \boxed{
+        \begin{array}[t]{rl}
+        \textbf{K1:}
+        & \text{Primal Feasibility:} \\[4pt]
+        \multicolumn{2}{r}{\text{in}~P_{\min}\!:\; \bdg(\bdx^*)\ge\bdzero} \\[5pt]
+        \multicolumn{2}{r}{\text{in}~P_{\max}\!:\; \bdg(\bdx^*)\le\bdzero} \\
+        \end{array}}
+        \hspace{2em}
+        \boxed{
+        \begin{array}[t]{l}
+        \textbf{K2: }
+        \bdx^*~\text{is stationary:} \\[3pt]
+         \nabla f(\bdx^*)=\sum_{i=1}^m\mu_i\nabla\bdg(\bdx^*) \\
+        \end{array}}
+        \hspace{1em}
+        \begin{array}[t]{l}
+          \boxed{
+            \begin{array}[t]{rl}
+              \textbf{K3:} & \text{Dual feasibility: }~\bdmu \ge \bdzero
+          \end{array}}
+          \\[5pt]
+          \boxed{
+            \begin{array}[t]{rl}
+              \textbf{K4:}&\text{Complementary slackness} \\
+                          &\mu_ig_i(\bdx^*) = 0,\; 1\le i\le m.
+          \end{array}}
+        \end{array}
+    \]
+
+    The constant vector $\bdmu\in\Rone^m_+$ is the vector of \textbf{dual} variables for the
+    corresponding constraints.
+% >>>
+
+% -- LP / The Simplex method:
+
+\subsubsection*{The Simplex Method for solving Linear Programming problems:}%<<<
   \begin{tabular}{ll}
 Parameters: &
   $\bdb_{m\times1}$,
@@ -853,284 +1150,9 @@ $%>>>
 %%% primal problem. In particular, the dual of a min problem is a max problem and vice versa;
 %%% a variable in (P) corresponds to a constraint in (D) and vice versa: %>>>
 
-\subsubsection*{Non-linear programming (NLP). Convex sets $\Omega\subset\Rone^n$}% <<<
-
-Below
-$0\le \lambda\le 1$ and
-$\bdlambda=(\lambda_1,\ldots,\lambda_m)^T\ge\bdzero$
-and form a discrete distribution, i.e.,
-$\bdone^T\bdlambda=\sum_{i=1}^m \lambda_i=1$.
-
-\begin{itemize}
-  \item $\Omega$ is convex if
-    $(1-\lambda)\bdx^{(1)}+\lambda\bdx^{(2)}$
-    for any
-    $\bdx^{(1)},\bdx^{(2)}\in\Omega$ and
-    $0\le\lambda\le1$.
-
-  \item If $\Omega_i$ are all convex, then their
-    intersection $\cap_i \Omega_i$  (finite or infinite) is convex.
-
-  \item Convex linear combinations (CLC):
-    $\sum\lambda_i\bdx^{(i)}$, $\bdx^{(i)}\in\Omega$.
-    A set is convex iff it contains all
-    its CLC's.
-
-  \item The Separation Hyperplan Thm: Let $\Omega\neq\varnothing$ be convex,
-    closed and $\bdy\notin\Omega$.
-    Then there exist
-    a normal vector $\bdn$ and a scalar $b$, such that $\bdn^T\bdy>b$
-    and $\bdn^T\bdx\le b$ for all $\bdx\in\Omega$.
-    Moreover, if $\hat\bdx\in\partial\Omega$, then $\bdn^T(\bdx-\hat\bdx)<0$
-    for all $\bdx\in\Omega$.
-\end{itemize}
-% >>>
-
-\subsubsection*{Convex functions $\Rone^n\to\Rone^1$}% <<<
-
-\begin{itemize}
-  \item Let $\bdx=(1-\lambda)\bda+\lambda\bdb$.
-    The function
-    $f\!:\Rone^n\to\Rone$ is \textbf{convex} if
-    $
-    f(\bdx)
-    \le
-    (1-\lambda) f(\bda)+\lambda f(\bdb)
-    $.
-    Moreover,
-
-    \[
-      % \text{Moreover, the following inequality holds: }~
-      \frac{f(\bdx)-f(\bda)}{\Norm{\bdx-\bda}}
-      \le
-      \frac{f(\bdb)-f(\bda)}{\Norm{\bdb-\bda}}
-      \le
-      \frac{f(\bdb)-f(\bdx)}{\Norm{\bdb-\bdx}},
-      \quad 0 < \lambda < 1.
-    \]
-  Jensen's inequality generalises for any convex linear combination of points:
-    $
-    f(\sum_{i=1}^m\lambda_i\bdx^{(i)})
-    \le
-    \sum_{i=1}^m\lambda_i f(\bdx^{(i)}).
-    $
-
-   \item The function $f\!:\Rone^n\to\Rone$ is \textbf{concave} if $(-f)$ is convex, i.e.,
-    $
-    f[(1-\lambda)\bda+\lambda\bdb]
-    \ge
-    (1-\lambda) f(\bda)+\lambda f(\bdb)
-    $.
-
-  \item If both $f_{1,2}$ are convex and $\alpha_{1,2}\ge0$, then $\alpha_1f_1+\alpha_2 f_2$
-    and $\max\{f_1,f_2\}$ are convex.
-
-  \item If both
-    $f\!:\Rone\to\Rone$
-    and
-    $g\!:\Rone^n\to\Rone$
-    are convex and $f$ is increasing, then
-    $f\circ g(\bdx)=f[g(\bdx)]$ is convex.
-
-  \item (Graph above tangent) If $f$ is locally convex and differentiable at $\bda$, then
-  $f(\bdx)\ge f(\bda)+\nabla f(\bda)^T(\bdx-\bda)$.
-
-  \item If $f\!:\Rone\to\Rone\in C^2$ is locally convex at $a$, then $f''(a)>0$
-
-  \item If $f\!:\Rone^n\to\Rone\in C^2$ is locally convex, then the
-    Hessian matrix is \textbf{s}ymmetric and \textbf{p}ositive \textbf{d}efinite (\textbf{spd}):
-    \[
-      H(\bda)=\nabla\nabla^T f(\bda)
-      =
-      \left[\frac{\partial^2f(\bda)}{ \partial x_i\partial x_j}\right]_{i,j=1}^n
-      =H^T(\bda)\succeq 0,
-      ~\text{ i.e. }~
-      \bdx^T\!H(\bda)\bdx\ge0,
-      \quad \forall\bdx\in\Rone^n.
-    \]
-
-\end{itemize}
-% >>>
-
-\subsubsection*{Convex optimization problems}% <<<
-
-\begin{itemize}
-  \item An optimization problem $\{\text{min}~f(\bdx), \; \bdx\in\Omega\subset\Rone^n\}$
-    is \textbf{convex} if $f$ is convex
-    and $\Omega$ is convex.
-  \item If $\bdx^*\in\Omega$ is  a local optimum of \textbf{convex} problem
-    $\{\text{min}~f(\bdx), \; \bdx\in\Omega\}$, then $f(\bdx)\ge f(\bdx^*)$ for all $\bdx\in\Omega$.
-\end{itemize}% >>>
-
-\subsubsection*{Lagrangian relaxation of non-linear problems (NLP) under all-equality constraints}% <<<
-
-\begin{itemize}
-  \item Given is constrained NLP (opt = max/min):
-    \hfil
-\(
-  P\!:
-  \begin{cases}
-    \text{opt} & f(\bdx),\; \bdx\in S, \\
-      \hfill
-      \text{s.t.} & S\!: \bdg(\bdx)=\bdzero,
-  \end{cases}
-    \quad
-    \bdg(\bdx)
-    =
-    \begin{bmatrix}
-      g_1(\bdx)\\[-2pt] \vdots\\ g_m(\bdx)
-    \end{bmatrix}
-    \mkern-6mu,
-    \quad
-    \bdx\in\Rone^n.
-\)
-
-\item Lagrangian relaxation of the constrained NLP
-  $P$ to an unconstrained $L$ in $\Rone^{n+m}$:
-\[
-  L\!: \calL(\bdx,\bdlambda)
-  = f(\bdx)-\bdlambda^T\bdg(\bdx)
-  = f(\bdx)-\sum_{i=1}^m \lambda_ig_i(\bdx),
-  \quad
-  \bdlambda\in\Rone^m.
-\]
-\item Lagrange Theorem: If $f,\bdg\in C^1$, $(\bdx^*,\bdlambda^*)$ is a critical point of $L$ and
-$\{\nabla g_1(\bdx^*),\ldots,\nabla g_1(\bdx^*)\}$ are linearly independent, then
-$\bdx^*$ is also critical for $f_{|_S}$ from $P$ and their value values coincide:
-\[
-  \nabla \calL(\bdx^*,\bdlambda^*)
-  =
-  \tvavektor[\nabla_\bdx,\nabla_{\bdlambda}] \calL(\bdx^*,\bdlambda^*)
-  =
-  \begin{bmatrix}
-    \nabla f(\bdx^*)-\nabla\bdg^T\!(\bdx)\,\bdlambda \\
-    - \bdg(\bdx^*)
-  \end{bmatrix}
-  =
-  \begin{bmatrix}
-    \bdzero_{n\times1} \\
-    \bdzero_{m\times1}
-  \end{bmatrix}
-  \;\ergo\;
-  \begin{cases}
-    \hfill
-    \nabla f(\bdx^*)&=\hfil \bdzero, \\
-    \calL(\bdx^*,\bdlambda^*)&=f(\bdx^*).
-  \end{cases}
-\]
-\Obs! $\bdx^*$ being a critical point for $f_{|_S}$ is necessary,
-but not sufficient for opt
-of smooth NLP's.
-\end{itemize}
-% >>>
-
-\subsubsection*{Optimization of non-linear problems (NLP) under all-inequality constraints}% <<<
-
-  All NLP's below are formulated in normal form:
-  \[
-    P_{\min}\!:
-    \begin{cases}
-      \min        & f(\bdx),\; \bdx\in\Rone^n, \\
-      \hfill
-      \text{s.t.} & \bdg(\bdx)\ge\bdzero,
-    \end{cases}
-    \quad
-    \text{or}
-    \quad
-    P_{\max}\!:
-    \begin{cases}
-      \max        & f(\bdx),\; \bdx\in\Rone^n, \\
-      \hfill
-      \text{s.t.} & \bdg(\bdx)\le\bdzero,
-    \end{cases}
-    \quad
-    \text{where}
-    \quad
-    \bdg(\bdx)
-    =
-    \begin{bmatrix}
-      g_1(\bdx)\\[-2pt] \vdots\\ g_m(\bdx)
-    \end{bmatrix}
-    \mkern-6mu.
-  \]
- \Obs! There are no implicit assumptions about non-negativity of the decision variables $\bdx$.
- If present, these have to be included explicitly as constraints, e.g., $g_i(\bdx)=x_i\ge0$.
-
- \begin{itemize}
-   \item Lagrangian relaxation:
-    $
-      \calL(\bdx,\bdmu)
-      = f(\bdx)
-      -
-      \bdmu^T\bdg(\bdx)
-  $,
-  $
-  (\bdx,\bdmu)\in\Rone^{n+m},\;
-    \bdmu\ge\bdzero.
-   $
-
-  \item The point $(\bdx^*,\bdmu^*)\in\Rone^{n+m}$ is a saddle point for the Lagrangian, if
-    \[
-      \text{in}~P_{\min}:
-      \begin{cases}
-          \calL(M^*) = \min_{\bdx}\max_{\bdmu} \calL(\bdx  ,\bdmu),~\text{i.e.}, \\
-          \calL(\bdx^*,\bdmu  ) \le \calL(M^*) \le \calL(\bdx  ,\bdmu^*),
-        \end{cases}
-        \hspace{1em}
-        -\text{and}-
-        \hspace{2em}
-      \text{in}~P_{\max}:
-        \begin{cases}
-          \calL(M^*) = \max_{\bdx}\min_{\bdmu} \calL(\bdx  ,\bdmu),~\text{i.e.}, \\
-          \calL(\bdx  ,\bdmu^*) \le \calL(M^*) \le \calL(\bdx^*,\bdmu).
-      \end{cases}
-    \]
-
-    \item If a normal NLP has a saddle point $(\bdx^*,\bdmu^*)$, then $\bdx^*$
-    is an optimum for the corresponding
-    $P_{\min}$ or
-    $P_{\max}$.
-
-  \item The Kaush-Kuhn-Tucker (\textbf{KKT}) necessary conditions
-    for a point $\bdx^*$ to be a local optimum of a normal NLP
-    with $f,\bdg\in C^1$ and linearly independent gradients $\nabla g_i(\bdx^*)$
-    of the active constraints at that point: There exist a constant
-    vector $\bdmu\in\Rone^m_+$, such that
-
-    \[
-        \boxed{
-        \begin{array}[t]{rl}
-        \textbf{K1:}
-        & \text{Primal Feasibility:} \\[4pt]
-        \multicolumn{2}{r}{\text{in}~P_{\min}\!:\; \bdg(\bdx^*)\ge\bdzero} \\[5pt]
-        \multicolumn{2}{r}{\text{in}~P_{\max}\!:\; \bdg(\bdx^*)\le\bdzero} \\
-        \end{array}}
-        \hspace{2em}
-        \boxed{
-        \begin{array}[t]{l}
-        \textbf{K2: }
-        \bdx^*~\text{is stationary:} \\[3pt]
-         \nabla f(\bdx^*)=\sum_{i=1}^m\mu_i\nabla\bdg(\bdx^*) \\
-        \end{array}}
-        \hspace{1em}
-        \begin{array}[t]{l}
-          \boxed{
-            \begin{array}[t]{rl}
-              \textbf{K3:} & \text{Dual feasibility: }~\bdmu \ge \bdzero
-          \end{array}}
-          \\[5pt]
-          \boxed{
-            \begin{array}[t]{rl}
-              \textbf{K4:}&\text{Complementary slackness} \\
-                          &\mu_ig_i(\bdx^*) = 0,\; 1\le i\le m.
-          \end{array}}
-        \end{array}
-    \]
- \end{itemize}
-
-% >>>
-
 \end{document}
+
+% -- Överbliven LinAlg-stoff:
 
 \subsubsection*{Linear Algebra}% <<<
 All matrices below are square $n\times n$.
