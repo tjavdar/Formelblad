@@ -26,8 +26,6 @@ p:  $(FILE).lpr # (Also: x2, p2,x4,p4)
 
 x2:  $(FILE)-x2.pdf
 p2:  $(FILE)-x2.lpr
-x4:  $(FILE)-x4.pdf
-p4:  $(FILE)-x4.lpr
 
 en: Lang.h
 	@$(LANG_EN) $<  # def'd in bz/Mtargets.lang
@@ -38,7 +36,7 @@ sl: Lang.h # Global *swap* LANG (Also: sv|en)
 # >>>
 
 # www-publishing Vars & Rules: www www-all ls-{targ,lang} <<<
-FILEx3        := $(FILE).pdf $(FILE)-x2.pdf $(FILE)-x4.pdf
+FILES12        := $(FILE).pdf $(FILE)-x2.pdf
 ALLMATTEDIR   := ../allmatte
 WWWDIR        := ../allmatte/formelblad
  
@@ -60,21 +58,21 @@ ls-targ:  # List targets (long paths)
 	@echo ">> Swedish targets:"; for i in $(TARG_SV) ;do echo $$i; done
 	@echo ">> English targets:"; for i in $(TARG_EN) ;do echo $$i; done
 
-xsq: $(FILEx3)
-	@for i in $(FILEx3); do pdf-squeeze.sh $$i; done
+xsq: $(FILES12)
+	@for i in $(FILES12); do pdf-squeeze.sh $$i; done
 
 $(WWWDIR)/en/%.pdf : %.tex en
 	# >> En target: $@
 	@make -sB FILE=$(basename $<) xsq 2>/dev/null
-	rsync -au $(FILEx3) $(dir $@)
+	rsync -au $(FILES12) $(dir $@)
 $(WWWDIR)/sv/%.pdf : %.tex sv
 	# >> Sv target: $@
 	@make -sB FILE=$(basename $<) xsq 2>/dev/null
-	rsync -au $(FILEx3) $(dir $@)
+	rsync -au $(FILES12) $(dir $@)
 $(WWWDIR)/%.pdf: %.tex
 	# >> Unilang target: $@
 	@make -sB FILE=$(basename $<) xsq 2>/dev/null
-	rsync -au $(FILEx3) $(dir $@)
+	rsync -au $(FILES12) $(dir $@)
 
 ifeq ("$(isBILANG)","")
 www: $(WWWDIR)/$(FILE).pdf #
