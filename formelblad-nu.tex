@@ -113,6 +113,11 @@
 
 \begin{itemize}
 
+   \item $\calL$ is a linear map acting on the vector space of some class of functions if
+     $\calL (\alpha f+\beta g)=\alpha\calL f+\beta\calL g$.
+     Powers: $\calL^n\defeq\calL\calL^{n-1}$,
+     $\calL^0\!f=I\!f=f$ (identity).
+
   \item Norm of a $n\times n$-matrix $A$ as a linear map $\Rone^n\to\Rone^n$:
     $\Norm{A}
     =\max_{\Norm{\bdx}=1} \Norm{A\bdx}
@@ -445,11 +450,6 @@ $ for any $\lambda\neq0$.
 
 \begin{itemize}
 
-   \item $\calL$ is a linear map acting on the vector space of some class of functions if
-     $\calL (\alpha f+\beta g)=\alpha\calL f+\beta\calL g$.
-     Powers: $\calL^n\defeq\calL\calL^{n-1}$,
-     $\calL^0\!f=I\!f=f$ (identity).
-
   \item Differentiation $D\!:\!f\to f'$ is linear.
   Polynomial action, e.g.: $(D^2+6D+9I)f=f''+6f'+f=(D+3I)^2f$.
 
@@ -471,17 +471,17 @@ $ for any $\lambda\neq0$.
     \]
 
   \item The Mean Value Thm in terms of $T_h$ acting on $C^{n+1}$ functions:
-    $
+    \[
      T_h = \sum_{k=0}^n\frac{(hD)^k}{k!}
-      + \Ordo(h^{n+1})D^{n+1}
-    $.
+      + \Ordo(h^{n+1})D^{n+1}.
+    \]
 
   \item Forward and backward
     differences operators and correponding
     approximation of the derivative:
     \[
       D_h=\frac{\Delta_h}{h}=\frac{T_h-I}{h}=\frac{e^{hD}-I}{h},\quad
-      D_{-h} =\frac{I-T_h}{h} = T_{-h}D_h=e^{-hD}D_h,
+      D_{-h} =\frac{I-T_{-h}}{h} = T_{-h}D_h=e^{-hD}D_h,
       \quad
       D_{\pm h}f(a)=f'(a) + \Ordo(h).
     \]
@@ -577,7 +577,7 @@ $ for any $\lambda\neq0$.
       & Q^{(2)}_{h}f=\frac{f_0+4f_1+f_2}{3}\,h & -\frac{h^5}{90}f^{(4)}(\xi)
       \\[5pt] \hline
       \rule[0pt]{0pt}{18pt} 3 & \frac{b-a}{3} &  \text{Simpson $\frac38$}
-      & Q^{(3)}_{h}f=\frac{3(f_0+3f_1+3f_2+f_2)}{8}\,h & -\frac{3h^5}{80}f^{(4)}(\xi)
+      & Q^{(3)}_{h}f=\frac{3(f_0+3f_1+3f_2+f_3)}{8}\,h & -\frac{3h^5}{80}f^{(4)}(\xi)
       \\[5pt] \hline
     \end{array}
   \]
@@ -601,42 +601,50 @@ $ for any $\lambda\neq0$.
 
 \end{itemize}% >>>
 
-\subsubsection*{Log-scale wDD (weighted Div Diffs) to crank up convergence rate of finite differences schemes} %<<<
+\subsubsection*{Weighted Div Diffs (wDD) boosting the convergence rate of log-scale finite differences schemes} %<<<
 
 \begin{itemize}
 \item
-Approximation of $F(0)=\lim_{x\to0}F(x)$ when $F(0)=F(h) + \Ordo(h^k)$ with
-\textbf{gap in powers $k$} in the Maclaurin expansion:
+Approximation of $F(0)=\lim_{x\to0}F(x)$
+with Maclaurin expansion of $F(h)$
+%$F(0)=F(h) + \Ordo(h^k)$ with
+\textbf{gap in powers $k$}
 \[
-  F(h) = F(0) + a_1h^k+a_2h^{2k}+\cdots+a_lh^{lk} + \Ordo(h^{(l+1)k}),\; h\to 0.
+  F(h) = F(0) + a_1h^k+a_2h^{2k}+\cdots+a_\ell h^{\ell k} + \Ordo(h^{(\ell+1)k}),\; h\to 0.
 \]
 The  wDD-table
 \[
   \wDD[\bddelta:\bdF]
-  =\wDD[(1,q^k,q^{2k},\ldots,q^{lk}):(F(h),F(qh),F(q^2h),\ldots,F(q^lh)]
+  =\wDD[(1,q^k,q^{2k},\ldots,q^{\ell k}):(F(h),F(qh),F(q^2h),\ldots,F(q^\ell h)], \quad 0<q<1,
 \]
- with refinement ratio $0<q<1$, has last term
-\[
-  \boxed{\calR^lF(h)=\wDD[F(h):F(q^lh)]=F(0) + \Ordo(h^{(l+1)k}).}
-\]
+ has last term of rate boosted $\Ordo(h^k)\nearrow\Ordo(h^{(\ell+1)k})$:
+ \/
+\(
+  \boxed{\calR^\ell F(h)=\wDD[F(h):F(q^\ell h)]=F(0) + \Ordo(h^{(\ell+1)k}).}
+\)
 
-  \item \textbf{Richardson extrapolation}
-    in approximating the derivatives $f'$, $f''$, etc., of a smooth function $f$:
-    \[
-    \begin{array}{c|*{5}{c}}
-      F(h) & D_{\pm h}f & \bar D_hf & \bar D^2_{\frac h2}f & \cdots \\[5pt]
-      \hline \rule[0pt]{0pt}{9pt}
-      k & 1 & 2 & 2 & \cdots \\
-    \end{array}
+\item \Ex.~\textbf{Richardson extrapolation}
+  (Boost up approx.~rate of derivatives of a smooth function $f$ at fix $x$):
+  \[
+  \begin{array}{|c|c|}
+    \hline \rule[0pt]{0pt}{12pt}
+    F(h) = D_{\pm h}, \quad \text{\textbf{Gap} in powers:}~k=1
+      & F(h) = \bar D^2_{\frac h2}f, \quad \text{\textbf{Gap} in powers:}~k=2
+      \\[5pt]
+    \hline \rule[0pt]{0pt}{12pt}
+        D_{\pm h}f(x) = f'(x)+b_1h +b_2h^2+b_3h^3+\cdots
+      & D_{\frac h2}f(x) = f''(x)+b_1h^2 +b_2h^4+b_3h^6+\cdots
+      \\[5pt]
+    \hline
+  \end{array}
   \]
-  \item \textbf{Romberg integration} = Richardson extrapolation
-    when approximating $\int_a^b \!\! f(x)\,dx$ of a smooth integrand $f$ with the
-    composite Trapezoidal rule:
+  \item \Ex.~\textbf{Romberg integration}
+    (Appr.~of the integral of a smooth $f$ with the composite Trapezoidal rule):
     \[
-      F(h)=Q_hf,\quad
+      F(h)=Q_hf
+      = \int_a^b \!\! f(x)\,dx +b_1h^2 +b_2h^4+b_3h^6+\cdots,
+      \;\textbf{gap}\!:~k=2;\quad
       h=\frac{b-a}{n},\quad
-      k=2,\quad
-      ~\text{where the refinement ratio}~
       q=\frac1r,\quad
       n,r\in\Zone_+.
     \]
@@ -672,13 +680,13 @@ $\bdone^T\bdlambda=\sum_{i=1}^m \lambda_i=1$.
     A set is convex iff it contains all
     its CLC's.
 
-  \item The Separation Hyperplan Thm: Let $\Omega\neq\varnothing$ be convex,
+  \item Separation Hyperplan: Let $\Omega\subset\Rone^n$ be convex,
     closed and $\bdy\notin\Omega$.
     Then there exist
-    a normal vector $\bdn$ and a scalar $b$, such that $\bdn^T\bdy>b$
+    a normal vector $\bdn$ and $b\in\Rone$, such that $\bdn^T\bdy>b$
     and $\bdn^T\bdx\le b$ for all $\bdx\in\Omega$.
-    Moreover, if $\hat\bdx\in\partial\Omega$, then $\bdn^T(\bdx-\hat\bdx)<0$
-    for all $\bdx\in\Omega$.
+    If $\hat\bdx\in\partial\Omega$, then $\bdn^T(\bdx-\hat\bdx)<0$,
+    $\forall\bdx\in\Omega$.
 \end{itemize}
 % >>>
 
@@ -753,24 +761,31 @@ $\bdone^T\bdlambda=\sum_{i=1}^m \lambda_i=1$.
 \subsubsection*{Non-linear programming (NLP). Convex optimization problems}% <<<
 
 \begin{itemize}
-  \item An optimization problem $\{\text{min}~f(\bdx), \; \bdx\in\Omega\subset\Rone^n\}$
-    is \textbf{convex} if $f$ is convex
-    and $\Omega$ is convex.
-  \item If $\bdx^*\in\Omega$ is  a local optimum of \textbf{convex} problem
-    $\{\text{min}~f(\bdx), \; \bdx\in\Omega\}$, then $f(\bdx)\ge f(\bdx^*)$ for all $\bdx\in\Omega$.
+
+  \item \Def.~Let $\Omega\subset\Rone^n$ be convex.
+    The NLP
+    $\{\text{min}~f(\bdx), \; \bdx\in\Omega\}$
+    is \textbf{convex} if $f$ is convex.
+    Equivalently,
+    the problem
+    $\{\text{max}~f(\bdx), \; \bdx\in\Omega\}$
+    is also convex if $f$ is concave,
+    as $(-f)$ is concave and $\max f = -\min(-f)$.
+
+  \item \Thm.~A local opt $\bdx^*$ of a \textbf{convex} NLP
+    is also its global optimum. % $f(\bdx)\ge f(\bdx^*)$ for all $\bdx\in\Omega$.
 \end{itemize}% >>>
 
 \subsubsection*{Lagrangian relaxation of non-linear problems (NLP) under all-equality constraints}% <<<
 
 \begin{itemize}
-  \item Given is constrained NLP (opt = max/min):
+  \item Consider the constrained NLP (opt = max or min):
     \hfil
 \(
-  P\!:
   \begin{cases}
-    \text{opt} & f(\bdx),\; \bdx\in S, \\
+    \text{opt}~f(\bdx),\; \bdx\in S, \\
       \hfill
-      \text{s.t.} & S\!: \bdg(\bdx)=\bdzero,
+      \text{s.t.}~S\!: \bdg(\bdx)=\bdzero,
   \end{cases}
     \quad
     \bdg(\bdx)
@@ -783,18 +798,20 @@ $\bdone^T\bdlambda=\sum_{i=1}^m \lambda_i=1$.
     \bdx\in\Rone^n.
 \)
 
-\item Lagrangian relaxation of the constrained NLP
-  $P$ to an unconstrained $L$ in $\Rone^{n+m}$:
+\item Lagrangian relaxation converts the constrained NLP in $\Rone^n$
+  to an unconstrained one in $\Rone^{n+m}$:
 \[
-  L\!: \calL(\bdx,\bdlambda)
+    \calL(\bdx,\bdlambda)
   = f(\bdx)-\bdlambda^T\bdg(\bdx)
   = f(\bdx)-\sum_{i=1}^m \lambda_ig_i(\bdx),
   \quad
-  \bdlambda\in\Rone^m.
+  \bdlambda\in\Rone^m
+  ~\text{(\Obs!~No sign restrictions)}.
 \]
-\item Lagrange Theorem: If $f,\bdg\in C^1$, $(\bdx^*,\bdlambda^*)$ is a critical point of $L$ and
-$\{\nabla g_1(\bdx^*),\ldots,\nabla g_1(\bdx^*)\}$ are linearly independent, then
-$\bdx^*$ is also critical for $f_{|_S}$ from $P$ and their value values coincide:
+\item Lagrange Theorem: If $f,\bdg\in C^1$, $(\bdx^*,\bdlambda^*)$
+  is a critical point of $\calL$ and
+$\{\nabla g_1(\bdx^*),\ldots,\nabla g_m(\bdx^*)\}$ are linearly independent, then
+$\bdx^*$ is also critical for $f_{|_S}=f(\bdx)$, $\bdx\in S$, and their value values coincide:
 \[
   \nabla \calL(\bdx^*,\bdlambda^*)
   =
@@ -811,12 +828,11 @@ $\bdx^*$ is also critical for $f_{|_S}$ from $P$ and their value values coincide
   \end{bmatrix}
   \;\ergo\;
   \begin{cases}
-    \hfill
-    \nabla f(\bdx^*)&=\hfil \bdzero, \\
-    \calL(\bdx^*,\bdlambda^*)&=f(\bdx^*).
+    \calL(\bdx^*,\bdlambda^*) = f(\bdx^*), \\
+    \nabla f(\bdx^*) = \sum_{i=1}^m\lambda_i\nabla g_i(\bdx^*). \\
   \end{cases}
 \]
-\Obs! $\bdx^*$ being a critical point for $f_{|_S}$ is necessary,
+\Obs! For $\bdx^*$ to be critical for $f_{|_S}$ is necessary,
 but not sufficient for opt
 of smooth NLP's.
 \end{itemize}
@@ -851,8 +867,9 @@ of smooth NLP's.
     \end{bmatrix}
     \mkern-6mu.
   \]
- \Obs! There are no implicit assumptions about non-negativity of the decision variables $\bdx$.
- If present, these have to be included explicitly as constraints, e.g., $g_i(\bdx)=x_i\ge0$.
+ \Obs! % For a generic NLP there are no implicit assumptions about $\bdx\ge\bdzero$.
+ Any sign restrictions of variables have
+ to be included explicitly as constraints, $g_i(\bdx)=x_i\ge0$.
 
  \begin{itemize}
    \item Lagrangian relaxation:
@@ -943,10 +960,11 @@ of smooth NLP's.
 Parameters: &
   $\bdb_{m\times1}$,
   $A_{m\times n}$,
-  $\bdc_{n\times1}$,
+  $\bdc_{n\times1}$
+
   % $\bdzero=(0,\ldots,0)^T$,
   % $I_m$ (unit matrix),
-  (intermediate values: $\hat \bdb$, $\hat\bdc$)
+  % (intermediate values: $\hat \bdb$, $\hat\bdc$)
 \cr
 Variables: &
   $z$, $w$ (primal and dual objective~functions),
@@ -957,8 +975,9 @@ Variables: &
   $z^*$, $\bdx^*$,
   $w^*$, $\bdy^*$
   (values at opt);
-  $\bds_{m\times1}=\bds^+\cup \bds^-$ (slack/surplus),
-  $\bda^-$ (artificial). % , $|\bds^-|=|\bda^-|$
+  $\bds_\bdx$ (slack),
+  $\bds_\bdy=-\hat\bdc$ (reduced costs/dual slack),
+  $\hat\bdb$ (rhs).
 \cr
 \end{tabular}
 %>>>
@@ -1019,10 +1038,10 @@ Variables: &
   } % boxed
   \end{array}
 \]
-The LP: \fbox{$\min z$, s.t. conditions}
-  $\iff$
-  LP: \fbox{$\max \;-z$, subject to the \textbf{same} conditions.}
-%>>>
+% The LP: \fbox{$\min z$, s.t. conditions}
+%   $\iff$
+%   LP: \fbox{$\max \;-z$, subject to the \textbf{same} conditions.}
+% >>>
 
 \subsubsection*{Normal max LP in standard form. Initial and Final Simplex Tableau at opt (actual layout):}%<<<
 \[
@@ -1041,18 +1060,18 @@ The LP: \fbox{$\min z$, s.t. conditions}
   \quad\sim\cdots\sim\quad
     \begin{array}[m]{c|ccc|c}
  \perp &     z   &     \bdx^T &     \bds^T   & \hat\bdb \cr\hline\rule{0pt}{10pt}
- z  &     1   &-\hat\bdc^T &     \bdy^{*T} & z^*\cr %\hline
+ z & 1 & \bdy^{*T}A-\bdc^T &     \bdy^{*T} & z^*\cr %\hline
  \bdx_B& \bdzero &     B^{-1}A&     B^{-1}   & \bdx_B^*   \cr
     \end{array}
 \]
-Split into Basic/Non-basic variables,
-$(\bdx,\bds)\to(\bdx_B,\bdx_N)$,
- and matrices:
-    $B=\cols(\bdx_B)$,
-    $N=\cols(\bdx_N)$
 %>>>
 
 \subsubsection*{The Final Tableau of the Normal max LP at opt, layout split in (B)asic/(N)on-basic columns:}%<<<
+Basic/Non-basic vars:
+$\{\bdx,\bds\}\to\{\bdx_B,\bdx_N\}$,
+$\boxed{\bdx_B=B^{-1}\bdb}$\,,
+matrices:
+ $A=\{B,N\}=\{\cols(\bdx_B),\cols(\bdx_N)\}$.
 \[
   \begin{cases}
     \begin{array}[m]{*{5}{lc}}
@@ -1068,52 +1087,87 @@ $(\bdx,\bds)\to(\bdx_B,\bdx_N)$,
   \bdx_B & \bdzero &  I_m  & B^{-1}N      &  B^{-1}\bdb   \cr
     \end{array}
 \]
-Here \fbox{$\bdy^{*T}=\bdc_B^TB^{-1}$} are the dual vars and
-\fbox{$\hat\bdc_N^T=\bdc_N^T-\bdc_B^TB^{-1}N=\bdc^T-y^{*T}N\le0$} the reduced costs at max.
+Above \fbox{$\bdy^{*T}=\bdc_B^TB^{-1}$} are the dual vars;
+\fbox{$\hat\bdc^T=\bdc^T-y^{*T}A=-\bds_\bdy^T\le\bdzero^T$} are the reduced costs/dual slack.
 %>>>
 
-% Weak + Strong Duality<<<
+% Weak Duality <<<
 \bigskip
 \textbf{Weak duality}: For any feasible $\bdx$ in (P) and $\bdy$ in (D) holds:
-\fbox{$
-  z = \bdc^T\bdx \le \bdy^TA\bdx \le \bdy^T\bdb = w.
-$}
-\begin{itemize}
-  \item If (P) is unbounded $\ergo$ (D) is infeasible.
-        If (D) is unbounded $\ergo$ (P) is infeasible
-  \item If both $\bdx^*$ is feasible in (P) and
-                $\bdy^*$ is feasible in (D) and
-                \[
-                  \boxed{z^*=\bdc^T\bdx^* = \bdy^{*T}A\bdx^*=\bdb^T\bdy^*=w^*,}
-                  \eqno(\star)
-                \]
-                then
-                $\bdx^*$ is optimal in (P)
-           and  $\bdy^*$ is optimal in (D).
-\end{itemize}
+%\fbox{$
+\[
+  z = \bdc^T\bdx
+    \,=\, \bdy^T\!A\,\bdx-(\ub  {\bdy^T\!A-\bdc^T}_{\bds_\bdy^T\,\ge\,\bdzero^T})\bdx
+    \,\le\, \bdy^TA\bdx
+    \,=\, \bdy^T\bdb - \bdy^T(\ub{\bdb-A\bdx}_{\bds_\bdx\,\ge\,\bdzero})
+    \,\le\, \bdy^T\bdb = w.
+\]
+%$}
+  % \item If (P) is unbounded $\ergo$ (D) is infeasible.
+  %       If (D) is unbounded $\ergo$ (P) is infeasible
+  Hence, if $\bdx^*$ is feasible in (P) and
+           $\bdy^*$ is feasible in (D),
+           then
+           $\bdx^*$ is optimal in (P),
+           $\bdy^*$ is optimal in (D),
+           and
+    \[
+      \boxed{
+        z^*
+        =\bdc^T\bdx^*
+        =(\bdy^{*T}\!A)\bdx^*
+        =\bdy^{*T}\!(A\bdx^*)
+        =\bdy^{*T}\bdb
+        =w^*,
+        \quad
+        \begin{cases}
+          \bdx^* = \bdx_B^*\cup\bdx_N^*=\{B^{-1}\bdb,\bdzero\}, \\
+          \bdy^* = \bdy_B^*\cup\bdy_N^*=\{B^{-T}\bdc,\bdzero\}, \\
+        \end{cases}
+      }
+      \quad(\star)
+    \]
 
-\textbf{Strong duality}: If either (P) or (D) has a bounded optimal solution,
-so has the other and $(\star)$ holds.%>>>
+%>>>
 
-\medskip\textbf{Complementary slackness at optimum}: %<<<
+\medskip % Complementary slackness at opt: % <<<
+\begin{tabular}{r}
+  as well as \\
+  \textbf{complementary} \\
+  \textbf{slackness} hold \\
+  {at both optima:} \\
+\end{tabular}
+\hspace{1em}
 $
-\begin{cases}
-  \bdy^{*T}(\bdb-A\bdx^*)=0
-  \iff y_i^*(b_i-\sum_{j=1}^{n} a_{ij}x_j^*) = 0, \;
+\boxed{
+\begin{aligned}
+  \bdy^{*T}\bds_\bdx^*
+  &= \bdy^{*T}(\bdb-A\bdx^*)=0
+  \;\iff\; y_i^*(b_i-\sum_{j=1}^{n} a_{ij}x_j^*) = 0, \;
    i=1,\ldots,m
-\cr
-  (\bdy^{*T}A-\bdc)\bdx^*=0 \iff x_j^*(\sum_{i=1}^m y_i^*a_{ij}-c_j)=0,
+\\[-7pt]
+  \bds_\bdy^{*T}\bdx^*
+  &= (\bdy^{*T}A-\bdc^T)\bdx^*=0 \;\iff\; (\sum_{i=1}^m y_i^*a_{ij}-c_j)x_j^* = 0,
   \; j=1,\ldots, n.\cr
-\end{cases}
-$%>>>
+\end{aligned}
+}
+\quad(\star\star)
+$
 
-\vspace{-1em}\subsubsection*{Duality} %<<<
+\vspace{1em}
+\textbf{STRONG duality}: If either (P) or (D) has a bounded optimal solution,
+so has the other and $(\star),(\star\star)$ hold.
+
+%>>>
+
+\vspace{-.7em}
+\subsubsection*{Normal form of a LP:} %<<<
 \(
 \boxed{
   \begin{array}[m]{l}
-   \textbf{Normal LP's have:}  \\
+   \textbf{Normal LPs have:}  \\
+   \bullet~\mbox{normal decision vars:}~\bdx\ge\bdzero,\;\bdy\ge\bdzero \\
    \bullet~\mbox{normal constraints:}~\max\!:\,\le,\,\min\!:\,\ge \\
-   \bullet~\mbox{normal decis.~vars:}~\bdx\ge\bdzero,\;\bdy\ge\bdzero \\
   \end{array}
 }
 \;\rightsquigarrow\;
@@ -1123,6 +1177,7 @@ $%>>>
     \max~z=\bdc^T\bdx \cr
     A\bdx\le\bdb,\;  \bdx\ge\bdzero
   \end{cases}
+  \mkern-15mu
 }
    \;\overset{1:1}\leftrightsquigarrow\;
    \boxed{
@@ -1130,24 +1185,21 @@ $%>>>
        \min~w=\bdb^T\bdy\cr
        A^T\bdy\ge\bdc,\;\bdy\ge\bdzero.
      \end{cases}
+  \mkern-15mu
    }
 \)%>>>
 
-\bigskip\textbf{(P)rimal-to-(D)ual correspondence rules:}%<<<
+\bigskip\textbf{One-to-one (P)rimal-to-(D)ual correspondence rules:}%<<<
 \begin{itemize}
-  \item Involution property: (P) $\overset{1:1}\leftrightsquigarrow$(D),
-    i.e., the Dual of the Dual is the Primal
   \item \fbox{Normal (P)} $\overset{1:1}\leftrightsquigarrow$ \fbox{Normal (D)}
-  \item \fbox{Constraints of reversed inequality} $\overset{1:1}\leftrightsquigarrow$
-    \fbox{Non-positive decision~variables}
-  \item \fbox{'='-Constraints} $\overset{1:1}\leftrightsquigarrow$
-    \fbox{Non-restricted decision variables}
+  \item \fbox{Non-normal constraints in (P)/(D)} $\overset{1:1}\leftrightsquigarrow$
+    \fbox{Non-normal (non-positive) decision~variable in (D)/(P)}
+  \item \fbox{Equality ("=") constraint in (P)/(D)} $\overset{1:1}\leftrightsquigarrow$
+    \fbox{Non-restricted decision variable in (D)/(P)}
+  \item Involution property: The corresondence
+      (P) $\overset{1:1}\leftrightsquigarrow$
+      (D) is \textbf{one-to-one}, i.e., the Dual of (D) is (P).
 \end{itemize}%>>>
-
-%%% \bigskip \textbf{Involution property}: %<<<
-%%% The dual of the dual is the
-%%% primal problem. In particular, the dual of a min problem is a max problem and vice versa;
-%%% a variable in (P) corresponds to a constraint in (D) and vice versa: %>>>
 
 \end{document}
 
