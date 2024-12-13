@@ -573,10 +573,10 @@ $ for any $\lambda\neq0$.
       \rule[0pt]{0pt}{18pt} 1 & b-a &  \text{Trapezoidal}
       & Q_hf = \frac{f_0+f_1}{2}\,h & -\frac{h^3}{12}f''(\xi)
       \\[5pt] \hline
-      \rule[0pt]{0pt}{18pt} 2 & \frac{b-a}{2} &  \text{Simpson $\frac13$}
+      \rule[0pt]{0pt}{18pt} 2 & \frac{b-a}{2} &  \text{Simpson's $\tfrac13$}
       & Q^{(2)}_{h}f=\frac{f_0+4f_1+f_2}{3}\,h & -\frac{h^5}{90}f^{(4)}(\xi)
       \\[5pt] \hline
-      \rule[0pt]{0pt}{18pt} 3 & \frac{b-a}{3} &  \text{Simpson $\frac38$}
+      \rule[0pt]{0pt}{18pt} 3 & \frac{b-a}{3} &  \text{Simpson's $\tfrac38$}
       & Q^{(3)}_{h}f=\frac{3(f_0+3f_1+3f_2+f_3)}{8}\,h & -\frac{3h^5}{80}f^{(4)}(\xi)
       \\[5pt] \hline
     \end{array}
@@ -587,15 +587,18 @@ $ for any $\lambda\neq0$.
     $\{(a+ih,f_i)\}_0^n$, $x=\frac{b-a}{n}$:
 
     \[
-      \int_a^bf(x)\,dx
+      \hspace{-1em}
+      \int_a^b\mkern-6muf(x)\,dx
       =
       \begin{cases}
-        h(f_0+2f_1+\cdots+2f_{n-1}+f_n)/2 + \Ordo(h^2),
+        \frac{f_0+2f_1+\cdots+2f_{n-1}+f_n}{2}h % + \Ordo(h^2),
+        -\tfrac{f''(\xi)}{12}(b-a)h^2, \; \xi\in(a,b)
         & \text{(Trapezoidal)}
-        \\
-        h(f_0+4f_1+2f_2+4f_3+\cdots+2f_{n-2}+4f_{n-1}+f_n)/3 + \Ordo(h^4),
-        ~n=2m,
-        & \text{(Simpson $\frac13$)}
+        \\[10pt]
+        \frac{f_0+4f_1+2f_2+4f_3+\cdots+2f_{n-2}+4f_{n-1}+f_n}{3} h % + \Ordo(h^4),
+        -\tfrac{f^{(4)}(\xi)}{180}(b-a)h^4,\;
+        ~n\;\text{even}
+        & \text{(Simpson's $\tfrac13$).}
       \end{cases}
     \]
 
